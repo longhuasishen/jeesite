@@ -687,11 +687,11 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
-				<version>2.4</version>
-				<configuration>
+				<version>2.6</version>
+				<!--<configuration>
 					<encoding>${project.build.sourceEncoding}</encoding>
-				</configuration>
-				<!-- <executions>
+				</configuration>-->
+				<executions>
 					<execution>
 						<phase>prepare-package</phase>
 						<goals>
@@ -706,7 +706,7 @@
 					       	</includes>
 						</configuration>
 					</execution>
-				</executions> -->
+				</executions>
 			</plugin>
 			
 			<!-- 混淆代码
