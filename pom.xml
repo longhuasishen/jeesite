@@ -54,7 +54,7 @@
 		<webserver.port>8181</webserver.port>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<downloadSources>true</downloadSources>
-		
+		<lombok.version>1.16.10</lombok.version>
 	</properties>
 	
 	<!-- 设定主仓库，按设定顺序进行查找。 -->
@@ -576,6 +576,13 @@
 			<systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/ckfinderplugin-imageresize-2.3.jar</systemPath>
 		</dependency>
 		<!-- CKFinder end -->
+
+		<!-- lombok start-->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
+		</dependency>
 		
 		<!-- TEST begin -->
 		<dependency>
