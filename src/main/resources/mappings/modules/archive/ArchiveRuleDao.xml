@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.archive.dao.ArchiveRuleDao">
+    
+	<sql id="archiveRuleColumns">
+		a.id AS "id",
+		a.rule_name AS "ruleName",
+		a.rule_length AS "ruleLength"
+	</sql>
+	
+	<sql id="archiveRuleJoins">
+	</sql>
+    
+	<select id="get" resultType="ArchiveRule">
+		SELECT 
+			<include refid="archiveRuleColumns"/>
+		FROM archive_rule a
+		<include refid="archiveRuleJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="ArchiveRule">
+		SELECT 
+			<include refid="archiveRuleColumns"/>
+		FROM archive_rule a
+		<include refid="archiveRuleJoins"/>
+		<where>
+			
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="ArchiveRule">
+		SELECT 
+			<include refid="archiveRuleColumns"/>
+		FROM archive_rule a
+		<include refid="archiveRuleJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO archive_rule(
+			rule_name,
+			rule_length
+		) VALUES (
+			#{ruleName},
+			#{ruleLength}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE archive_rule SET 	
+			rule_name = #{ruleName},
+			rule_length = #{ruleLength}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM archive_rule
+		WHERE id = #{id}
+	</update>
+	
+</mapper>
