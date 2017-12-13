@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.doc.dao.DocConcreteDao">
+    
+	<sql id="docConcreteColumns">
+		a.kind_code AS "kindCode",
+		a.kind_name AS "kindName",
+		a.kind_level AS "kindLevel",
+		a.stand_name AS "standName",
+		a.kind_category AS "kindCategory",
+		a.kind_type AS "kindType",
+		a.sec_unit AS "secUnit",
+		a.first_unit AS "firstUnit",
+		a.rate AS "rate",
+		a.primary_provider AS "primaryProvider",
+		a.pricing_mode AS "pricingMode",
+		a.brand_name AS "brandName",
+		a.sales AS "sales",
+		a.outsourcing AS "outsourcing",
+		a.mad_self AS "madSelf",
+		a.tax_service AS "taxService",
+		a.comp_set AS "compSet",
+		a.mortar AS "mortar",
+		a.min_inventory AS "minInventory",
+		a.cost_prices AS "costPrices",
+		a.max_inventory AS "maxInventory",
+		a.sum_control AS "sumControl",
+		a.save_inventory AS "saveInventory",
+		a.stock_stand AS "stockStand",
+		a.abc_category AS "abcCategory",
+		a.tax_rate AS "taxRate",
+		a.quality_manage AS "qualityManage",
+		a.bat_manage AS "batManage",
+		a.entrust_manage AS "entrustManage",
+		a.stock_manage AS "stockManage",
+		a.ext_field1 AS "extField1",
+		a.ext_field2 AS "extField2",
+		a.ext_field3 AS "extField3",
+		a.remark AS "remark"
+	</sql>
+	
+	<sql id="docConcreteJoins">
+	</sql>
+    
+	<select id="get" resultType="DocConcrete">
+		SELECT 
+			<include refid="docConcreteColumns"/>
+		FROM doc_concrete a
+		<include refid="docConcreteJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="DocConcrete">
+		SELECT 
+			<include refid="docConcreteColumns"/>
+		FROM doc_concrete a
+		<include refid="docConcreteJoins"/>
+		<where>
+			
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="DocConcrete">
+		SELECT 
+			<include refid="docConcreteColumns"/>
+		FROM doc_concrete a
+		<include refid="docConcreteJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO doc_concrete(
+			kind_code,
+			kind_name,
+			kind_level,
+			stand_name,
+			kind_category,
+			kind_type,
+			sec_unit,
+			first_unit,
+			rate,
+			primary_provider,
+			pricing_mode,
+			brand_name,
+			sales,
+			outsourcing,
+			mad_self,
+			tax_service,
+			comp_set,
+			mortar,
+			min_inventory,
+			cost_prices,
+			max_inventory,
+			sum_control,
+			save_inventory,
+			stock_stand,
+			abc_category,
+			tax_rate,
+			quality_manage,
+			bat_manage,
+			entrust_manage,
+			stock_manage,
+			ext_field1,
+			ext_field2,
+			ext_field3,
+			remark
+		) VALUES (
+			#{kindCode},
+			#{kindName},
+			#{kindLevel},
+			#{standName},
+			#{kindCategory},
+			#{kindType},
+			#{secUnit},
+			#{firstUnit},
+			#{rate},
+			#{primaryProvider},
+			#{pricingMode},
+			#{brandName},
+			#{sales},
+			#{outsourcing},
+			#{madSelf},
+			#{taxService},
+			#{compSet},
+			#{mortar},
+			#{minInventory},
+			#{costPrices},
+			#{maxInventory},
+			#{sumControl},
+			#{saveInventory},
+			#{stockStand},
+			#{abcCategory},
+			#{taxRate},
+			#{qualityManage},
+			#{batManage},
+			#{entrustManage},
+			#{stockManage},
+			#{extField1},
+			#{extField2},
+			#{extField3},
+			#{remark}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE doc_concrete SET 	
+			kind_code = #{kindCode},
+			kind_name = #{kindName},
+			kind_level = #{kindLevel},
+			stand_name = #{standName},
+			kind_category = #{kindCategory},
+			kind_type = #{kindType},
+			sec_unit = #{secUnit},
+			first_unit = #{firstUnit},
+			rate = #{rate},
+			primary_provider = #{primaryProvider},
+			pricing_mode = #{pricingMode},
+			brand_name = #{brandName},
+			sales = #{sales},
+			outsourcing = #{outsourcing},
+			mad_self = #{madSelf},
+			tax_service = #{taxService},
+			comp_set = #{compSet},
+			mortar = #{mortar},
+			min_inventory = #{minInventory},
+			cost_prices = #{costPrices},
+			max_inventory = #{maxInventory},
+			sum_control = #{sumControl},
+			save_inventory = #{saveInventory},
+			stock_stand = #{stockStand},
+			abc_category = #{abcCategory},
+			tax_rate = #{taxRate},
+			quality_manage = #{qualityManage},
+			bat_manage = #{batManage},
+			entrust_manage = #{entrustManage},
+			stock_manage = #{stockManage},
+			ext_field1 = #{extField1},
+			ext_field2 = #{extField2},
+			ext_field3 = #{extField3},
+			remark = #{remark}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM doc_concrete
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

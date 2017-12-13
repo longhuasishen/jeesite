@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.archive.dao.ArchiveAreaDao">
+    
+	<sql id="archiveAreaColumns">
+		a.id AS "id",
+		a.area_name AS "areaName",
+		a.area_code AS "areaCode"
+	</sql>
+	
+	<sql id="archiveAreaJoins">
+	</sql>
+    
+	<select id="get" resultType="ArchiveArea">
+		SELECT 
+			<include refid="archiveAreaColumns"/>
+		FROM archive_area a
+		<include refid="archiveAreaJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="ArchiveArea">
+		SELECT 
+			<include refid="archiveAreaColumns"/>
+		FROM archive_area a
+		<include refid="archiveAreaJoins"/>
+		<where>
+			<if test="areaCode != null and areaCode != ''">
+				AND a.area_code LIKE
+				<if test="dbName == 'oracle'">'%'||#{areaCode}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{areaCode}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{areaCode}, '%')</if>
+			</if>
+			<if test="areaName != null and areaName != ''">
+				AND a.area_name LIKE
+				<if test="dbName == 'oracle'">'%'||#{areaName}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{areaName}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{areaName}, '%')</if>
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="ArchiveArea">
+		SELECT 
+			<include refid="archiveAreaColumns"/>
+		FROM archive_area a
+		<include refid="archiveAreaJoins"/>
+		<where>
+
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO archive_area(
+			area_name,
+			area_code
+		) VALUES (
+			#{areaName},
+			#{areaCode}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE archive_area SET 	
+			area_name = #{areaName},
+			area_code = #{areaCode}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM archive_area
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

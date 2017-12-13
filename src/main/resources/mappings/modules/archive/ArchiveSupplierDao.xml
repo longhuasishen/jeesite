@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.archive.dao.ArchiveSupplierDao">
+    
+	<sql id="archiveSupplierColumns">
+		a.id AS "id",
+		a.supplier_name AS "supplierName",
+		a.supplier_code AS "supplierCode"
+	</sql>
+	
+	<sql id="archiveSupplierJoins">
+	</sql>
+    
+	<select id="get" resultType="ArchiveSupplier">
+		SELECT 
+			<include refid="archiveSupplierColumns"/>
+		FROM archive_supplier a
+		<include refid="archiveSupplierJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="ArchiveSupplier">
+		SELECT 
+			<include refid="archiveSupplierColumns"/>
+		FROM archive_supplier a
+		<include refid="archiveSupplierJoins"/>
+		<where>
+			<if test="supplierCode != null and supplierCode != ''">
+				AND a.supplier_code LIKE
+				<if test="dbName == 'oracle'">'%'||#{supplierCode}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{supplierCode}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{supplierCode}, '%')</if>
+			</if>
+			<if test="supplierName != null and supplierName != ''">
+				AND a.supplier_name LIKE
+				<if test="dbName == 'oracle'">'%'||#{supplierName}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{supplierName}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{supplierName}, '%')</if>
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="ArchiveSupplier">
+		SELECT 
+			<include refid="archiveSupplierColumns"/>
+		FROM archive_supplier a
+		<include refid="archiveSupplierJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO archive_supplier(
+			supplier_name,
+			supplier_code
+		) VALUES (
+			#{supplierName},
+			#{supplierCode}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE archive_supplier SET 	
+			supplier_name = #{supplierName},
+			supplier_code = #{supplierCode}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM archive_supplier
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

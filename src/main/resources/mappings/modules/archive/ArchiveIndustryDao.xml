@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.archive.dao.ArchiveIndustryDao">
+    
+	<sql id="archiveIndustryColumns">
+		a.id AS "id",
+		a.industry_name AS "industryName",
+		a.industry_code AS "industryCode"
+	</sql>
+	
+	<sql id="archiveIndustryJoins">
+	</sql>
+    
+	<select id="get" resultType="ArchiveIndustry">
+		SELECT 
+			<include refid="archiveIndustryColumns"/>
+		FROM archive_industry a
+		<include refid="archiveIndustryJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="ArchiveIndustry">
+		SELECT 
+			<include refid="archiveIndustryColumns"/>
+		FROM archive_industry a
+		<include refid="archiveIndustryJoins"/>
+		<where>
+			<if test="industryCode != null and industryCode != ''">
+				AND a.industry_code LIKE
+				<if test="dbName == 'oracle'">'%'||#{industryCode}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{industryCode}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{industryCode}, '%')</if>
+			</if>
+			<if test="industryName != null and industryName != ''">
+				AND a.industry_name LIKE
+				<if test="dbName == 'oracle'">'%'||#{industryName}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{industryName}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{industryName}, '%')</if>
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="ArchiveIndustry">
+		SELECT 
+			<include refid="archiveIndustryColumns"/>
+		FROM archive_industry a
+		<include refid="archiveIndustryJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO archive_industry(
+			industry_name,
+			industry_code
+		) VALUES (
+			#{industryName},
+			#{industryCode}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE archive_industry SET 	
+			industry_name = #{industryName},
+			industry_code = #{industryCode}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM archive_industry
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.archive.dao.ArchiveDepartmentDao">
+    
+	<sql id="archiveDepartmentColumns">
+		a.id AS "id",
+		a.department_name AS "departmentName",
+		a.department_code AS "departmentCode"
+	</sql>
+	
+	<sql id="archiveDepartmentJoins">
+	</sql>
+    
+	<select id="get" resultType="ArchiveDepartment">
+		SELECT 
+			<include refid="archiveDepartmentColumns"/>
+		FROM archive_department a
+		<include refid="archiveDepartmentJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="ArchiveDepartment">
+		SELECT 
+			<include refid="archiveDepartmentColumns"/>
+		FROM archive_department a
+		<include refid="archiveDepartmentJoins"/>
+		<where>
+			<if test="departmentCode != null and departmentCode != ''">
+				AND a.department_code LIKE
+				<if test="dbName == 'oracle'">'%'||#{departmentCode}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{departmentCode}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{departmentCode}, '%')</if>
+			</if>
+			<if test="departmentName != null and departmentName != ''">
+				AND a.department_name LIKE
+				<if test="dbName == 'oracle'">'%'||#{departmentName}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{departmentName}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{departmentName}, '%')</if>
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="ArchiveDepartment">
+		SELECT 
+			<include refid="archiveDepartmentColumns"/>
+		FROM archive_department a
+		<include refid="archiveDepartmentJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO archive_department(
+			department_name,
+			department_code
+		) VALUES (
+			#{departmentName},
+			#{departmentCode}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE archive_department SET 	
+			department_name = #{departmentName},
+			department_code = #{departmentCode}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM archive_department
+		WHERE id = #{id}
+	</update>
+	
+</mapper>
