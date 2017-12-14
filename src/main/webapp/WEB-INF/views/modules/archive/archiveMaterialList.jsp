@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/include/taglib.jsp"%>
 <html>
 <head>
-	<title>分类管理</title>
+	<title>单表管理</title>
 	<meta name="decorator" content="default"/>
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -18,8 +18,8 @@
 </head>
 <body>
 	<ul class="nav nav-tabs">
-		<li class="active"><a href="${ctx}/archive/archiveMaterial/">分类列表</a></li>
-		<shiro:hasPermission name="archive:archiveMaterial:edit"><li><a href="${ctx}/archive/archiveMaterial/form">分类添加</a></li></shiro:hasPermission>
+		<li class="active"><a href="${ctx}/archive/archiveMaterial/">单表列表</a></li>
+		<shiro:hasPermission name="archive:archiveMaterial:edit"><li><a href="${ctx}/archive/archiveMaterial/form">单表添加</a></li></shiro:hasPermission>
 	</ul>
 	<form:form id="searchForm" modelAttribute="archiveMaterial" action="${ctx}/archive/archiveMaterial/" method="post" class="breadcrumb form-search">
 		<input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
@@ -53,11 +53,10 @@
 				<td>
 						${fns:abbr(archiveMaterial.materialName,50)}
 				</td>
-
 				<shiro:hasPermission name="archive:archiveMaterial:edit"><td>
-				<a href="${ctx}/archive/archiveMaterial/form?id=${archiveMaterial.id}">修改</a>
-				<a href="${ctx}/archive/archiveMaterial/delete?id=${archiveMaterial.id}" onclick="return confirmx('确认要删除该单表吗？', this.href)">删除</a>
-			</td></shiro:hasPermission>
+    				<a href="${ctx}/archive/archiveMaterial/form?id=${archiveMaterial.id}">修改</a>
+					<a href="${ctx}/archive/archiveMaterial/delete?id=${archiveMaterial.id}" onclick="return confirmx('确认要删除该单表吗？', this.href)">删除</a>
+				</td></shiro:hasPermission>
 			</tr>
 		</c:forEach>
 		</tbody>

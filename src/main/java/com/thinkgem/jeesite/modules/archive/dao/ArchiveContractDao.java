@@ -10,7 +10,7 @@ import com.thinkgem.jeesite.modules.archive.entity.ArchiveContract;
 /**
  * 合同分类DAO接口
  * @author lisy
- * @version 2017-12-11
+ * @version 2017-12-14
  */
 @MyBatisDao
 public interface ArchiveContractDao extends CrudDao<ArchiveContract> {

@@ -25,7 +25,7 @@ import com.thinkgem.jeesite.modules.archive.service.ArchiveRepertoryService;
 /**
  * 仓库分类Controller
  * @author spark
- * @version 2017-12-12
+ * @version 2017-12-13
  */
 @Controller
 @RequestMapping(value = "${adminPath}/archive/archiveRepertory")

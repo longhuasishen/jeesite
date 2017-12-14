@@ -16,7 +16,7 @@ import com.thinkgem.jeesite.modules.archive.dao.ArchiveSupplierDao;
 /**
  * 供应商分类Service
  * @author spark
- * @version 2017-12-12
+ * @version 2017-12-13
  */
 @Service
 @Transactional(readOnly = true)

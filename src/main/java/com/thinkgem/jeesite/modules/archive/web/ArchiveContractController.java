@@ -25,7 +25,7 @@ import com.thinkgem.jeesite.modules.archive.service.ArchiveContractService;
 /**
  * 合同分类Controller
  * @author lisy
- * @version 2017-12-11
+ * @version 2017-12-14
  */
 @Controller
 @RequestMapping(value = "${adminPath}/archive/archiveContract")

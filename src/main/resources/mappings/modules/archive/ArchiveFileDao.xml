@@ -5,7 +5,11 @@
 	<sql id="archiveFileColumns">
 		a.id AS "id",
 		a.file_name AS "fileName",
-		a.file_code AS "fileCode"
+		a.file_code AS "fileCode",
+		a.ext_field1 AS "extField1",
+		a.ext_field2 AS "extField2",
+		a.ext_field3 AS "extField3",
+		a.remark AS "remark"
 	</sql>
 	
 	<sql id="archiveFileJoins">
@@ -25,18 +29,7 @@
 		FROM archive_file a
 		<include refid="archiveFileJoins"/>
 		<where>
-			<if test="fileCode != null and fileCode != ''">
-				AND a.file_code LIKE
-				<if test="dbName == 'oracle'">'%'||#{fileCode}||'%'</if>
-				<if test="dbName == 'mssql'">'%'+#{fileCode}+'%'</if>
-				<if test="dbName == 'mysql'">CONCAT('%', #{fileCode}, '%')</if>
-			</if>
-			<if test="fileName != null and fileName != ''">
-				AND a.file_name LIKE
-				<if test="dbName == 'oracle'">'%'||#{fileName}||'%'</if>
-				<if test="dbName == 'mssql'">'%'+#{fileName}+'%'</if>
-				<if test="dbName == 'mysql'">CONCAT('%', #{fileName}, '%')</if>
-			</if>
+			
 		</where>
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
@@ -53,7 +46,18 @@
 		FROM archive_file a
 		<include refid="archiveFileJoins"/>
 		<where>
-			
+			<if test="fileCode != null and fileCode != ''">
+				AND a.file_code LIKE
+				<if test="dbName == 'oracle'">'%'||#{fileCode}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{fileCode}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{fileCode}, '%')</if>
+			</if>
+			<if test="fileName != null and fileName != ''">
+				AND a.file_name LIKE
+				<if test="dbName == 'oracle'">'%'||#{fileName}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{fileName}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{fileName}, '%')</if>
+			</if>
 		</where>		
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
@@ -67,17 +71,29 @@
 	<insert id="insert">
 		INSERT INTO archive_file(
 			file_name,
-			file_code
+			file_code,
+			ext_field1,
+			ext_field2,
+			ext_field3,
+			remark
 		) VALUES (
 			#{fileName},
-			#{fileCode}
+			#{fileCode},
+			#{extField1},
+			#{extField2},
+			#{extField3},
+			#{remark}
 		)
 	</insert>
 	
 	<update id="update">
 		UPDATE archive_file SET 	
 			file_name = #{fileName},
-			file_code = #{fileCode}
+			file_code = #{fileCode},
+			ext_field1 = #{extField1},
+			ext_field2 = #{extField2},
+			ext_field3 = #{extField3},
+			remark = #{remark}
 		WHERE id = #{id}
 	</update>
 	

@@ -5,7 +5,11 @@
 	<sql id="archiveAreaColumns">
 		a.id AS "id",
 		a.area_name AS "areaName",
-		a.area_code AS "areaCode"
+		a.area_code AS "areaCode",
+		a.ext_field1 AS "extField1",
+		a.ext_field2 AS "extField2",
+		a.ext_field3 AS "extField3",
+		a.remark AS "remark"
 	</sql>
 	
 	<sql id="archiveAreaJoins">
@@ -53,7 +57,7 @@
 		FROM archive_area a
 		<include refid="archiveAreaJoins"/>
 		<where>
-
+			
 		</where>		
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
@@ -67,17 +71,29 @@
 	<insert id="insert">
 		INSERT INTO archive_area(
 			area_name,
-			area_code
+			area_code,
+			ext_field1,
+			ext_field2,
+			ext_field3,
+			remark
 		) VALUES (
 			#{areaName},
-			#{areaCode}
+			#{areaCode},
+			#{extField1},
+			#{extField2},
+			#{extField3},
+			#{remark}
 		)
 	</insert>
 	
 	<update id="update">
 		UPDATE archive_area SET 	
 			area_name = #{areaName},
-			area_code = #{areaCode}
+			area_code = #{areaCode},
+			ext_field1 = #{extField1},
+			ext_field2 = #{extField2},
+			ext_field3 = #{extField3},
+			remark = #{remark}
 		WHERE id = #{id}
 	</update>
 	

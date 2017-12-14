@@ -32,7 +32,13 @@
 	</ul><br/>
 	<form:form id="inputForm" modelAttribute="archiveSupplier" action="${ctx}/archive/archiveSupplier/save" method="post" class="form-horizontal">
 		<form:hidden path="id"/>
-		<sys:message content="${message}"/>		
+		<sys:message content="${message}"/>
+		<div class="control-group">
+			<label class="control-label">供应商编码：</label>
+			<div class="controls">
+				<form:input path="supplierCode" htmlEscape="false" maxlength="12" class="input-xlarge "/>
+			</div>
+		</div>
 		<div class="control-group">
 			<label class="control-label">供应商名称：</label>
 			<div class="controls">
@@ -40,9 +46,27 @@
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label">供应商编码：</label>
+			<label class="control-label">ext_field1：</label>
 			<div class="controls">
-				<form:input path="supplierCode" htmlEscape="false" maxlength="12" class="input-xlarge "/>
+				<form:input path="extField1" htmlEscape="false" maxlength="60" class="input-xlarge "/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">ext_field2：</label>
+			<div class="controls">
+				<form:input path="extField2" htmlEscape="false" maxlength="60" class="input-xlarge "/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">ext_field3：</label>
+			<div class="controls">
+				<form:input path="extField3" htmlEscape="false" maxlength="120" class="input-xlarge "/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">remark：</label>
+			<div class="controls">
+				<form:input path="remark" htmlEscape="false" maxlength="1000" class="input-xlarge "/>
 			</div>
 		</div>
 		<div class="form-actions">

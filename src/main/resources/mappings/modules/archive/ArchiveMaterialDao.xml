@@ -5,7 +5,11 @@
 	<sql id="archiveMaterialColumns">
 		a.id AS "id",
 		a.material_name AS "materialName",
-		a.material_code AS "materialCode"
+		a.material_code AS "materialCode",
+		a.ext_field1 AS "extField1",
+		a.ext_field2 AS "extField2",
+		a.ext_field3 AS "extField3",
+		a.remark AS "remark"
 	</sql>
 	
 	<sql id="archiveMaterialJoins">
@@ -67,17 +71,29 @@
 	<insert id="insert">
 		INSERT INTO archive_material(
 			material_name,
-			material_code
+			material_code,
+			ext_field1,
+			ext_field2,
+			ext_field3,
+			remark
 		) VALUES (
 			#{materialName},
-			#{materialCode}
+			#{materialCode},
+			#{extField1},
+			#{extField2},
+			#{extField3},
+			#{remark}
 		)
 	</insert>
 	
 	<update id="update">
 		UPDATE archive_material SET 	
 			material_name = #{materialName},
-			material_code = #{materialCode}
+			material_code = #{materialCode},
+			ext_field1 = #{extField1},
+			ext_field2 = #{extField2},
+			ext_field3 = #{extField3},
+			remark = #{remark}
 		WHERE id = #{id}
 	</update>
 	

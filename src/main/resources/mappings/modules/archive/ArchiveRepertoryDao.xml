@@ -5,7 +5,11 @@
 	<sql id="archiveRepertoryColumns">
 		a.id AS "id",
 		a.repertory_name AS "repertoryName",
-		a.repertory_code AS "repertoryCode"
+		a.repertory_code AS "repertoryCode",
+		a.ext_field1 AS "extField1",
+		a.ext_field2 AS "extField2",
+		a.ext_field3 AS "extField3",
+		a.remark AS "remark"
 	</sql>
 	
 	<sql id="archiveRepertoryJoins">
@@ -25,18 +29,7 @@
 		FROM archive_repertory a
 		<include refid="archiveRepertoryJoins"/>
 		<where>
-			<if test="repertoryCode != null and repertoryCode != ''">
-				AND a.repertory_code LIKE
-				<if test="dbName == 'oracle'">'%'||#{repertoryCode}||'%'</if>
-				<if test="dbName == 'mssql'">'%'+#{repertoryCode}+'%'</if>
-				<if test="dbName == 'mysql'">CONCAT('%', #{repertoryCode}, '%')</if>
-			</if>
-			<if test="repertoryName != null and repertoryName != ''">
-				AND a.repertory_name LIKE
-				<if test="dbName == 'oracle'">'%'||#{repertoryName}||'%'</if>
-				<if test="dbName == 'mssql'">'%'+#{repertoryName}+'%'</if>
-				<if test="dbName == 'mysql'">CONCAT('%', #{repertoryName}, '%')</if>
-			</if>
+			
 		</where>
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
@@ -53,7 +46,18 @@
 		FROM archive_repertory a
 		<include refid="archiveRepertoryJoins"/>
 		<where>
-			
+			<if test="repertoryCode != null and repertoryCode != ''">
+				AND a.repertory_code LIKE
+				<if test="dbName == 'oracle'">'%'||#{repertoryCode}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{repertoryCode}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{repertoryCode}, '%')</if>
+			</if>
+			<if test="repertoryName != null and repertoryName != ''">
+				AND a.repertory_name LIKE
+				<if test="dbName == 'oracle'">'%'||#{repertoryName}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{repertoryName}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{repertoryName}, '%')</if>
+			</if>
 		</where>		
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
@@ -67,17 +71,29 @@
 	<insert id="insert">
 		INSERT INTO archive_repertory(
 			repertory_name,
-			repertory_code
+			repertory_code,
+			ext_field1,
+			ext_field2,
+			ext_field3,
+			remark
 		) VALUES (
 			#{repertoryName},
-			#{repertoryCode}
+			#{repertoryCode},
+			#{extField1},
+			#{extField2},
+			#{extField3},
+			#{remark}
 		)
 	</insert>
 	
 	<update id="update">
 		UPDATE archive_repertory SET 	
 			repertory_name = #{repertoryName},
-			repertory_code = #{repertoryCode}
+			repertory_code = #{repertoryCode},
+			ext_field1 = #{extField1},
+			ext_field2 = #{extField2},
+			ext_field3 = #{extField3},
+			remark = #{remark}
 		WHERE id = #{id}
 	</update>
 	

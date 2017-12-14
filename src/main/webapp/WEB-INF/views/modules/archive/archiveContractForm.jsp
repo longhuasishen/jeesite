@@ -34,15 +34,39 @@
 		<form:hidden path="id"/>
 		<sys:message content="${message}"/>
 		<div class="control-group">
-			<label class="control-label">合同分类编码：</label>
+			<label class="control-label">合同编码：</label>
 			<div class="controls">
 				<form:input path="contractCode" htmlEscape="false" maxlength="12" class="input-xlarge "/>
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label">合同分类名称：</label>
+			<label class="control-label">合同名称：</label>
 			<div class="controls">
 				<form:input path="contractName" htmlEscape="false" maxlength="50" class="input-xlarge "/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">ext_field1：</label>
+			<div class="controls">
+				<form:input path="extField1" htmlEscape="false" maxlength="60" class="input-xlarge "/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">ext_field2：</label>
+			<div class="controls">
+				<form:input path="extField2" htmlEscape="false" maxlength="60" class="input-xlarge "/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">ext_field3：</label>
+			<div class="controls">
+				<form:input path="extField3" htmlEscape="false" maxlength="120" class="input-xlarge "/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">remark：</label>
+			<div class="controls">
+				<form:input path="remark" htmlEscape="false" maxlength="1000" class="input-xlarge "/>
 			</div>
 		</div>
 		<div class="form-actions">

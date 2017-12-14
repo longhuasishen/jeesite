@@ -5,7 +5,11 @@
 	<sql id="archiveCustomColumns">
 		a.id AS "id",
 		a.custom_name AS "customName",
-		a.custom_code AS "customCode"
+		a.custom_code AS "customCode",
+		a.ext_field1 AS "extField1",
+		a.ext_field2 AS "extField2",
+		a.ext_field3 AS "extField3",
+		a.remark AS "remark"
 	</sql>
 	
 	<sql id="archiveCustomJoins">
@@ -67,17 +71,29 @@
 	<insert id="insert">
 		INSERT INTO archive_custom(
 			custom_name,
-			custom_code
+			custom_code,
+			ext_field1,
+			ext_field2,
+			ext_field3,
+			remark
 		) VALUES (
 			#{customName},
-			#{customCode}
+			#{customCode},
+			#{extField1},
+			#{extField2},
+			#{extField3},
+			#{remark}
 		)
 	</insert>
 	
 	<update id="update">
 		UPDATE archive_custom SET 	
 			custom_name = #{customName},
-			custom_code = #{customCode}
+			custom_code = #{customCode},
+			ext_field1 = #{extField1},
+			ext_field2 = #{extField2},
+			ext_field3 = #{extField3},
+			remark = #{remark}
 		WHERE id = #{id}
 	</update>
 	

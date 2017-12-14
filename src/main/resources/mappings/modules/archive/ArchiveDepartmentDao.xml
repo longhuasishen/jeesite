@@ -5,7 +5,11 @@
 	<sql id="archiveDepartmentColumns">
 		a.id AS "id",
 		a.department_name AS "departmentName",
-		a.department_code AS "departmentCode"
+		a.department_code AS "departmentCode",
+		a.ext_field1 AS "extField1",
+		a.ext_field2 AS "extField2",
+		a.ext_field3 AS "extField3",
+		a.remark AS "remark"
 	</sql>
 	
 	<sql id="archiveDepartmentJoins">
@@ -25,18 +29,7 @@
 		FROM archive_department a
 		<include refid="archiveDepartmentJoins"/>
 		<where>
-			<if test="departmentCode != null and departmentCode != ''">
-				AND a.department_code LIKE
-				<if test="dbName == 'oracle'">'%'||#{departmentCode}||'%'</if>
-				<if test="dbName == 'mssql'">'%'+#{departmentCode}+'%'</if>
-				<if test="dbName == 'mysql'">CONCAT('%', #{departmentCode}, '%')</if>
-			</if>
-			<if test="departmentName != null and departmentName != ''">
-				AND a.department_name LIKE
-				<if test="dbName == 'oracle'">'%'||#{departmentName}||'%'</if>
-				<if test="dbName == 'mssql'">'%'+#{departmentName}+'%'</if>
-				<if test="dbName == 'mysql'">CONCAT('%', #{departmentName}, '%')</if>
-			</if>
+			
 		</where>
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
@@ -53,7 +46,18 @@
 		FROM archive_department a
 		<include refid="archiveDepartmentJoins"/>
 		<where>
-			
+			<if test="departmentCode != null and departmentCode != ''">
+				AND a.department_code LIKE
+				<if test="dbName == 'oracle'">'%'||#{departmentCode}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{departmentCode}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{departmentCode}, '%')</if>
+			</if>
+			<if test="departmentName != null and departmentName != ''">
+				AND a.department_name LIKE
+				<if test="dbName == 'oracle'">'%'||#{departmentName}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{departmentName}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{departmentName}, '%')</if>
+			</if>
 		</where>		
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
@@ -67,17 +71,29 @@
 	<insert id="insert">
 		INSERT INTO archive_department(
 			department_name,
-			department_code
+			department_code,
+			ext_field1,
+			ext_field2,
+			ext_field3,
+			remark
 		) VALUES (
 			#{departmentName},
-			#{departmentCode}
+			#{departmentCode},
+			#{extField1},
+			#{extField2},
+			#{extField3},
+			#{remark}
 		)
 	</insert>
 	
 	<update id="update">
 		UPDATE archive_department SET 	
 			department_name = #{departmentName},
-			department_code = #{departmentCode}
+			department_code = #{departmentCode},
+			ext_field1 = #{extField1},
+			ext_field2 = #{extField2},
+			ext_field3 = #{extField3},
+			remark = #{remark}
 		WHERE id = #{id}
 	</update>
 	

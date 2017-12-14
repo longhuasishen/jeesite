@@ -16,7 +16,7 @@ import com.thinkgem.jeesite.modules.archive.dao.ArchiveMaterialDao;
 /**
  * 物资分类Service
  * @author lisy
- * @version 2017-12-10
+ * @version 2017-12-14
  */
 @Service
 @Transactional(readOnly = true)

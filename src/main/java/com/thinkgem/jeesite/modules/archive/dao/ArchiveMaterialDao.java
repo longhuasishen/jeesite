@@ -10,7 +10,7 @@ import com.thinkgem.jeesite.modules.archive.entity.ArchiveMaterial;
 /**
  * 物资分类DAO接口
  * @author lisy
- * @version 2017-12-10
+ * @version 2017-12-14
  */
 @MyBatisDao
 public interface ArchiveMaterialDao extends CrudDao<ArchiveMaterial> {

@@ -5,7 +5,11 @@
 	<sql id="archiveContractColumns">
 		a.id AS "id",
 		a.contract_name AS "contractName",
-		a.contract_code AS "contractCode"
+		a.contract_code AS "contractCode",
+		a.ext_field1 AS "extField1",
+		a.ext_field2 AS "extField2",
+		a.ext_field3 AS "extField3",
+		a.remark AS "remark"
 	</sql>
 	
 	<sql id="archiveContractJoins">
@@ -25,7 +29,18 @@
 		FROM archive_contract a
 		<include refid="archiveContractJoins"/>
 		<where>
-			
+			<if test="contractCode != null and contractCode != ''">
+				AND a.contract_code LIKE
+				<if test="dbName == 'oracle'">'%'||#{contractCode}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{contractCode}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{contractCode}, '%')</if>
+			</if>
+			<if test="contractName != null and contractName != ''">
+				AND a.contract_name LIKE
+				<if test="dbName == 'oracle'">'%'||#{contractName}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{contractName}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{contractName}, '%')</if>
+			</if>
 		</where>
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
@@ -56,17 +71,29 @@
 	<insert id="insert">
 		INSERT INTO archive_contract(
 			contract_name,
-			contract_code
+			contract_code,
+			ext_field1,
+			ext_field2,
+			ext_field3,
+			remark
 		) VALUES (
 			#{contractName},
-			#{contractCode}
+			#{contractCode},
+			#{extField1},
+			#{extField2},
+			#{extField3},
+			#{remark}
 		)
 	</insert>
 	
 	<update id="update">
 		UPDATE archive_contract SET 	
 			contract_name = #{contractName},
-			contract_code = #{contractCode}
+			contract_code = #{contractCode},
+			ext_field1 = #{extField1},
+			ext_field2 = #{extField2},
+			ext_field3 = #{extField3},
+			remark = #{remark}
 		WHERE id = #{id}
 	</update>
 	

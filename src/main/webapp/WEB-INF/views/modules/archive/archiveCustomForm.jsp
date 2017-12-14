@@ -32,17 +32,41 @@
 	</ul><br/>
 	<form:form id="inputForm" modelAttribute="archiveCustom" action="${ctx}/archive/archiveCustom/save" method="post" class="form-horizontal">
 		<form:hidden path="id"/>
-		<sys:message content="${message}"/>		
+		<sys:message content="${message}"/>
 		<div class="control-group">
-			<label class="control-label">客户分类名称：</label>
+			<label class="control-label">客户编码：</label>
+			<div class="controls">
+				<form:input path="customCode" htmlEscape="false" maxlength="12" class="input-xlarge "/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">客户名称：</label>
 			<div class="controls">
 				<form:input path="customName" htmlEscape="false" maxlength="50" class="input-xlarge "/>
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label">客户分类编码：</label>
+			<label class="control-label">ext_field1：</label>
 			<div class="controls">
-				<form:input path="customCode" htmlEscape="false" maxlength="12" class="input-xlarge "/>
+				<form:input path="extField1" htmlEscape="false" maxlength="60" class="input-xlarge "/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">ext_field2：</label>
+			<div class="controls">
+				<form:input path="extField2" htmlEscape="false" maxlength="60" class="input-xlarge "/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">ext_field3：</label>
+			<div class="controls">
+				<form:input path="extField3" htmlEscape="false" maxlength="120" class="input-xlarge "/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">remark：</label>
+			<div class="controls">
+				<form:input path="remark" htmlEscape="false" maxlength="1000" class="input-xlarge "/>
 			</div>
 		</div>
 		<div class="form-actions">

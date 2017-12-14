@@ -27,22 +27,46 @@
 </head>
 <body>
 	<ul class="nav nav-tabs">
-		<li><a href="${ctx}/archive/archiveMaterial/">分类列表</a></li>
-		<li class="active"><a href="${ctx}/archive/archiveMaterial/form?id=${archiveMaterial.id}">分类<shiro:hasPermission name="archive:archiveMaterial:edit">${not empty archiveMaterial.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="archive:archiveMaterial:edit">查看</shiro:lacksPermission></a></li>
+		<li><a href="${ctx}/archive/archiveMaterial/">单表列表</a></li>
+		<li class="active"><a href="${ctx}/archive/archiveMaterial/form?id=${archiveMaterial.id}">单表<shiro:hasPermission name="archive:archiveMaterial:edit">${not empty archiveMaterial.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="archive:archiveMaterial:edit">查看</shiro:lacksPermission></a></li>
 	</ul><br/>
 	<form:form id="inputForm" modelAttribute="archiveMaterial" action="${ctx}/archive/archiveMaterial/save" method="post" class="form-horizontal">
 		<form:hidden path="id"/>
-		<sys:message content="${message}"/>		
+		<sys:message content="${message}"/>
 		<div class="control-group">
-			<label class="control-label">分类编码：</label>
+			<label class="control-label">物资编码：</label>
 			<div class="controls">
 				<form:input path="materialCode" htmlEscape="false" maxlength="12" class="input-xlarge "/>
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label">分类名称：</label>
+			<label class="control-label">物资名称：</label>
 			<div class="controls">
 				<form:input path="materialName" htmlEscape="false" maxlength="50" class="input-xlarge "/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">ext_field1：</label>
+			<div class="controls">
+				<form:input path="extField1" htmlEscape="false" maxlength="60" class="input-xlarge "/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">ext_field2：</label>
+			<div class="controls">
+				<form:input path="extField2" htmlEscape="false" maxlength="60" class="input-xlarge "/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">ext_field3：</label>
+			<div class="controls">
+				<form:input path="extField3" htmlEscape="false" maxlength="120" class="input-xlarge "/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">remark：</label>
+			<div class="controls">
+				<form:input path="remark" htmlEscape="false" maxlength="1000" class="input-xlarge "/>
 			</div>
 		</div>
 		<div class="form-actions">

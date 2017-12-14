@@ -10,7 +10,7 @@ import com.thinkgem.jeesite.modules.archive.entity.ArchiveSupplier;
 /**
  * 供应商分类DAO接口
  * @author spark
- * @version 2017-12-12
+ * @version 2017-12-13
  */
 @MyBatisDao
 public interface ArchiveSupplierDao extends CrudDao<ArchiveSupplier> {

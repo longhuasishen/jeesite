@@ -10,7 +10,7 @@ import com.thinkgem.jeesite.modules.archive.entity.ArchiveCustom;
 /**
  * 客户分类DAO接口
  * @author spark
- * @version 2017-12-12
+ * @version 2017-12-14
  */
 @MyBatisDao
 public interface ArchiveCustomDao extends CrudDao<ArchiveCustom> {

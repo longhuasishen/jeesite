@@ -25,6 +25,12 @@
 		<input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
 		<input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
 		<ul class="ul-form">
+			<li><label>分类编码：</label>
+				<form:input path="contractCode" htmlEscape="false" maxlength="200" class="input-medium"/>
+			</li>
+			<li><label>分类名称：</label>
+				<form:input path="contractName" htmlEscape="false" maxlength="200" class="input-medium"/>
+			</li>
 			<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
 			<li class="clearfix"></li>
 		</ul>

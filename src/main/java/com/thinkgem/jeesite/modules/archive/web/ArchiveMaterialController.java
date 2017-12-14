@@ -6,6 +6,9 @@ package com.thinkgem.jeesite.modules.archive.web;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.thinkgem.jeesite.modules.sys.entity.Office;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.thinkgem.jeesite.common.config.Global;
@@ -22,10 +26,13 @@ import com.thinkgem.jeesite.common.utils.StringUtils;
 import com.thinkgem.jeesite.modules.archive.entity.ArchiveMaterial;
 import com.thinkgem.jeesite.modules.archive.service.ArchiveMaterialService;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * 物资分类Controller
  * @author lisy
- * @version 2017-12-10
+ * @version 2017-12-14
  */
 @Controller
 @RequestMapping(value = "${adminPath}/archive/archiveMaterial")
@@ -78,6 +85,25 @@ public class ArchiveMaterialController extends BaseController {
 		archiveMaterialService.delete(archiveMaterial);
 		addMessage(redirectAttributes, "删除单表成功");
 		return "redirect:"+Global.getAdminPath()+"/archive/archiveMaterial/?repage";
+	}
+	@RequiresPermissions("user")
+	@ResponseBody
+	@RequestMapping(value = "treeData")
+	public List<Map<String, Object>> treeData(@RequestParam(required=false) String materialCode, HttpServletResponse response) {
+		List<Map<String, Object>> mapList = Lists.newArrayList();
+		ArchiveMaterial am = new ArchiveMaterial();
+		am.setMaterialCode(materialCode);
+		List<ArchiveMaterial> list = archiveMaterialService.findList(am);
+		for (int i=0; i<list.size(); i++){
+		ArchiveMaterial e = list.get(i);
+			Map<String, Object> map = Maps.newHashMap();
+			map.put("id", e.getId());
+			map.put("name", e.getMaterialName());
+			map.put("code", e.getMaterialCode());
+
+			mapList.add(map);
+		}
+		return mapList;
 	}
 
 }

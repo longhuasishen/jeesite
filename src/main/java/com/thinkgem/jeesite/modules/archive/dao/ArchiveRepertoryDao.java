@@ -10,7 +10,7 @@ import com.thinkgem.jeesite.modules.archive.entity.ArchiveRepertory;
 /**
  * 仓库分类DAO接口
  * @author spark
- * @version 2017-12-12
+ * @version 2017-12-13
  */
 @MyBatisDao
 public interface ArchiveRepertoryDao extends CrudDao<ArchiveRepertory> {

@@ -5,7 +5,11 @@
 	<sql id="archiveSupplierColumns">
 		a.id AS "id",
 		a.supplier_name AS "supplierName",
-		a.supplier_code AS "supplierCode"
+		a.supplier_code AS "supplierCode",
+		a.ext_field1 AS "extField1",
+		a.ext_field2 AS "extField2",
+		a.ext_field3 AS "extField3",
+		a.remark AS "remark"
 	</sql>
 	
 	<sql id="archiveSupplierJoins">
@@ -25,18 +29,7 @@
 		FROM archive_supplier a
 		<include refid="archiveSupplierJoins"/>
 		<where>
-			<if test="supplierCode != null and supplierCode != ''">
-				AND a.supplier_code LIKE
-				<if test="dbName == 'oracle'">'%'||#{supplierCode}||'%'</if>
-				<if test="dbName == 'mssql'">'%'+#{supplierCode}+'%'</if>
-				<if test="dbName == 'mysql'">CONCAT('%', #{supplierCode}, '%')</if>
-			</if>
-			<if test="supplierName != null and supplierName != ''">
-				AND a.supplier_name LIKE
-				<if test="dbName == 'oracle'">'%'||#{supplierName}||'%'</if>
-				<if test="dbName == 'mssql'">'%'+#{supplierName}+'%'</if>
-				<if test="dbName == 'mysql'">CONCAT('%', #{supplierName}, '%')</if>
-			</if>
+			
 		</where>
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
@@ -53,7 +46,18 @@
 		FROM archive_supplier a
 		<include refid="archiveSupplierJoins"/>
 		<where>
-			
+			<if test="supplierCode != null and supplierCode != ''">
+				AND a.supplier_code LIKE
+				<if test="dbName == 'oracle'">'%'||#{supplierCode}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{supplierCode}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{supplierCode}, '%')</if>
+			</if>
+			<if test="supplierName != null and supplierName != ''">
+				AND a.supplier_name LIKE
+				<if test="dbName == 'oracle'">'%'||#{supplierName}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{supplierName}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{supplierName}, '%')</if>
+			</if>
 		</where>		
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
@@ -67,17 +71,29 @@
 	<insert id="insert">
 		INSERT INTO archive_supplier(
 			supplier_name,
-			supplier_code
+			supplier_code,
+			ext_field1,
+			ext_field2,
+			ext_field3,
+			remark
 		) VALUES (
 			#{supplierName},
-			#{supplierCode}
+			#{supplierCode},
+			#{extField1},
+			#{extField2},
+			#{extField3},
+			#{remark}
 		)
 	</insert>
 	
 	<update id="update">
 		UPDATE archive_supplier SET 	
 			supplier_name = #{supplierName},
-			supplier_code = #{supplierCode}
+			supplier_code = #{supplierCode},
+			ext_field1 = #{extField1},
+			ext_field2 = #{extField2},
+			ext_field3 = #{extField3},
+			remark = #{remark}
 		WHERE id = #{id}
 	</update>
 	
