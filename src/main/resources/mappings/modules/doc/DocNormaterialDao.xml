@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.thinkgem.jeesite.modules.doc.dao.DocConcreteDao">
-
-	<sql id="docConcreteColumns">
+<mapper namespace="com.thinkgem.jeesite.modules.doc.dao.DocNormaterialDao">
+    
+	<sql id="docNormaterialColumns">
 		a.kind_code AS "kindCode",
 		a.kind_name AS "kindName",
 		a.kind_level AS "kindLevel",
@@ -38,23 +38,23 @@
 		a.ext_field3 AS "extField3",
 		a.remark AS "remark"
 	</sql>
-
-	<sql id="docConcreteJoins">
+	
+	<sql id="docNormaterialJoins">
 	</sql>
-
-	<select id="get" resultType="DocConcrete">
-		SELECT
-			<include refid="docConcreteColumns"/>
-		FROM doc_concrete a
-		<include refid="docConcreteJoins"/>
+    
+	<select id="get" resultType="DocNormaterial">
+		SELECT 
+			<include refid="docNormaterialColumns"/>
+		FROM doc_normaterial a
+		<include refid="docNormaterialJoins"/>
 		WHERE a.id = #{id}
 	</select>
-
-	<select id="findList" resultType="DocConcrete">
-		SELECT
-			<include refid="docConcreteColumns"/>
-		FROM doc_concrete a
-		<include refid="docConcreteJoins"/>
+	
+	<select id="findList" resultType="DocNormaterial">
+		SELECT 
+			<include refid="docNormaterialColumns"/>
+		FROM doc_normaterial a
+		<include refid="docNormaterialJoins"/>
 		<where>
 			<if test="kindCode != null and kindCode != ''">
 				AND a.kind_code LIKE
@@ -77,15 +77,15 @@
 			</otherwise>
 		</choose>
 	</select>
-
-	<select id="findAllList" resultType="DocConcrete">
-		SELECT
-			<include refid="docConcreteColumns"/>
-		FROM doc_concrete a
-		<include refid="docConcreteJoins"/>
+	
+	<select id="findAllList" resultType="DocNormaterial">
+		SELECT 
+			<include refid="docNormaterialColumns"/>
+		FROM doc_normaterial a
+		<include refid="docNormaterialJoins"/>
 		<where>
-
-		</where>
+			
+		</where>		
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
 				ORDER BY ${page.orderBy}
@@ -94,9 +94,9 @@
 			</otherwise>
 		</choose>
 	</select>
-
+	
 	<insert id="insert">
-		INSERT INTO doc_concrete(
+		INSERT INTO doc_normaterial(
 			kind_code,
 			kind_name,
 			kind_level,
@@ -168,9 +168,9 @@
 			#{remark}
 		)
 	</insert>
-
+	
 	<update id="update">
-		UPDATE doc_concrete SET
+		UPDATE doc_normaterial SET 	
 			kind_code = #{kindCode},
 			kind_name = #{kindName},
 			kind_level = #{kindLevel},
@@ -207,9 +207,9 @@
 			remark = #{remark}
 		WHERE id = #{id}
 	</update>
-
+	
 	<update id="delete">
-		DELETE FROM doc_concrete
+		DELETE FROM doc_normaterial
 		WHERE id = #{id}
 	</update>
 	

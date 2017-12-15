@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.doc.dao.DocDriverDao">
+    
+	<sql id="docDriverColumns">
+		a.driver_code AS "driverCode",
+		a.driver_name AS "driverName",
+		a.car_no AS "carNo",
+		a.licence_no AS "licenceNo",
+		a.comment AS "comment",
+		a.ext_field1 AS "extField1",
+		a.ext_field2 AS "extField2",
+		a.ext_field3 AS "extField3",
+		a.remark AS "remark"
+	</sql>
+	
+	<sql id="docDriverJoins">
+	</sql>
+    
+	<select id="get" resultType="DocDriver">
+		SELECT 
+			<include refid="docDriverColumns"/>
+		FROM doc_driver a
+		<include refid="docDriverJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="DocDriver">
+		SELECT 
+			<include refid="docDriverColumns"/>
+		FROM doc_driver a
+		<include refid="docDriverJoins"/>
+		<where>
+			<if test="driverCode != null and driverCode != ''">
+				AND a.driver_code LIKE
+				<if test="dbName == 'oracle'">'%'||#{driverCode}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{driverCode}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{driverCode}, '%')</if>
+			</if>
+			<if test="driverName != null and driverName != ''">
+				AND a.driver_name LIKE
+				<if test="dbName == 'oracle'">'%'||#{driverName}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{driverName}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{driverName}, '%')</if>
+			</if>
+			<if test="carNo != null and carNo != ''">
+				AND a.car_no LIKE
+				<if test="dbName == 'oracle'">'%'||#{carNo}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{carNo}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{carNo}, '%')</if>
+			</if>
+			<if test="licenceNo != null and licenceNo != ''">
+				AND a.licence_no LIKE
+				<if test="dbName == 'oracle'">'%'||#{licenceNo}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{licenceNo}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{licenceNo}, '%')</if>
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="DocDriver">
+		SELECT 
+			<include refid="docDriverColumns"/>
+		FROM doc_driver a
+		<include refid="docDriverJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO doc_driver(
+			driver_code,
+			driver_name,
+			car_no,
+			licence_no,
+			comment,
+			ext_field1,
+			ext_field2,
+			ext_field3,
+			remark
+		) VALUES (
+			#{driverCode},
+			#{driverName},
+			#{carNo},
+			#{licenceNo},
+			#{comment},
+			#{extField1},
+			#{extField2},
+			#{extField3},
+			#{remark}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE doc_driver SET 	
+			driver_code = #{driverCode},
+			driver_name = #{driverName},
+			car_no = #{carNo},
+			licence_no = #{licenceNo},
+			comment = #{comment},
+			ext_field1 = #{extField1},
+			ext_field2 = #{extField2},
+			ext_field3 = #{extField3},
+			remark = #{remark}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM doc_driver
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

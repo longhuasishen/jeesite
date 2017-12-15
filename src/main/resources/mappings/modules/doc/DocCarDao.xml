@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.doc.dao.DocCarDao">
+    
+	<sql id="docCarColumns">
+		a.car_code AS "carCode",
+		a.car_no AS "carNo",
+		a.driver_name AS "driverName",
+		a.car_owner AS "carOwner",
+		a.car_licence AS "carLicence",
+		a.card_no AS "cardNo",
+		a.car_typename AS "carTypename",
+		a.empty_weight AS "emptyWeight",
+		a.drive_cube AS "driveCube",
+		a.car_phone AS "carPhone",
+		a.is_mixing AS "isMixing",
+		a.is_pump AS "isPump",
+		a.is_other AS "isOther",
+		a.is_avalable AS "isAvalable",
+		a.drive_record AS "driveRecord",
+		a.ext_field1 AS "extField1",
+		a.ext_field2 AS "extField2",
+		a.ext_field3 AS "extField3",
+		a.remark AS "remark"
+	</sql>
+	
+	<sql id="docCarJoins">
+	</sql>
+    
+	<select id="get" resultType="DocCar">
+		SELECT 
+			<include refid="docCarColumns"/>
+		FROM doc_car a
+		<include refid="docCarJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="DocCar">
+		SELECT 
+			<include refid="docCarColumns"/>
+		FROM doc_car a
+		<include refid="docCarJoins"/>
+		<where>
+			<if test="carCode != null and carCode != ''">
+				AND a.car_code LIKE
+				<if test="dbName == 'oracle'">'%'||#{carCode}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{carCode}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{carCode}, '%')</if>
+			</if>
+			<if test="carNo != null and carNo != ''">
+				AND a.car_no LIKE
+				<if test="dbName == 'oracle'">'%'||#{carNo}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{carNo}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{carNo}, '%')</if>
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="DocCar">
+		SELECT 
+			<include refid="docCarColumns"/>
+		FROM doc_car a
+		<include refid="docCarJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO doc_car(
+			car_code,
+			car_no,
+			driver_name,
+			car_owner,
+			car_licence,
+			card_no,
+			car_typename,
+			empty_weight,
+			drive_cube,
+			car_phone,
+			is_mixing,
+			is_pump,
+			is_other,
+			is_avalable,
+			drive_record,
+			ext_field1,
+			ext_field2,
+			ext_field3,
+			remark
+		) VALUES (
+			#{carCode},
+			#{carNo},
+			#{driverName},
+			#{carOwner},
+			#{carLicence},
+			#{cardNo},
+			#{carTypename},
+			#{emptyWeight},
+			#{driveCube},
+			#{carPhone},
+			#{isMixing},
+			#{isPump},
+			#{isOther},
+			#{isAvalable},
+			#{driveRecord},
+			#{extField1},
+			#{extField2},
+			#{extField3},
+			#{remark}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE doc_car SET 	
+			car_code = #{carCode},
+			car_no = #{carNo},
+			driver_name = #{driverName},
+			car_owner = #{carOwner},
+			car_licence = #{carLicence},
+			card_no = #{cardNo},
+			car_typename = #{carTypename},
+			empty_weight = #{emptyWeight},
+			drive_cube = #{driveCube},
+			car_phone = #{carPhone},
+			is_mixing = #{isMixing},
+			is_pump = #{isPump},
+			is_other = #{isOther},
+			is_avalable = #{isAvalable},
+			drive_record = #{driveRecord},
+			ext_field1 = #{extField1},
+			ext_field2 = #{extField2},
+			ext_field3 = #{extField3},
+			remark = #{remark}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM doc_car
+		WHERE id = #{id}
+	</update>
+	
+</mapper>
