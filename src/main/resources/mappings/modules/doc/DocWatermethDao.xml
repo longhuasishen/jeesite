@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.doc.dao.DocWatermethDao">
+    
+	<sql id="docWatermethColumns">
+		a.watermeth_code AS "watermethCode",
+		a.watermeth_name AS "watermethName",
+		a.comment AS "comment",
+		a.ext_field1 AS "extField1",
+		a.ext_field2 AS "extField2",
+		a.ext_field3 AS "extField3",
+		a.remark AS "remark"
+	</sql>
+	
+	<sql id="docWatermethJoins">
+	</sql>
+    
+	<select id="get" resultType="DocWatermeth">
+		SELECT 
+			<include refid="docWatermethColumns"/>
+		FROM doc_watermeth a
+		<include refid="docWatermethJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="DocWatermeth">
+		SELECT 
+			<include refid="docWatermethColumns"/>
+		FROM doc_watermeth a
+		<include refid="docWatermethJoins"/>
+		<where>
+			<if test="watermethCode != null and watermethCode != ''">
+				AND a.watermeth_code LIKE
+				<if test="dbName == 'oracle'">'%'||#{watermethCode}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{watermethCode}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{watermethCode}, '%')</if>
+			</if>
+			<if test="watermethName != null and watermethName != ''">
+				AND a.watermeth_name LIKE
+				<if test="dbName == 'oracle'">'%'||#{watermethName}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{watermethName}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{watermethName}, '%')</if>
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="DocWatermeth">
+		SELECT 
+			<include refid="docWatermethColumns"/>
+		FROM doc_watermeth a
+		<include refid="docWatermethJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO doc_watermeth(
+			watermeth_code,
+			watermeth_name,
+			comment,
+			ext_field1,
+			ext_field2,
+			ext_field3,
+			remark
+		) VALUES (
+			#{watermethCode},
+			#{watermethName},
+			#{comment},
+			#{extField1},
+			#{extField2},
+			#{extField3},
+			#{remark}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE doc_watermeth SET 	
+			watermeth_code = #{watermethCode},
+			watermeth_name = #{watermethName},
+			comment = #{comment},
+			ext_field1 = #{extField1},
+			ext_field2 = #{extField2},
+			ext_field3 = #{extField3},
+			remark = #{remark}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM doc_watermeth
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

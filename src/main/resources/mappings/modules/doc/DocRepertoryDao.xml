@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.doc.dao.DocRepertoryDao">
+    
+	<sql id="docRepertoryColumns">
+		a.repertory_code AS "repertoryCode",
+		a.repertory_name AS "repertoryName",
+		a.kind_category AS "kindCategory",
+		a.repertory_department AS "repertoryDepartment",
+		a.manager_person AS "managerPerson",
+		a.phone_no AS "phoneNo",
+		a.max_stock AS "maxStock",
+		a.pricing_method AS "pricingMethod",
+		a.repertory_addr AS "repertoryAddr",
+		a.repertory_station AS "repertoryStation",
+		a.comment AS "comment",
+		a.ext_field1 AS "extField1",
+		a.ext_field2 AS "extField2",
+		a.ext_field3 AS "extField3",
+		a.remark AS "remark"
+	</sql>
+	
+	<sql id="docRepertoryJoins">
+	</sql>
+    
+	<select id="get" resultType="DocRepertory">
+		SELECT 
+			<include refid="docRepertoryColumns"/>
+		FROM doc_repertory a
+		<include refid="docRepertoryJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="DocRepertory">
+		SELECT 
+			<include refid="docRepertoryColumns"/>
+		FROM doc_repertory a
+		<include refid="docRepertoryJoins"/>
+		<where>
+			<if test="repertoryCode != null and repertoryCode != ''">
+				AND a.repertory_code LIKE
+				<if test="dbName == 'oracle'">'%'||#{repertoryCode}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{repertoryCode}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{repertoryCode}, '%')</if>
+			</if>
+			<if test="repertoryName != null and repertoryName != ''">
+				AND a.repertory_name LIKE
+				<if test="dbName == 'oracle'">'%'||#{repertoryName}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{repertoryName}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{repertoryName}, '%')</if>
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="DocRepertory">
+		SELECT 
+			<include refid="docRepertoryColumns"/>
+		FROM doc_repertory a
+		<include refid="docRepertoryJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO doc_repertory(
+			repertory_code,
+			repertory_name,
+			kind_category,
+			repertory_department,
+			manager_person,
+			phone_no,
+			max_stock,
+			pricing_method,
+			repertory_addr,
+			repertory_station,
+			comment,
+			ext_field1,
+			ext_field2,
+			ext_field3,
+			remark
+		) VALUES (
+			#{repertoryCode},
+			#{repertoryName},
+			#{kindCategory},
+			#{repertoryDepartment},
+			#{managerPerson},
+			#{phoneNo},
+			#{maxStock},
+			#{pricingMethod},
+			#{repertoryAddr},
+			#{repertoryStation},
+			#{comment},
+			#{extField1},
+			#{extField2},
+			#{extField3},
+			#{remark}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE doc_repertory SET 	
+			repertory_code = #{repertoryCode},
+			repertory_name = #{repertoryName},
+			kind_category = #{kindCategory},
+			repertory_department = #{repertoryDepartment},
+			manager_person = #{managerPerson},
+			phone_no = #{phoneNo},
+			max_stock = #{maxStock},
+			pricing_method = #{pricingMethod},
+			repertory_addr = #{repertoryAddr},
+			repertory_station = #{repertoryStation},
+			comment = #{comment},
+			ext_field1 = #{extField1},
+			ext_field2 = #{extField2},
+			ext_field3 = #{extField3},
+			remark = #{remark}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM doc_repertory
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

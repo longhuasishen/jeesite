@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.doc.dao.DocOfficeworkDao">
+    
+	<sql id="docOfficeworkColumns">
+		a.officework_code AS "officeworkCode",
+		a.officework_name AS "officeworkName",
+		a.officework_dep AS "officeworkDep",
+		a.officework_post AS "officeworkPost",
+		a.officework_edu AS "officeworkEdu",
+		a.officework_marry AS "officeworkMarry",
+		a.officework_pol AS "officeworkPol",
+		a.officework_sex AS "officeworkSex",
+		a.officework_phone AS "officeworkPhone",
+		a.officework_birth AS "officeworkBirth",
+		a.officework_idcard AS "officeworkIdcard",
+		a.join_date AS "joinDate",
+		a.doc_site AS "docSite",
+		a.doc_no AS "docNo",
+		a.from_uni AS "fromUni",
+		a.officework_comp AS "officeworkComp",
+		a.last_comp AS "lastComp",
+		a.overuni_time AS "overuniTime",
+		a.officework_major AS "officeworkMajor",
+		a.input_time AS "inputTime",
+		a.officework_level AS "officeworkLevel",
+		a.officework_addr AS "officeworkAddr",
+		a.work_status AS "workStatus",
+		a.post_level AS "postLevel",
+		a.officework_nation AS "officeworkNation",
+		a.officework_quarters AS "officeworkQuarters",
+		a.officework_sales AS "officeworkSales",
+		a.contract_flg AS "contractFlg",
+		a.officework_flg AS "officeworkFlg",
+		a.officework_cancel AS "officeworkCancel",
+		a.ext_field1 AS "extField1",
+		a.ext_field2 AS "extField2",
+		a.ext_field3 AS "extField3",
+		a.remark AS "remark"
+	</sql>
+	
+	<sql id="docOfficeworkJoins">
+	</sql>
+    
+	<select id="get" resultType="DocOfficework">
+		SELECT 
+			<include refid="docOfficeworkColumns"/>
+		FROM doc_officework a
+		<include refid="docOfficeworkJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="DocOfficework">
+		SELECT 
+			<include refid="docOfficeworkColumns"/>
+		FROM doc_officework a
+		<include refid="docOfficeworkJoins"/>
+		<where>
+			<if test="officeworkCode != null and officeworkCode != ''">
+				AND a.officework_code LIKE
+				<if test="dbName == 'oracle'">'%'||#{officeworkCode}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{officeworkCode}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{officeworkCode}, '%')</if>
+			</if>
+			<if test="officeworkName != null and officeworkName != ''">
+				AND a.officework_name LIKE
+				<if test="dbName == 'oracle'">'%'||#{officeworkName}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{officeworkName}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{officeworkName}, '%')</if>
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="DocOfficework">
+		SELECT 
+			<include refid="docOfficeworkColumns"/>
+		FROM doc_officework a
+		<include refid="docOfficeworkJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO doc_officework(
+			officework_code,
+			officework_name,
+			officework_dep,
+			officework_post,
+			officework_edu,
+			officework_marry,
+			officework_pol,
+			officework_sex,
+			officework_phone,
+			officework_birth,
+			officework_idcard,
+			join_date,
+			doc_site,
+			doc_no,
+			from_uni,
+			officework_comp,
+			last_comp,
+			overuni_time,
+			officework_major,
+			input_time,
+			officework_level,
+			officework_addr,
+			work_status,
+			post_level,
+			officework_nation,
+			officework_quarters,
+			officework_sales,
+			contract_flg,
+			officework_flg,
+			officework_cancel,
+			ext_field1,
+			ext_field2,
+			ext_field3,
+			remark
+		) VALUES (
+			#{officeworkCode},
+			#{officeworkName},
+			#{officeworkDep},
+			#{officeworkPost},
+			#{officeworkEdu},
+			#{officeworkMarry},
+			#{officeworkPol},
+			#{officeworkSex},
+			#{officeworkPhone},
+			#{officeworkBirth},
+			#{officeworkIdcard},
+			#{joinDate},
+			#{docSite},
+			#{docNo},
+			#{fromUni},
+			#{officeworkComp},
+			#{lastComp},
+			#{overuniTime},
+			#{officeworkMajor},
+			#{inputTime},
+			#{officeworkLevel},
+			#{officeworkAddr},
+			#{workStatus},
+			#{postLevel},
+			#{officeworkNation},
+			#{officeworkQuarters},
+			#{officeworkSales},
+			#{contractFlg},
+			#{officeworkFlg},
+			#{officeworkCancel},
+			#{extField1},
+			#{extField2},
+			#{extField3},
+			#{remark}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE doc_officework SET 	
+			officework_code = #{officeworkCode},
+			officework_name = #{officeworkName},
+			officework_dep = #{officeworkDep},
+			officework_post = #{officeworkPost},
+			officework_edu = #{officeworkEdu},
+			officework_marry = #{officeworkMarry},
+			officework_pol = #{officeworkPol},
+			officework_sex = #{officeworkSex},
+			officework_phone = #{officeworkPhone},
+			officework_birth = #{officeworkBirth},
+			officework_idcard = #{officeworkIdcard},
+			join_date = #{joinDate},
+			doc_site = #{docSite},
+			doc_no = #{docNo},
+			from_uni = #{fromUni},
+			officework_comp = #{officeworkComp},
+			last_comp = #{lastComp},
+			overuni_time = #{overuniTime},
+			officework_major = #{officeworkMajor},
+			input_time = #{inputTime},
+			officework_level = #{officeworkLevel},
+			officework_addr = #{officeworkAddr},
+			work_status = #{workStatus},
+			post_level = #{postLevel},
+			officework_nation = #{officeworkNation},
+			officework_quarters = #{officeworkQuarters},
+			officework_sales = #{officeworkSales},
+			contract_flg = #{contractFlg},
+			officework_flg = #{officeworkFlg},
+			officework_cancel = #{officeworkCancel},
+			ext_field1 = #{extField1},
+			ext_field2 = #{extField2},
+			ext_field3 = #{extField3},
+			remark = #{remark}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM doc_officework
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

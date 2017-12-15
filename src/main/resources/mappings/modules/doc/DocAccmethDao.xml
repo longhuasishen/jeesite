@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.doc.dao.DocAccmethDao">
+    
+	<sql id="docAccmethColumns">
+		a.accmeth_code AS "accmethCode",
+		a.accmeth_name AS "accmethName",
+		a.ext_field1 AS "extField1",
+		a.ext_field2 AS "extField2",
+		a.ext_field3 AS "extField3",
+		a.remark AS "remark"
+	</sql>
+	
+	<sql id="docAccmethJoins">
+	</sql>
+    
+	<select id="get" resultType="DocAccmeth">
+		SELECT 
+			<include refid="docAccmethColumns"/>
+		FROM doc_accmeth a
+		<include refid="docAccmethJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="DocAccmeth">
+		SELECT 
+			<include refid="docAccmethColumns"/>
+		FROM doc_accmeth a
+		<include refid="docAccmethJoins"/>
+		<where>
+			<if test="accmethCode != null and accmethCode != ''">
+				AND a.accmeth_code LIKE
+				<if test="dbName == 'oracle'">'%'||#{accmethCode}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{accmethCode}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{accmethCode}, '%')</if>
+			</if>
+			<if test="accmethName != null and accmethName != ''">
+				AND a.accmeth_name LIKE
+				<if test="dbName == 'oracle'">'%'||#{accmethName}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{accmethName}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{accmethName}, '%')</if>
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="DocAccmeth">
+		SELECT 
+			<include refid="docAccmethColumns"/>
+		FROM doc_accmeth a
+		<include refid="docAccmethJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO doc_accmeth(
+			accmeth_code,
+			accmeth_name,
+			ext_field1,
+			ext_field2,
+			ext_field3,
+			remark
+		) VALUES (
+			#{accmethCode},
+			#{accmethName},
+			#{extField1},
+			#{extField2},
+			#{extField3},
+			#{remark}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE doc_accmeth SET 	
+			accmeth_code = #{accmethCode},
+			accmeth_name = #{accmethName},
+			ext_field1 = #{extField1},
+			ext_field2 = #{extField2},
+			ext_field3 = #{extField3},
+			remark = #{remark}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM doc_accmeth
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

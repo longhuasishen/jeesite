@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.doc.dao.DocConcretetypDao">
+    
+	<sql id="docConcretetypColumns">
+		a.concretetyp_code AS "concretetypCode",
+		a.concretetyp_name AS "concretetypName",
+		a.stock_name AS "stockName",
+		a.ext_field1 AS "extField1",
+		a.ext_field2 AS "extField2",
+		a.ext_field3 AS "extField3",
+		a.remark AS "remark"
+	</sql>
+	
+	<sql id="docConcretetypJoins">
+	</sql>
+    
+	<select id="get" resultType="DocConcretetyp">
+		SELECT 
+			<include refid="docConcretetypColumns"/>
+		FROM doc_concretetyp a
+		<include refid="docConcretetypJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="DocConcretetyp">
+		SELECT 
+			<include refid="docConcretetypColumns"/>
+		FROM doc_concretetyp a
+		<include refid="docConcretetypJoins"/>
+		<where>
+			<if test="concretetypCode != null and concretetypCode != ''">
+				AND a.concretetyp_code LIKE
+				<if test="dbName == 'oracle'">'%'||#{concretetypCode}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{concretetypCode}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{concretetypCode}, '%')</if>
+			</if>
+			<if test="concretetypName != null and concretetypName != ''">
+				AND a.concretetyp_name LIKE
+				<if test="dbName == 'oracle'">'%'||#{concretetypName}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{concretetypName}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{concretetypName}, '%')</if>
+			</if>
+			<if test="stockName != null and stockName != ''">
+				AND a.stock_name LIKE
+				<if test="dbName == 'oracle'">'%'||#{stockName}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{stockName}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{stockName}, '%')</if>
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="DocConcretetyp">
+		SELECT 
+			<include refid="docConcretetypColumns"/>
+		FROM doc_concretetyp a
+		<include refid="docConcretetypJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO doc_concretetyp(
+			concretetyp_code,
+			concretetyp_name,
+			stock_name,
+			ext_field1,
+			ext_field2,
+			ext_field3,
+			remark
+		) VALUES (
+			#{concretetypCode},
+			#{concretetypName},
+			#{stockName},
+			#{extField1},
+			#{extField2},
+			#{extField3},
+			#{remark}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE doc_concretetyp SET 	
+			concretetyp_code = #{concretetypCode},
+			concretetyp_name = #{concretetypName},
+			stock_name = #{stockName},
+			ext_field1 = #{extField1},
+			ext_field2 = #{extField2},
+			ext_field3 = #{extField3},
+			remark = #{remark}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM doc_concretetyp
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

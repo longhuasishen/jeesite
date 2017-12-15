@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.doc.dao.DocPumpDao">
+    
+	<sql id="docPumpColumns">
+		a.pump_code AS "pumpCode",
+		a.pump_name AS "pumpName",
+		a.comment AS "comment",
+		a.ext_field1 AS "extField1",
+		a.ext_field2 AS "extField2",
+		a.ext_field3 AS "extField3",
+		a.remark AS "remark"
+	</sql>
+	
+	<sql id="docPumpJoins">
+	</sql>
+    
+	<select id="get" resultType="DocPump">
+		SELECT 
+			<include refid="docPumpColumns"/>
+		FROM doc_pump a
+		<include refid="docPumpJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="DocPump">
+		SELECT 
+			<include refid="docPumpColumns"/>
+		FROM doc_pump a
+		<include refid="docPumpJoins"/>
+		<where>
+			<if test="pumpCode != null and pumpCode != ''">
+				AND a.pump_code LIKE
+				<if test="dbName == 'oracle'">'%'||#{pumpCode}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{pumpCode}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{pumpCode}, '%')</if>
+			</if>
+			<if test="pumpName != null and pumpName != ''">
+				AND a.pump_name LIKE
+				<if test="dbName == 'oracle'">'%'||#{pumpName}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{pumpName}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{pumpName}, '%')</if>
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="DocPump">
+		SELECT 
+			<include refid="docPumpColumns"/>
+		FROM doc_pump a
+		<include refid="docPumpJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO doc_pump(
+			pump_code,
+			pump_name,
+			comment,
+			ext_field1,
+			ext_field2,
+			ext_field3,
+			remark
+		) VALUES (
+			#{pumpCode},
+			#{pumpName},
+			#{comment},
+			#{extField1},
+			#{extField2},
+			#{extField3},
+			#{remark}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE doc_pump SET 	
+			pump_code = #{pumpCode},
+			pump_name = #{pumpName},
+			comment = #{comment},
+			ext_field1 = #{extField1},
+			ext_field2 = #{extField2},
+			ext_field3 = #{extField3},
+			remark = #{remark}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM doc_pump
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

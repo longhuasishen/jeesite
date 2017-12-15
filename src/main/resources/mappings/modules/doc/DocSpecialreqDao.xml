@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.doc.dao.DocSpecialreqDao">
+    
+	<sql id="docSpecialreqColumns">
+		a.specialreq_code AS "specialreqCode",
+		a.specialreq_name AS "specialreqName",
+		a.ext_field1 AS "extField1",
+		a.ext_field2 AS "extField2",
+		a.ext_field3 AS "extField3",
+		a.remark AS "remark"
+	</sql>
+	
+	<sql id="docSpecialreqJoins">
+	</sql>
+    
+	<select id="get" resultType="DocSpecialreq">
+		SELECT 
+			<include refid="docSpecialreqColumns"/>
+		FROM doc_specialreq a
+		<include refid="docSpecialreqJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="DocSpecialreq">
+		SELECT 
+			<include refid="docSpecialreqColumns"/>
+		FROM doc_specialreq a
+		<include refid="docSpecialreqJoins"/>
+		<where>
+			<if test="specialreqCode != null and specialreqCode != ''">
+				AND a.specialreq_code LIKE
+				<if test="dbName == 'oracle'">'%'||#{specialreqCode}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{specialreqCode}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{specialreqCode}, '%')</if>
+			</if>
+			<if test="specialreqName != null and specialreqName != ''">
+				AND a.specialreq_name LIKE
+				<if test="dbName == 'oracle'">'%'||#{specialreqName}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{specialreqName}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{specialreqName}, '%')</if>
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="DocSpecialreq">
+		SELECT 
+			<include refid="docSpecialreqColumns"/>
+		FROM doc_specialreq a
+		<include refid="docSpecialreqJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO doc_specialreq(
+			specialreq_code,
+			specialreq_name,
+			ext_field1,
+			ext_field2,
+			ext_field3,
+			remark
+		) VALUES (
+			#{specialreqCode},
+			#{specialreqName},
+			#{extField1},
+			#{extField2},
+			#{extField3},
+			#{remark}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE doc_specialreq SET 	
+			specialreq_code = #{specialreqCode},
+			specialreq_name = #{specialreqName},
+			ext_field1 = #{extField1},
+			ext_field2 = #{extField2},
+			ext_field3 = #{extField3},
+			remark = #{remark}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM doc_specialreq
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

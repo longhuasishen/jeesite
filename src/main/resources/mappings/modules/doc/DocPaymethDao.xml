@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.doc.dao.DocPaymethDao">
+    
+	<sql id="docPaymethColumns">
+		a.paymeth_code AS "paymethCode",
+		a.paymeth_name AS "paymethName",
+		a.ext_field1 AS "extField1",
+		a.ext_field2 AS "extField2",
+		a.ext_field3 AS "extField3",
+		a.remark AS "remark"
+	</sql>
+	
+	<sql id="docPaymethJoins">
+	</sql>
+    
+	<select id="get" resultType="DocPaymeth">
+		SELECT 
+			<include refid="docPaymethColumns"/>
+		FROM doc_paymeth a
+		<include refid="docPaymethJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="DocPaymeth">
+		SELECT 
+			<include refid="docPaymethColumns"/>
+		FROM doc_paymeth a
+		<include refid="docPaymethJoins"/>
+		<where>
+			<if test="paymethCode != null and paymethCode != ''">
+				AND a.paymeth_code LIKE
+				<if test="dbName == 'oracle'">'%'||#{paymethCode}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{paymethCode}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{paymethCode}, '%')</if>
+			</if>
+			<if test="paymethName != null and paymethName != ''">
+				AND a.paymeth_name LIKE
+				<if test="dbName == 'oracle'">'%'||#{paymethName}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{paymethName}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{paymethName}, '%')</if>
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="DocPaymeth">
+		SELECT 
+			<include refid="docPaymethColumns"/>
+		FROM doc_paymeth a
+		<include refid="docPaymethJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO doc_paymeth(
+			paymeth_code,
+			paymeth_name,
+			ext_field1,
+			ext_field2,
+			ext_field3,
+			remark
+		) VALUES (
+			#{paymethCode},
+			#{paymethName},
+			#{extField1},
+			#{extField2},
+			#{extField3},
+			#{remark}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE doc_paymeth SET 	
+			paymeth_code = #{paymethCode},
+			paymeth_name = #{paymethName},
+			ext_field1 = #{extField1},
+			ext_field2 = #{extField2},
+			ext_field3 = #{extField3},
+			remark = #{remark}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM doc_paymeth
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

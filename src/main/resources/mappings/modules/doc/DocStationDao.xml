@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.doc.dao.DocStationDao">
+    
+	<sql id="docStationColumns">
+		a.station_code AS "stationCode",
+		a.station_name AS "stationName",
+		a.repertory_name AS "repertoryName",
+		a.ext_field1 AS "extField1",
+		a.ext_field2 AS "extField2",
+		a.ext_field3 AS "extField3",
+		a.remark AS "remark"
+	</sql>
+	
+	<sql id="docStationJoins">
+	</sql>
+    
+	<select id="get" resultType="DocStation">
+		SELECT 
+			<include refid="docStationColumns"/>
+		FROM doc_station a
+		<include refid="docStationJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="DocStation">
+		SELECT 
+			<include refid="docStationColumns"/>
+		FROM doc_station a
+		<include refid="docStationJoins"/>
+		<where>
+			<if test="stationCode != null and stationCode != ''">
+				AND a.station_code LIKE
+				<if test="dbName == 'oracle'">'%'||#{stationCode}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{stationCode}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{stationCode}, '%')</if>
+			</if>
+			<if test="stationName != null and stationName != ''">
+				AND a.station_name LIKE
+				<if test="dbName == 'oracle'">'%'||#{stationName}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{stationName}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{stationName}, '%')</if>
+			</if>
+			<if test="repertoryName != null and repertoryName != ''">
+				AND a.repertory_name LIKE
+				<if test="dbName == 'oracle'">'%'||#{repertoryName}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{repertoryName}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{repertoryName}, '%')</if>
+			</if>
+			
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="DocStation">
+		SELECT 
+			<include refid="docStationColumns"/>
+		FROM doc_station a
+		<include refid="docStationJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO doc_station(
+			station_code,
+			station_name,
+			repertory_name,
+			ext_field1,
+			ext_field2,
+			ext_field3,
+			remark
+		) VALUES (
+			#{stationCode},
+			#{stationName},
+			#{repertoryName},
+			#{extField1},
+			#{extField2},
+			#{extField3},
+			#{remark}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE doc_station SET 	
+			station_code = #{stationCode},
+			station_name = #{stationName},
+			repertory_name = #{repertoryName},
+			ext_field1 = #{extField1},
+			ext_field2 = #{extField2},
+			ext_field3 = #{extField3},
+			remark = #{remark}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM doc_station
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

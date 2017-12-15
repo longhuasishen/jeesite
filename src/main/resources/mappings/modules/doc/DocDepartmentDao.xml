@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.doc.dao.DocDepartmentDao">
+    
+	<sql id="docDepartmentColumns">
+		a.department_code AS "departmentCode",
+		a.department_name AS "departmentName",
+		a.department_category AS "departmentCategory",
+		a.manager_person AS "managerPerson",
+		a.phone_no AS "phoneNo",
+		a.first_unit AS "firstUnit",
+		a.comment AS "comment",
+		a.ext_field1 AS "extField1",
+		a.ext_field2 AS "extField2",
+		a.ext_field3 AS "extField3",
+		a.remark AS "remark"
+	</sql>
+	
+	<sql id="docDepartmentJoins">
+	</sql>
+    
+	<select id="get" resultType="DocDepartment">
+		SELECT 
+			<include refid="docDepartmentColumns"/>
+		FROM doc_department a
+		<include refid="docDepartmentJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="DocDepartment">
+		SELECT 
+			<include refid="docDepartmentColumns"/>
+		FROM doc_department a
+		<include refid="docDepartmentJoins"/>
+		<where>
+			<if test="departmentCode != null and departmentCode != ''">
+				AND a.department_code LIKE
+				<if test="dbName == 'oracle'">'%'||#{departmentCode}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{departmentCode}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{departmentCode}, '%')</if>
+			</if>
+			<if test="departmentName != null and departmentName != ''">
+				AND a.department_name LIKE
+				<if test="dbName == 'oracle'">'%'||#{departmentName}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{departmentName}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{departmentName}, '%')</if>
+			</if>
+			<if test="departmentCategory != null and departmentCategory != ''">
+				AND a.department_category LIKE
+				<if test="dbName == 'oracle'">'%'||#{departmentCategory}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{departmentCategory}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{departmentCategory}, '%')</if>
+			</if>
+			<if test="managerPerson != null and managerPerson != ''">
+				AND a.manager_person LIKE
+				<if test="dbName == 'oracle'">'%'||#{managerPerson}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{managerPerson}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{managerPerson}, '%')</if>
+			</if>
+			<if test="phoneNo != null and phoneNo != ''">
+				AND a.phone_no LIKE
+				<if test="dbName == 'oracle'">'%'||#{phoneNo}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{phoneNo}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{phoneNo}, '%')</if>
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="DocDepartment">
+		SELECT 
+			<include refid="docDepartmentColumns"/>
+		FROM doc_department a
+		<include refid="docDepartmentJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO doc_department(
+			department_code,
+			department_name,
+			department_category,
+			manager_person,
+			phone_no,
+			first_unit,
+			comment,
+			ext_field1,
+			ext_field2,
+			ext_field3,
+			remark
+		) VALUES (
+			#{departmentCode},
+			#{departmentName},
+			#{departmentCategory},
+			#{managerPerson},
+			#{phoneNo},
+			#{firstUnit},
+			#{comment},
+			#{extField1},
+			#{extField2},
+			#{extField3},
+			#{remark}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE doc_department SET 	
+			department_code = #{departmentCode},
+			department_name = #{departmentName},
+			department_category = #{departmentCategory},
+			manager_person = #{managerPerson},
+			phone_no = #{phoneNo},
+			first_unit = #{firstUnit},
+			comment = #{comment},
+			ext_field1 = #{extField1},
+			ext_field2 = #{extField2},
+			ext_field3 = #{extField3},
+			remark = #{remark}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM doc_department
+		WHERE id = #{id}
+	</update>
+	
+</mapper>
