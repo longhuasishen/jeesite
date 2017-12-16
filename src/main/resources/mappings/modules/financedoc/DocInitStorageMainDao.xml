@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.financedoc.dao.DocInitStorageMainDao">
+    
+	<sql id="docInitStorageMainColumns">
+		a.id AS "id",
+		a.doc_code AS "docCode",
+		a.storage_code AS "storageCode",
+		a.storage_date AS "storageDate",
+		a.storage_department AS "storageDepartment",
+		a.storage_repertory AS "storageRepertory",
+		a.storage_flag AS "storageFlag",
+		a.storage_audit_flag AS "storageAuditFlag",
+		a.storage_type AS "storageType",
+		a.storage_create AS "storageCreate",
+		a.storage_auditor AS "storageAuditor",
+		a.storage_handler AS "storageHandler",
+		a.storage_create_date AS "storageCreateDate",
+		a.storage_audit_date AS "storageAuditDate",
+		a.remark AS "remark",
+		a.ext_field1 AS "extField1",
+		a.ext_field2 AS "extField2",
+		a.ext_field3 AS "extField3"
+	</sql>
+	
+	<sql id="docInitStorageMainJoins">
+	</sql>
+    
+	<select id="get" resultType="DocInitStorageMain">
+		SELECT 
+			<include refid="docInitStorageMainColumns"/>
+		FROM doc_init_storage_main a
+		<include refid="docInitStorageMainJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="DocInitStorageMain">
+		SELECT 
+			<include refid="docInitStorageMainColumns"/>
+		FROM doc_init_storage_main a
+		<include refid="docInitStorageMainJoins"/>
+		<where>
+			
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="DocInitStorageMain">
+		SELECT 
+			<include refid="docInitStorageMainColumns"/>
+		FROM doc_init_storage_main a
+		<include refid="docInitStorageMainJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO doc_init_storage_main(
+			id,
+			doc_code,
+			storage_code,
+			storage_date,
+			storage_department,
+			storage_repertory,
+			storage_flag,
+			storage_audit_flag,
+			storage_type,
+			storage_create,
+			storage_auditor,
+			storage_handler,
+			storage_create_date,
+			storage_audit_date,
+			remark,
+			ext_field1,
+			ext_field2,
+			ext_field3
+		) VALUES (
+			#{id},
+			#{docCode},
+			#{storageCode},
+			#{storageDate},
+			#{storageDepartment},
+			#{storageRepertory},
+			#{storageFlag},
+			#{storageAuditFlag},
+			#{storageType},
+			#{storageCreate},
+			#{storageAuditor},
+			#{storageHandler},
+			#{storageCreateDate},
+			#{storageAuditDate},
+			#{remark},
+			#{extField1},
+			#{extField2},
+			#{extField3}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE doc_init_storage_main SET 	
+			doc_code = #{docCode},
+			storage_code = #{storageCode},
+			storage_date = #{storageDate},
+			storage_department = #{storageDepartment},
+			storage_repertory = #{storageRepertory},
+			storage_flag = #{storageFlag},
+			storage_audit_flag = #{storageAuditFlag},
+			storage_type = #{storageType},
+			storage_create = #{storageCreate},
+			storage_auditor = #{storageAuditor},
+			storage_handler = #{storageHandler},
+			storage_create_date = #{storageCreateDate},
+			storage_audit_date = #{storageAuditDate},
+			remark = #{remark},
+			ext_field1 = #{extField1},
+			ext_field2 = #{extField2},
+			ext_field3 = #{extField3}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM doc_init_storage_main
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

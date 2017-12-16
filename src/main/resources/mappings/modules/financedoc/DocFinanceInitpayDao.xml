@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.financedoc.dao.DocFinanceInitpayDao">
+    
+	<sql id="docFinanceInitpayColumns">
+		a.id AS "id",
+		c.sup_code AS "docSupplier.supCode",
+		c.sup_name AS "docSupplier.supName",
+		c.sup_short_name AS "docSupplier.supShortName",
+		a.debit_balance AS "debitBalance",
+		a.credit_balance AS "creditBalance",
+		a.remark AS "remark",
+		a.ext_field1 AS "extField1",
+		a.ext_field2 AS "extField2",
+		a.ext_field3 AS "extField3",
+		c.id AS "docSupplier.id"
+	</sql>
+	
+	<sql id="docFinanceInitpayJoins">
+		LEFT JOIN doc_supplier c ON c.id = a.supplier_code
+	</sql>
+    
+	<select id="get" resultType="DocFinanceInitpay">
+		SELECT 
+			<include refid="docFinanceInitpayColumns"/>
+		FROM doc_finance_initpay a
+		<include refid="docFinanceInitpayJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="DocFinanceInitpay">
+		SELECT 
+			<include refid="docFinanceInitpayColumns"/>
+		FROM doc_finance_initpay a
+		<include refid="docFinanceInitpayJoins"/>
+		<where>
+			
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="DocFinanceInitpay">
+		SELECT 
+			<include refid="docFinanceInitpayColumns"/>
+		FROM doc_finance_initpay a
+		<include refid="docFinanceInitpayJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO doc_finance_initpay(
+			supplier_code,
+			supplier_name,
+			debit_balance,
+			credit_balance,
+			remark,
+			ext_field1,
+			ext_field2,
+			ext_field3
+		) VALUES (
+			#{docSupplier.id},
+			#{docSupplier.supName},
+			#{debitBalance},
+			#{creditBalance},
+			#{remark},
+			#{extField1},
+			#{extField2},
+			#{extField3}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE doc_finance_initpay SET 	
+			supplier_code = #{docSupplier.id},
+			supplier_name = #{docSupplier.supName},
+			debit_balance = #{debitBalance},
+			credit_balance = #{creditBalance},
+			remark = #{remark},
+			ext_field1 = #{extField1},
+			ext_field2 = #{extField2},
+			ext_field3 = #{extField3}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM doc_finance_initpay
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

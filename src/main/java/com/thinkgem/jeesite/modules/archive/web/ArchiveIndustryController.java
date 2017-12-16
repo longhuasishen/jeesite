@@ -6,6 +6,9 @@ package com.thinkgem.jeesite.modules.archive.web;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.thinkgem.jeesite.modules.archive.entity.ArchiveCustom;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.thinkgem.jeesite.common.config.Global;
@@ -21,6 +25,9 @@ import com.thinkgem.jeesite.common.web.BaseController;
 import com.thinkgem.jeesite.common.utils.StringUtils;
 import com.thinkgem.jeesite.modules.archive.entity.ArchiveIndustry;
 import com.thinkgem.jeesite.modules.archive.service.ArchiveIndustryService;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * 行业分类Controller
@@ -78,6 +85,23 @@ public class ArchiveIndustryController extends BaseController {
 		archiveIndustryService.delete(archiveIndustry);
 		addMessage(redirectAttributes, "删除行业分类成功");
 		return "redirect:"+Global.getAdminPath()+"/archive/archiveIndustry/?repage";
+	}
+	@ResponseBody
+	@RequestMapping(value = "treeData")
+	public List<Map<String, Object>> treeData(HttpServletResponse response) {
+		List<Map<String, Object>> mapList = Lists.newArrayList();
+		ArchiveIndustry archiveIndustry = new ArchiveIndustry();
+		List<ArchiveIndustry> list = archiveIndustryService.findList(archiveIndustry);
+		for (int i=0; i<list.size(); i++){
+			ArchiveIndustry e = list.get(i);
+			Map<String, Object> map = Maps.newHashMap();
+			map.put("id", e.getId());
+			map.put("name", e.getIndustryName());
+			map.put("code", e.getIndustryCode());
+
+			mapList.add(map);
+		}
+		return mapList;
 	}
 
 }

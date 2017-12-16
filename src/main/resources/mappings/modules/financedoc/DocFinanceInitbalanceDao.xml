@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.financedoc.dao.DocFinanceInitbalanceDao">
+    
+	<sql id="docFinanceInitbalanceColumns">
+		a.id AS "id",
+		c.cus_code AS "docCustomer.cusCode",
+		c.cus_name AS "docCustomer.cusName",
+		c.cus_project AS "docCustomer.cusProject",
+		c.cus_short_name AS "docCustomer.cusShortName",
+		a.debit_balance AS "debitBalance",
+		a.credit_balance AS "creditBalance",
+		a.remark AS "remark",
+		a.ext_field1 AS "extField1",
+		a.ext_field2 AS "extField2",
+		a.ext_field3 AS "extField3",
+		c.id AS "docCustomer.id"
+	</sql>
+	
+	<sql id="docFinanceInitbalanceJoins">
+		LEFT JOIN doc_customer c ON c.id = a.customer_code
+	</sql>
+    
+	<select id="get" resultType="DocFinanceInitbalance">
+		SELECT 
+			<include refid="docFinanceInitbalanceColumns"/>
+		FROM doc_finance_initbalance a
+		<include refid="docFinanceInitbalanceJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="DocFinanceInitbalance">
+		SELECT 
+			<include refid="docFinanceInitbalanceColumns"/>
+		FROM doc_finance_initbalance a
+		<include refid="docFinanceInitbalanceJoins"/>
+		<where>
+			
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="DocFinanceInitbalance">
+		SELECT 
+			<include refid="docFinanceInitbalanceColumns"/>
+		FROM doc_finance_initbalance a
+		<include refid="docFinanceInitbalanceJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO doc_finance_initbalance(
+			customer_code,
+			customer_name,
+			project_name,
+			customer_short_name,
+			debit_balance,
+			credit_balance,
+			remark,
+			ext_field1,
+			ext_field2,
+			ext_field3
+		) VALUES (
+			#{docCustomer.id},
+			#{docCustomer.cusName},
+			#{docCustomer.cusProject},
+			#{docCustomer.cusShortName},
+			#{debitBalance},
+			#{creditBalance},
+			#{remark},
+			#{extField1},
+			#{extField2},
+			#{extField3}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE doc_finance_initbalance SET 	
+			customer_code = #{docCustomer.id},
+			customer_name = #{docCustomer.cusName},
+			project_name = #{docCustomer.cusProject},
+			customer_short_name = #{docCustomer.cusShortName},
+			debit_balance = #{debitBalance},
+			credit_balance = #{creditBalance},
+			remark = #{remark},
+			ext_field1 = #{extField1},
+			ext_field2 = #{extField2},
+			ext_field3 = #{extField3}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM doc_finance_initbalance
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

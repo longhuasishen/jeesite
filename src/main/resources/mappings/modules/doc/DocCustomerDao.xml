@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.doc.dao.DocCustomerDao">
+    
+	<sql id="docCustomerColumns">
+		a.id AS "id",
+		a.cus_code AS "cusCode",
+		a.cus_org AS "cusOrg",
+		a.cus_name AS "cusName",
+		a.cus_project AS "cusProject",
+		a.cus_short_name AS "cusShortName",
+		a.cus_type AS "archiveCustom.id",
+		a.cus_area AS "cusArea",
+		a.cus_industry AS "archiveIndustry.id",
+		a.cus_settle AS "cusSettle",
+		a.cus_licence AS "cusLicence",
+		a.cus_taxno AS "cusTaxno",
+		a.cus_bank AS "cusBank",
+		a.cus_account AS "cusAccount",
+		a.cus_corporate AS "cusCorporate",
+		a.cus_agent AS "cusAgent",
+		a.cus_corporate_idno AS "cusCorporateIdno",
+		a.cus_agent_idno AS "cusAgentIdno",
+		a.cus_corporate_job AS "cusCorporateJob",
+		a.cus_agent_job AS "cusAgentJob",
+		a.cus_corporate_mobile AS "cusCorporateMobile",
+		a.cus_agent_mobile AS "cusAgentMobile",
+		a.cus_post_code AS "cusPostCode",
+		a.cus_contact AS "cusContact",
+		a.cus_email AS "cusEmail",
+		a.cus_address AS "cusAddress",
+		a.cus_salesman AS "cusSalesman",
+		a.cus_credit_rate AS "cusCreditRate",
+		a.cus_credit_limit AS "cusCreditLimit",
+		a.cus_credit_days AS "cusCreditDays",
+		a.cus_signer AS "cusSigner",
+		a.cus_project_state AS "cusProjectState",
+		a.cus_up_date AS "cusUpDate",
+		a.is_sale_cus AS "isSaleCus",
+		a.is_repay_cus AS "isRepayCus",
+		a.is_stop_trans AS "isStopTrans",
+		a.is_cus_code AS "isCusCode",
+		a.ext_field1 AS "extField1",
+		a.ext_field2 AS "extField2",
+		a.ext_field3 AS "extField3",
+		a.remark AS "remark",
+		c.custom_code AS "archiveCustom.customCode",
+		c.custom_name AS "archiveCustom.customName",
+		i.industry_name AS "archiveIndustry.industryName",
+		i.industry_code AS "archiveIndustry.industryCode"
+	</sql>
+	
+	<sql id="docCustomerJoins">
+		LEFT JOIN archive_custom c ON c.id = a.cus_type
+		LEFT JOIN archive_industry i ON i.id = a.cus_industry
+	</sql>
+    
+	<select id="get" resultType="DocCustomer">
+		SELECT 
+			<include refid="docCustomerColumns"/>
+		FROM doc_customer a
+		<include refid="docCustomerJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="DocCustomer">
+		SELECT 
+			<include refid="docCustomerColumns"/>
+		FROM doc_customer a
+		<include refid="docCustomerJoins"/>
+		<where>
+			
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="DocCustomer">
+		SELECT 
+			<include refid="docCustomerColumns"/>
+		FROM doc_customer a
+		<include refid="docCustomerJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO doc_customer(
+			cus_code,
+			cus_org,
+			cus_name,
+			cus_project,
+			cus_short_name,
+			cus_type,
+			cus_area,
+			cus_industry,
+			cus_settle,
+			cus_licence,
+			cus_taxno,
+			cus_bank,
+			cus_account,
+			cus_corporate,
+			cus_agent,
+			cus_corporate_idno,
+			cus_agent_idno,
+			cus_corporate_job,
+			cus_agent_job,
+			cus_corporate_mobile,
+			cus_agent_mobile,
+			cus_post_code,
+			cus_contact,
+			cus_email,
+			cus_address,
+			cus_salesman,
+			cus_credit_rate,
+			cus_credit_limit,
+			cus_credit_days,
+			cus_signer,
+			cus_project_state,
+			cus_up_date,
+			is_sale_cus,
+			is_repay_cus,
+			is_stop_trans,
+			is_cus_code,
+			ext_field1,
+			ext_field2,
+			ext_field3,
+			remark
+		) VALUES (
+			#{cusCode},
+			#{cusOrg},
+			#{cusName},
+			#{cusProject},
+			#{cusShortName},
+			#{archiveCustom.id},
+			#{cusArea},
+			#{archiveIndustry.id},
+			#{cusSettle},
+			#{cusLicence},
+			#{cusTaxno},
+			#{cusBank},
+			#{cusAccount},
+			#{cusCorporate},
+			#{cusAgent},
+			#{cusCorporateIdno},
+			#{cusAgentIdno},
+			#{cusCorporateJob},
+			#{cusAgentJob},
+			#{cusCorporateMobile},
+			#{cusAgentMobile},
+			#{cusPostCode},
+			#{cusContact},
+			#{cusEmail},
+			#{cusAddress},
+			#{cusSalesman},
+			#{cusCreditRate},
+			#{cusCreditLimit},
+			#{cusCreditDays},
+			#{cusSigner},
+			#{cusProjectState},
+			#{cusUpDate},
+			#{isSaleCus},
+			#{isRepayCus},
+			#{isStopTrans},
+			#{isCusCode},
+			#{extField1},
+			#{extField2},
+			#{extField3},
+			#{remark}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE doc_customer SET 	
+			cus_code = #{cusCode},
+			cus_org = #{cusOrg},
+			cus_name = #{cusName},
+			cus_project = #{cusProject},
+			cus_short_name = #{cusShortName},
+			cus_type = #{archiveCustom.id},
+			cus_area = #{cusArea},
+			cus_industry = #{archiveIndustry.id},
+			cus_settle = #{cusSettle},
+			cus_licence = #{cusLicence},
+			cus_taxno = #{cusTaxno},
+			cus_bank = #{cusBank},
+			cus_account = #{cusAccount},
+			cus_corporate = #{cusCorporate},
+			cus_agent = #{cusAgent},
+			cus_corporate_idno = #{cusCorporateIdno},
+			cus_agent_idno = #{cusAgentIdno},
+			cus_corporate_job = #{cusCorporateJob},
+			cus_agent_job = #{cusAgentJob},
+			cus_corporate_mobile = #{cusCorporateMobile},
+			cus_agent_mobile = #{cusAgentMobile},
+			cus_post_code = #{cusPostCode},
+			cus_contact = #{cusContact},
+			cus_email = #{cusEmail},
+			cus_address = #{cusAddress},
+			cus_salesman = #{cusSalesman},
+			cus_credit_rate = #{cusCreditRate},
+			cus_credit_limit = #{cusCreditLimit},
+			cus_credit_days = #{cusCreditDays},
+			cus_signer = #{cusSigner},
+			cus_project_state = #{cusProjectState},
+			cus_up_date = #{cusUpDate},
+			is_sale_cus = #{isSaleCus},
+			is_repay_cus = #{isRepayCus},
+			is_stop_trans = #{isStopTrans},
+			is_cus_code = #{isCusCode},
+			ext_field1 = #{extField1},
+			ext_field2 = #{extField2},
+			ext_field3 = #{extField3},
+			remark = #{remark}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM doc_customer
+		WHERE id = #{id}
+	</update>
+	
+</mapper>
