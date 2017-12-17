@@ -3,6 +3,10 @@
  */
 package com.thinkgem.jeesite.modules.financedoc.entity;
 
+import com.thinkgem.jeesite.modules.doc.entity.DocDepartment;
+import com.thinkgem.jeesite.modules.doc.entity.DocRepertory;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
 import com.thinkgem.jeesite.common.persistence.DataEntity;
@@ -12,14 +16,16 @@ import com.thinkgem.jeesite.common.persistence.DataEntity;
  * @author lisy
  * @version 2017-12-15
  */
+@Getter
+@Setter
 public class DocInitStorageMain extends DataEntity<DocInitStorageMain> {
 	
 	private static final long serialVersionUID = 1L;
 	private String docCode;		// 单据编号
 	private String storageCode;		// 入库单号
 	private String storageDate;		// 入库日期时间
-	private String storageDepartment;		// 入库部门
-	private String storageRepertory;		// 入库仓库
+	private DocDepartment docDepartment;		// 入库部门
+	private DocRepertory docRepertory;		// 入库仓库
 	private String storageFlag;		// 红蓝标志
 	private String storageAuditFlag;		// 审核状态
 	private String storageType;		// 入库类型
@@ -68,24 +74,6 @@ public class DocInitStorageMain extends DataEntity<DocInitStorageMain> {
 		this.storageDate = storageDate;
 	}
 	
-	@Length(min=1, max=20, message="入库部门长度必须介于 1 和 20 之间")
-	public String getStorageDepartment() {
-		return storageDepartment;
-	}
-
-	public void setStorageDepartment(String storageDepartment) {
-		this.storageDepartment = storageDepartment;
-	}
-	
-	@Length(min=1, max=20, message="入库仓库长度必须介于 1 和 20 之间")
-	public String getStorageRepertory() {
-		return storageRepertory;
-	}
-
-	public void setStorageRepertory(String storageRepertory) {
-		this.storageRepertory = storageRepertory;
-	}
-	
 	@Length(min=1, max=1, message="红蓝标志长度必须介于 1 和 1 之间")
 	public String getStorageFlag() {
 		return storageFlag;
@@ -122,7 +110,7 @@ public class DocInitStorageMain extends DataEntity<DocInitStorageMain> {
 		this.storageCreate = storageCreate;
 	}
 	
-	@Length(min=1, max=20, message="审核人长度必须介于 1 和 20 之间")
+	@Length(min=0, max=20, message="审核人长度必须介于 1 和 20 之间")
 	public String getStorageAuditor() {
 		return storageAuditor;
 	}
@@ -131,7 +119,7 @@ public class DocInitStorageMain extends DataEntity<DocInitStorageMain> {
 		this.storageAuditor = storageAuditor;
 	}
 	
-	@Length(min=1, max=20, message="经手人长度必须介于 1 和 20 之间")
+	@Length(min=0, max=20, message="经手人长度必须介于 1 和 20 之间")
 	public String getStorageHandler() {
 		return storageHandler;
 	}
@@ -140,7 +128,7 @@ public class DocInitStorageMain extends DataEntity<DocInitStorageMain> {
 		this.storageHandler = storageHandler;
 	}
 	
-	@Length(min=1, max=20, message="制单日期长度必须介于 1 和 20 之间")
+	@Length(min=0, max=20, message="制单日期长度必须介于 1 和 20 之间")
 	public String getStorageCreateDate() {
 		return storageCreateDate;
 	}
@@ -149,7 +137,7 @@ public class DocInitStorageMain extends DataEntity<DocInitStorageMain> {
 		this.storageCreateDate = storageCreateDate;
 	}
 	
-	@Length(min=1, max=20, message="审核日期长度必须介于 1 和 20 之间")
+	@Length(min=0, max=20, message="审核日期长度必须介于 1 和 20 之间")
 	public String getStorageAuditDate() {
 		return storageAuditDate;
 	}

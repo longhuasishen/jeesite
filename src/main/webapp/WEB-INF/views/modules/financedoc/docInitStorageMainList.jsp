@@ -36,36 +36,61 @@
 			<th>单据编号</th>
 			<th>入库单号</th>
 			<th>入库日期</th>
-			<th>客户简称</th>
-			<th>借方余额</th>
-			<th>贷方余额</th>
-			<th>摘要</th>
-			<shiro:hasPermission name="financedoc:docBusinessInitbalance:edit"><th>操作</th></shiro:hasPermission>
+			<th>入库部门</th>
+			<th>入库仓库</th>
+			<th>红蓝标志</th>
+			<th>审核状态</th>
+			<th>入库类型</th>
+			<th>制单人</th>
+			<th>审核人</th>
+			<th>经手人</th>
+			<th>制单日期</th>
+			<th>审核日期</th>
+			<shiro:hasPermission name="financedoc:docInitStorageMain:edit"><th>操作</th></shiro:hasPermission>
 		</tr>
 		</thead>
 		<tbody>
-		<c:forEach items="${page.list}" var="docBusinessInitbalance">
+		<c:forEach items="${page.list}" var="docInitStorageMain">
 			<tr>
 				<td>
-						${fns:abbr(docBusinessInitbalance.docCustomer.cusCode,50)}
+						${fns:abbr(docInitStorageMain.docCode,50)}
 				</td>
 				<td>
-						${fns:abbr(docBusinessInitbalance.docCustomer.cusName,50)}
+						${fns:abbr(docInitStorageMain.storageCode,50)}
 				</td>
 				<td>
-						${fns:abbr(docBusinessInitbalance.docCustomer.cusProject,50)}
+						${docInitStorageMain.storageDate}
 				</td>
 				<td>
-						${fns:abbr(docBusinessInitbalance.docCustomer.cusShortName,50)}
+						${fns:abbr(docInitStorageMain.docDepartment.departmentName,50)}
 				</td>
 				<td>
-						${fns:abbr(docBusinessInitbalance.debitBalance,50)}
+						${fns:abbr(docInitStorageMain.docRepertory.repertoryName,50)}
 				</td>
 				<td>
-						${fns:abbr(docBusinessInitbalance.creditBalance,50)}
+						${fns:getDictLabel(docInitStorageMain.storageFlag, 'red_blue_flag', '')}
 				</td>
 				<td>
-						${fns:abbr(docBusinessInitbalance.remark,50)}
+						${fns:getDictLabel(docInitStorageMain.storageAuditFlag, 'init_aduit_status', '未审核')}
+				</td>
+				<td>
+						${fns:abbr(docInitStorageMain.storageCreate,50)}
+				</td>
+				<td>
+						${fns:abbr(docInitStorageMain.storageCreate,50)}
+				</td>
+				<td>
+						${fns:abbr(docInitStorageMain.storageHandler,50)}
+				</td>
+				<td>
+						${fns:abbr(docInitStorageMain.storageCreateDate,50)}
+				</td>
+				<td>
+						${fns:abbr(docInitStorageMain.storageCreateDate,50)}
+					    <%--<fmt:formatDate value="${docInitStorageMain.storageCreateDate}" pattern="yyyy-MM-dd HH:mm:ss"/>--%>
+				</td>
+				<td>
+						${fns:abbr(docInitStorageMain.storageAuditDate,50)}
 				</td>
 				<shiro:hasPermission name="financedoc:docInitStorageMain:edit"><td>
     				<a href="${ctx}/financedoc/docInitStorageMain/form?id=${docInitStorageMain.id}">修改</a>

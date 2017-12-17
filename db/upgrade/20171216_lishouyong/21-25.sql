@@ -191,3 +191,26 @@ CREATE TABLE `doc_supplier` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '供应商档案表';
 
+drop table if EXISTS  `doc_init_storage_main`;
+CREATE TABLE `doc_init_storage_main` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `doc_code` varchar(12) NOT NULL COMMENT '单据编号',
+  `storage_code` varchar(50) DEFAULT NULL COMMENT '入库单号',
+  `storage_date` varchar(20) NOT NULL COMMENT '入库日期时间',
+  `storage_department` varchar(20) NOT NULL COMMENT '入库部门',
+  `storage_repertory` varchar(20) NOT NULL COMMENT '入库仓库',
+  `storage_flag` varchar(1) NOT NULL COMMENT '红蓝标志',
+  `storage_audit_flag` varchar(1) NOT NULL COMMENT '审核状态',
+  `storage_type` varchar(20) NOT NULL COMMENT '入库类型',
+  `storage_create` varchar(20) not null COMMENT '制单人',
+  `storage_auditor` varchar(20)  COMMENT '审核人',
+  `storage_handler` varchar(20)  COMMENT '经手人',
+  `storage_create_date` varchar(20) COMMENT '制单日期',
+  `storage_audit_date` varchar(20) COMMENT '审核日期',
+  `remark` varchar(1000) DEFAULT NULL COMMENT '备注',
+  `ext_field1` varchar(60) DEFAULT NULL COMMENT 'ext_field1',
+  `ext_field2` varchar(60) DEFAULT NULL COMMENT 'ext_field2',
+  `ext_field3` varchar(120) DEFAULT NULL COMMENT 'ext_field3',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='期初入库主表';
+
