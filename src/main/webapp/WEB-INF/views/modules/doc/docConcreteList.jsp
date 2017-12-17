@@ -72,36 +72,36 @@
 		<tbody>
 		<c:forEach items="${page.list}" var="docConcrete">
 			<tr>
-				<td> ${fns:abbr(kind_code,16)}</td>
-				<td> ${fns:abbr(kind_name,120)}</td>
-				<td> ${fns:abbr(kind_level,60)}</td>
-				<td> ${fns:abbr(stand_name,120)}</td>
-				<td> ${fns:abbr(kind_category,60)}</td>
-				<td> ${fns:abbr(kind_type,60)}</td>
-				<td> ${fns:abbr(sec_unit,20)}</td>
-				<td> ${fns:abbr(first_unit,60)}</td>
-				<td> ${fns:abbr(rate,12)}</td>
-				<td> ${fns:abbr(primary_provider,240)}</td>
-				<td> ${fns:abbr(pricing_mode,32)}</td>
-				<td> ${fns:abbr(brand_name,120)}</td>
-				<td> ${fns:abbr(sales,1)}</td>
-				<td> ${fns:abbr(outsourcing,1)}</td>
-				<td> ${fns:abbr(mad_self,1)}</td>
-				<td> ${fns:abbr(tax_service,1)}</td>
-				<td> ${fns:abbr(comp_set,1)}</td>
-				<td> ${fns:abbr(mortar,1)}</td>
-				<td> ${fns:abbr(min_inventory,1)}</td>
-				<td> ${fns:abbr(cost_prices,1)}</td>
-				<td> ${fns:abbr(max_inventory,1)}</td>
-				<td> ${fns:abbr(sum_control,1)}</td>
-				<td> ${fns:abbr(save_inventory,1)}</td>
-				<td> ${fns:abbr(stock_stand,1)}</td>
-				<td> ${fns:abbr(abc_category,1)}</td>
-				<td> ${fns:abbr(tax_rate,1)}</td>
-				<td> ${fns:abbr(quality_manage,1)}</td>
-				<td> ${fns:abbr(bat_manage,1)}</td>
-				<td> ${fns:abbr(entrust_manage,1)}</td>
-				<td> ${fns:abbr(stock_manage,1)}</td>
+				<td> ${fns:abbr(docConcrete.kindCode,16)}</td>
+				<td> ${fns:abbr(docConcrete.kindName,120)}</td>
+				<td> ${fns:abbr(docConcrete.kindLevel,60)}</td>
+				<td> ${fns:abbr(docConcrete.standName,120)}</td>
+				<td> ${fns:abbr(docConcrete.kindCategory,60)}</td>
+				<td> ${fns:abbr(docConcrete.kindType,60)}</td>
+				<td> ${fns:abbr(docConcrete.secUnit,20)}</td>
+				<td> ${fns:abbr(docConcrete.firstUnit,60)}</td>
+				<td> ${fns:abbr(docConcrete.rate,12)}</td>
+				<td> ${fns:abbr(docConcrete.primaryProvider,240)}</td>
+				<td> ${fns:abbr(docConcrete.pricingMode,32)}</td>
+				<td> ${fns:abbr(docConcrete.brandName,120)}</td>
+				<td> ${fns:abbr(docConcrete.sales,1)}</td>
+				<td> ${fns:abbr(docConcrete.outsourcing,1)}</td>
+				<td> ${fns:abbr(docConcrete.madSelf,1)}</td>
+				<td> ${fns:abbr(docConcrete.taxService,1)}</td>
+				<td> ${fns:abbr(docConcrete.compSet,1)}</td>
+				<td> ${fns:abbr(docConcrete.mortar,1)}</td>
+				<td> ${fns:abbr(docConcrete.minInventory,1)}</td>
+				<td> ${fns:abbr(docConcrete.costPrices,1)}</td>
+				<td> ${fns:abbr(docConcrete.maxInventory,1)}</td>
+				<td> ${fns:abbr(docConcrete.sumControl,1)}</td>
+				<td> ${fns:abbr(docConcrete.saveInventory,1)}</td>
+				<td> ${fns:abbr(docConcrete.stockStand,1)}</td>
+				<td> ${fns:abbr(docConcrete.abcCategory,1)}</td>
+				<td> ${fns:abbr(docConcrete.taxRate,1)}</td>
+				<td> ${fns:abbr(docConcrete.qualityManage,1)}</td>
+				<td> ${fns:abbr(docConcrete.batManage,1)}</td>
+				<td> ${fns:abbr(docConcrete.entrustManage,1)}</td>
+				<td> ${fns:abbr(docConcrete.stockManage,1)}</td>
 				<shiro:hasPermission name="doc:docConcrete:edit"><td>
     				<a href="${ctx}/doc/docConcrete/form?id=${docConcrete.id}">修改</a>
 					<a href="${ctx}/doc/docConcrete/delete?id=${docConcrete.id}" onclick="return confirmx('确认要删除该原材料档案吗？', this.href)">删除</a>

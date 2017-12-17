@@ -74,6 +74,38 @@ public class DocConcreteController extends BaseController {
 		if (!beanValidator(model, docConcrete)){
 			return form(docConcrete, model);
 		}
+
+		if(docConcrete.getChildConcreteList1()!=null){
+			for(String id : docConcrete.getChildConcreteList1()){
+				if("1".equals(id)){
+					docConcrete.setSales(id);
+				}else if("2".equals(id)){
+					docConcrete.setOutsourcing(id);
+				}else if("3".equals(id)){
+					docConcrete.setMadSelf(id);
+				}else if("4".equals(id)){
+					docConcrete.setTaxService(id);
+				}else if("5".equals(id)){
+					docConcrete.setCompSet(id);
+				}else if("6".equals(id)){
+					docConcrete.setMortar(id);
+				}
+			}
+		}
+
+		if(docConcrete.getChildConcreteList2()!=null){
+			for(String id : docConcrete.getChildConcreteList2()){
+				if("1".equals(id)){
+					docConcrete.setQualityManage(id);
+				}else if("2".equals(id)){
+					docConcrete.setBatManage(id);
+				}else if("3".equals(id)){
+					docConcrete.setEntrustManage(id);
+				}else if("4".equals(id)){
+					docConcrete.setStockManage(id);
+				}
+			}
+		}
 		docConcreteService.save(docConcrete);
 		addMessage(redirectAttributes, "保存原材料档案成功");
 		return "redirect:"+Global.getAdminPath()+"/doc/docConcrete/?repage";

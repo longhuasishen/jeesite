@@ -89,22 +89,29 @@ public class DocConcretetypController extends BaseController {
 	@ResponseBody
 	@RequestMapping(value = "treeData")
 	public List<Map<String, Object>> treeData(@RequestParam(required=false) String materialCode, HttpServletResponse response) {
+		List<Map<String, Object>> mapList = Lists.newArrayList();
+		DocConcretetyp am = new DocConcretetyp();
 		String materialCodeFirst = materialCode.substring(0,1);
 		String s[] ;
-		if (materialCodeFirst.equals("0")){
-			//0表示数字
-		}else if (materialCodeFirst.equals("1")){
-			//1表示字母
-		}
+		List<DocConcretetyp> list = null;
+
 		if (materialCodeFirst.contains("|")){
 			//如果包含竖线，表示in
 			s = materialCode.split("|");
+			list = docConcretetypService.findListByArray(s);
+		}else if(materialCode.equals("*")){
+			list = docConcretetypService.findList(am);
+		}else{
+			if (materialCodeFirst.equals("0")){
+				//0表示数字
+				am.setConcretetypCode(materialCode.substring(1));
+			}else if (materialCodeFirst.equals("1")){
+				//1表示字母
+				am.setConcretetypCode(materialCode.substring(1));
+			}
+			list = docConcretetypService.findList(am);
 		}
 
-		List<Map<String, Object>> mapList = Lists.newArrayList();
-		DocConcretetyp am = new DocConcretetyp();
-		am.setConcretetypCode(materialCode);
-		List<DocConcretetyp> list = docConcretetypService.findList(am);
 		for (int i=0; i<list.size(); i++){
 			DocConcretetyp e = list.get(i);
 			Map<String, Object> map = Maps.newHashMap();

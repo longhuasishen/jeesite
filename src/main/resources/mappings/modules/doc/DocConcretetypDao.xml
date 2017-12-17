@@ -110,5 +110,17 @@
 		DELETE FROM doc_concretetyp
 		WHERE id = #{id}
 	</update>
-	
+
+	<select id="findListByArray" resultType="DocConcretetyp">
+		select concretetyp_code , concretetyp_name from doc_concretetyp where concretetyp_code IN ();
+	</select>
+	<select id="findListByParams" resultType="DocConcretetyp">
+		select
+		<include refid="docConcretetypColumns" />
+		from doc_concretetyp a
+		where concretetyp_code in
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
 </mapper>
