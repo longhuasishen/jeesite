@@ -3,6 +3,8 @@
  */
 package com.thinkgem.jeesite.modules.doc.service;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -43,5 +45,9 @@ public class DocConcretetypService extends CrudService<DocConcretetypDao, DocCon
 	public void delete(DocConcretetyp docConcretetyp) {
 		super.delete(docConcretetyp);
 	}
-	
+
+	public List<DocConcretetyp> findListByArray(String[] s) {
+		return super.findList(s);
+	}
+
 }
