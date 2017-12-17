@@ -32,13 +32,41 @@
 	<sys:message content="${message}"/>
 	<table id="contentTable" class="table table-striped table-bordered table-condensed">
 		<thead>
-			<tr>
-				<shiro:hasPermission name="financedoc:docInitStorageMain:edit"><th>操作</th></shiro:hasPermission>
-			</tr>
+		<tr>
+			<th>单据编号</th>
+			<th>入库单号</th>
+			<th>入库日期</th>
+			<th>客户简称</th>
+			<th>借方余额</th>
+			<th>贷方余额</th>
+			<th>摘要</th>
+			<shiro:hasPermission name="financedoc:docBusinessInitbalance:edit"><th>操作</th></shiro:hasPermission>
+		</tr>
 		</thead>
 		<tbody>
-		<c:forEach items="${page.list}" var="docInitStorageMain">
+		<c:forEach items="${page.list}" var="docBusinessInitbalance">
 			<tr>
+				<td>
+						${fns:abbr(docBusinessInitbalance.docCustomer.cusCode,50)}
+				</td>
+				<td>
+						${fns:abbr(docBusinessInitbalance.docCustomer.cusName,50)}
+				</td>
+				<td>
+						${fns:abbr(docBusinessInitbalance.docCustomer.cusProject,50)}
+				</td>
+				<td>
+						${fns:abbr(docBusinessInitbalance.docCustomer.cusShortName,50)}
+				</td>
+				<td>
+						${fns:abbr(docBusinessInitbalance.debitBalance,50)}
+				</td>
+				<td>
+						${fns:abbr(docBusinessInitbalance.creditBalance,50)}
+				</td>
+				<td>
+						${fns:abbr(docBusinessInitbalance.remark,50)}
+				</td>
 				<shiro:hasPermission name="financedoc:docInitStorageMain:edit"><td>
     				<a href="${ctx}/financedoc/docInitStorageMain/form?id=${docInitStorageMain.id}">修改</a>
 					<a href="${ctx}/financedoc/docInitStorageMain/delete?id=${docInitStorageMain.id}" onclick="return confirmx('确认要删除该期初入库吗？', this.href)">删除</a>
