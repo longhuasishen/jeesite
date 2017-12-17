@@ -61,14 +61,14 @@
 	<div class="control-group">
 		<label class="control-label">所属分类：</label>
 		<div class="controls">
-			<sys:treeselect id="kindCategory" name="archiveMaterial.code" value="${docConcrete.archiveMaterial.code}" labelName="archiveMaterial.name" labelValue="${docConcrete.archiveMaterial.name}"
+			<sys:treeselect id="kindCategory" name="archiveMaterial.id" value="${docConcrete.archiveMaterial.id}" labelName="archiveMaterial.materialName" labelValue="${docConcrete.archiveMaterial.materialName}"
 							title="物资" url="/archive/archiveMaterial/treeData?materialCode=01" cssClass="required"/>
 		</div>
 	</div>
 	<div class="control-group">
 		<label class="control-label">原材料类型：</label>
 		<div class="controls">
-			<sys:treeselect id="kind_type" name="docConcretetyo.code" value="${docConcretetyp.code}" labelName="docConcretetyo.name" labelValue="${docConcretetyp.name}"
+			<sys:treeselect id="kindType" name="docConcretetyp.id" value="${docConcrete.docConcretetyp.id}" labelName="docConcretetyp.concretetypName" labelValue="${docConcrete.docConcretetyp.concretetypName}"
 							title="原材料类型" url="/doc/docConcretetyp/treeData?materialCode=*" cssClass="required"/>
 		</div>
 	</div>
@@ -93,7 +93,7 @@
 	<div class="control-group">
 		<label class="control-label">主要供应商：</label>
 		<div class="controls">
-			<sys:treeselect id="primaryProvider" name="docConcretetyo.code" value="${docConcretetyp.code}" labelName="docConcretetyo.name" labelValue="${docConcretetyp.name}"
+			<sys:treeselect id="primaryProvider" name="primaryProvider"  value="${docConcrete.docConcretetyp.id}" labelName="docConcretetyp.concretetypName" labelValue="${docConcrete.docConcretetyp.concretetypName}"
 							title="原材料类型" url="/doc/docConcretetyp/treeData?materialCode=*" cssClass="required"/>
 		</div>
 	</div>
@@ -157,37 +157,37 @@
 	<div class="control-group">
 		<label class="control-label">最低库存：</label>
 		<div class="controls">
-			<form:input path="minInventory" htmlEscape="false" maxlength="1" class="input-xlarge  digits"/>
+			<form:input path="minInventory" htmlEscape="false" maxlength="50" class="input-xlarge  digits"/>
 		</div>
 	</div>
 	<div class="control-group">
 		<label class="control-label">成本参考核算单价：</label>
 		<div class="controls">
-			<form:input path="costPrices" htmlEscape="false" maxlength="1" class="input-xlarge  number"/>
+			<form:input path="costPrices" htmlEscape="false" maxlength="50" class="input-xlarge  number"/>
 		</div>
 	</div>
 	<div class="control-group">
 		<label class="control-label">最高存库：</label>
 		<div class="controls">
-			<form:input path="maxInventory" htmlEscape="false" maxlength="1" class="input-xlarge  digits"/>
+			<form:input path="maxInventory" htmlEscape="false" maxlength="50" class="input-xlarge  digits"/>
 		</div>
 	</div>
 	<div class="control-group">
 		<label class="control-label">配方上下限控制：</label>
 		<div class="controls">
-			<form:input path="sumControl" htmlEscape="false" maxlength="1" class="input-xlarge  digits"/>
+			<form:input path="sumControl" htmlEscape="false" maxlength="50" class="input-xlarge  digits"/>
 		</div>
 	</div>
 	<div class="control-group">
 		<label class="control-label">安全库存：</label>
 		<div class="controls">
-			<form:input path="saveInventory" htmlEscape="false" maxlength="1" class="input-xlarge  digits"/>
+			<form:input path="saveInventory" htmlEscape="false" maxlength="50" class="input-xlarge  digits"/>
 		</div>
 	</div>
 	<div class="control-group">
 		<label class="control-label">积压标准：</label>
 		<div class="controls">
-			<form:input path="stockStand" htmlEscape="false" maxlength="1" class="input-xlarge  digits"/>
+			<form:input path="stockStand" htmlEscape="false" maxlength="50" class="input-xlarge  digits"/>
 		</div>
 	</div>
 	<div class="control-group">
@@ -195,14 +195,14 @@
 		<div class="controls">
 			<form:select path="abcCategory" class="input-xlarge ">
 				<form:option value="" label=""/>
-				<form:options items="${fns:getDictList('')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+				<form:options items="${fns:getDictList('abcCategory_list')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
 			</form:select>
 		</div>
 	</div>
 	<div class="control-group">
 		<label class="control-label">税率：</label>
 		<div class="controls">
-			<form:input path="taxRate" htmlEscape="false" maxlength="1" class="input-xlarge  number"/>
+			<form:input path="taxRate" htmlEscape="false" maxlength="50" class="input-xlarge  number"/>
 		</div>
 	</div>
 	<div class="control-group">

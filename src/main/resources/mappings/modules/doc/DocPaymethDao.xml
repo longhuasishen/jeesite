@@ -3,6 +3,7 @@
 <mapper namespace="com.thinkgem.jeesite.modules.doc.dao.DocPaymethDao">
     
 	<sql id="docPaymethColumns">
+		a.id AS "id",
 		a.paymeth_code AS "paymethCode",
 		a.paymeth_name AS "paymethName",
 		a.ext_field1 AS "extField1",

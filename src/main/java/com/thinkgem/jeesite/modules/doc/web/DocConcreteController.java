@@ -78,17 +78,17 @@ public class DocConcreteController extends BaseController {
 		if(docConcrete.getChildConcreteList1()!=null){
 			for(String id : docConcrete.getChildConcreteList1()){
 				if("1".equals(id)){
-					docConcrete.setSales(id);
+					docConcrete.setSales("是");
 				}else if("2".equals(id)){
-					docConcrete.setOutsourcing(id);
+					docConcrete.setOutsourcing("是");
 				}else if("3".equals(id)){
-					docConcrete.setMadSelf(id);
+					docConcrete.setMadSelf("是");
 				}else if("4".equals(id)){
-					docConcrete.setTaxService(id);
+					docConcrete.setTaxService("是");
 				}else if("5".equals(id)){
-					docConcrete.setCompSet(id);
+					docConcrete.setCompSet("是");
 				}else if("6".equals(id)){
-					docConcrete.setMortar(id);
+					docConcrete.setMortar("是");
 				}
 			}
 		}
@@ -96,13 +96,13 @@ public class DocConcreteController extends BaseController {
 		if(docConcrete.getChildConcreteList2()!=null){
 			for(String id : docConcrete.getChildConcreteList2()){
 				if("1".equals(id)){
-					docConcrete.setQualityManage(id);
+					docConcrete.setQualityManage("是");
 				}else if("2".equals(id)){
-					docConcrete.setBatManage(id);
+					docConcrete.setBatManage("是");
 				}else if("3".equals(id)){
-					docConcrete.setEntrustManage(id);
+					docConcrete.setEntrustManage("是");
 				}else if("4".equals(id)){
-					docConcrete.setStockManage(id);
+					docConcrete.setStockManage("是");
 				}
 			}
 		}

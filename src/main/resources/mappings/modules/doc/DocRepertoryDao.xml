@@ -3,6 +3,7 @@
 <mapper namespace="com.thinkgem.jeesite.modules.doc.dao.DocRepertoryDao">
     
 	<sql id="docRepertoryColumns">
+		a.id AS "id",
 		a.repertory_code AS "repertoryCode",
 		a.repertory_name AS "repertoryName",
 		a.kind_category AS "kindCategory",

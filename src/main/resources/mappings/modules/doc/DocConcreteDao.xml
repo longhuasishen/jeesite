@@ -3,12 +3,13 @@
 <mapper namespace="com.thinkgem.jeesite.modules.doc.dao.DocConcreteDao">
 
 	<sql id="docConcreteColumns">
+		a.id AS "id",
 		a.kind_code AS "kindCode",
 		a.kind_name AS "kindName",
 		a.kind_level AS "kindLevel",
 		a.stand_name AS "standName",
-		a.kind_category AS "kindCategory",
-		a.kind_type AS "kindType",
+		a.kind_category AS "archiveMaterial.id",
+		a.kind_type AS "docConcretetyp.id",
 		a.sec_unit AS "secUnit",
 		a.first_unit AS "firstUnit",
 		a.rate AS "rate",
@@ -36,10 +37,16 @@
 		a.ext_field1 AS "extField1",
 		a.ext_field2 AS "extField2",
 		a.ext_field3 AS "extField3",
+		c.material_code AS "archiveMaterial.materialCode",
+		c.material_name AS "archiveMaterial.materialName",
+		d.concretetyp_code AS "docConcretetyp.concretetypCode",
+		d.concretetyp_name AS "docConcretetyp.concretetypName",
 		a.remark AS "remark"
 	</sql>
 
 	<sql id="docConcreteJoins">
+		LEFT JOIN archive_material c ON c.id = a.kind_category
+		LEFT JOIN doc_concretetyp d ON d.id = a.kind_type
 	</sql>
 
 	<select id="get" resultType="DocConcrete">
@@ -136,8 +143,8 @@
 			#{kindName},
 			#{kindLevel},
 			#{standName},
-			#{kindCategory},
-			#{kindType},
+			#{archiveMaterial.id},
+			#{docConcretetyp.id},
 			#{secUnit},
 			#{firstUnit},
 			#{rate},
@@ -175,8 +182,8 @@
 			kind_name = #{kindName},
 			kind_level = #{kindLevel},
 			stand_name = #{standName},
-			kind_category = #{kindCategory},
-			kind_type = #{kindType},
+			kind_category = #{archiveMaterial.id},
+			kind_type = #{docConcretetyp.id},
 			sec_unit = #{secUnit},
 			first_unit = #{firstUnit},
 			rate = #{rate},

@@ -56,6 +56,15 @@ public class DocConcrete extends DataEntity<DocConcrete> {
 	private List<String> childConcreteList2;//原材料勾选2
 	private ArchiveMaterial archiveMaterial;		// 原材料分类
 
+	private DocConcretetyp docConcretetyp;		// 原材料档案分类
+
+	public DocConcretetyp getDocConcretetyp() {
+		return docConcretetyp;
+	}
+
+	public void setDocConcretetyp(DocConcretetyp docConcretetyp) {
+		this.docConcretetyp = docConcretetyp;
+	}
 	public ArchiveMaterial getArchiveMaterial() {
 		return archiveMaterial;
 	}

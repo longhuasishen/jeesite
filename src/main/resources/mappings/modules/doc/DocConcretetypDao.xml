@@ -3,6 +3,7 @@
 <mapper namespace="com.thinkgem.jeesite.modules.doc.dao.DocConcretetypDao">
     
 	<sql id="docConcretetypColumns">
+		a.id AS "id",
 		a.concretetyp_code AS "concretetypCode",
 		a.concretetyp_name AS "concretetypName",
 		a.stock_name AS "stockName",

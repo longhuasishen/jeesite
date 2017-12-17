@@ -3,6 +3,7 @@
 <mapper namespace="com.thinkgem.jeesite.modules.doc.dao.DocWatermethDao">
     
 	<sql id="docWatermethColumns">
+		a.id AS "id",
 		a.watermeth_code AS "watermethCode",
 		a.watermeth_name AS "watermethName",
 		a.comment AS "comment",
