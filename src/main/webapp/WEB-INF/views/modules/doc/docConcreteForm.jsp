@@ -69,7 +69,9 @@
 		<label class="control-label">原材料类型：</label>
 		<div class="controls">
 			<form:select path="kindType" class="input-xlarge ">
-				<form:option value="" label=""/>
+				<sys:treeselect id="kind_type" name="docConcretetyo.code" value="${docConcretetyo.code}" labelName="docConcretetyo.name" labelValue="${docConcretetyo.name}"
+								title="原材料类型" url="/doc/docConcretetyp/treeData?materialCode=*" cssClass="required"/>
+				<!-- <form:option value="" label=""/> -->
 				<form:options items="${fns:getDictList('')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
 			</form:select>
 		</div>
