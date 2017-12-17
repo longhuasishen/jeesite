@@ -6,6 +6,9 @@ package com.thinkgem.jeesite.modules.doc.web;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.thinkgem.jeesite.modules.archive.entity.ArchiveMaterial;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.thinkgem.jeesite.common.config.Global;
@@ -21,6 +25,9 @@ import com.thinkgem.jeesite.common.web.BaseController;
 import com.thinkgem.jeesite.common.utils.StringUtils;
 import com.thinkgem.jeesite.modules.doc.entity.DocConcrete;
 import com.thinkgem.jeesite.modules.doc.service.DocConcreteService;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * 原材料档案Controller
@@ -66,6 +73,38 @@ public class DocConcreteController extends BaseController {
 	public String save(DocConcrete docConcrete, Model model, RedirectAttributes redirectAttributes) {
 		if (!beanValidator(model, docConcrete)){
 			return form(docConcrete, model);
+		}
+
+		if(docConcrete.getChildConcreteList1()!=null){
+			for(String id : docConcrete.getChildConcreteList1()){
+				if("1".equals(id)){
+					docConcrete.setSales(id);
+				}else if("2".equals(id)){
+					docConcrete.setOutsourcing(id);
+				}else if("3".equals(id)){
+					docConcrete.setMadSelf(id);
+				}else if("4".equals(id)){
+					docConcrete.setTaxService(id);
+				}else if("5".equals(id)){
+					docConcrete.setCompSet(id);
+				}else if("6".equals(id)){
+					docConcrete.setMortar(id);
+				}
+			}
+		}
+
+		if(docConcrete.getChildConcreteList2()!=null){
+			for(String id : docConcrete.getChildConcreteList2()){
+				if("1".equals(id)){
+					docConcrete.setQualityManage(id);
+				}else if("2".equals(id)){
+					docConcrete.setBatManage(id);
+				}else if("3".equals(id)){
+					docConcrete.setEntrustManage(id);
+				}else if("4".equals(id)){
+					docConcrete.setStockManage(id);
+				}
+			}
 		}
 		docConcreteService.save(docConcrete);
 		addMessage(redirectAttributes, "保存原材料档案成功");

@@ -61,17 +61,15 @@
 	<div class="control-group">
 		<label class="control-label">所属分类：</label>
 		<div class="controls">
-			<sys:treeselect id="kindCategory" name="archiveMaterial.id" value="${archiveMaterial.id}" labelName="archiveMaterial.name" labelValue="${archiveMaterial.name}"
+			<sys:treeselect id="kindCategory" name="archiveMaterial.code" value="${docConcrete.archiveMaterial.code}" labelName="archiveMaterial.name" labelValue="${docConcrete.archiveMaterial.name}"
 							title="物资" url="/archive/archiveMaterial/treeData?materialCode=01" cssClass="required"/>
 		</div>
 	</div>
 	<div class="control-group">
 		<label class="control-label">原材料类型：</label>
 		<div class="controls">
-			<form:select path="kindType" class="input-xlarge ">
-				<form:option value="" label=""/>
-				<form:options items="${fns:getDictList('')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
-			</form:select>
+			<sys:treeselect id="kind_type" name="docConcretetyo.code" value="${docConcretetyp.code}" labelName="docConcretetyo.name" labelValue="${docConcretetyp.name}"
+							title="原材料类型" url="/doc/docConcretetyp/treeData?materialCode=*" cssClass="required"/>
 		</div>
 	</div>
 	<div class="control-group">
@@ -95,7 +93,8 @@
 	<div class="control-group">
 		<label class="control-label">主要供应商：</label>
 		<div class="controls">
-			<form:input path="primaryProvider" htmlEscape="false" maxlength="240" class="input-xlarge "/>
+			<sys:treeselect id="primaryProvider" name="docConcretetyo.code" value="${docConcretetyp.code}" labelName="docConcretetyo.name" labelValue="${docConcretetyp.name}"
+							title="原材料类型" url="/doc/docConcretetyp/treeData?materialCode=*" cssClass="required"/>
 		</div>
 	</div>
 	<div class="control-group">
@@ -103,7 +102,7 @@
 		<div class="controls">
 			<form:select path="pricingMode" class="input-xlarge ">
 				<form:option value="" label=""/>
-				<form:options items="${fns:getDictList('')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+				<form:options items="${fns:getDictList('pricing_method')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
 			</form:select>
 		</div>
 	</div>
@@ -114,6 +113,12 @@
 		</div>
 	</div>
 	<div class="control-group">
+		<label class="control-label">原材料勾选1:</label>
+		<div class="controls">
+			<form:checkboxes path="childConcreteList1" items="${fns:getDictList('concrete_box1')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+		</div>
+	</div>
+	<!-- <div class="control-group">
 		<label class="control-label">销售：</label>
 		<div class="controls">
 			<form:checkboxes path="sales" items="${fns:getDictList('')}" itemLabel="label" itemValue="value" htmlEscape="false" class=""/>
@@ -148,7 +153,7 @@
 		<div class="controls">
 			<form:checkboxes path="mortar" items="${fns:getDictList('')}" itemLabel="label" itemValue="value" htmlEscape="false" class=""/>
 		</div>
-	</div>
+	</div>-->
 	<div class="control-group">
 		<label class="control-label">最低库存：</label>
 		<div class="controls">
@@ -201,6 +206,12 @@
 		</div>
 	</div>
 	<div class="control-group">
+		<label class="control-label">原材料勾选2:</label>
+		<div class="controls">
+			<form:checkboxes path="childConcreteList2" items="${fns:getDictList('concrete_box2')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+		</div>
+	</div>
+	<!--<div class="control-group">
 		<label class="control-label">保质期管理：</label>
 		<div class="controls">
 			<form:checkboxes path="qualityManage" items="${fns:getDictList('')}" itemLabel="label" itemValue="value" htmlEscape="false" class=""/>
@@ -223,13 +234,7 @@
 		<div class="controls">
 			<form:checkboxes path="stockManage" items="${fns:getDictList('')}" itemLabel="label" itemValue="value" htmlEscape="false" class=""/>
 		</div>
-	</div>
-	<div class="control-group">
-		<label class="control-label">ext_field1：</label>
-		<div class="controls">
-			<form:input path="extField1" htmlEscape="false" maxlength="60" class="input-xlarge "/>
-		</div>
-	</div>
+	</div>-->
 	<div class="control-group">
 		<label class="control-label">ext_field2：</label>
 		<div class="controls">

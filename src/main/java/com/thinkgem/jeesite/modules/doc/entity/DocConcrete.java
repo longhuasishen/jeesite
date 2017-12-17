@@ -3,9 +3,12 @@
  */
 package com.thinkgem.jeesite.modules.doc.entity;
 
+import com.thinkgem.jeesite.modules.archive.entity.ArchiveMaterial;
 import org.hibernate.validator.constraints.Length;
 
 import com.thinkgem.jeesite.common.persistence.DataEntity;
+
+import java.util.List;
 
 /**
  * 原材料档案Entity
@@ -49,7 +52,28 @@ public class DocConcrete extends DataEntity<DocConcrete> {
 	private String extField2;		// ext_field2
 	private String extField3;		// ext_field3
 	private String remark;		// remark
-	
+	private List<String> childConcreteList1;//原材料勾选1
+	private List<String> childConcreteList2;//原材料勾选2
+	private ArchiveMaterial archiveMaterial;		// 原材料分类
+
+	public ArchiveMaterial getArchiveMaterial() {
+		return archiveMaterial;
+	}
+	public void setArchiveMaterial(ArchiveMaterial archiveMaterial) {
+		this.archiveMaterial = archiveMaterial;
+	}
+	public List<String> getChildConcreteList1() {
+		return childConcreteList1;
+	}
+	public void setChildConcreteList1(List<String> childConcreteList1) {
+		this.childConcreteList1 = childConcreteList1;
+	}
+	public List<String> getChildConcreteList2() {
+		return childConcreteList2;
+	}
+	public void setChildConcreteList2(List<String> childConcreteList2) {
+		this.childConcreteList2 = childConcreteList2;
+	}
 	public DocConcrete() {
 		super();
 	}

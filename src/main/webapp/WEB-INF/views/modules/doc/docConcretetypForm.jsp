@@ -49,7 +49,9 @@
 		<div class="control-group">
 			<label class="control-label">存货名称：</label>
 			<div class="controls">
-				<form:input path="stockName" htmlEscape="false" maxlength="60" class="input-xlarge "/>
+				<sys:treeselect id="stock_name" name="archiveMaterial.id" value="${archiveMaterial.id}" labelName="archiveMaterial.name" labelValue="${archiveMaterial.name}"
+								title="物资" url="/archive/archiveMaterial/treeData?materialCode=1TS" cssClass="required"/>
+				<!--<form:input path="stockName" htmlEscape="false" maxlength="60" class="input-xlarge "/>-->
 			</div>
 		</div>
 		<div class="control-group">
