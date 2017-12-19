@@ -7,8 +7,10 @@
 		a.doc_code AS "docCode",
 		a.storage_code AS "storageCode",
 		a.storage_date AS "storageDate",
-		a.storage_department AS "storageDepartment",
-		a.storage_repertory AS "storageRepertory",
+		c.department_code AS "docDepartment.departmentCode",
+		c.department_name AS "docDepartment.departmentName",
+		r.repertory_code AS "docRepertory.repertoryCode",
+		r.repertory_name AS "docRepertory.repertoryName",
 		a.storage_flag AS "storageFlag",
 		a.storage_audit_flag AS "storageAuditFlag",
 		a.storage_type AS "storageType",
@@ -21,9 +23,12 @@
 		a.ext_field1 AS "extField1",
 		a.ext_field2 AS "extField2",
 		a.ext_field3 AS "extField3"
+
 	</sql>
 	
 	<sql id="docInitStorageMainJoins">
+		LEFT JOIN doc_department c on c.department_code = a.storage_department
+		LEFT JOIN doc_repertory r on r.repertory_code = a.storage_repertory
 	</sql>
     
 	<select id="get" resultType="DocInitStorageMain">
@@ -70,7 +75,6 @@
 	
 	<insert id="insert">
 		INSERT INTO doc_init_storage_main(
-			id,
 			doc_code,
 			storage_code,
 			storage_date,
@@ -89,12 +93,11 @@
 			ext_field2,
 			ext_field3
 		) VALUES (
-			#{id},
 			#{docCode},
 			#{storageCode},
 			#{storageDate},
-			#{storageDepartment},
-			#{storageRepertory},
+			#{docDepartment.id},
+			#{docRepertory.id},
 			#{storageFlag},
 			#{storageAuditFlag},
 			#{storageType},
@@ -115,8 +118,8 @@
 			doc_code = #{docCode},
 			storage_code = #{storageCode},
 			storage_date = #{storageDate},
-			storage_department = #{storageDepartment},
-			storage_repertory = #{storageRepertory},
+			storage_department = #{docDepartment.id},
+			storage_repertory = #{docRepertory.id},
 			storage_flag = #{storageFlag},
 			storage_audit_flag = #{storageAuditFlag},
 			storage_type = #{storageType},

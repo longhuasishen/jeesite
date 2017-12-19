@@ -6,6 +6,8 @@ package com.thinkgem.jeesite.modules.financedoc.web;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.thinkgem.jeesite.common.utils.DateUtils;
+import com.thinkgem.jeesite.modules.sys.utils.UserUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +23,8 @@ import com.thinkgem.jeesite.common.web.BaseController;
 import com.thinkgem.jeesite.common.utils.StringUtils;
 import com.thinkgem.jeesite.modules.financedoc.entity.DocInitStorageMain;
 import com.thinkgem.jeesite.modules.financedoc.service.DocInitStorageMainService;
+
+import java.util.Date;
 
 /**
  * 期初入库Controller
@@ -57,6 +61,7 @@ public class DocInitStorageMainController extends BaseController {
 	@RequiresPermissions("financedoc:docInitStorageMain:view")
 	@RequestMapping(value = "form")
 	public String form(DocInitStorageMain docInitStorageMain, Model model) {
+		model.addAttribute("user", UserUtils.getUser());
 		model.addAttribute("docInitStorageMain", docInitStorageMain);
 		return "modules/financedoc/docInitStorageMainForm";
 	}
@@ -66,6 +71,9 @@ public class DocInitStorageMainController extends BaseController {
 	public String save(DocInitStorageMain docInitStorageMain, Model model, RedirectAttributes redirectAttributes) {
 		if (!beanValidator(model, docInitStorageMain)){
 			return form(docInitStorageMain, model);
+		}
+		if(StringUtils.isEmpty(docInitStorageMain.getStorageCreateDate())){
+			docInitStorageMain.setStorageCreateDate(DateUtils.formatDateTime(new Date()));
 		}
 		docInitStorageMainService.save(docInitStorageMain);
 		addMessage(redirectAttributes, "保存期初入库成功");

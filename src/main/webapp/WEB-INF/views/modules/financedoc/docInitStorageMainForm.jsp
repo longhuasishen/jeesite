@@ -49,104 +49,49 @@
 		<div class="control-group">
 			<label class="control-label">入库日期时间：</label>
 			<div class="controls">
-				<form:input path="storageDate" htmlEscape="false" maxlength="20" class="input-xlarge required"/>
-				<span class="help-inline"><font color="red">*</font> </span>
+				<input id="storageDate" name="storageDate" type="text" readonly="readonly" maxlength="20" class="Wdate required" readonly="readonly"
+					   value="${docInitStorageMain.storageDate}"
+					   onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">入库部门：</label>
 			<div class="controls">
-				<form:input path="storageDepartment" htmlEscape="false" maxlength="20" class="input-xlarge required"/>
+				<sys:treeselect id="storageDepartment" name="docDepartment.id" value="${docInitStorageMain.docDepartment.departmentCode}" labelName="docDepartment.departmentCode" labelValue="${docInitStorageMain.docDepartment.departmentCode}"
+								title="部门" url="/doc/docDepartment/treeData" cssClass="required"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">入库仓库：</label>
 			<div class="controls">
-				<form:input path="storageRepertory" htmlEscape="false" maxlength="20" class="input-xlarge required"/>
+				<sys:treeselect id="storageRepertory" name="docRepertory.id" value="${docInitStorageMain.docRepertory.repertoryCode}" labelName="docRepertory.repertoryCode" labelValue="${docInitStorageMain.docRepertory.repertoryCode}"
+								title="仓库" url="/doc/docRepertory/treeData" cssClass="required"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">红蓝标志：</label>
 			<div class="controls">
-				<form:input path="storageFlag" htmlEscape="false" maxlength="1" class="input-xlarge required"/>
-				<span class="help-inline"><font color="red">*</font> </span>
-			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label">审核状态：</label>
-			<div class="controls">
-				<form:input path="storageAuditFlag" htmlEscape="false" maxlength="1" class="input-xlarge required"/>
+				<form:radiobuttons path="storageFlag" items="${fns:getDictList('red_blue_flag')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">入库类型：</label>
 			<div class="controls">
-				<form:input path="storageType" htmlEscape="false" maxlength="20" class="input-xlarge required"/>
+				<form:input path="storageType" htmlEscape="false" maxlength="20" class="input-xlarge required" value="期初入库" readonly="true"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">制单人：</label>
 			<div class="controls">
-				<form:input path="storageCreate" htmlEscape="false" maxlength="20" class="input-xlarge required"/>
+				<form:input path="storageCreate" htmlEscape="false" maxlength="20" class="input-xlarge required"  readonly="true" value="${user.name}"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
-		<div class="control-group">
-			<label class="control-label">审核人：</label>
-			<div class="controls">
-				<form:input path="storageAuditor" htmlEscape="false" maxlength="20" class="input-xlarge required"/>
-				<span class="help-inline"><font color="red">*</font> </span>
-			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label">经手人：</label>
-			<div class="controls">
-				<form:input path="storageHandler" htmlEscape="false" maxlength="20" class="input-xlarge required"/>
-				<span class="help-inline"><font color="red">*</font> </span>
-			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label">制单日期：</label>
-			<div class="controls">
-				<form:input path="storageCreateDate" htmlEscape="false" maxlength="20" class="input-xlarge required"/>
-				<span class="help-inline"><font color="red">*</font> </span>
-			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label">审核日期：</label>
-			<div class="controls">
-				<form:input path="storageAuditDate" htmlEscape="false" maxlength="20" class="input-xlarge required"/>
-				<span class="help-inline"><font color="red">*</font> </span>
-			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label">备注：</label>
-			<div class="controls">
-				<form:input path="remark" htmlEscape="false" maxlength="1000" class="input-xlarge "/>
-			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label">ext_field1：</label>
-			<div class="controls">
-				<form:input path="extField1" htmlEscape="false" maxlength="60" class="input-xlarge "/>
-			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label">ext_field2：</label>
-			<div class="controls">
-				<form:input path="extField2" htmlEscape="false" maxlength="60" class="input-xlarge "/>
-			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label">ext_field3：</label>
-			<div class="controls">
-				<form:input path="extField3" htmlEscape="false" maxlength="120" class="input-xlarge "/>
-			</div>
-		</div>
+
 		<div class="form-actions">
 			<shiro:hasPermission name="financedoc:docInitStorageMain:edit"><input id="btnSubmit" class="btn btn-primary" type="submit" value="保 存"/>&nbsp;</shiro:hasPermission>
 			<input id="btnCancel" class="btn" type="button" value="返 回" onclick="history.go(-1)"/>
