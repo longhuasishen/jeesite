@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.contract.dao.ContractSalesDao">
+    
+	<sql id="contractSalesColumns">
+		a.id AS "id",
+		a.project_name AS "docCustomer.id",
+		a.contract_id AS "docCustomer.cusCode",
+		a.contract_date AS "contractDate",
+		a.contract_comp AS "contractComp",
+		a.project_addr AS "projectAddr",
+		a.contract_department AS "contractDepartment",
+		a.sales_person AS "salesPerson",
+		a.comstem_type AS "comstemType",
+		a.tong_accmeth AS "tongAccmeth",
+		a.contract_addr AS "contractAddr",
+		a.third_person AS "thirdPerson",
+		a.eff_term AS "effTerm",
+		a.eff_start AS "effStart",
+		a.eff_end AS "effEnd",
+		a.cube_control AS "cubeControl",
+		a.cube_start AS "cubeStart",
+		a.cube_end AS "cubeEnd",
+		a.time_control AS "timeControl",
+		a.time_start AS "timeStart",
+		a.time_end AS "timeEnd",
+		a.create_person AS "createPerson",
+		a.check_person AS "checkPerson",
+		a.cancle_person AS "canclePerson",
+		a.create_date AS "createDate",
+		a.check_date AS "checkDate",
+		a.cancel_date AS "cancelDate",
+		a.contract_remark AS "contractRemark",
+		a.concrete_price AS "concretePrice",
+		a.watermeth_price AS "watermethPrice",
+		a.spec_price AS "specPrice",
+		a.sum_control AS "sumControl",
+		a.save_inventory AS "saveInventory",
+		a.stock_stand AS "stockStand",
+		a.abc_category AS "abcCategory",
+		a.tax_rate AS "taxRate",
+		a.quality_manage AS "qualityManage",
+		a.ext_field1 AS "extField1",
+		a.ext_field2 AS "extField2",
+		a.ext_field3 AS "extField3",
+		a.remark AS "remark"
+	</sql>
+	
+	<sql id="contractSalesJoins">
+		LEFT JOIN doc_customer c ON c.id = a.project_name
+	</sql>
+    
+	<select id="get" resultType="ContractSales">
+		SELECT 
+			<include refid="contractSalesColumns"/>
+		FROM contract_sales a
+		<include refid="contractSalesJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="ContractSales">
+		SELECT 
+			<include refid="contractSalesColumns"/>
+		FROM contract_sales a
+		<include refid="contractSalesJoins"/>
+		<where>
+			
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="ContractSales">
+		SELECT 
+			<include refid="contractSalesColumns"/>
+		FROM contract_sales a
+		<include refid="contractSalesJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO contract_sales(
+			id,
+			project_name,
+			contract_id,
+			contract_date,
+			contract_comp,
+			project_addr,
+			contract_department,
+			sales_person,
+			comstem_type,
+			tong_accmeth,
+			contract_addr,
+			third_person,
+			eff_term,
+			eff_start,
+			eff_end,
+			cube_control,
+			cube_start,
+			cube_end,
+			time_control,
+			time_start,
+			time_end,
+			create_person,
+			check_person,
+			cancle_person,
+			create_date,
+			check_date,
+			cancel_date,
+			contract_remark,
+			concrete_price,
+			watermeth_price,
+			spec_price,
+			sum_control,
+			save_inventory,
+			stock_stand,
+			abc_category,
+			tax_rate,
+			quality_manage,
+			ext_field1,
+			ext_field2,
+			ext_field3,
+			remark
+		) VALUES (
+			#{id},
+			#{projectName},
+			#{contractId},
+			#{contractDate},
+			#{contractComp},
+			#{projectAddr},
+			#{contractDepartment},
+			#{salesPerson},
+			#{comstemType},
+			#{tongAccmeth},
+			#{contractAddr},
+			#{thirdPerson},
+			#{effTerm},
+			#{effStart},
+			#{effEnd},
+			#{cubeControl},
+			#{cubeStart},
+			#{cubeEnd},
+			#{timeControl},
+			#{timeStart},
+			#{timeEnd},
+			#{createPerson},
+			#{checkPerson},
+			#{canclePerson},
+			#{createDate},
+			#{checkDate},
+			#{cancelDate},
+			#{contractRemark},
+			#{concretePrice},
+			#{watermethPrice},
+			#{specPrice},
+			#{sumControl},
+			#{saveInventory},
+			#{stockStand},
+			#{abcCategory},
+			#{taxRate},
+			#{qualityManage},
+			#{extField1},
+			#{extField2},
+			#{extField3},
+			#{remark}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE contract_sales SET 	
+			project_name = #{projectName},
+			contract_id = #{contractId},
+			contract_date = #{contractDate},
+			contract_comp = #{contractComp},
+			project_addr = #{projectAddr},
+			contract_department = #{contractDepartment},
+			sales_person = #{salesPerson},
+			comstem_type = #{comstemType},
+			tong_accmeth = #{tongAccmeth},
+			contract_addr = #{contractAddr},
+			third_person = #{thirdPerson},
+			eff_term = #{effTerm},
+			eff_start = #{effStart},
+			eff_end = #{effEnd},
+			cube_control = #{cubeControl},
+			cube_start = #{cubeStart},
+			cube_end = #{cubeEnd},
+			time_control = #{timeControl},
+			time_start = #{timeStart},
+			time_end = #{timeEnd},
+			create_person = #{createPerson},
+			check_person = #{checkPerson},
+			cancle_person = #{canclePerson},
+			check_date = #{checkDate},
+			cancel_date = #{cancelDate},
+			contract_remark = #{contractRemark},
+			concrete_price = #{concretePrice},
+			watermeth_price = #{watermethPrice},
+			spec_price = #{specPrice},
+			sum_control = #{sumControl},
+			save_inventory = #{saveInventory},
+			stock_stand = #{stockStand},
+			abc_category = #{abcCategory},
+			tax_rate = #{taxRate},
+			quality_manage = #{qualityManage},
+			ext_field1 = #{extField1},
+			ext_field2 = #{extField2},
+			ext_field3 = #{extField3},
+			remark = #{remark}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM contract_sales
+		WHERE id = #{id}
+	</update>
+	
+</mapper>
