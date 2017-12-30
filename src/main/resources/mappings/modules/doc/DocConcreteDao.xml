@@ -13,7 +13,7 @@
 		a.sec_unit AS "secUnit",
 		a.first_unit AS "firstUnit",
 		a.rate AS "rate",
-		a.primary_provider AS "primaryProvider",
+		a.primary_provider AS "docSupplier.id",
 		a.pricing_mode AS "pricingMode",
 		a.brand_name AS "brandName",
 		a.sales AS "sales",
@@ -41,12 +41,15 @@
 		c.material_name AS "archiveMaterial.materialName",
 		d.concretetyp_code AS "docConcretetyp.concretetypCode",
 		d.concretetyp_name AS "docConcretetyp.concretetypName",
+		e.sup_code AS "docSupplier.supCode",
+		e.sup_name AS "docSupplier.supName",
 		a.remark AS "remark"
 	</sql>
 
 	<sql id="docConcreteJoins">
 		LEFT JOIN archive_material c ON c.id = a.kind_category
 		LEFT JOIN doc_concretetyp d ON d.id = a.kind_type
+		LEFT JOIN doc_supplier e ON e.id = a.primary_provider
 	</sql>
 
 	<select id="get" resultType="DocConcrete">
@@ -148,7 +151,7 @@
 			#{secUnit},
 			#{firstUnit},
 			#{rate},
-			#{primaryProvider},
+			#{docSupplier.id},
 			#{pricingMode},
 			#{brandName},
 			#{sales},
@@ -187,7 +190,7 @@
 			sec_unit = #{secUnit},
 			first_unit = #{firstUnit},
 			rate = #{rate},
-			primary_provider = #{primaryProvider},
+			primary_provider = #{docSupplier.id},
 			pricing_mode = #{pricingMode},
 			brand_name = #{brandName},
 			sales = #{sales},

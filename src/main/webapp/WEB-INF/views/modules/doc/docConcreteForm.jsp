@@ -93,8 +93,8 @@
 	<div class="control-group">
 		<label class="control-label">主要供应商：</label>
 		<div class="controls">
-			<sys:treeselect id="primaryProvider" name="primaryProvider"  value="${docConcrete.docConcretetyp.id}" labelName="docConcretetyp.concretetypName" labelValue="${docConcrete.docConcretetyp.concretetypName}"
-							title="原材料类型" url="/doc/docConcretetyp/treeData?materialCode=*" cssClass="required"/>
+			<sys:treeselect id="primaryProvider" name="docSupplier.id"  value="${docConcrete.docSupplier.id}" labelName="docSupplier.supName" labelValue="${docConcrete.docSupplier.supName}"
+							title="原材料类型" url="/doc/docSupplier/treeData?materialCode=*" cssClass="required"/>
 		</div>
 	</div>
 	<div class="control-group">

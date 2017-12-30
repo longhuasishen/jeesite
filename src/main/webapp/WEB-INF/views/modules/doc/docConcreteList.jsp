@@ -81,7 +81,7 @@
 				<td> ${fns:abbr(docConcrete.secUnit,20)}</td>
 				<td> ${fns:abbr(docConcrete.firstUnit,60)}</td>
 				<td> ${fns:abbr(docConcrete.rate,12)}</td>
-				<td> ${fns:abbr(docConcrete.docConcretetyp.concretetypName,240)}</td>
+				<td> ${fns:abbr(docConcrete.docSupplier.supName,240)}</td>
 				<td> ${fns:getDictLabel(docConcrete.pricingMode,"pricing_method","")}</td>
 				<td> ${fns:abbr(docConcrete.brandName,120)}</td>
 				<td> ${fns:abbr(docConcrete.sales,100)}</td>
