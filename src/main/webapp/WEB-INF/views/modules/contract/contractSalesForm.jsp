@@ -22,7 +22,24 @@
 					}
 				}
 			});
-		});
+		}
+		);
+
+        function projectNameTreeselectCallBack(v,h,f){
+            if("ok" == v){
+                $("#contractId").val($("#projectNameName").val().substring($("#projectNameName").val().indexOf("[")+1,$("#projectNameName").val().indexOf("]")));
+                //获取指定客户信息
+                $.get("${ctx}/doc/docCustomer/get?id=" + $("#projectNameId").val(), function(data){
+                    //设置input值
+                    $("#contractComp").val(data.cusOrg);
+                    $("#projectAddr").val(data.cusAddress);
+                });
+
+            }
+        }
+
+
+
 	</script>
 </head>
 <body>
@@ -51,7 +68,7 @@
 			<label class="control-label">签定日期：</label>
 			<div class="controls">
 				<input id="contractDate"  name="contractDate"  type="text" readonly="readonly" maxlength="20" class="input-medium Wdate" style="width:163px;"
-					   value="<fmt:formatDate value="${act.beginDate}" pattern="yyyy-MM-dd"/>"
+					   value="<fmt:formatDate value="${contractSales.contractDate}" pattern="yyyy-MM-dd"/>"
 					   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
 			</div>
 		</div>
@@ -70,25 +87,29 @@
 		<div class="control-group">
 			<label class="control-label">签定部门：</label>
 			<div class="controls">
-				<form:input path="contractDepartment" htmlEscape="false" maxlength="60" class="input-xlarge "/>
+				<sys:treeselect id="contractDepartment" name="docDepartment.id" value="${contractSales.docDepartment.id}" labelName="docDepartment.departmentName" labelValue="${contractSales.docDepartment.departmentName}"
+								title="部门档案" url="/doc/docDepartment/treeData" cssClass="required"/>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">业务员：</label>
 			<div class="controls">
-				<form:input path="salesPerson" htmlEscape="false" maxlength="60" class="input-xlarge "/>
+				<sys:treeselect id="salesPerson" name="docOfficework.id" value="${contractSales.docOfficework.id}" labelName="docOfficework.officeworkName" labelValue="${contractSales.docOfficework.officeworkName}"
+								title="职员档案" url="/doc/docOfficework/treeData" cssClass="required"/>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">客户分类：</label>
 			<div class="controls">
-				<form:input path="comstemType" htmlEscape="false" maxlength="32" class="input-xlarge "/>
+				<sys:treeselect id="comstemType" name="comstemType" value="${contractSales.docOfficework.id}" labelName="docOfficework.officeworkName" labelValue="${contractSales.docOfficework.officeworkName}"
+								title="合同分类" url="/doc/docOfficework/treeData" cssClass="required"/>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">砼结算方式：</label>
 			<div class="controls">
-				<form:input path="tongAccmeth" htmlEscape="false" maxlength="60" class="input-xlarge "/>
+				<sys:treeselect id="tongAccmeth" name="docAccmeth.id" value="${contractSales.docAccmeth.id}" labelName="docAccmeth.accmethName" labelValue="${contractSales.docAccmeth.accmethName}"
+								title="结算方式档案" url="/doc/docAccmeth/treeData" cssClass="required"/>
 			</div>
 		</div>
 		<div class="control-group">
@@ -154,11 +175,11 @@
 			<div class="controls">
 				<%--<form:input path="timeControl" htmlEscape="false" maxlength="1" class="input-xlarge "/>--%>
 				<input id="timeStart"  name="timeStart"  type="text" readonly="readonly" maxlength="20" class="input-medium Wdate" style="width:163px;"
-					   value="<fmt:formatDate value="${act.beginDate}" pattern="yyyy-MM-dd"/>"
+					   value="<fmt:formatDate value="${contractSales.timeStart}" pattern="yyyy-MM-dd"/>"
 					   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
 				　--　
 				<input id="timeEnd" name="timeEnd" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate" style="width:163px;"
-					   value="<fmt:formatDate value="${act.endDate}" pattern="yyyy-MM-dd"/>"
+					   value="<fmt:formatDate value="${contractSales.timeEnd}" pattern="yyyy-MM-dd"/>"
 					   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
 			</div>
 		</div>
@@ -178,20 +199,28 @@
 		<table class="table-form">
 			<tr class="align-center">
 				<td class="tit">制单人</td>
-
-				<td><form:input path="createPerson" htmlEscape="false" maxlength="50" class="input-xlarge required"  readonly="true" value="${user.name}"/></td>
+				<td><form:input path="createPerson" htmlEscape="false" maxlength="50"   readonly="true" value="${user.name}"/></td>
 				<td class="tit">审核人</td>
-				<td><form:input path="checkPerson" htmlEscape="false" maxlength="50" class="input-xlarge required"  readonly="true" value="${user.name}"/></td>
+				<td><form:input path="checkPerson" htmlEscape="false" maxlength="50"   readonly="true" value="${user.name}"/></td>
 				<td class="tit">作废人</td>
-				<td><form:input path="canclePerson" htmlEscape="false" maxlength="50" class="input-xlarge required"  readonly="true" value="${user.name}"/></td>
+				<td><form:input path="canclePerson" htmlEscape="false" maxlength="50"   readonly="true" value="${user.name}"/></td>
 			</tr>
 			<tr class="align-center">
 				<td class="tit">制单日期</td>
-				<td><form:input path="createDate" htmlEscape="false" maxlength="50"/></td>
+				<td><input id="makeDate"  name="makeDate"  type="text" readonly="readonly" maxlength="20" class="input-medium Wdate" style="width:163px;"
+					   value="<fmt:formatDate value="${contractSales.makeDate}" pattern="yyyy-MM-dd"/>"
+					   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
+				</td>
 				<td class="tit">审核日期</td>
-				<td><form:input path="checkDate" htmlEscape="false" maxlength="50"/></td>
+				<td><input id="checkDate"  name="checkDate"  type="text" readonly="readonly" maxlength="20" class="input-medium Wdate" style="width:163px;"
+					   value="<fmt:formatDate value="${act.beginDate}" pattern="yyyy-MM-dd"/>"
+					   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
+				</td>
 				<td class="tit">作废日期</td>
-				<td><form:input path="cancelDate" htmlEscape="false" maxlength="50"/></td>
+				<td><input id="cancelDate"  name="cancelDate"  type="text" readonly="readonly" maxlength="20" class="input-medium Wdate" style="width:163px;"
+					   value="<fmt:formatDate value="${act.beginDate}" pattern="yyyy-MM-dd"/>"
+						   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
+				</td>
 			</tr>
 		</table>
 	</div>

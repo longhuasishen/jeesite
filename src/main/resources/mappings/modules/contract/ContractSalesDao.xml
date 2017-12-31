@@ -5,14 +5,14 @@
 	<sql id="contractSalesColumns">
 		a.id AS "id",
 		a.project_name AS "docCustomer.id",
-		a.contract_id AS "docCustomer.cusCode",
+		a.contract_id AS "contractId",
 		a.contract_date AS "contractDate",
 		a.contract_comp AS "contractComp",
 		a.project_addr AS "projectAddr",
-		a.contract_department AS "contractDepartment",
-		a.sales_person AS "salesPerson",
+		a.contract_department AS "docDepartment.id",
+		a.sales_person AS "docOfficework.id",
 		a.comstem_type AS "comstemType",
-		a.tong_accmeth AS "tongAccmeth",
+		a.tong_accmeth AS "docAccmeth.id",
 		a.contract_addr AS "contractAddr",
 		a.third_person AS "thirdPerson",
 		a.eff_term AS "effTerm",
@@ -27,7 +27,7 @@
 		a.create_person AS "createPerson",
 		a.check_person AS "checkPerson",
 		a.cancle_person AS "canclePerson",
-		a.create_date AS "createDate",
+		a.make_date AS "makeDate",
 		a.check_date AS "checkDate",
 		a.cancel_date AS "cancelDate",
 		a.contract_remark AS "contractRemark",
@@ -43,11 +43,18 @@
 		a.ext_field1 AS "extField1",
 		a.ext_field2 AS "extField2",
 		a.ext_field3 AS "extField3",
+		c.cus_project AS "docCustomer.cusProject",
+		d.department_name AS "docDepartment.departmentName",
+		e.officework_name AS "docOfficework.officeworkName",
+		f.accmeth_name AS "docAccmeth.accmethName",
 		a.remark AS "remark"
 	</sql>
 	
 	<sql id="contractSalesJoins">
 		LEFT JOIN doc_customer c ON c.id = a.project_name
+		LEFT JOIN doc_department d ON d.id = a.contract_department
+		LEFT JOIN doc_officework e ON e.id = a.sales_person
+		LEFT JOIN doc_accmeth f ON f.id = a.tong_accmeth
 	</sql>
     
 	<select id="get" resultType="ContractSales">
@@ -64,7 +71,12 @@
 		FROM contract_sales a
 		<include refid="contractSalesJoins"/>
 		<where>
-			
+			<if test="projectName != null and projectName != ''">
+				AND c.cus_project LIKE
+				<if test="dbName == 'oracle'">'%'||#{projectName}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{projectName}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{projectName}, '%')</if>
+			</if>
 		</where>
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
@@ -94,7 +106,6 @@
 	
 	<insert id="insert">
 		INSERT INTO contract_sales(
-			id,
 			project_name,
 			contract_id,
 			contract_date,
@@ -118,7 +129,7 @@
 			create_person,
 			check_person,
 			cancle_person,
-			create_date,
+			make_date,
 			check_date,
 			cancel_date,
 			contract_remark,
@@ -136,16 +147,15 @@
 			ext_field3,
 			remark
 		) VALUES (
-			#{id},
-			#{projectName},
+			#{docCustomer.id},
 			#{contractId},
 			#{contractDate},
 			#{contractComp},
 			#{projectAddr},
-			#{contractDepartment},
-			#{salesPerson},
-			#{comstemType},
-			#{tongAccmeth},
+			#{docDepartment.id},
+			#{docOfficework.id},
+			#{docOfficework.id},
+			#{docAccmeth.id},
 			#{contractAddr},
 			#{thirdPerson},
 			#{effTerm},
@@ -160,7 +170,7 @@
 			#{createPerson},
 			#{checkPerson},
 			#{canclePerson},
-			#{createDate},
+			#{makeDate},
 			#{checkDate},
 			#{cancelDate},
 			#{contractRemark},
@@ -182,15 +192,15 @@
 	
 	<update id="update">
 		UPDATE contract_sales SET 	
-			project_name = #{projectName},
+			project_name = #{docCustomer.id},
 			contract_id = #{contractId},
 			contract_date = #{contractDate},
 			contract_comp = #{contractComp},
 			project_addr = #{projectAddr},
-			contract_department = #{contractDepartment},
-			sales_person = #{salesPerson},
+			contract_department = #{docDepartment.id},
+			sales_person = #{docOfficework.id},
 			comstem_type = #{comstemType},
-			tong_accmeth = #{tongAccmeth},
+			tong_accmeth = #{docAccmeth.id},
 			contract_addr = #{contractAddr},
 			third_person = #{thirdPerson},
 			eff_term = #{effTerm},

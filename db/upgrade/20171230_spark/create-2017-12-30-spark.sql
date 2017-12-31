@@ -25,7 +25,7 @@ CREATE TABLE `contract_sales` (
   `create_person` varchar(60) DEFAULT NULL COMMENT '制单人',
   `check_person` varchar(60) DEFAULT NULL COMMENT '审核人',
   `cancle_person` varchar(60) DEFAULT NULL COMMENT '作废人',
-  `create_date` varchar(20) DEFAULT NULL COMMENT '制单日期',
+  `make_date` varchar(20) DEFAULT NULL COMMENT '制单日期',
   `check_date` varchar(20) DEFAULT NULL COMMENT '审核日期',
   `cancel_date` varchar(20) DEFAULT NULL COMMENT '作废日期',
   `contract_remark` varchar(256) DEFAULT NULL COMMENT '备注',

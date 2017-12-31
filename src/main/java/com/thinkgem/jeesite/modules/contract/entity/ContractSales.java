@@ -3,7 +3,10 @@
  */
 package com.thinkgem.jeesite.modules.contract.entity;
 
+import com.thinkgem.jeesite.modules.doc.entity.DocAccmeth;
 import com.thinkgem.jeesite.modules.doc.entity.DocCustomer;
+import com.thinkgem.jeesite.modules.doc.entity.DocDepartment;
+import com.thinkgem.jeesite.modules.doc.entity.DocOfficework;
 import org.hibernate.validator.constraints.Length;
 
 import com.thinkgem.jeesite.common.persistence.DataEntity;
@@ -39,6 +42,16 @@ public class ContractSales extends DataEntity<ContractSales> {
 	private String createPerson;		// 制单人
 	private String checkPerson;		// 审核人
 	private String canclePerson;		// 作废人
+
+	public String getMakeDate() {
+		return makeDate;
+	}
+
+	public void setMakeDate(String makeDate) {
+		this.makeDate = makeDate;
+	}
+
+	private String makeDate;		// 审核日期
 	private String checkDate;		// 审核日期
 	private String cancelDate;		// 作废日期
 	private String contractRemark;		// 备注
@@ -57,6 +70,17 @@ public class ContractSales extends DataEntity<ContractSales> {
 	private String remark;		// remark
 
 	private DocCustomer docCustomer;
+	private DocDepartment docDepartment;
+	private DocOfficework docOfficework;
+	private DocAccmeth docAccmeth;
+
+
+	public DocAccmeth getDocAccmeth() {	return docAccmeth;}
+	public void setDocAccmeth(DocAccmeth docAccmeth) {		this.docAccmeth = docAccmeth;	}
+	public DocOfficework getDocOfficework() {		return docOfficework;	}
+	public void setDocOfficework(DocOfficework docOfficework) {		this.docOfficework = docOfficework;	}
+	public DocDepartment getDocDepartment() {		return docDepartment;	}
+	public void setDocDepartment(DocDepartment docDepartment) {		this.docDepartment = docDepartment;	}
 
 	public DocCustomer getDocCustomer() {
 		return docCustomer;
