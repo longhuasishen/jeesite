@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.thinkgem.jeesite.modules.doc.entity.DocAccmeth;
+import com.thinkgem.jeesite.modules.doc.entity.DocDepartment;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -86,6 +86,7 @@ public class DocOfficeworkController extends BaseController {
 		addMessage(redirectAttributes, "删除职员档案成功");
 		return "redirect:"+Global.getAdminPath()+"/doc/docOfficework/?repage";
 	}
+
 	@ResponseBody
 	@RequestMapping(value = "treeData")
 	public List<Map<String, Object>> treeData(HttpServletResponse response) {
@@ -95,11 +96,12 @@ public class DocOfficeworkController extends BaseController {
 		for (int i=0; i<list.size(); i++){
 			DocOfficework e = list.get(i);
 			Map<String, Object> map = Maps.newHashMap();
-			map.put("id", e.getOfficeworkCode());
+			map.put("id", e.getId());
 			map.put("name", e.getOfficeworkName()+"["+e.getOfficeworkCode()+"]");
 
 			mapList.add(map);
 		}
 		return mapList;
 	}
+
 }

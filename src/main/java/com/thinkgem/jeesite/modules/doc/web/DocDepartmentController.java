@@ -95,7 +95,7 @@ public class DocDepartmentController extends BaseController {
 		for (int i=0; i<list.size(); i++){
 			DocDepartment e = list.get(i);
 			Map<String, Object> map = Maps.newHashMap();
-			map.put("id", e.getDepartmentCode());
+			map.put("id", e.getId());
 			map.put("name", e.getDepartmentName()+"["+e.getDepartmentCode()+"]");
 
 			mapList.add(map);

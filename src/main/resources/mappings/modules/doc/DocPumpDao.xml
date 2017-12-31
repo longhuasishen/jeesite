@@ -3,6 +3,7 @@
 <mapper namespace="com.thinkgem.jeesite.modules.doc.dao.DocPumpDao">
     
 	<sql id="docPumpColumns">
+		a.id AS "id",
 		a.pump_code AS "pumpCode",
 		a.pump_name AS "pumpName",
 		a.comment AS "comment",

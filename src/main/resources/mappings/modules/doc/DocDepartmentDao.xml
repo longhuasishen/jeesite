@@ -3,6 +3,7 @@
 <mapper namespace="com.thinkgem.jeesite.modules.doc.dao.DocDepartmentDao">
     
 	<sql id="docDepartmentColumns">
+		a.id AS "id",
 		a.department_code AS "departmentCode",
 		a.department_name AS "departmentName",
 		a.department_category AS "departmentCategory",

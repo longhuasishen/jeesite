@@ -3,6 +3,7 @@
 <mapper namespace="com.thinkgem.jeesite.modules.doc.dao.DocStationDao">
     
 	<sql id="docStationColumns">
+		a.id AS "id",
 		a.station_code AS "stationCode",
 		a.station_name AS "stationName",
 		a.repertory_name AS "repertoryName",

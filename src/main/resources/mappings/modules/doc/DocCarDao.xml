@@ -3,6 +3,7 @@
 <mapper namespace="com.thinkgem.jeesite.modules.doc.dao.DocCarDao">
     
 	<sql id="docCarColumns">
+		a.id AS "id",
 		a.car_code AS "carCode",
 		a.car_no AS "carNo",
 		a.driver_name AS "driverName",

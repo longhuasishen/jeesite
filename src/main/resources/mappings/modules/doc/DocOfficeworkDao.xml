@@ -3,6 +3,7 @@
 <mapper namespace="com.thinkgem.jeesite.modules.doc.dao.DocOfficeworkDao">
     
 	<sql id="docOfficeworkColumns">
+		a.id AS "id",
 		a.officework_code AS "officeworkCode",
 		a.officework_name AS "officeworkName",
 		a.officework_dep AS "officeworkDep",

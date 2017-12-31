@@ -3,6 +3,7 @@
 <mapper namespace="com.thinkgem.jeesite.modules.doc.dao.DocNormaterialDao">
     
 	<sql id="docNormaterialColumns">
+		a.id AS "id",
 		a.kind_code AS "kindCode",
 		a.kind_name AS "kindName",
 		a.kind_level AS "kindLevel",

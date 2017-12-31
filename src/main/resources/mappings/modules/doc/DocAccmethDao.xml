@@ -3,6 +3,7 @@
 <mapper namespace="com.thinkgem.jeesite.modules.doc.dao.DocAccmethDao">
     
 	<sql id="docAccmethColumns">
+		a.id AS "id",
 		a.accmeth_code AS "accmethCode",
 		a.accmeth_name AS "accmethName",
 		a.ext_field1 AS "extField1",

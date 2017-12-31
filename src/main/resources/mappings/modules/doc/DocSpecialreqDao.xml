@@ -3,6 +3,7 @@
 <mapper namespace="com.thinkgem.jeesite.modules.doc.dao.DocSpecialreqDao">
     
 	<sql id="docSpecialreqColumns">
+		a.id AS "id",
 		a.specialreq_code AS "specialreqCode",
 		a.specialreq_name AS "specialreqName",
 		a.ext_field1 AS "extField1",
