@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.purchase.dao.ContractPurchaseDetailDao">
+    
+	<sql id="contractPurchaseDetailColumns">
+		a.id AS "id",
+		a.contract_code AS "contractCode",
+		a.kind_code AS "kindCode",
+		a.item_amount AS "itemAmount",
+		a.item_number AS "itemNumber",
+		a.item_price AS "itemPrice",
+		a.conversion_rate AS "conversionRate",
+		a.other_rate AS "otherRate",
+		a.is_complete AS "isComplete",
+		a.remark AS "remark",
+		a.ext_field1 AS "extField1",
+		a.ext_field2 AS "extField2",
+		a.ext_field3 AS "extField3"
+	</sql>
+	
+	<sql id="contractPurchaseDetailJoins">
+	</sql>
+    
+	<select id="get" resultType="ContractPurchaseDetail">
+		SELECT 
+			<include refid="contractPurchaseDetailColumns"/>
+		FROM contract_purchase_detail a
+		<include refid="contractPurchaseDetailJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="ContractPurchaseDetail">
+		SELECT 
+			<include refid="contractPurchaseDetailColumns"/>
+		FROM contract_purchase_detail a
+		<include refid="contractPurchaseDetailJoins"/>
+		<where>
+			
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="ContractPurchaseDetail">
+		SELECT 
+			<include refid="contractPurchaseDetailColumns"/>
+		FROM contract_purchase_detail a
+		<include refid="contractPurchaseDetailJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO contract_purchase_detail(
+			id,
+			contract_code,
+			kind_code,
+			item_amount,
+			item_number,
+			item_price,
+			conversion_rate,
+			other_rate,
+			is_complete,
+			remark,
+			ext_field1,
+			ext_field2,
+			ext_field3
+		) VALUES (
+			#{id},
+			#{contractCode},
+			#{kindCode},
+			#{itemAmount},
+			#{itemNumber},
+			#{itemPrice},
+			#{conversionRate},
+			#{otherRate},
+			#{isComplete},
+			#{remark},
+			#{extField1},
+			#{extField2},
+			#{extField3}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE contract_purchase_detail SET 	
+			contract_code = #{contractCode},
+			kind_code = #{kindCode},
+			item_amount = #{itemAmount},
+			item_number = #{itemNumber},
+			item_price = #{itemPrice},
+			conversion_rate = #{conversionRate},
+			other_rate = #{otherRate},
+			is_complete = #{isComplete},
+			remark = #{remark},
+			ext_field1 = #{extField1},
+			ext_field2 = #{extField2},
+			ext_field3 = #{extField3}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM contract_purchase_detail
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

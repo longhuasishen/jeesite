@@ -6,6 +6,12 @@
 	<meta name="decorator" content="blank"/><c:set var="tabmode" value="${empty cookie.tabmode.value ? '0' : cookie.tabmode.value}"/>
     <c:if test="${tabmode eq '1'}"><link rel="Stylesheet" href="${ctxStatic}/jerichotab/css/jquery.jerichotab.css" />
     <script type="text/javascript" src="${ctxStatic}/jerichotab/js/jquery.jerichotab.js"></script></c:if>
+	<link href="${ctxStatic}/bootstrap/2.3.1/js/bootstrap-table.css" rel="stylesheet" />
+	<%--<script src="/static/jquery/jquery-1.9.1.min.js"></script>--%>
+	<script src="${ctxStatic}/bootstrap/2.3.1/js/bootstrap.min.js" type="text/javascript"></script>
+	<%--<script src="${ctxStatic}/bootstrap/2.3.1/js/bootstrap-table.js" type="text/javascript"></script>--%>
+	<script src="${ctxStatic}/bootstrap/2.3.1/js/bootstrap-table.min.js" type="text/javascript"></script>
+	<script src="${ctxStatic}/bootstrap/2.3.1/js/bootstrap-table-zh-CN.js"></script>
 	<style type="text/css">
 		#main {padding:0;margin:0;} #main .container-fluid{padding:0 4px 0 6px;}
 		#header {margin:0 0 8px;position:static;} #header li {font-size:14px;_font-size:12px;}

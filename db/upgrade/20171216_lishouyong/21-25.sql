@@ -200,7 +200,7 @@ CREATE TABLE `doc_init_storage_main` (
   `storage_department` varchar(20) NOT NULL COMMENT '入库部门',
   `storage_repertory` varchar(20) NOT NULL COMMENT '入库仓库',
   `storage_flag` varchar(1) NOT NULL COMMENT '红蓝标志',
-  `storage_audit_flag` varchar(1) NOT NULL COMMENT '审核状态',
+  `storage_audit_flag` varchar(1) default '1' COMMENT '审核状态',
   `storage_type` varchar(20) NOT NULL COMMENT '入库类型',
   `storage_create` varchar(20) not null COMMENT '制单人',
   `storage_auditor` varchar(20)  COMMENT '审核人',
@@ -214,3 +214,68 @@ CREATE TABLE `doc_init_storage_main` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='期初入库主表';
 
+drop table if EXISTS  `contract_purchase`;
+CREATE TABLE `contract_purchase` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `contract_code` varchar(16) NOT NULL COMMENT '合同编号',
+  `supplier_code` varchar(16) NOT NULL COMMENT '供应商编码',
+  `supplier_name` varchar(60) NOT NULL COMMENT '供应商名称',
+  `contract_type_code` varchar(20) NOT NULL COMMENT '合同分类编码',
+  `contract_type_name` varchar(20) NOT NULL COMMENT '合同分类名称',
+  `sign_date` varchar(20) NOT NULL COMMENT '签订日期',
+  `sign_place` varchar(20) NOT NULL COMMENT '签订地点',
+  `liquiddate_rate` varchar(20) COMMENT '违约金比例',
+  `sign_department_code` varchar(16) NOT NULL COMMENT '签订部门',
+  `sign_department_name` varchar(16) NOT NULL COMMENT '签订部门名称',
+  `period_start` varchar(20)  COMMENT '有效期起始',
+  `period_end` varchar(20) COMMENT '有效期结束',
+  `setting_type_code` varchar(20) not null COMMENT '结算方式编码',
+  `setting_type_name` varchar(20) not null COMMENT '结算方式名称',
+  `saleman_code` varchar(20)  COMMENT '业务员编码',
+  `saleman_name` varchar(20)  COMMENT '业务员名称',
+  `transport_type` varchar(20)  COMMENT '是否需要承运',
+  `contrace_create` varchar(20) not null COMMENT '制单人',
+  `contract_create_date` varchar(20) COMMENT '制单日期',
+  `contract_auditor` varchar(20)  COMMENT '审核人',
+  `contract_audit_date` varchar(20) COMMENT '审核日期',
+  `contract_cancel` varchar(20)  COMMENT '作废人',
+  `contract_cancel_date` varchar(20) COMMENT '作废日期',
+  `remark` varchar(1000) DEFAULT NULL COMMENT '备注',
+  `ext_field1` varchar(60) DEFAULT NULL COMMENT 'ext_field1',
+  `ext_field2` varchar(60) DEFAULT NULL COMMENT 'ext_field2',
+  `ext_field3` varchar(120) DEFAULT NULL COMMENT 'ext_field3',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='采购合同主表';
+
+drop table if EXISTS  `contract_purchase_detail`;
+CREATE TABLE `contract_purchase_detail` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `contract_code` varchar(16) NOT NULL COMMENT '合同编号',
+  `kind_code` varchar(16) NOT NULL COMMENT '品种编码',
+  `item_amount` varchar(20) NOT NULL COMMENT '金额',
+  `item_number` varchar(20) NOT NULL COMMENT '数量',
+  `item_price` varchar(20) NOT NULL COMMENT '单价',
+  `conversion_rate` varchar(16) COMMENT '折算比',
+  `other_rate` varchar(16) COMMENT '扣称比例',
+  `is_complete` varchar(1)  COMMENT '是否完成',
+  `remark` varchar(1000) DEFAULT NULL COMMENT '备注',
+  `ext_field1` varchar(60) DEFAULT NULL COMMENT 'ext_field1',
+  `ext_field2` varchar(60) DEFAULT NULL COMMENT 'ext_field2',
+  `ext_field3` varchar(120) DEFAULT NULL COMMENT 'ext_field3',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='采购合同明细表';
+
+drop table if EXISTS  `doc_kind`;
+CREATE TABLE `doc_kind` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `kind_code` varchar(16) NOT NULL COMMENT '品种编码',
+  `kind_name` varchar(120) DEFAULT NULL COMMENT '品种名称',
+  `kind_level` varchar(60) DEFAULT NULL COMMENT '材质等级',
+  `stand_name` varchar(120) DEFAULT NULL COMMENT '标准名称',
+  `kind_category` varchar(60) DEFAULT NULL COMMENT '所属分类',
+  `kind_type` varchar(60) DEFAULT NULL COMMENT '原材料类型',
+  `first_unit` varchar(60) DEFAULT NULL COMMENT '主记量单位',
+  `primary_provider` varchar(240) DEFAULT NULL COMMENT '主要供应商',
+  `brand_name` varchar(120) DEFAULT NULL COMMENT '品牌名称',
+  PRIMARY KEY (`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='品种档案表或存货档案表';

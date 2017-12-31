@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.doc.dao.DocStationinfoDao">
+    
+	<sql id="docStationinfoColumns">
+		a.id AS "id",
+		c.station_code AS "docStation.stationCode",
+		c.station_name AS "docStation.stationName",
+		a.station_db_type AS "stationDbType",
+		a.station_db_name AS "stationDbName",
+		a.station_db_ip AS "stationDbIp",
+		a.station_db_task AS "stationDbTask",
+		a.station_db_prescription AS "stationDbPrescription",
+		a.station_user AS "stationUser",
+		a.station_passwd AS "stationPasswd",
+		a.prescription_id AS "prescriptionId",
+		a.task_id AS "taskId",
+		a.prescription_sql AS "prescriptionSql",
+		a.task_sql AS "taskSql",
+		a.prescription_sql_erp AS "prescriptionSqlErp",
+		a.task_sql_erp AS "taskSqlErp",
+		a.ext_field1 AS "extField1",
+		a.ext_field2 AS "extField2",
+		a.ext_field3 AS "extField3",
+		a.remark AS "remark"
+	</sql>
+	
+	<sql id="docStationinfoJoins">
+		LEFT JOIN doc_station c ON c.station_code = a.station_code
+	</sql>
+    
+	<select id="get" resultType="DocStationinfo">
+		SELECT 
+			<include refid="docStationinfoColumns"/>
+		FROM doc_stationinfo a
+		<include refid="docStationinfoJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="DocStationinfo">
+		SELECT 
+			<include refid="docStationinfoColumns"/>
+		FROM doc_stationinfo a
+		<include refid="docStationinfoJoins"/>
+		<where>
+			
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="DocStationinfo">
+		SELECT 
+			<include refid="docStationinfoColumns"/>
+		FROM doc_stationinfo a
+		<include refid="docStationinfoJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO doc_stationinfo(
+			station_code,
+			station_name,
+			station_db_type,
+			station_db_name,
+			station_db_ip,
+			station_db_task,
+			station_db_prescription,
+			station_user,
+			station_passwd,
+			prescription_id,
+			task_id,
+			prescription_sql,
+			task_sql,
+			prescription_sql_erp,
+			task_sql_erp,
+			ext_field1,
+			ext_field2,
+			ext_field3,
+			remark
+		) VALUES (
+			#{docStation.stationCode},
+			#{docStation.stationName},
+			#{stationDbType},
+			#{stationDbName},
+			#{stationDbIp},
+			#{stationDbTask},
+			#{stationDbPrescription},
+			#{stationUser},
+			#{stationPasswd},
+			#{prescriptionId},
+			#{taskId},
+			#{prescriptionSql},
+			#{taskSql},
+			#{prescriptionSqlErp},
+			#{taskSqlErp},
+			#{extField1},
+			#{extField2},
+			#{extField3},
+			#{remark}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE doc_stationinfo SET 	
+			station_code = #{docStation.stationCode},
+			station_name = #{docStation.stationName},
+			station_db_type = #{stationDbType},
+			station_db_name = #{stationDbName},
+			station_db_ip = #{stationDbIp},
+			station_db_task = #{stationDbTask},
+			station_db_prescription = #{stationDbPrescription},
+			station_user = #{stationUser},
+			station_passwd = #{stationPasswd},
+			prescription_id = #{prescriptionId},
+			task_id = #{taskId},
+			prescription_sql = #{prescriptionSql},
+			task_sql = #{taskSql},
+			prescription_sql_erp = #{prescriptionSqlErp},
+			task_sql_erp = #{taskSqlErp},
+			ext_field1 = #{extField1},
+			ext_field2 = #{extField2},
+			ext_field3 = #{extField3},
+			remark = #{remark}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM doc_stationinfo
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

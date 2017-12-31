@@ -3,9 +3,14 @@
  */
 package com.thinkgem.jeesite.modules.doc.web;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.thinkgem.jeesite.common.config.Global;
+import com.thinkgem.jeesite.common.persistence.Page;
+import com.thinkgem.jeesite.common.utils.StringUtils;
+import com.thinkgem.jeesite.common.web.BaseController;
+import com.thinkgem.jeesite.modules.doc.entity.DocAccmeth;
+import com.thinkgem.jeesite.modules.doc.service.DocAccmethService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,14 +18,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.thinkgem.jeesite.common.config.Global;
-import com.thinkgem.jeesite.common.persistence.Page;
-import com.thinkgem.jeesite.common.web.BaseController;
-import com.thinkgem.jeesite.common.utils.StringUtils;
-import com.thinkgem.jeesite.modules.doc.entity.DocAccmeth;
-import com.thinkgem.jeesite.modules.doc.service.DocAccmethService;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 结算方式档案Controller
@@ -78,6 +82,22 @@ public class DocAccmethController extends BaseController {
 		docAccmethService.delete(docAccmeth);
 		addMessage(redirectAttributes, "删除结算方式档案成功");
 		return "redirect:"+Global.getAdminPath()+"/doc/docAccmeth/?repage";
+	}
+	@ResponseBody
+	@RequestMapping(value = "treeData")
+	public List<Map<String, Object>> treeData(HttpServletResponse response) {
+		List<Map<String, Object>> mapList = Lists.newArrayList();
+		DocAccmeth docAccmeth = new DocAccmeth();
+		List<DocAccmeth> list = docAccmethService.findList(docAccmeth);
+		for (int i=0; i<list.size(); i++){
+			DocAccmeth e = list.get(i);
+			Map<String, Object> map = Maps.newHashMap();
+			map.put("id", e.getAccmethCode());
+			map.put("name", e.getAccmethName()+"["+e.getAccmethCode()+"]");
+
+			mapList.add(map);
+		}
+		return mapList;
 	}
 
 }

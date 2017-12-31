@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.doc.dao.DocKindDao">
+    
+	<sql id="docKindColumns">
+		a.id AS "id",
+		a.kind_code AS "kindCode",
+		a.kind_name AS "kindName",
+		a.kind_level AS "kindLevel",
+		a.stand_name AS "standName",
+		m.material_code AS "archiveMaterial.materialCode",
+		m.material_name AS "archiveMaterial.materialName",
+		c.concretetyp_code AS "docConcretetyp.concretetypCode",
+		c.concretetyp_name AS "docConcretetyp.concretetypName",
+		a.first_unit AS "firstUnit",
+		a.primary_provider AS "primaryProvider",
+		a.brand_name AS "brandName"
+	</sql>
+	
+	<sql id="docKindJoins">
+		LEFT JOIN archive_material m on m.material_code = a.kind_category
+		LEFT JOIN doc_concretetyp c on c.concretetyp_code = a.kind_type
+	</sql>
+    
+	<select id="get" resultType="DocKind">
+		SELECT 
+			<include refid="docKindColumns"/>
+		FROM doc_kind a
+		<include refid="docKindJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="DocKind">
+		SELECT 
+			<include refid="docKindColumns"/>
+		FROM doc_kind a
+		<include refid="docKindJoins"/>
+		<where>
+			
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="DocKind">
+		SELECT 
+			<include refid="docKindColumns"/>
+		FROM doc_kind a
+		<include refid="docKindJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO doc_kind(
+			id,
+			kind_code,
+			kind_name,
+			kind_level,
+			stand_name,
+			kind_category,
+			kind_type,
+			first_unit,
+			primary_provider,
+			brand_name
+		) VALUES (
+			#{id},
+			#{kindCode},
+			#{kindName},
+			#{kindLevel},
+			#{standName},
+			#{kindCategory},
+			#{kindType},
+			#{firstUnit},
+			#{primaryProvider},
+			#{brandName}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE doc_kind SET 	
+			kind_code = #{kindCode},
+			kind_name = #{kindName},
+			kind_level = #{kindLevel},
+			stand_name = #{standName},
+			kind_category = #{kindCategory},
+			kind_type = #{kindType},
+			first_unit = #{firstUnit},
+			primary_provider = #{primaryProvider},
+			brand_name = #{brandName}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM doc_kind
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

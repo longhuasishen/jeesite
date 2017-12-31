@@ -4,6 +4,7 @@
 <head>
 	<title>期初入库管理</title>
 	<meta name="decorator" content="default"/>
+
 	<script type="text/javascript">
 		$(document).ready(function() {
 			
@@ -14,6 +15,23 @@
 			$("#searchForm").submit();
         	return false;
         }
+        $('#contentTable').bootstrapTable({
+            columns: [{
+                checkbox: true
+            }, {
+                field: 'ORDER_NO',
+                title: '订单编号'
+            }, {
+                field: 'ORDER_TYPE',
+                title: '订单类型'
+            }, {
+                field: 'ORDER_STATUS',
+                title: '订单状态'
+            }, {
+                field: 'REMARK',
+                title: '备注'
+            }, ]
+        });
 	</script>
 </head>
 <body>
