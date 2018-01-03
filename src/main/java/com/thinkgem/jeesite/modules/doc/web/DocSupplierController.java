@@ -120,5 +120,21 @@ public class DocSupplierController extends BaseController {
 		}
 		return mapList;
 	}
+	@ResponseBody
+	@RequestMapping(value = "treeData2")
+	public List<Map<String, Object>> treeData2(HttpServletResponse response) {
+		List<Map<String, Object>> mapList = Lists.newArrayList();
+		DocSupplier docSupplier = new DocSupplier();
+		List<DocSupplier> list = docSupplierService.findList(docSupplier);
+		for (int i=0; i<list.size(); i++){
+			DocSupplier e = list.get(i);
+			Map<String, Object> map = Maps.newHashMap();
+			map.put("id", e.getSupCode());
+			map.put("name", e.getSupName()+"["+e.getSupCode()+"]");
+
+			mapList.add(map);
+		}
+		return mapList;
+	}
 
 }

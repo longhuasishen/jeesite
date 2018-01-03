@@ -25,14 +25,14 @@
 		});
 		function sup_codeTreeselectCallBack(v,h,f){
             if("ok" == v){
-                alert($("#supName").val());
                 //获取指定客户信息
                 $("#contractCode").val($("#sup_codeName").val().substring($("#sup_codeName").val().indexOf("[")+1,$("#sup_codeName").val().indexOf("]")));
-                $("#supName").val($("#sup_codeName").val().substring(0,$("#sup_codeName").val().indexOf("[")));
-                alert($("#supName").val());
+//                $("#supName").val($("#sup_codeName").val().substring(0,$("#sup_codeName").val().indexOf("[")));
+//                alert($("#supName").val());
+//                alert($("#sup_codeName").val());
             }
 		}
-        function archive_contractTreeselectCallBack(v,h,f){
+        /*function archive_contractTreeselectCallBack(v,h,f){
             if("ok" == v){
                 $("#contractName").val($("#archive_contractName").val().substring(0,$("#archive_contractName").val().indexOf("[")));
             }
@@ -51,7 +51,7 @@
             if("ok" == v){
                 $("#officeworkName").val($("#docOfficeworkName").val().substring(0,$("#docOfficeworkName").val().indexOf("[")));
             }
-        }
+        }*/
 
 
 		function addDetail() {
@@ -73,6 +73,10 @@
                 $.jBox($("#importBox").html(), {title:"导入数据", buttons:{"关闭":true},
                     bottomText:"导入文件不能超过5M，仅允许导入“xls”或“xlsx”格式文件！"});
             });*/
+
+            $("#btnSubmit").click(function () {
+//                getTableDatasById("addDetailTable")
+            });
         })
 	</script>
 	<script src="/static/common.js"></script>
@@ -107,16 +111,16 @@
 			<div class="control-group">
 				<label class="control-label">供应商编码：</label>
 				<div class="controls">
-					<sys:treeselect id="sup_code" name="docSupplier.id" value="${contractPurchase.docSupplier.id}" labelName="docSupplier.supCode" labelValue="${contractPurchase.docSupplier.supCode}"
-									title="供应商" url="/doc/docSupplier/treeData" cssClass="required"/>
+					<sys:treeselect id="sup_code" name="docSupplier.supCode" value="${contractPurchase.docSupplier.supCode}" labelName="docSupplier.supName" labelValue="${contractPurchase.docSupplier.supName}"
+									title="供应商" url="/doc/docSupplier/treeData2" cssClass="required"/>
 					<span class="help-inline"><font color="red">*</font> </span>
 				</div>
 			</div>
 			<div class="control-group">
 				<label class="control-label">合同分类编码：</label>
 				<div class="controls">
-					<sys:treeselect id="archive_contract" name="archiveContract.id" value="${contractPurchase.archiveContract.contractCode}" labelName="archiveContract.contractCode" labelValue="${contractPurchase.archiveContract.contractCode}"
-									title="合同分类" url="/archive/archiveContract/treeData" cssClass="required"/>
+					<sys:treeselect id="archive_contract" name="archiveContract.contractCode" value="${contractPurchase.archiveContract.contractCode}" labelName="archiveContract.contractName" labelValue="${contractPurchase.archiveContract.contractName}"
+									title="合同分类" url="/archive/archiveContract/treeData2" cssClass="required"/>
 					<span class="help-inline"><font color="red">*</font> </span>
 				</div>
 			</div>
@@ -138,23 +142,23 @@
 			<div class="control-group">
 				<label class="control-label">签订部门：</label>
 				<div class="controls">
-					<sys:treeselect id="storageDepartment" name="docDepartment.id" value="${docInitStorageMain.docDepartment.departmentCode}" labelName="docDepartment.departmentCode" labelValue="${docInitStorageMain.docDepartment.departmentCode}"
-									title="部门" url="/doc/docDepartment/treeData" cssClass="required"/>
+					<sys:treeselect id="storageDepartment" name="docDepartment.departmentCode" value="${contractPurchase.docDepartment.departmentCode}" labelName="docDepartment.departmentName" labelValue="${contractPurchase.docDepartment.departmentName}"
+									title="部门" url="/doc/docDepartment/treeData2" cssClass="required"/>
 					<span class="help-inline"><font color="red">*</font> </span>
 				</div>
 			</div>
 			<div class="control-group">
 				<label class="control-label">结算方式编码：</label>
 				<div class="controls">
-					<sys:treeselect id="docAccmeth" name="docAccmeth.id" value="${contractPurchase.docAccmeth.accmethCode}" labelName="docAccmeth.accmethCode" labelValue="${contractPurchase.docAccmeth.accmethCode}"
-									title="结算方式" url="/doc/docAccmeth/treeData" cssClass="required"/>
+					<sys:treeselect id="docAccmeth" name="docAccmeth.accmethCode" value="${contractPurchase.docAccmeth.accmethCode}" labelName="docAccmeth.accmethName" labelValue="${contractPurchase.docAccmeth.accmethName}"
+									title="结算方式" url="/doc/docAccmeth/treeData2" cssClass="required"/>
 				</div>
 			</div>
 			<div class="control-group">
 				<label class="control-label">业务员编码：</label>
 				<div class="controls">
-					<sys:treeselect id="docOfficework" name="docOfficework.id" value="${contractPurchase.docOfficework.officeworkCode}" labelName="docOfficework.officeworkCode" labelValue="${contractPurchase.docOfficework.officeworkCode}"
-									title="业务员" url="/doc/docOfficework/treeData" cssClass="required"/>
+					<sys:treeselect id="docOfficework" name="docOfficework.officeworkCode" value="${contractPurchase.docOfficework.officeworkCode}" labelName="docOfficework.officeworkName" labelValue="${contractPurchase.docOfficework.officeworkName}"
+									title="业务员" url="/doc/docOfficework/treeData2" cssClass="required"/>
 				</div>
 			</div>
 			<div class="control-group">
@@ -224,11 +228,11 @@
 					<form:input path="remark" htmlEscape="false" maxlength="1000" class="input-xlarge "/>
 				</div>
 			</div>
-			<input name="docDepartment.departmentName" id="departmentName" type="text" style="display:none;"/>
-			<input name="docSupplier.supName" id="supName" type="text" style="display:none;" value="123"/>
+				<%--<input name="docDepartment.departmentName" id="departmentName" type="text" style="display:none;"/>
+                <input name="docSupplier.supName" id="supName" type="text" style="display:none;" value="123"/>
 			<input name="archiveContract.contractName" id="contractName" type="text" style="display:none;"/>
 			<input name="docAccmeth.accmethName" id="accmethName" type="text" style="display:none;"/>
-			<input name="docOfficework.officeworkName" id="officeworkName" type="text" style="display:none;"/>
+			<input name="docOfficework.officeworkName" id="officeworkName" type="text" style="display:none;"/>--%>
 			</p>
 		</div>
 		<div class="tab-pane fade" id="persons">

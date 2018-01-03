@@ -102,5 +102,21 @@ public class ArchiveContractController extends BaseController {
 		}
 		return mapList;
 	}
+	@ResponseBody
+	@RequestMapping(value = "treeData2")
+	public List<Map<String, Object>> treeData2(HttpServletResponse response) {
+		List<Map<String, Object>> mapList = Lists.newArrayList();
+		ArchiveContract archiveContract = new ArchiveContract();
+		List<ArchiveContract> list = archiveContractService.findList(archiveContract);
+		for (int i=0; i<list.size(); i++){
+			ArchiveContract e = list.get(i);
+			Map<String, Object> map = Maps.newHashMap();
+			map.put("id", e.getContractCode());
+			map.put("name", e.getContractName()+"["+e.getContractCode()+"]");
+
+			mapList.add(map);
+		}
+		return mapList;
+	}
 
 }

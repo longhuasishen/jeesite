@@ -19,6 +19,7 @@ import com.thinkgem.jeesite.common.persistence.DataEntity;
  * @author lisy
  * @version 2017-12-24
  */
+
 @Getter
 @Setter
 public class ContractPurchase extends DataEntity<ContractPurchase> {
@@ -63,7 +64,6 @@ public class ContractPurchase extends DataEntity<ContractPurchase> {
 	public void setContractCode(String contractCode) {
 		this.contractCode = contractCode;
 	}
-	
 
 	@Length(min=1, max=20, message="签订日期长度必须介于 1 和 20 之间")
 	public String getSignDate() {

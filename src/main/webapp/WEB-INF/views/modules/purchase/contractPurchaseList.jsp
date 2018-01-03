@@ -39,6 +39,7 @@
 				<th>合同分类</th>
 				<th>签订日期</th>
 				<th>结算方式</th>
+				<th>违约金比例</th>
 				<th>签订部门</th>
 				<th>业务员</th>
 				<shiro:hasPermission name="purchase:contractPurchase:edit"><th>操作</th></shiro:hasPermission>
@@ -64,6 +65,9 @@
 				</td>
 				<td>
 						${fns:abbr(contractPurchase.docAccmeth.accmethName,50)}
+				</td>
+				<td>
+						${fns:abbr(contractPurchase.liquidDateRate,50)}
 				</td>
 				<td>
 						${fns:abbr(contractPurchase.docDepartment.departmentName,50)}

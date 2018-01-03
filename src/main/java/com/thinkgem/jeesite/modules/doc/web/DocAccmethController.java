@@ -103,5 +103,21 @@ public class DocAccmethController extends BaseController {
 		}
 		return mapList;
 	}
+	@ResponseBody
+	@RequestMapping(value = "treeData2")
+	public List<Map<String, Object>> treeData2(HttpServletResponse response) {
+		List<Map<String, Object>> mapList = Lists.newArrayList();
+		DocAccmeth docAccmeth = new DocAccmeth();
+		List<DocAccmeth> list = docAccmethService.findList(docAccmeth);
+		for (int i=0; i<list.size(); i++){
+			DocAccmeth e = list.get(i);
+			Map<String, Object> map = Maps.newHashMap();
+			map.put("id", e.getAccmethCode());
+			map.put("name", e.getAccmethName()+"["+e.getAccmethCode()+"]");
+
+			mapList.add(map);
+		}
+		return mapList;
+	}
 
 }

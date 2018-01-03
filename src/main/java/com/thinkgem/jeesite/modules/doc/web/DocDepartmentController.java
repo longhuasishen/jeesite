@@ -102,4 +102,20 @@ public class DocDepartmentController extends BaseController {
 		}
 		return mapList;
 	}
+	@ResponseBody
+	@RequestMapping(value = "treeData2")
+	public List<Map<String, Object>> treeData2(HttpServletResponse response) {
+		List<Map<String, Object>> mapList = Lists.newArrayList();
+		DocDepartment docDepartment = new DocDepartment();
+		List<DocDepartment> list = docDepartmentService.findList(docDepartment);
+		for (int i=0; i<list.size(); i++){
+			DocDepartment e = list.get(i);
+			Map<String, Object> map = Maps.newHashMap();
+			map.put("id", e.getDepartmentCode());
+			map.put("name", e.getDepartmentName()+"["+e.getDepartmentCode()+"]");
+
+			mapList.add(map);
+		}
+		return mapList;
+	}
 }

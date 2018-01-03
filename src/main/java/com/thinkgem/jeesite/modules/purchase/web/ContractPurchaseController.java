@@ -7,6 +7,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.thinkgem.jeesite.common.utils.DateUtils;
+import com.thinkgem.jeesite.modules.archive.entity.ArchiveContract;
+import com.thinkgem.jeesite.modules.doc.entity.DocAccmeth;
+import com.thinkgem.jeesite.modules.doc.entity.DocDepartment;
+import com.thinkgem.jeesite.modules.doc.entity.DocOfficework;
+import com.thinkgem.jeesite.modules.doc.entity.DocSupplier;
 import com.thinkgem.jeesite.modules.purchase.entity.ContractPurchaseDetail;
 import com.thinkgem.jeesite.modules.purchase.service.ContractPurchaseDetailService;
 import com.thinkgem.jeesite.modules.sys.utils.UserUtils;
@@ -86,6 +91,27 @@ public class ContractPurchaseController extends BaseController {
 		if(StringUtils.isEmpty(contractPurchase.getContractCreateDate())){
 			contractPurchase.setContractCreateDate(DateUtils.formatDateTime(new Date()));
 		}
+		/*DocSupplier docSupplier = contractPurchase.getDocSupplier();
+		docSupplier.setSupCode(docSupplier.getSupCode().substring(
+				docSupplier.getSupCode().indexOf("[")+1,docSupplier.getSupCode().length()-1)
+		);
+		DocDepartment docDepartment = contractPurchase.getDocDepartment();
+		docDepartment.setDepartmentCode(docDepartment.getDepartmentCode().substring(
+				docDepartment.getDepartmentCode().indexOf("[")+1,docDepartment.getDepartmentCode().length()-1)
+		);
+		DocAccmeth docAccmeth = contractPurchase.getDocAccmeth();
+		docAccmeth.setAccmethCode(docAccmeth.getAccmethCode().substring(
+				docAccmeth.getAccmethCode().indexOf("[")+1,docAccmeth.getAccmethCode().length()-1)
+		);
+		DocOfficework docOfficework = contractPurchase.getDocOfficework();
+		docOfficework.setOfficeworkCode(docOfficework.getOfficeworkCode().substring(
+				docOfficework.getOfficeworkCode().indexOf("[")+1,docOfficework.getOfficeworkCode().length()-1)
+		);
+		ArchiveContract archiveContract = contractPurchase.getArchiveContract();
+		archiveContract.setContractCode(archiveContract.getContractCode().substring(
+				archiveContract.getContractCode().indexOf("[")+1,archiveContract.getContractCode().length()-1)
+		);*/
+
 		contractPurchaseService.save(contractPurchase);
 		addMessage(redirectAttributes, "保存采购合同成功");
 		return "redirect:"+Global.getAdminPath()+"/purchase/contractPurchase/?repage";

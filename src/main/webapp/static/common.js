@@ -56,3 +56,16 @@ function saveRowById(obj) {
     $(obj).parent().find("a#editLink").show();
     $(obj).hide();
 }
+
+function getTableDatasById(tableId) {
+    var tableArray = [];
+    $("#"+tableId+" tbody").find("tr").each(function () {
+        var tdArray = [];
+        var obj = $(this);
+        obj.find("td").each(function () {
+            tdArray.push($(this).text());
+        });
+        tableArray.push(tdArray);
+    });
+    alert(tableArray);
+}
