@@ -53,8 +53,8 @@
 		<div class="control-group">
 			<label class="control-label">工程名称：</label>
 			<div class="controls">
-				<sys:treeselect id="projectName" name="docCustomer.id" value="${contractSales.docCustomer.id}" labelName="docCustomer.cusName" labelValue="${contractSales.docCustomer.cusName}"
-								title="客户档案" url="/doc/docCustomer/treeData" cssClass="required"/>
+				<sys:treeselect id="projectName" name="docCustomer.id" value="${contractSales.docCustomer.id}" labelName="docCustomer.cusProject" labelValue="${contractSales.docCustomer.cusProject}"
+								title="客户档案" url="/doc/docCustomer/treeDataCusProject" cssClass="required"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
@@ -67,8 +67,8 @@
 		<div class="control-group">
 			<label class="control-label">签定日期：</label>
 			<div class="controls">
-				<input id="contractDate"  name="contractDate"  type="text" readonly="readonly" maxlength="20" class="input-medium Wdate" style="width:163px;"
-					   value="<fmt:formatDate value="${contractSales.contractDate}" pattern="yyyy-MM-dd"/>"
+				<input id="contractDate"  name="contractDate"  type="text" readonly="readonly" maxlength="20" class="Wdate required" style="width:163px;"
+					    value="${contractSales.contractDate}"
 					   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
 			</div>
 		</div>
@@ -128,12 +128,12 @@
 			<label class="control-label">有效期限：</label>
 			<div class="controls">
 				<%--<form:input path="effTerm" htmlEscape="false" maxlength="1" class="input-xlarge "/>--%>
-				<input id="effStart"  name="effStart"  type="text" readonly="readonly" maxlength="20" class="input-medium Wdate" style="width:163px;"
-					   value="<fmt:formatDate value="${act.beginDate}" pattern="yyyy-MM-dd"/>"
+				<input id="effStart"  name="effStart"  type="text" readonly="readonly" maxlength="20" class="Wdate required" style="width:163px;"
+					   value="${contractSales.contractDate}"
 					   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
 				　--　
-				<input id="effEnd" name="effEnd" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate" style="width:163px;"
-					   value="<fmt:formatDate value="${act.endDate}" pattern="yyyy-MM-dd"/>"
+				<input id="effEnd" name="effEnd" type="text" readonly="readonly" maxlength="20" class="Wdate required" style="width:163px;"
+					   value="${contractSales.contractDate}"
 					   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
 			</div>
 		</div>
@@ -174,12 +174,12 @@
 			<label class="control-label">时间控制：</label>
 			<div class="controls">
 				<%--<form:input path="timeControl" htmlEscape="false" maxlength="1" class="input-xlarge "/>--%>
-				<input id="timeStart"  name="timeStart"  type="text" readonly="readonly" maxlength="20" class="input-medium Wdate" style="width:163px;"
-					   value="<fmt:formatDate value="${contractSales.timeStart}" pattern="yyyy-MM-dd"/>"
+				<input id="timeStart"  name="timeStart"  type="text" readonly="readonly" maxlength="20" class="Wdate required" style="width:163px;"
+					   value="${contractSales.contractDate}"
 					   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
 				　--　
-				<input id="timeEnd" name="timeEnd" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate" style="width:163px;"
-					   value="<fmt:formatDate value="${contractSales.timeEnd}" pattern="yyyy-MM-dd"/>"
+				<input id="timeEnd" name="timeEnd" type="text" readonly="readonly" maxlength="20" class="Wdate required" style="width:163px;"
+					   value="${contractSales.contractDate}"
 					   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
 			</div>
 		</div>
@@ -207,18 +207,18 @@
 			</tr>
 			<tr class="align-center">
 				<td class="tit">制单日期</td>
-				<td><input id="makeDate"  name="makeDate"  type="text" readonly="readonly" maxlength="20" class="input-medium Wdate" style="width:163px;"
-					   value="<fmt:formatDate value="${contractSales.makeDate}" pattern="yyyy-MM-dd"/>"
-					   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
+				<td><input id="makeDate"  name="makeDate"  type="text" readonly="readonly" maxlength="20" class="Wdate required" style="width:163px;"
+						   value="${contractSales.contractDate}"
+						   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
 				</td>
 				<td class="tit">审核日期</td>
-				<td><input id="checkDate"  name="checkDate"  type="text" readonly="readonly" maxlength="20" class="input-medium Wdate" style="width:163px;"
-					   value="<fmt:formatDate value="${act.beginDate}" pattern="yyyy-MM-dd"/>"
-					   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
+				<td><input id="checkDate"  name="checkDate"  type="text" readonly="readonly" maxlength="20" class="Wdate required" style="width:163px;"
+						   value="${contractSales.contractDate}"
+						   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
 				</td>
 				<td class="tit">作废日期</td>
-				<td><input id="cancelDate"  name="cancelDate"  type="text" readonly="readonly" maxlength="20" class="input-medium Wdate" style="width:163px;"
-					   value="<fmt:formatDate value="${act.beginDate}" pattern="yyyy-MM-dd"/>"
+				<td><input id="cancelDate"  name="cancelDate"  type="text" readonly="readonly" maxlength="20" class="Wdate required" style="width:163px;"
+						   value="${contractSales.contractDate}"
 						   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
 				</td>
 			</tr>
@@ -258,7 +258,7 @@
 			<label class="control-label">备注：</label>
 			<div class="controls">
 				<%--<form:input path="contractRemark" htmlEscape="false" maxlength="256" class="input-xlarge "/>--%>
-				<form:textarea path="contractRemark" htmlEscape="false" rows="1" maxlength="1000" class="input-xxlarge required"/>
+				<form:textarea path="contractRemark" htmlEscape="false" rows="1" maxlength="1000"/>
 			</div>
 		</div>
 		<div class="control-group">
@@ -417,37 +417,37 @@
 		<div class="control-group">
 			<label class="control-label">其它特殊要求：</label>
 			<div class="controls">
-				<form:textarea path="sumControl" htmlEscape="false" rows="6" maxlength="1000" class="input-xxlarge required"/>
+				<form:textarea path="sumControl" htmlEscape="false" rows="6" maxlength="1000" />
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">工程需用量：</label>
 			<div class="controls">
-				<form:textarea path="saveInventory" htmlEscape="false" rows="6" maxlength="1000" class="input-xxlarge required"/>
+				<form:textarea path="saveInventory" htmlEscape="false" rows="6" maxlength="1000" />
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">验收方法及期限：</label>
 			<div class="controls">
-				<form:textarea path="stockStand" htmlEscape="false" rows="6" maxlength="1000" class="input-xxlarge required"/>
+				<form:textarea path="stockStand" htmlEscape="false" rows="6" maxlength="1000" />
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">交货时间及地点：</label>
 			<div class="controls">
-				<form:textarea path="abcCategory" htmlEscape="false" rows="6" maxlength="1000" class="input-xxlarge required"/>
+				<form:textarea path="abcCategory" htmlEscape="false" rows="6" maxlength="1000" />
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">结算方式：</label>
 			<div class="controls">
-				<form:textarea path="taxRate" htmlEscape="false" rows="6" maxlength="1000" class="input-xxlarge required"/>
+				<form:textarea path="taxRate" htmlEscape="false" rows="6" maxlength="1000" />
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">付款方式：</label>
 			<div class="controls">
-				<form:textarea path="qualityManage" htmlEscape="false" rows="6" maxlength="1000" class="input-xxlarge required"/>
+				<form:textarea path="qualityManage" htmlEscape="false" rows="6" maxlength="1000" />
 			</div>
 		</div>
 		<div class="control-group">
