@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.bill.dao.ContractReceivableDao">
+    
+	<sql id="contractReceivableColumns">
+		a.id AS "id",
+		a.bill_no AS "billNo",
+		a.bill_date AS "billDate",
+		a.custom_abbr AS "customAbbr",
+		a.month_amount AS "monthAmount",
+		a.contract_amount AS "contractAmount",
+		a.check_status AS "checkStatus",
+		a.create_person AS "createPerson",
+		a.check_person AS "checkPerson",
+		a.make_date AS "makeDate",
+		a.check_date AS "checkDate",
+		a.contract_remark AS "contractRemark",
+		a.ext_field1 AS "extField1",
+		a.ext_field2 AS "extField2",
+		a.ext_field3 AS "extField3",
+		a.remark AS "remark"
+	</sql>
+	
+	<sql id="contractReceivableJoins">
+	</sql>
+    
+	<select id="get" resultType="ContractReceivable">
+		SELECT 
+			<include refid="contractReceivableColumns"/>
+		FROM contract_receivable a
+		<include refid="contractReceivableJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="ContractReceivable">
+		SELECT 
+			<include refid="contractReceivableColumns"/>
+		FROM contract_receivable a
+		<include refid="contractReceivableJoins"/>
+		<where>
+			
+			<if test="billNo != null and billNo != ''">
+				AND a.bill_no = #{billNo}
+			</if>
+			<if test="billDate != null and billDate != ''">
+				AND a.bill_date = #{billDate}
+			</if>
+			<if test="customAbbr != null and customAbbr != ''">
+				AND a.custom_abbr = #{customAbbr}
+			</if>
+			<if test="monthAmount != null and monthAmount != ''">
+				AND a.month_amount = #{monthAmount}
+			</if>
+			<if test="contractAmount != null and contractAmount != ''">
+				AND a.contract_amount = #{contractAmount}
+			</if>
+			<if test="checkStatus != null and checkStatus != ''">
+				AND a.check_status = #{checkStatus}
+			</if>
+			<if test="createPerson != null and createPerson != ''">
+				AND a.create_person = #{createPerson}
+			</if>
+			<if test="checkPerson != null and checkPerson != ''">
+				AND a.check_person = #{checkPerson}
+			</if>
+			<if test="makeDate != null and makeDate != ''">
+				AND a.make_date = #{makeDate}
+			</if>
+			<if test="checkDate != null and checkDate != ''">
+				AND a.check_date = #{checkDate}
+			</if>
+			<if test="contractRemark != null and contractRemark != ''">
+				AND a.contract_remark = #{contractRemark}
+			</if>
+			<if test="extField1 != null and extField1 != ''">
+				AND a.ext_field1 = #{extField1}
+			</if>
+			<if test="extField2 != null and extField2 != ''">
+				AND a.ext_field2 = #{extField2}
+			</if>
+			<if test="extField3 != null and extField3 != ''">
+				AND a.ext_field3 = #{extField3}
+			</if>
+			<if test="remark != null and remark != ''">
+				AND a.remark = #{remark}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="ContractReceivable">
+		SELECT 
+			<include refid="contractReceivableColumns"/>
+		FROM contract_receivable a
+		<include refid="contractReceivableJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO contract_receivable(
+			id,
+			bill_no,
+			bill_date,
+			custom_abbr,
+			month_amount,
+			contract_amount,
+			check_status,
+			create_person,
+			check_person,
+			make_date,
+			check_date,
+			contract_remark,
+			ext_field1,
+			ext_field2,
+			ext_field3,
+			remark
+		) VALUES (
+			#{id},
+			#{billNo},
+			#{billDate},
+			#{customAbbr},
+			#{monthAmount},
+			#{contractAmount},
+			#{checkStatus},
+			#{createPerson},
+			#{checkPerson},
+			#{makeDate},
+			#{checkDate},
+			#{contractRemark},
+			#{extField1},
+			#{extField2},
+			#{extField3},
+			#{remark}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE contract_receivable SET 	
+			bill_no = #{billNo},
+			bill_date = #{billDate},
+			custom_abbr = #{customAbbr},
+			month_amount = #{monthAmount},
+			contract_amount = #{contractAmount},
+			check_status = #{checkStatus},
+			create_person = #{createPerson},
+			check_person = #{checkPerson},
+			make_date = #{makeDate},
+			check_date = #{checkDate},
+			contract_remark = #{contractRemark},
+			ext_field1 = #{extField1},
+			ext_field2 = #{extField2},
+			ext_field3 = #{extField3},
+			remark = #{remark}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM contract_receivable
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

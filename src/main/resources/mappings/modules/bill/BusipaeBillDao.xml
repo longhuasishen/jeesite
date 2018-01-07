@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.bill.dao.BusipaeBillDao">
+    
+	<sql id="busipaeBillColumns">
+		a.id AS "id",
+		a.bill_no AS "billNo",
+		a.bill_date AS "billDate",
+		a.custom_name AS "customName",
+		a.custom_abbr AS "customAbbr",
+		a.project_name AS "projectName",
+		a.bill_direction AS "billDirection",
+		a.bill_amt AS "billAmt",
+		a.create_person AS "createPerson",
+		a.check_person AS "checkPerson",
+		a.make_date AS "makeDate",
+		a.check_date AS "checkDate",
+		a.bill_status AS "billStatus",
+		a.busi_remark AS "busiRemark",
+		a.ext_field1 AS "extField1",
+		a.ext_field2 AS "extField2",
+		a.ext_field3 AS "extField3",
+		a.remark AS "remark"
+	</sql>
+	
+	<sql id="busipaeBillJoins">
+	</sql>
+    
+	<select id="get" resultType="BusipaeBill">
+		SELECT 
+			<include refid="busipaeBillColumns"/>
+		FROM busipae_bill a
+		<include refid="busipaeBillJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="BusipaeBill">
+		SELECT 
+			<include refid="busipaeBillColumns"/>
+		FROM busipae_bill a
+		<include refid="busipaeBillJoins"/>
+		<where>
+			
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="BusipaeBill">
+		SELECT 
+			<include refid="busipaeBillColumns"/>
+		FROM busipae_bill a
+		<include refid="busipaeBillJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO busipae_bill(
+			bill_no,
+			bill_date,
+			custom_name,
+			custom_abbr,
+			project_name,
+			bill_direction,
+			bill_amt,
+			create_person,
+			check_person,
+			make_date,
+			check_date,
+			bill_status,
+			busi_remark,
+			ext_field1,
+			ext_field2,
+			ext_field3,
+			remark
+		) VALUES (
+			#{billNo},
+			#{billDate},
+			#{customName},
+			#{customAbbr},
+			#{projectName},
+			#{billDirection},
+			#{billAmt},
+			#{createPerson},
+			#{checkPerson},
+			#{makeDate},
+			#{checkDate},
+			#{billStatus},
+			#{busiRemark},
+			#{extField1},
+			#{extField2},
+			#{extField3},
+			#{remark}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE busipae_bill SET 	
+			bill_no = #{billNo},
+			bill_date = #{billDate},
+			custom_name = #{customName},
+			custom_abbr = #{customAbbr},
+			project_name = #{projectName},
+			bill_direction = #{billDirection},
+			bill_amt = #{billAmt},
+			create_person = #{createPerson},
+			check_person = #{checkPerson},
+			make_date = #{makeDate},
+			check_date = #{checkDate},
+			bill_status = #{billStatus},
+			busi_remark = #{busiRemark},
+			ext_field1 = #{extField1},
+			ext_field2 = #{extField2},
+			ext_field3 = #{extField3},
+			remark = #{remark}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM busipae_bill
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

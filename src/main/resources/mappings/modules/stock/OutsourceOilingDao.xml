@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.stock.dao.OutsourceOilingDao">
+    
+	<sql id="outsourceOilingColumns">
+		a.id AS "id",
+		a.oiling_date AS "oilingDate",
+		a.sample_name AS "sampleName",
+		a.supplier_name AS "supplierName",
+		a.oiling_count AS "oilingCount",
+		a.oiling_price AS "oilingPrice",
+		a.oiling_amount AS "oilingAmount",
+		a.oiling_person AS "oilingPerson",
+		a.car_no AS "carNo",
+		a.oiling_remark AS "oilingRemark",
+		a.create_person AS "createPerson",
+		a.check_person AS "checkPerson",
+		a.make_date AS "makeDate",
+		a.check_date AS "checkDate",
+		a.check_status AS "checkStatus",
+		a.ext_field1 AS "extField1",
+		a.ext_field2 AS "extField2",
+		a.ext_field3 AS "extField3",
+		a.remark AS "remark"
+	</sql>
+	
+	<sql id="outsourceOilingJoins">
+	</sql>
+    
+	<select id="get" resultType="OutsourceOiling">
+		SELECT 
+			<include refid="outsourceOilingColumns"/>
+		FROM outsource_oiling a
+		<include refid="outsourceOilingJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="OutsourceOiling">
+		SELECT 
+			<include refid="outsourceOilingColumns"/>
+		FROM outsource_oiling a
+		<include refid="outsourceOilingJoins"/>
+		<where>
+			
+			<if test="oilingDate != null and oilingDate != ''">
+				AND a.oiling_date = #{oilingDate}
+			</if>
+			<if test="sampleName != null and sampleName != ''">
+				AND a.sample_name = #{sampleName}
+			</if>
+			<if test="supplierName != null and supplierName != ''">
+				AND a.supplier_name = #{supplierName}
+			</if>
+			<if test="oilingCount != null and oilingCount != ''">
+				AND a.oiling_count = #{oilingCount}
+			</if>
+			<if test="oilingPrice != null and oilingPrice != ''">
+				AND a.oiling_price = #{oilingPrice}
+			</if>
+			<if test="oilingAmount != null and oilingAmount != ''">
+				AND a.oiling_amount = #{oilingAmount}
+			</if>
+			<if test="oilingPerson != null and oilingPerson != ''">
+				AND a.oiling_person = #{oilingPerson}
+			</if>
+			<if test="carNo != null and carNo != ''">
+				AND a.car_no = #{carNo}
+			</if>
+			<if test="oilingRemark != null and oilingRemark != ''">
+				AND a.oiling_remark = #{oilingRemark}
+			</if>
+			<if test="createPerson != null and createPerson != ''">
+				AND a.create_person = #{createPerson}
+			</if>
+			<if test="checkPerson != null and checkPerson != ''">
+				AND a.check_person = #{checkPerson}
+			</if>
+			<if test="makeDate != null and makeDate != ''">
+				AND a.make_date = #{makeDate}
+			</if>
+			<if test="checkDate != null and checkDate != ''">
+				AND a.check_date = #{checkDate}
+			</if>
+			<if test="checkStatus != null and checkStatus != ''">
+				AND a.check_status = #{checkStatus}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="OutsourceOiling">
+		SELECT 
+			<include refid="outsourceOilingColumns"/>
+		FROM outsource_oiling a
+		<include refid="outsourceOilingJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO outsource_oiling(
+			oiling_date,
+			sample_name,
+			supplier_name,
+			oiling_count,
+			oiling_price,
+			oiling_amount,
+			oiling_person,
+			car_no,
+			oiling_remark,
+			create_person,
+			check_person,
+			make_date,
+			check_date,
+			check_status,
+			ext_field1,
+			ext_field2,
+			ext_field3,
+			remark
+		) VALUES (
+			#{oilingDate},
+			#{sampleName},
+			#{supplierName},
+			#{oilingCount},
+			#{oilingPrice},
+			#{oilingAmount},
+			#{oilingPerson},
+			#{carNo},
+			#{oilingRemark},
+			#{createPerson},
+			#{checkPerson},
+			#{makeDate},
+			#{checkDate},
+			#{checkStatus},
+			#{extField1},
+			#{extField2},
+			#{extField3},
+			#{remark}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE outsource_oiling SET 	
+			oiling_date = #{oilingDate},
+			sample_name = #{sampleName},
+			supplier_name = #{supplierName},
+			oiling_count = #{oilingCount},
+			oiling_price = #{oilingPrice},
+			oiling_amount = #{oilingAmount},
+			oiling_person = #{oilingPerson},
+			car_no = #{carNo},
+			oiling_remark = #{oilingRemark},
+			create_person = #{createPerson},
+			check_person = #{checkPerson},
+			make_date = #{makeDate},
+			check_date = #{checkDate},
+			check_status = #{checkStatus},
+			ext_field1 = #{extField1},
+			ext_field2 = #{extField2},
+			ext_field3 = #{extField3},
+			remark = #{remark}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM outsource_oiling
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

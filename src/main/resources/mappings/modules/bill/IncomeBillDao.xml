@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.bill.dao.IncomeBillDao">
+    
+	<sql id="incomeBillColumns">
+		a.id AS "id",
+		a.bill_no AS "billNo",
+		a.bill_date AS "billDate",
+		a.custom_name AS "customName",
+		a.project_name AS "projectName",
+		a.pay_way AS "payWay",
+		a.income_amount AS "incomeAmount",
+		a.with_no AS "withNo",
+		a.bank_name AS "bankName",
+		a.bank_acc AS "bankAcc",
+		a.check_status AS "checkStatus",
+		a.create_person AS "createPerson",
+		a.check_person AS "checkPerson",
+		a.make_date AS "makeDate",
+		a.check_date AS "checkDate",
+		a.income_remark AS "incomeRemark",
+		a.ext_field1 AS "extField1",
+		a.ext_field2 AS "extField2",
+		a.ext_field3 AS "extField3",
+		a.remark AS "remark"
+	</sql>
+	
+	<sql id="incomeBillJoins">
+	</sql>
+    
+	<select id="get" resultType="IncomeBill">
+		SELECT 
+			<include refid="incomeBillColumns"/>
+		FROM income_bill a
+		<include refid="incomeBillJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="IncomeBill">
+		SELECT 
+			<include refid="incomeBillColumns"/>
+		FROM income_bill a
+		<include refid="incomeBillJoins"/>
+		<where>
+			
+			<if test="billNo != null and billNo != ''">
+				AND a.bill_no = #{billNo}
+			</if>
+			<if test="billDate != null and billDate != ''">
+				AND a.bill_date = #{billDate}
+			</if>
+			<if test="customName != null and customName != ''">
+				AND a.custom_name = #{customName}
+			</if>
+			<if test="projectName != null and projectName != ''">
+				AND a.project_name = #{projectName}
+			</if>
+			<if test="payWay != null and payWay != ''">
+				AND a.pay_way = #{payWay}
+			</if>
+			<if test="incomeAmount != null and incomeAmount != ''">
+				AND a.income_amount = #{incomeAmount}
+			</if>
+			<if test="withNo != null and withNo != ''">
+				AND a.with_no = #{withNo}
+			</if>
+			<if test="bankName != null and bankName != ''">
+				AND a.bank_name = #{bankName}
+			</if>
+			<if test="bankAcc != null and bankAcc != ''">
+				AND a.bank_acc = #{bankAcc}
+			</if>
+			<if test="checkStatus != null and checkStatus != ''">
+				AND a.check_status = #{checkStatus}
+			</if>
+			<if test="createPerson != null and createPerson != ''">
+				AND a.create_person = #{createPerson}
+			</if>
+			<if test="checkPerson != null and checkPerson != ''">
+				AND a.check_person = #{checkPerson}
+			</if>
+			<if test="makeDate != null and makeDate != ''">
+				AND a.make_date = #{makeDate}
+			</if>
+			<if test="checkDate != null and checkDate != ''">
+				AND a.check_date = #{checkDate}
+			</if>
+			<if test="incomeRemark != null and incomeRemark != ''">
+				AND a.income_remark = #{incomeRemark}
+			</if>
+			<if test="extField1 != null and extField1 != ''">
+				AND a.ext_field1 = #{extField1}
+			</if>
+			<if test="extField2 != null and extField2 != ''">
+				AND a.ext_field2 = #{extField2}
+			</if>
+			<if test="extField3 != null and extField3 != ''">
+				AND a.ext_field3 = #{extField3}
+			</if>
+			<if test="remark != null and remark != ''">
+				AND a.remark = #{remark}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="IncomeBill">
+		SELECT 
+			<include refid="incomeBillColumns"/>
+		FROM income_bill a
+		<include refid="incomeBillJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO income_bill(
+			id,
+			bill_no,
+			bill_date,
+			custom_name,
+			project_name,
+			pay_way,
+			income_amount,
+			with_no,
+			bank_name,
+			bank_acc,
+			check_status,
+			create_person,
+			check_person,
+			make_date,
+			check_date,
+			income_remark,
+			ext_field1,
+			ext_field2,
+			ext_field3,
+			remark
+		) VALUES (
+			#{id},
+			#{billNo},
+			#{billDate},
+			#{customName},
+			#{projectName},
+			#{payWay},
+			#{incomeAmount},
+			#{withNo},
+			#{bankName},
+			#{bankAcc},
+			#{checkStatus},
+			#{createPerson},
+			#{checkPerson},
+			#{makeDate},
+			#{checkDate},
+			#{incomeRemark},
+			#{extField1},
+			#{extField2},
+			#{extField3},
+			#{remark}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE income_bill SET 	
+			bill_no = #{billNo},
+			bill_date = #{billDate},
+			custom_name = #{customName},
+			project_name = #{projectName},
+			pay_way = #{payWay},
+			income_amount = #{incomeAmount},
+			with_no = #{withNo},
+			bank_name = #{bankName},
+			bank_acc = #{bankAcc},
+			check_status = #{checkStatus},
+			create_person = #{createPerson},
+			check_person = #{checkPerson},
+			make_date = #{makeDate},
+			check_date = #{checkDate},
+			income_remark = #{incomeRemark},
+			ext_field1 = #{extField1},
+			ext_field2 = #{extField2},
+			ext_field3 = #{extField3},
+			remark = #{remark}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM income_bill
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

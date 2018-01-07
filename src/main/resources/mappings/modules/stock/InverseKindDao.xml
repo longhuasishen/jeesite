@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.stock.dao.InverseKindDao">
+    
+	<sql id="inverseKindColumns">
+		a.id AS "id",
+		a.inverse_date AS "inverseDate",
+		a.repo_name AS "repoName",
+		a.orgi_name AS "orgiName",
+		a.orgi_no AS "orgiNo",
+		a.inverse_num AS "inverseNum",
+		a.orgi_price AS "orgiPrice",
+		a.orgi_amount AS "orgiAmount",
+		a.new_name AS "newName",
+		a.new_no AS "newNo",
+		a.new_num AS "newNum",
+		a.new_price AS "newPrice",
+		a.new_amount AS "newAmount",
+		a.create_person AS "createPerson",
+		a.check_person AS "checkPerson",
+		a.make_date AS "makeDate",
+		a.check_date AS "checkDate",
+		a.check_status AS "checkStatus",
+		a.check_remark AS "checkRemark",
+		a.ext_field1 AS "extField1",
+		a.ext_field2 AS "extField2",
+		a.ext_field3 AS "extField3",
+		a.remark AS "remark"
+	</sql>
+	
+	<sql id="inverseKindJoins">
+	</sql>
+    
+	<select id="get" resultType="InverseKind">
+		SELECT 
+			<include refid="inverseKindColumns"/>
+		FROM inverse_kind a
+		<include refid="inverseKindJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="InverseKind">
+		SELECT 
+			<include refid="inverseKindColumns"/>
+		FROM inverse_kind a
+		<include refid="inverseKindJoins"/>
+		<where>
+			
+			<if test="inverseDate != null and inverseDate != ''">
+				AND a.inverse_date = #{inverseDate}
+			</if>
+			<if test="repoName != null and repoName != ''">
+				AND a.repo_name = #{repoName}
+			</if>
+			<if test="orgiName != null and orgiName != ''">
+				AND a.orgi_name = #{orgiName}
+			</if>
+			<if test="orgiNo != null and orgiNo != ''">
+				AND a.orgi_no = #{orgiNo}
+			</if>
+			<if test="inverseNum != null and inverseNum != ''">
+				AND a.inverse_num = #{inverseNum}
+			</if>
+			<if test="orgiPrice != null and orgiPrice != ''">
+				AND a.orgi_price = #{orgiPrice}
+			</if>
+			<if test="orgiAmount != null and orgiAmount != ''">
+				AND a.orgi_amount = #{orgiAmount}
+			</if>
+			<if test="newName != null and newName != ''">
+				AND a.new_name = #{newName}
+			</if>
+			<if test="newNo != null and newNo != ''">
+				AND a.new_no = #{newNo}
+			</if>
+			<if test="newNum != null and newNum != ''">
+				AND a.new_num = #{newNum}
+			</if>
+			<if test="newPrice != null and newPrice != ''">
+				AND a.new_price = #{newPrice}
+			</if>
+			<if test="newAmount != null and newAmount != ''">
+				AND a.new_amount = #{newAmount}
+			</if>
+			<if test="createPerson != null and createPerson != ''">
+				AND a.create_person = #{createPerson}
+			</if>
+			<if test="checkPerson != null and checkPerson != ''">
+				AND a.check_person = #{checkPerson}
+			</if>
+			<if test="makeDate != null and makeDate != ''">
+				AND a.make_date = #{makeDate}
+			</if>
+			<if test="checkDate != null and checkDate != ''">
+				AND a.check_date = #{checkDate}
+			</if>
+			<if test="checkStatus != null and checkStatus != ''">
+				AND a.check_status = #{checkStatus}
+			</if>
+			<if test="checkRemark != null and checkRemark != ''">
+				AND a.check_remark = #{checkRemark}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="InverseKind">
+		SELECT 
+			<include refid="inverseKindColumns"/>
+		FROM inverse_kind a
+		<include refid="inverseKindJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO inverse_kind(
+			inverse_date,
+			repo_name,
+			orgi_name,
+			orgi_no,
+			inverse_num,
+			orgi_price,
+			orgi_amount,
+			new_name,
+			new_no,
+			new_num,
+			new_price,
+			new_amount,
+			create_person,
+			check_person,
+			make_date,
+			check_date,
+			check_status,
+			check_remark,
+			ext_field1,
+			ext_field2,
+			ext_field3,
+			remark
+		) VALUES (
+			#{inverseDate},
+			#{repoName},
+			#{orgiName},
+			#{orgiNo},
+			#{inverseNum},
+			#{orgiPrice},
+			#{orgiAmount},
+			#{newName},
+			#{newNo},
+			#{newNum},
+			#{newPrice},
+			#{newAmount},
+			#{createPerson},
+			#{checkPerson},
+			#{makeDate},
+			#{checkDate},
+			#{checkStatus},
+			#{checkRemark},
+			#{extField1},
+			#{extField2},
+			#{extField3},
+			#{remark}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE inverse_kind SET 	
+			inverse_date = #{inverseDate},
+			repo_name = #{repoName},
+			orgi_name = #{orgiName},
+			orgi_no = #{orgiNo},
+			inverse_num = #{inverseNum},
+			orgi_price = #{orgiPrice},
+			orgi_amount = #{orgiAmount},
+			new_name = #{newName},
+			new_no = #{newNo},
+			new_num = #{newNum},
+			new_price = #{newPrice},
+			new_amount = #{newAmount},
+			create_person = #{createPerson},
+			check_person = #{checkPerson},
+			make_date = #{makeDate},
+			check_date = #{checkDate},
+			check_status = #{checkStatus},
+			check_remark = #{checkRemark},
+			ext_field1 = #{extField1},
+			ext_field2 = #{extField2},
+			ext_field3 = #{extField3},
+			remark = #{remark}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM inverse_kind
+		WHERE id = #{id}
+	</update>
+	
+</mapper>
