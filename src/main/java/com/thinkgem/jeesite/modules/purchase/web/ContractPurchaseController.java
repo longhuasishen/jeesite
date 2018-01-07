@@ -15,8 +15,11 @@ import com.thinkgem.jeesite.modules.doc.entity.DocSupplier;
 import com.thinkgem.jeesite.modules.purchase.entity.ContractPurchaseDetail;
 import com.thinkgem.jeesite.modules.purchase.service.ContractPurchaseDetailService;
 import com.thinkgem.jeesite.modules.sys.utils.UserUtils;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.annotations.Param;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -41,6 +44,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping(value = "${adminPath}/purchase/contractPurchase")
+@Slf4j
 public class ContractPurchaseController extends BaseController {
 
 	@Autowired
@@ -84,7 +88,7 @@ public class ContractPurchaseController extends BaseController {
 
 	@RequiresPermissions("purchase:contractPurchase:edit")
 	@RequestMapping(value = "save")
-	public String save(ContractPurchase contractPurchase, Model model, RedirectAttributes redirectAttributes) {
+	public String save(ContractPurchase contractPurchase, Model model, RedirectAttributes redirectAttributes, @RequestParam(value = "tableDatas",required = false) String tableDatas) {
 		if (!beanValidator(model, contractPurchase)){
 			return form(contractPurchase, model);
 		}
@@ -111,7 +115,9 @@ public class ContractPurchaseController extends BaseController {
 		archiveContract.setContractCode(archiveContract.getContractCode().substring(
 				archiveContract.getContractCode().indexOf("[")+1,archiveContract.getContractCode().length()-1)
 		);*/
-
+		if(StringUtils.isNotEmpty(tableDatas)){
+			log.info("合同明细{}",tableDatas);
+		}
 		contractPurchaseService.save(contractPurchase);
 		addMessage(redirectAttributes, "保存采购合同成功");
 		return "redirect:"+Global.getAdminPath()+"/purchase/contractPurchase/?repage";

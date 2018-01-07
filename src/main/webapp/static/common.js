@@ -62,10 +62,13 @@ function getTableDatasById(tableId) {
     $("#"+tableId+" tbody").find("tr").each(function () {
         var tdArray = [];
         var obj = $(this);
-        obj.find("td").each(function () {
-            tdArray.push($(this).text());
+        var tds = obj.find("td").length;
+        obj.find("td").each(function (i) {
+            if(i<tds-1){
+                tdArray.push($(this).text());
+            }
         });
         tableArray.push(tdArray);
     });
-    alert(tableArray);
+    return tableArray;
 }
