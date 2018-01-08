@@ -81,8 +81,9 @@
         })
 	</script>
 	<script src="/static/common.js"></script>
-	<script src="${ctxStatic}/jquery/jquery-1.9.1.min.js" type="text/javascript"></script>
-	<script src="${ctxStatic}/bootstrap/3.3.4/js/bootstrap.min.js" type="text/javascript"></script>
+	<%--<script src="${ctxStatic}/jquery/jquery-1.9.1.min.js" type="text/javascript"></script>--%>
+	<script src="${ctxStatic}/jquery/jquery-1.8.3.min.js" type="text/javascript"></script>
+	<%--<script src="${ctxStatic}/bootstrap/3.3.4/js/bootstrap.min.js" type="text/javascript"></script>--%>
 	<link href="${ctxStatic}/jquery-validation/1.11.0/jquery.validate.min.css" type="text/css" rel="stylesheet" />
 	<script src="${ctxStatic}/jquery-validation/1.11.0/jquery.validate.min.js" type="text/javascript"></script>
 	<script src="/static/jqGrid/4.7/js/jquery.jqGrid.js"></script>
@@ -90,8 +91,8 @@
 	<link rel="stylesheet" type="text/css" href="/static/jquery-ui-1.12.1/jquery-ui.min.css" />
 	<link rel="stylesheet" type="text/css" href="/static/jquery-ui-1.12.1/jquery-ui.theme.min.css" />
 	<link rel="stylesheet" type="text/css" href="/static/jqGrid/4.7/css/ui.jqgrid-bootstrap-ui.css" />
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
-	<%--<link rel="stylesheet" type="text/css" href="/static/jqGrid/4.7/css/ui.jqgrid-bootstrap.css" />--%>
+	<%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
+	<link rel="stylesheet" type="text/css" href="/static/jqGrid/4.7/css/ui.jqgrid-bootstrap.css" />--%>
 	<link rel="stylesheet" type="text/css" href="/static/jqGrid/4.7/css/trirand/ui.jqgrid-bootstrap.css" />
 	<link rel="stylesheet" type="text/css" href="/static/jqGrid/4.7/css/ui.jqgrid.css" />
 	<script type="text/ecmascript" src="/static/bootstrap/3.3.4/js/bootstrap-datepicker.js"></script>
@@ -103,7 +104,7 @@
         $.jgrid.defaults.responsive = true;
         $.jgrid.defaults.styleUI = 'Bootstrap';
 	</script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	<%--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>--%>
 </head>
 <body>
 
@@ -460,14 +461,27 @@
                             grid.jqGrid('editRow',id, {keys:true, focusField: 4});
                             lastSelection = id;
                         }
+                        $("#userButton").unbind("click").click(function(){
+                            searchKind();
+                        });
                     }
                     function searchKind() {
-                        alert('弹出查询品种编码框');
+                        var submit = function (v, h, f) {
+                            var temp=document.getElementById('jbox-iframe').contentWindow.document.getElementById('svalue').value;
+							console.log("temp="+temp);
+                            return true;
+                        };
+                        top.$.jBox.open("iframe:${ctx}/doc/docKind/listFrame",
+                            "品种选择",700,430,submit
+                        );
                     }
+
                     function createKindCodeEditElement(value, editOptions) {
-                        var div = $("<div style='margin-top:5px'></div>");
-                        var treeSelect = $("<input>",{type:"text",name:"kindCode",value:value,style:"width:100px"});
-                        var searchClass = $("<span class='ui-icon ui-icon-search'>",{onclick:searchKind()});
+                        var div = $("<div style='margin-top:5px' class='input-append'></div>");
+                        var treeSelect = $("<input>",{type:"text",name:"kindCode",value:value,style:"width:100px",class:'input-xlarge required'});
+                        var searchClass = $("<a>",{id:'userButton',href:'#',class:'btn  ',style:'padding-top:0px;padding-right:1px;padding-bottom:0px;padding-left:1px;'});
+                        var iClass = $("<i>",{class:'icon-search'});
+                        searchClass.append(iClass);
                         div.append(treeSelect).append(searchClass);
                         return div;
 					}
