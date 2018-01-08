@@ -3,6 +3,8 @@
  */
 package com.thinkgem.jeesite.modules.purchase.entity;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
 import com.thinkgem.jeesite.common.persistence.DataEntity;
@@ -12,11 +14,16 @@ import com.thinkgem.jeesite.common.persistence.DataEntity;
  * @author lisy
  * @version 2017-12-31
  */
+@Getter
+@Setter
 public class ContractPurchaseDetail extends DataEntity<ContractPurchaseDetail> {
 	
 	private static final long serialVersionUID = 1L;
 	private String contractCode;		// 合同编号
 	private String kindCode;		// 品种编码
+	private String kindName;		// 品种名称
+	private String kindLevel;		// 材质等级
+	private String firstUnit;		// 主记量单位
 	private String itemAmount;		// 金额
 	private String itemNumber;		// 数量
 	private String itemPrice;		// 单价

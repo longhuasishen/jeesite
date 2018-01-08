@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.thinkgem.jeesite.common.config.Global;
@@ -21,6 +22,9 @@ import com.thinkgem.jeesite.common.web.BaseController;
 import com.thinkgem.jeesite.common.utils.StringUtils;
 import com.thinkgem.jeesite.modules.purchase.entity.ContractPurchaseDetail;
 import com.thinkgem.jeesite.modules.purchase.service.ContractPurchaseDetailService;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * 采购合同明细Controller
@@ -52,6 +56,20 @@ public class ContractPurchaseDetailController extends BaseController {
 		Page<ContractPurchaseDetail> page = contractPurchaseDetailService.findPage(new Page<ContractPurchaseDetail>(request, response), contractPurchaseDetail); 
 		model.addAttribute("page", page);
 		return "modules/purchase/contractPurchaseDetailList";
+	}
+
+//	@RequiresPermissions("purchase:contractPurchaseDetail:view")
+	@RequestMapping(value = {"listJson", ""})
+	@ResponseBody
+	public List<ContractPurchaseDetail> listJson(String contractCode, HttpServletRequest request, HttpServletResponse response) {
+		ContractPurchaseDetail contractPurchaseDetail = new ContractPurchaseDetail();
+		List<ContractPurchaseDetail> list = Arrays.asList();
+		if(StringUtils.isNotEmpty(contractCode)) {
+			contractPurchaseDetail.setContractCode(contractCode);
+			Page<ContractPurchaseDetail> page = contractPurchaseDetailService.findPage(new Page<ContractPurchaseDetail>(request, response), contractPurchaseDetail);
+			list = page.getList();
+		}
+		return list;
 	}
 
 	@RequiresPermissions("purchase:contractPurchaseDetail:view")
