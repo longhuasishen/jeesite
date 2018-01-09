@@ -53,12 +53,18 @@ public class DocKindController extends BaseController {
 		return entity;
 	}
 	
-	@RequiresPermissions("doc:docKind:view")
+//	@RequiresPermissions("doc:docKind:view")
 	@RequestMapping(value = {"list", ""})
 	public String list(DocKind docKind, HttpServletRequest request, HttpServletResponse response, Model model) {
 		Page<DocKind> page = docKindService.findPage(new Page<DocKind>(request, response), docKind); 
 		model.addAttribute("page", page);
 		return "modules/doc/docKindList";
+	}
+	@RequestMapping(value = {"listFrame", ""})
+	public String listFrame(DocKind docKind, HttpServletRequest request, HttpServletResponse response, Model model) {
+		Page<DocKind> page = docKindService.findPage(new Page<DocKind>(request, response), docKind);
+		model.addAttribute("page", page);
+		return "modules/doc/docKindListFrame";
 	}
 
 	@RequiresPermissions("doc:docKind:view")
