@@ -26,68 +26,68 @@
 		<input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
 		<ul class="ul-form">
 			<li><label>转换日期：</label>
-				<input name="inverseDate" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate"
-					value="<fmt:formatDate value="${inverseKind.inverseDate}" pattern="yyyy-MM-dd HH:mm:ss"/>"
-					onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
+				<input id="inverseDate"  name="inverseDate"  type="text" readonly="readonly" maxlength="20" class="Wdate required" style="width:163px;"
+					   value="${inverseKind.inverseDate}"
+					   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
 			</li>
-			<li><label>仓库名称：</label>
-				<form:input path="repoName" htmlEscape="false" maxlength="60" class="input-medium"/>
-			</li>
-			<li><label>原品种名称：</label>
-				<form:input path="orgiName" htmlEscape="false" maxlength="60" class="input-medium"/>
-			</li>
-			<li><label>原出厂编号：</label>
-				<form:input path="orgiNo" htmlEscape="false" maxlength="32" class="input-medium"/>
-			</li>
-			<li><label>转换数量：</label>
-				<form:input path="inverseNum" htmlEscape="false" maxlength="10" class="input-medium"/>
-			</li>
-			<li><label>原单价：</label>
-				<form:input path="orgiPrice" htmlEscape="false" maxlength="15" class="input-medium"/>
-			</li>
-			<li><label>原金额：</label>
-				<form:input path="orgiAmount" htmlEscape="false" maxlength="15" class="input-medium"/>
-			</li>
-			<li><label>新品种名称：</label>
-				<form:input path="newName" htmlEscape="false" maxlength="60" class="input-medium"/>
-			</li>
-			<li><label>新出厂编号：</label>
-				<form:input path="newNo" htmlEscape="false" maxlength="32" class="input-medium"/>
-			</li>
-			<li><label>新数量：</label>
-				<form:input path="newNum" htmlEscape="false" maxlength="10" class="input-medium"/>
-			</li>
-			<li><label>新单价：</label>
-				<form:input path="newPrice" htmlEscape="false" maxlength="15" class="input-medium"/>
-			</li>
-			<li><label>新金额：</label>
-				<form:input path="newAmount" htmlEscape="false" maxlength="15" class="input-medium"/>
-			</li>
-			<li><label>制单人：</label>
-				<form:input path="createPerson" htmlEscape="false" maxlength="60" class="input-medium"/>
-			</li>
-			<li><label>审核人：</label>
-				<form:input path="checkPerson" htmlEscape="false" maxlength="60" class="input-medium"/>
-			</li>
-			<li><label>制单日期：</label>
-				<input name="makeDate" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate"
-					value="<fmt:formatDate value="${inverseKind.makeDate}" pattern="yyyy-MM-dd HH:mm:ss"/>"
-					onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
-			</li>
-			<li><label>审核日期：</label>
-				<input name="checkDate" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate"
-					value="<fmt:formatDate value="${inverseKind.checkDate}" pattern="yyyy-MM-dd HH:mm:ss"/>"
-					onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
-			</li>
-			<li><label>审核状态：</label>
-				<form:select path="checkStatus" class="input-medium">
-					<form:option value="" label=""/>
-					<form:options items="${fns:getDictList('')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
-				</form:select>
-			</li>
-			<li><label>备注：</label>
-				<form:input path="checkRemark" htmlEscape="false" maxlength="200" class="input-medium"/>
-			</li>
+			<%--<li><label>仓库名称：</label>--%>
+				<%--<form:input path="repoName" htmlEscape="false" maxlength="60" class="input-medium"/>--%>
+			<%--</li>--%>
+			<%--<li><label>原品种名称：</label>--%>
+				<%--<form:input path="orgiName" htmlEscape="false" maxlength="60" class="input-medium"/>--%>
+			<%--</li>--%>
+			<%--<li><label>原出厂编号：</label>--%>
+				<%--<form:input path="orgiNo" htmlEscape="false" maxlength="32" class="input-medium"/>--%>
+			<%--</li>--%>
+			<%--<li><label>转换数量：</label>--%>
+				<%--<form:input path="inverseNum" htmlEscape="false" maxlength="10" class="input-medium"/>--%>
+			<%--</li>--%>
+			<%--<li><label>原单价：</label>--%>
+				<%--<form:input path="orgiPrice" htmlEscape="false" maxlength="15" class="input-medium"/>--%>
+			<%--</li>--%>
+			<%--<li><label>原金额：</label>--%>
+				<%--<form:input path="orgiAmount" htmlEscape="false" maxlength="15" class="input-medium"/>--%>
+			<%--</li>--%>
+			<%--<li><label>新品种名称：</label>--%>
+				<%--<form:input path="newName" htmlEscape="false" maxlength="60" class="input-medium"/>--%>
+			<%--</li>--%>
+			<%--<li><label>新出厂编号：</label>--%>
+				<%--<form:input path="newNo" htmlEscape="false" maxlength="32" class="input-medium"/>--%>
+			<%--</li>--%>
+			<%--<li><label>新数量：</label>--%>
+				<%--<form:input path="newNum" htmlEscape="false" maxlength="10" class="input-medium"/>--%>
+			<%--</li>--%>
+			<%--<li><label>新单价：</label>--%>
+				<%--<form:input path="newPrice" htmlEscape="false" maxlength="15" class="input-medium"/>--%>
+			<%--</li>--%>
+			<%--<li><label>新金额：</label>--%>
+				<%--<form:input path="newAmount" htmlEscape="false" maxlength="15" class="input-medium"/>--%>
+			<%--</li>--%>
+			<%--<li><label>制单人：</label>--%>
+				<%--<form:input path="createPerson" htmlEscape="false" maxlength="60" class="input-medium"/>--%>
+			<%--</li>--%>
+			<%--<li><label>审核人：</label>--%>
+				<%--<form:input path="checkPerson" htmlEscape="false" maxlength="60" class="input-medium"/>--%>
+			<%--</li>--%>
+			<%--<li><label>制单日期：</label>--%>
+				<%--<input name="makeDate" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate"--%>
+					<%--value="<fmt:formatDate value="${inverseKind.makeDate}" pattern="yyyy-MM-dd HH:mm:ss"/>"--%>
+					<%--onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>--%>
+			<%--</li>--%>
+			<%--<li><label>审核日期：</label>--%>
+				<%--<input name="checkDate" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate"--%>
+					<%--value="<fmt:formatDate value="${inverseKind.checkDate}" pattern="yyyy-MM-dd HH:mm:ss"/>"--%>
+					<%--onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>--%>
+			<%--</li>--%>
+			<%--<li><label>审核状态：</label>--%>
+				<%--<form:select path="checkStatus" class="input-medium">--%>
+					<%--<form:option value="" label=""/>--%>
+					<%--<form:options items="${fns:getDictList('')}" itemLabel="label" itemValue="value" htmlEscape="false"/>--%>
+				<%--</form:select>--%>
+			<%--</li>--%>
+			<%--<li><label>备注：</label>--%>
+				<%--<form:input path="checkRemark" htmlEscape="false" maxlength="200" class="input-medium"/>--%>
+			<%--</li>--%>
 			<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
 			<li class="clearfix"></li>
 		</ul>
@@ -124,7 +124,7 @@
 					${inverseKind.inverseDate}
 				</a></td>
 				<td>
-					${inverseKind.repoName}
+					${inverseKind.docRepertory.repertoryName}
 				</td>
 				<td>
 					${inverseKind.orgiName}
@@ -169,7 +169,7 @@
 					${inverseKind.checkDate}
 				</td>
 				<td>
-					${fns:getDictLabel(inverseKind.checkStatus, '', '')}
+					${fns:getDictLabel(inverseKind.checkStatus, 'check_state1', '')}
 				</td>
 				<td>
 					${inverseKind.checkRemark}

@@ -36,16 +36,18 @@
 		<div class="control-group">
 			<label class="control-label">转换日期：</label>
 			<div class="controls">
-				<input name="inverseDate" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate required"
-					value="<fmt:formatDate value="${inverseKind.inverseDate}" pattern="yyyy-MM-dd HH:mm:ss"/>"
-					onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
+				<input id="inverseDate"  name="inverseDate"  type="text" readonly="readonly" maxlength="20" class="Wdate required" style="width:163px;"
+					   value="${inverseKind.inverseDate}"
+					   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">仓库名称：</label>
 			<div class="controls">
-				<form:input path="repoName" htmlEscape="false" maxlength="60" class="input-xlarge "/>
+				<sys:treeselect id="repoName" name="docRepertory.id" value="${inverseKind.docRepertory.id}" labelName="docRepertory.repertoryName" labelValue="${inverseKind.docRepertory.repertoryName}"
+								title="仓库档案" url="/doc/docRepertory/treeData" cssClass="required"/>
+				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
@@ -111,29 +113,29 @@
 		<div class="control-group">
 			<label class="control-label">制单人：</label>
 			<div class="controls">
-				<form:input path="createPerson" htmlEscape="false" maxlength="60" class="input-xlarge "/>
+				<form:input path="createPerson" htmlEscape="false" maxlength="60"   readonly="true" value="${user.name}"/>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">审核人：</label>
 			<div class="controls">
-				<form:input path="checkPerson" htmlEscape="false" maxlength="60" class="input-xlarge "/>
+				<form:input path="checkPerson" htmlEscape="false" maxlength="60"   readonly="true" value="${user.name}"/>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">制单日期：</label>
 			<div class="controls">
-				<input name="makeDate" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate "
-					value="<fmt:formatDate value="${inverseKind.makeDate}" pattern="yyyy-MM-dd HH:mm:ss"/>"
-					onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
+				<input id="makeDate"  name="makeDate"  type="text" readonly="readonly" maxlength="20" class="Wdate required" style="width:163px;"
+					   value="${inverseKind.makeDate}"
+					   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">审核日期：</label>
 			<div class="controls">
-				<input name="checkDate" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate "
-					value="<fmt:formatDate value="${inverseKind.checkDate}" pattern="yyyy-MM-dd HH:mm:ss"/>"
-					onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
+				<input id="checkDate"  name="checkDate"  type="text" readonly="readonly" maxlength="20" class="Wdate required" style="width:163px;"
+					   value="${inverseKind.makeDate}"
+					   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
 			</div>
 		</div>
 		<div class="control-group">
@@ -141,7 +143,7 @@
 			<div class="controls">
 				<form:select path="checkStatus" class="input-xlarge ">
 					<form:option value="" label=""/>
-					<form:options items="${fns:getDictList('')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+					<form:options items="${fns:getDictList('check_state1')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
 				</form:select>
 			</div>
 		</div>

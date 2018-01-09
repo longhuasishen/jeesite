@@ -61,7 +61,7 @@
 		<label class="control-label">客户分类：</label>
 		<div class="controls">
 			<sys:treeselect id="comstemType" name="comstemType" value="${contractSales.docOfficework.id}" labelName="docOfficework.officeworkName" labelValue="${contractSales.docOfficework.officeworkName}"
-							title="合同分类" url="/doc/docOfficework/treeData" cssClass="required"/>
+							title="职员档案" url="/doc/docOfficework/treeData" cssClass="required"/>
 		</div>
 	</div>
 	<div class="control-group">

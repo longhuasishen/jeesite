@@ -3,6 +3,7 @@
  */
 package com.thinkgem.jeesite.modules.doc.entity;
 
+import com.thinkgem.jeesite.modules.archive.entity.ArchiveRepertory;
 import org.hibernate.validator.constraints.Length;
 
 import com.thinkgem.jeesite.common.persistence.DataEntity;
@@ -30,6 +31,35 @@ public class DocRepertory extends DataEntity<DocRepertory> {
 	private String extField2;		// ext_field2
 	private String extField3;		// ext_field3
 	private String remark;		// remark
+
+	public DocStation getDocStation() {
+		return docStation;
+	}
+
+	public void setDocStation(DocStation docStation) {
+		this.docStation = docStation;
+	}
+
+	private DocStation docStation;
+
+	public ArchiveRepertory getArchiveRepertory() {
+		return archiveRepertory;
+	}
+
+	public void setArchiveRepertory(ArchiveRepertory archiveRepertory) {
+		this.archiveRepertory = archiveRepertory;
+	}
+
+	public DocDepartment getDocDepartment() {
+		return docDepartment;
+	}
+
+	public void setDocDepartment(DocDepartment docDepartment) {
+		this.docDepartment = docDepartment;
+	}
+
+	private ArchiveRepertory archiveRepertory;
+	private DocDepartment docDepartment;
 	
 	public DocRepertory() {
 		super();

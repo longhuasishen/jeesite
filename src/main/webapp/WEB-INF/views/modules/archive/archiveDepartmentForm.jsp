@@ -36,13 +36,15 @@
 		<div class="control-group">
 			<label class="control-label">部门编码：</label>
 			<div class="controls">
-				<form:input path="departmentCode" htmlEscape="false" maxlength="12" class="input-xlarge "/>
+				<form:input path="departmentCode" htmlEscape="false" maxlength="12" class="input-xlarge required"/>
+				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">部门名称：</label>
 			<div class="controls">
-				<form:input path="departmentName" htmlEscape="false" maxlength="50" class="input-xlarge "/>
+				<form:input path="departmentName" htmlEscape="false" maxlength="50" class="input-xlarge required"/>
+				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">

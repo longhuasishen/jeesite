@@ -25,7 +25,6 @@
 		FROM archive_rule a
 		<include refid="archiveRuleJoins"/>
 		<where>
-			
 		</where>
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">

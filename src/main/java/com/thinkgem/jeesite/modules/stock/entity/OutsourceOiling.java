@@ -3,6 +3,9 @@
  */
 package com.thinkgem.jeesite.modules.stock.entity;
 
+import com.thinkgem.jeesite.modules.doc.entity.DocCar;
+import com.thinkgem.jeesite.modules.doc.entity.DocOfficework;
+import com.thinkgem.jeesite.modules.doc.entity.DocSupplier;
 import org.hibernate.validator.constraints.Length;
 
 import com.thinkgem.jeesite.common.persistence.DataEntity;
@@ -33,6 +36,35 @@ public class OutsourceOiling extends DataEntity<OutsourceOiling> {
 	private String extField2;		// ext_field2
 	private String extField3;		// ext_field3
 	private String remark;		// remark
+
+	private DocSupplier docSupplier;
+
+	public DocSupplier getDocSupplier() {
+		return docSupplier;
+	}
+
+	public void setDocSupplier(DocSupplier docSupplier) {
+		this.docSupplier = docSupplier;
+	}
+
+	public DocOfficework getDocOfficework() {
+		return docOfficework;
+	}
+
+	public void setDocOfficework(DocOfficework docOfficework) {
+		this.docOfficework = docOfficework;
+	}
+
+	public DocCar getDocCar() {
+		return docCar;
+	}
+
+	public void setDocCar(DocCar docCar) {
+		this.docCar = docCar;
+	}
+
+	private DocOfficework docOfficework;
+	private DocCar docCar;
 	
 	public OutsourceOiling() {
 		super();

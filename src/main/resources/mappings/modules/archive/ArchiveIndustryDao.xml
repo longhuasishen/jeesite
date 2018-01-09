@@ -29,7 +29,18 @@
 		FROM archive_industry a
 		<include refid="archiveIndustryJoins"/>
 		<where>
-			
+			<if test="industryCode != null and industryCode != ''">
+				AND a.industry_code LIKE
+				<if test="dbName == 'oracle'">'%'||#{industryCode}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{industryCode}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{industryCode}, '%')</if>
+			</if>
+			<if test="industryName != null and industryName != ''">
+				AND a.industry_name LIKE
+				<if test="dbName == 'oracle'">'%'||#{industryName}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{industryName}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{industryName}, '%')</if>
+			</if>
 		</where>
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">

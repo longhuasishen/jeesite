@@ -43,19 +43,24 @@
 		<div class="control-group">
 			<label class="control-label">仓库名称：</label>
 			<div class="controls">
-				<form:input path="repertoryName" htmlEscape="false" maxlength="120" class="input-xlarge "/>
+				<form:input path="repertoryName" htmlEscape="false" maxlength="120" class="input-xlarge required"/>
+				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">所属分类：</label>
 			<div class="controls">
-				<form:input path="kindCategory" htmlEscape="false" maxlength="60" class="input-xlarge "/>
+				<sys:treeselect id="kindCategory" name="archiveRepertory.id" value="${docRepertory.archiveRepertory.id}" labelName="archiveRepertory.repertoryName" labelValue="${docRepertory.archiveRepertory.repertoryName}"
+								title="仓库分类" url="/archive/archiveRepertory/treeData" cssClass="required"/>
+				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">所属部门：</label>
 			<div class="controls">
-				<form:input path="repertoryDepartment" htmlEscape="false" maxlength="240" class="input-xlarge "/>
+				<sys:treeselect id="repertoryDepartment" name="docDepartment.id" value="${docRepertory.docDepartment.id}" labelName="docDepartment.departmentName" labelValue="${docRepertory.docDepartment.departmentName}"
+								title="部门档案" url="/doc/docDepartment/treeData" cssClass="required"/>
+				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
@@ -79,8 +84,12 @@
 		<div class="control-group">
 			<label class="control-label">计价方式：</label>
 			<div class="controls">
-				<form:input path="pricingMethod" htmlEscape="false" maxlength="20" class="input-xlarge "/>
+				<form:select path="pricingMethod" class="input-xlarge ">
+					<form:option value="" label=""/>
+					<form:options items="${fns:getDictList('pricing_method')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+				</form:select>
 			</div>
+
 		</div>
 		<div class="control-group">
 			<label class="control-label">地址：</label>
@@ -91,7 +100,8 @@
 		<div class="control-group">
 			<label class="control-label">搅拌站：</label>
 			<div class="controls">
-				<form:input path="repertoryStation" htmlEscape="false" maxlength="120" class="input-xlarge "/>
+				<sys:treeselect id="repertoryStation" name="docStation.id" value="${docRepertory.docStation.id}" labelName="docStation.stationName" labelValue="${docRepertory.docStation.stationName}"
+								title="搅拌站档案" url="/doc/docStation/treeData" />
 			</div>
 		</div>
 		<div class="control-group">

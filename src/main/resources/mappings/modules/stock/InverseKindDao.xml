@@ -5,7 +5,7 @@
 	<sql id="inverseKindColumns">
 		a.id AS "id",
 		a.inverse_date AS "inverseDate",
-		a.repo_name AS "repoName",
+		a.repo_name AS "docRepertory.id",
 		a.orgi_name AS "orgiName",
 		a.orgi_no AS "orgiNo",
 		a.inverse_num AS "inverseNum",
@@ -25,10 +25,13 @@
 		a.ext_field1 AS "extField1",
 		a.ext_field2 AS "extField2",
 		a.ext_field3 AS "extField3",
+		d.repertory_code AS "docRepertory.repertoryCode",
+		d.repertory_name AS "docRepertory.repertoryName",
 		a.remark AS "remark"
 	</sql>
 	
 	<sql id="inverseKindJoins">
+		LEFT JOIN doc_repertory d ON d.id = a.repo_name
 	</sql>
     
 	<select id="get" resultType="InverseKind">
@@ -153,7 +156,7 @@
 			remark
 		) VALUES (
 			#{inverseDate},
-			#{repoName},
+			#{docRepertory.id},
 			#{orgiName},
 			#{orgiNo},
 			#{inverseNum},
@@ -180,7 +183,7 @@
 	<update id="update">
 		UPDATE inverse_kind SET 	
 			inverse_date = #{inverseDate},
-			repo_name = #{repoName},
+			repo_name = #{docRepertory.id},
 			orgi_name = #{orgiName},
 			orgi_no = #{orgiNo},
 			inverse_num = #{inverseNum},

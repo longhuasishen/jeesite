@@ -6,7 +6,7 @@
 		a.id AS "id",
 		a.officework_code AS "officeworkCode",
 		a.officework_name AS "officeworkName",
-		a.officework_dep AS "officeworkDep",
+		a.officework_dep AS "docDepartment.id",
 		a.officework_post AS "officeworkPost",
 		a.officework_edu AS "officeworkEdu",
 		a.officework_marry AS "officeworkMarry",
@@ -37,10 +37,13 @@
 		a.ext_field1 AS "extField1",
 		a.ext_field2 AS "extField2",
 		a.ext_field3 AS "extField3",
+		d.department_code AS "docDepartment.departmentCode",
+		d.department_name AS "docDepartment.departmentName",
 		a.remark AS "remark"
 	</sql>
 	
 	<sql id="docOfficeworkJoins">
+		LEFT JOIN doc_department d ON d.id = a.officework_dep
 	</sql>
     
 	<select id="get" resultType="DocOfficework">
@@ -135,7 +138,7 @@
 		) VALUES (
 			#{officeworkCode},
 			#{officeworkName},
-			#{officeworkDep},
+			#{docDepartment.id},
 			#{officeworkPost},
 			#{officeworkEdu},
 			#{officeworkMarry},
@@ -174,7 +177,7 @@
 		UPDATE doc_officework SET 	
 			officework_code = #{officeworkCode},
 			officework_name = #{officeworkName},
-			officework_dep = #{officeworkDep},
+			officework_dep = #{docDepartment.id},
 			officework_post = #{officeworkPost},
 			officework_edu = #{officeworkEdu},
 			officework_marry = #{officeworkMarry},

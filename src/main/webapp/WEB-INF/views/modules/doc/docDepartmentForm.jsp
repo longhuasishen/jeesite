@@ -43,19 +43,23 @@
 		<div class="control-group">
 			<label class="control-label">部门名称：</label>
 			<div class="controls">
-				<form:input path="departmentName" htmlEscape="false" maxlength="120" class="input-xlarge "/>
+				<form:input path="departmentName" htmlEscape="false" maxlength="120" class="input-xlarge required"/>
+				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">所属分类：</label>
 			<div class="controls">
-				<form:input path="departmentCategory" htmlEscape="false" maxlength="60" class="input-xlarge "/>
+				<sys:treeselect id="departmentCategory" name="archiveDepartment.id" value="${docDepartment.archiveDepartment.id}" labelName="archiveDepartment.departmentName" labelValue="${docDepartment.archiveDepartment.departmentName}"
+								title="部门分类" url="/archive/archiveDepartment/treeData" cssClass="required"/>
+				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">负责人：</label>
 			<div class="controls">
-				<form:input path="managerPerson" htmlEscape="false" maxlength="60" class="input-xlarge "/>
+				<form:input path="managerPerson" htmlEscape="false" maxlength="60" class="input-xlarge required"/>
+				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">

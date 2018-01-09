@@ -37,6 +37,13 @@ public class ProjectDistanceService extends CrudService<ProjectDistanceDao, Proj
 	@Transactional(readOnly = false)
 	public void save(ProjectDistance projectDistance) {
 		super.save(projectDistance);
+		if (projectDistance.getIsNewRecord()){
+//			projectDistance.preInsert();
+//			dao.insert(projectDistance);
+		}else{
+			projectDistance.preUpdate();
+			dao.update(projectDistance);
+		}
 	}
 	
 	@Transactional(readOnly = false)

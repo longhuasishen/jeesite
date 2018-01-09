@@ -22,6 +22,16 @@ public class DocStation extends DataEntity<DocStation> {
 	private String extField2;		// ext_field2
 	private String extField3;		// ext_field3
 	private String remark;		// remark
+
+	public DocRepertory getDocRepertory() {
+		return docRepertory;
+	}
+
+	public void setDocRepertory(DocRepertory docRepertory) {
+		this.docRepertory = docRepertory;
+	}
+
+	private DocRepertory docRepertory;
 	
 	public DocStation() {
 		super();

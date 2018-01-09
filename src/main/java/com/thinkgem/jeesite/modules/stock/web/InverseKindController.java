@@ -6,6 +6,7 @@ package com.thinkgem.jeesite.modules.stock.web;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.thinkgem.jeesite.modules.sys.utils.UserUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -57,6 +58,7 @@ public class InverseKindController extends BaseController {
 	@RequiresPermissions("stock:inverseKind:view")
 	@RequestMapping(value = "form")
 	public String form(InverseKind inverseKind, Model model) {
+		model.addAttribute("user", UserUtils.getUser());
 		model.addAttribute("inverseKind", inverseKind);
 		return "modules/stock/inverseKindForm";
 	}

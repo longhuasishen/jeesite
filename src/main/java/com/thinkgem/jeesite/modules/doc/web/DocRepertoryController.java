@@ -94,7 +94,7 @@ public class DocRepertoryController extends BaseController {
 		for (int i=0; i<list.size(); i++){
 			DocRepertory e = list.get(i);
 			Map<String, Object> map = Maps.newHashMap();
-			map.put("id", e.getRepertoryCode());
+			map.put("id", e.getId());
 			map.put("name", e.getRepertoryName()+"["+e.getRepertoryCode()+"]");
 
 			mapList.add(map);

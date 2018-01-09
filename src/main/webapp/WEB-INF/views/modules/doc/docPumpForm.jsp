@@ -23,6 +23,12 @@
 				}
 			});
 		});
+
+        function pumpCodeTreeselectCallBack(v,h,f){
+            if("ok" == v){
+                $("#pumpName").val($("#pumpCodeName").val().substring($("#pumpCodeName").val().indexOf("[")+1,$("#pumpCodeName").val().indexOf("]")));
+            }
+        }
 	</script>
 </head>
 <body>
@@ -36,14 +42,16 @@
 		<div class="control-group">
 			<label class="control-label">泵编码：</label>
 			<div class="controls">
-				<form:input path="pumpCode" htmlEscape="false" maxlength="16" class="input-xlarge required"/>
+				<sys:treeselect id="pumpCode" name="docCar.id" value="${docPump.docCar.id}" labelName="docCar.carTypename" labelValue="${docPump.docCar.carTypename}"
+								title="车辆档案" url="/doc/docCar/treeDataPump" cssClass="required"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">泵名称：</label>
 			<div class="controls">
-				<form:input path="pumpName" htmlEscape="false" maxlength="120" class="input-xlarge "/>
+				<form:input path="pumpName" htmlEscape="false" maxlength="120" class="input-xlarge required"/>
+				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">

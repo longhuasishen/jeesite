@@ -29,7 +29,18 @@
 		FROM archive_file a
 		<include refid="archiveFileJoins"/>
 		<where>
-			
+			<if test="fileCode != null and fileCode != ''">
+				AND a.file_code LIKE
+				<if test="dbName == 'oracle'">'%'||#{fileCode}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{fileCode}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{fileCode}, '%')</if>
+			</if>
+			<if test="fileName != null and fileName != ''">
+				AND a.file_name LIKE
+				<if test="dbName == 'oracle'">'%'||#{fileName}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{fileName}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{fileName}, '%')</if>
+			</if>
 		</where>
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">

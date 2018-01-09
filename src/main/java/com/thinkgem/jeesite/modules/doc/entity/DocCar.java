@@ -7,6 +7,8 @@ import org.hibernate.validator.constraints.Length;
 
 import com.thinkgem.jeesite.common.persistence.DataEntity;
 
+import java.util.List;
+
 /**
  * 车辆档案Entity
  * @author spark
@@ -34,7 +36,17 @@ public class DocCar extends DataEntity<DocCar> {
 	private String extField2;		// ext_field2
 	private String extField3;		// ext_field3
 	private String remark;		// remark
-	
+
+	public List<String> getChildCarList1() {
+		return childCarList1;
+	}
+
+	public void setChildCarList1(List<String> childCarList1) {
+		this.childCarList1 = childCarList1;
+	}
+
+	private List<String> childCarList1;//原材料勾选1
+
 	public DocCar() {
 		super();
 	}

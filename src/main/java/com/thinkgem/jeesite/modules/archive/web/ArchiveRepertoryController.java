@@ -6,6 +6,9 @@ package com.thinkgem.jeesite.modules.archive.web;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.thinkgem.jeesite.modules.archive.entity.ArchiveMaterial;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.thinkgem.jeesite.common.config.Global;
@@ -21,6 +25,9 @@ import com.thinkgem.jeesite.common.web.BaseController;
 import com.thinkgem.jeesite.common.utils.StringUtils;
 import com.thinkgem.jeesite.modules.archive.entity.ArchiveRepertory;
 import com.thinkgem.jeesite.modules.archive.service.ArchiveRepertoryService;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * 仓库分类Controller
@@ -78,6 +85,25 @@ public class ArchiveRepertoryController extends BaseController {
 		archiveRepertoryService.delete(archiveRepertory);
 		addMessage(redirectAttributes, "删除仓库分类成功");
 		return "redirect:"+Global.getAdminPath()+"/archive/archiveRepertory/?repage";
+	}
+
+	@RequiresPermissions("user")
+	@ResponseBody
+	@RequestMapping(value = "treeData")
+	public List<Map<String, Object>> treeData(@RequestParam(required=false) String repertoryCode, HttpServletResponse response) {
+		List<Map<String, Object>> mapList = Lists.newArrayList();
+		ArchiveRepertory am = new ArchiveRepertory();
+		List<ArchiveRepertory> list = archiveRepertoryService.findList(am);
+		for (int i=0; i<list.size(); i++){
+			ArchiveRepertory e = list.get(i);
+			Map<String, Object> map = Maps.newHashMap();
+			map.put("id", e.getId());
+			map.put("name", e.getRepertoryCode()+"["+e.getRepertoryName()+"]");
+			map.put("code", e.getRepertoryCode());
+
+			mapList.add(map);
+		}
+		return mapList;
 	}
 
 }

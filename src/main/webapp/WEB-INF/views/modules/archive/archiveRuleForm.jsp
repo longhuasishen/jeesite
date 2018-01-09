@@ -36,13 +36,14 @@
 		<div class="control-group">
 			<label class="control-label">规则名称：</label>
 			<div class="controls">
-				<form:input path="ruleName" htmlEscape="false" maxlength="50" class="input-xlarge "/>
+				<form:input path="ruleName" htmlEscape="false" maxlength="50" class="input-xlarge required"/>
+				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">规则长度：</label>
 			<div class="controls">
-				<form:input path="ruleLength" htmlEscape="false" maxlength="8" class="input-xlarge "/>
+				<form:input path="ruleLength" htmlEscape="false" maxlength="8" class="input-xlarge required"/>
 				<label style="color: red">*连续8位数字代表8级编码规则长度</label>
 			</div>
 		</div>

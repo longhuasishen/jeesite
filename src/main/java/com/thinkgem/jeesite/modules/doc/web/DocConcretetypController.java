@@ -116,7 +116,7 @@ public class DocConcretetypController extends BaseController {
 			DocConcretetyp e = list.get(i);
 			Map<String, Object> map = Maps.newHashMap();
 			map.put("id", e.getId());
-			map.put("name", e.getConcretetypName());
+			map.put("name", e.getConcretetypCode()+"["+e.getConcretetypName()+"]");
 			map.put("code", e.getConcretetypCode());
 
 			mapList.add(map);

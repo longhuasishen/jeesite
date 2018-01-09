@@ -3,6 +3,7 @@
  */
 package com.thinkgem.jeesite.modules.stock.entity;
 
+import com.thinkgem.jeesite.modules.doc.entity.DocRepertory;
 import org.hibernate.validator.constraints.Length;
 
 import com.thinkgem.jeesite.common.persistence.DataEntity;
@@ -37,6 +38,16 @@ public class InverseKind extends DataEntity<InverseKind> {
 	private String extField2;		// ext_field2
 	private String extField3;		// ext_field3
 	private String remark;		// remark
+
+	public DocRepertory getDocRepertory() {
+		return docRepertory;
+	}
+
+	public void setDocRepertory(DocRepertory docRepertory) {
+		this.docRepertory = docRepertory;
+	}
+
+	private DocRepertory docRepertory;
 	
 	public InverseKind() {
 		super();

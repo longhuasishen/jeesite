@@ -52,15 +52,15 @@
 		<tbody>
 		<c:forEach items="${page.list}" var="projectDistance">
 			<tr>
-				<td> ${fns:abbr(projectDistance.customId,16)}</td>
-				<td> ${fns:abbr(projectDistance.customName,16)}</td>
-				<td> ${fns:abbr(projectDistance.customAbbr,16)}</td>
-				<td> ${fns:abbr(projectDistance.customAddr,16)}</td>
-				<td> ${fns:abbr(projectDistance.receiver,16)}</td>
-				<td> ${fns:abbr(projectDistance.distance,16)}</td>
-				<td> ${fns:abbr(projectDistance.distanceRemark,16)}</td>
+				<td> ${fns:abbr(projectDistance.docCustomer.cusCode,50)}</td>
+				<td> ${fns:abbr(projectDistance.docCustomer.cusName,50)}</td>
+				<td> ${fns:abbr(projectDistance.docCustomer.cusShortName,50)}</td>
+				<td> ${fns:abbr(projectDistance.docCustomer.cusAddr,60)}</td>
+				<td> ${fns:abbr(projectDistance.docCustomer.receiver,16)}</td>
+				<td> ${fns:abbr(projectDistance.docCustomer.distance,20)}</td>
+				<td> ${fns:abbr(projectDistance.docCustomer.distanceRmk,200)}</td>
 				<shiro:hasPermission name="produces:projectDistance:edit"><td>
-    				<a href="${ctx}/produces/projectDistance/form?id=${projectDistance.id}">修改</a>
+    				<a href="${ctx}/produces/projectDistance/form?id=${projectDistance.docCustomer.id}">修改</a>
 					<a href="${ctx}/produces/projectDistance/delete?id=${projectDistance.id}" onclick="return confirmx('确认要删除该工程运距管理吗？', this.href)">删除</a>
 				</td></shiro:hasPermission>
 			</tr>

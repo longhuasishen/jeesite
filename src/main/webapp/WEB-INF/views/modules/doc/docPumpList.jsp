@@ -48,7 +48,7 @@
 		<c:forEach items="${page.list}" var="docPump">
 			<tr>
 				<td>
-						${fns:abbr(docPump.pumpCode,50)}
+						${fns:abbr(docPump.docCar.carCode,50)}
 				</td>
 				<td>
 						${fns:abbr(docPump.pumpName,50)}

@@ -29,7 +29,18 @@
 		FROM archive_repertory a
 		<include refid="archiveRepertoryJoins"/>
 		<where>
-			
+			<if test="repertoryCode != null and repertoryCode != ''">
+				AND a.repertory_code LIKE
+				<if test="dbName == 'oracle'">'%'||#{repertoryCode}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{repertoryCode}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{repertoryCode}, '%')</if>
+			</if>
+			<if test="repertoryName != null and repertoryName != ''">
+				AND a.repertory_name LIKE
+				<if test="dbName == 'oracle'">'%'||#{repertoryName}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{repertoryName}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{repertoryName}, '%')</if>
+			</if>
 		</where>
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">

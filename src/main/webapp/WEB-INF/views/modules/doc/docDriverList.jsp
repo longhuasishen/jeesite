@@ -56,13 +56,13 @@
 		<c:forEach items="${page.list}" var="docDriver">
 			<tr>
 				<td>
-						${fns:abbr(docDriver.driverCode,50)}
+						${fns:abbr(docDriver.docOfficework.officeworkCode,50)}
 				</td>
 				<td>
 						${fns:abbr(docDriver.driverName,50)}
 				</td>
 				<td>
-						${fns:abbr(docDriver.carNo,50)}
+						${fns:abbr(docDriver.docCar.carNo,50)}
 				</td>
 				<td>
 						${fns:abbr(docDriver.licenceNo,50)}

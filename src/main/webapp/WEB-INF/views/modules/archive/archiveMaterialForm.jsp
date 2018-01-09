@@ -36,13 +36,15 @@
 		<div class="control-group">
 			<label class="control-label">物资编码：</label>
 			<div class="controls">
-				<form:input path="materialCode" htmlEscape="false" maxlength="12" class="input-xlarge "/>
+				<form:input path="materialCode" htmlEscape="false" maxlength="12" class="input-xlarge required"/>
+				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">物资名称：</label>
 			<div class="controls">
-				<form:input path="materialName" htmlEscape="false" maxlength="50" class="input-xlarge "/>
+				<form:input path="materialName" htmlEscape="false" maxlength="50" class="input-xlarge required"/>
+				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">

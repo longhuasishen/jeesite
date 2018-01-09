@@ -14,10 +14,19 @@
 		a.ext_field1 AS "extField1",
 		a.ext_field2 AS "extField2",
 		a.ext_field3 AS "extField3",
+		d.id AS "docCustomer.id",
+		d.cus_code AS "docCustomer.cusCode",
+		d.cus_name AS "docCustomer.cusName",
+		d.cus_short_name AS "docCustomer.cusShortName",
+		d.cus_addr AS "docCustomer.cusAddr",
+		d.receiver AS "docCustomer.receiver",
+		d.distance AS "docCustomer.distance",
+		d.distance_rmk AS "docCustomer.distanceRmk",
 		a.remark AS "remark"
 	</sql>
 	
 	<sql id="projectDistanceJoins">
+		right outer join doc_customer d on 1=1
 	</sql>
     
 	<select id="get" resultType="ProjectDistance">
@@ -25,7 +34,7 @@
 			<include refid="projectDistanceColumns"/>
 		FROM project_distance a
 		<include refid="projectDistanceJoins"/>
-		WHERE a.id = #{id}
+		WHERE d.id = #{id}
 	</select>
 	
 	<select id="findList" resultType="ProjectDistance">
@@ -35,13 +44,13 @@
 		<include refid="projectDistanceJoins"/>
 		<where>
 			<if test="customId != null and customId != ''">
-				AND a.custom_id LIKE
+				AND d.cus_code LIKE
 				<if test="dbName == 'oracle'">'%'||#{customId}||'%'</if>
 				<if test="dbName == 'mssql'">'%'+#{customId}+'%'</if>
 				<if test="dbName == 'mysql'">CONCAT('%', #{customId}, '%')</if>
 			</if>
 			<if test="customName != null and customName != ''">
-				AND a.custom_name LIKE
+				AND d.cus_name LIKE
 				<if test="dbName == 'oracle'">'%'||#{customName}||'%'</if>
 				<if test="dbName == 'mssql'">'%'+#{customName}+'%'</if>
 				<if test="dbName == 'mysql'">CONCAT('%', #{customName}, '%')</if>
@@ -100,20 +109,13 @@
 			#{remark}
 		)
 	</insert>
-	
+
 	<update id="update">
-		UPDATE project_distance SET 	
-			custom_id = #{customId},
-			custom_name = #{customName},
-			custom_abbr = #{customAbbr},
-			custom_addr = #{customAddr},
-			receiver = #{receiver},
-			distance = #{distance},
-			distance_remark = #{distanceRemark},
-			ext_field1 = #{extField1},
-			ext_field2 = #{extField2},
-			ext_field3 = #{extField3},
-			remark = #{remark}
+		UPDATE doc_customer SET
+			cus_addr = #{docCustomer.cusAddr},
+			receiver = #{docCustomer.receiver},
+			distance = #{docCustomer.distance},
+			distance_rmk = #{docCustomer.distanceRmk}
 		WHERE id = #{id}
 	</update>
 	

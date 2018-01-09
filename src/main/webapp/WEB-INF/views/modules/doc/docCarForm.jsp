@@ -43,31 +43,36 @@
 		<div class="control-group">
 			<label class="control-label">车牌号码：</label>
 			<div class="controls">
-				<form:input path="carNo" htmlEscape="false" maxlength="10" class="input-xlarge "/>
+				<form:input path="carNo" htmlEscape="false" maxlength="10" class="input-xlarge required"/>
+				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">司机姓名：</label>
 			<div class="controls">
-				<form:input path="driverName" htmlEscape="false" maxlength="60" class="input-xlarge "/>
+				<form:input path="driverName" htmlEscape="false" maxlength="60" class="input-xlarge required"/>
+				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">车主：</label>
 			<div class="controls">
-				<form:input path="carOwner" htmlEscape="false" maxlength="20" class="input-xlarge "/>
+				<form:input path="carOwner" htmlEscape="false" maxlength="20" class="input-xlarge required"/>
+				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">行驶执照：</label>
 			<div class="controls">
-				<form:input path="carLicence" htmlEscape="false" maxlength="32" class="input-xlarge "/>
+				<form:input path="carLicence" htmlEscape="false" maxlength="32" class="input-xlarge required"/>
+				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">卡号：</label>
 			<div class="controls">
-				<form:input path="cardNo" htmlEscape="false" maxlength="32" class="input-xlarge "/>
+				<form:input path="cardNo" htmlEscape="false" maxlength="32" class="input-xlarge required"/>
+				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
@@ -94,28 +99,39 @@
 				<form:input path="carPhone" htmlEscape="false" maxlength="20" class="input-xlarge "/>
 			</div>
 		</div>
+
 		<div class="control-group">
-			<label class="control-label">搅拌车：</label>
+			<label class="control-label">车辆性质:</label>
 			<div class="controls">
-				<form:input path="isMixing" htmlEscape="false" maxlength="1" class="input-xlarge "/>
+				<form:checkboxes path="childCarList1" items="${fns:getDictList('cars_box1')}" itemLabel="label" itemValue="value" htmlEscape="false" class="required"/>
 			</div>
 		</div>
-		<div class="control-group">
-			<label class="control-label">泵车：</label>
-			<div class="controls">
-				<form:input path="isPump" htmlEscape="false" maxlength="1" class="input-xlarge "/>
-			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label">其它设备：</label>
-			<div class="controls">
-				<form:input path="isOther" htmlEscape="false" maxlength="1" class="input-xlarge "/>
-			</div>
-		</div>
+		<%--<div class="control-group">--%>
+			<%--<label class="control-label">搅拌车：</label>--%>
+			<%--<div class="controls">--%>
+				<%--<form:input path="isMixing" htmlEscape="false" maxlength="1" class="input-xlarge "/>--%>
+			<%--</div>--%>
+		<%--</div>--%>
+		<%--<div class="control-group">--%>
+			<%--<label class="control-label">泵车：</label>--%>
+			<%--<div class="controls">--%>
+				<%--<form:input path="isPump" htmlEscape="false" maxlength="1" class="input-xlarge "/>--%>
+			<%--</div>--%>
+		<%--</div>--%>
+		<%--<div class="control-group">--%>
+			<%--<label class="control-label">其它设备：</label>--%>
+			<%--<div class="controls">--%>
+				<%--<form:input path="isOther" htmlEscape="false" maxlength="1" class="input-xlarge "/>--%>
+			<%--</div>--%>
+		<%--</div>--%>
 		<div class="control-group">
 			<label class="control-label">是否可用：</label>
 			<div class="controls">
-				<form:input path="isAvalable" htmlEscape="false" maxlength="1" class="input-xlarge "/>
+				<%--<form:input path="isAvalable" htmlEscape="false" maxlength="1" class="input-xlarge "/>--%>
+				<form:select path="isAvalable" class="input-xlarge ">
+					<form:option value="" label=""/>
+					<form:options items="${fns:getDictList('yes_no')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+				</form:select>
 			</div>
 		</div>
 		<div class="control-group">

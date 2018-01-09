@@ -4,16 +4,19 @@
     
 	<sql id="docPumpColumns">
 		a.id AS "id",
-		a.pump_code AS "pumpCode",
+		a.pump_code AS "docCar.id",
 		a.pump_name AS "pumpName",
 		a.comment AS "comment",
 		a.ext_field1 AS "extField1",
 		a.ext_field2 AS "extField2",
 		a.ext_field3 AS "extField3",
+		d.car_code AS "docCar.carCode",
+		d.car_typename AS "docCar.carTypename",
 		a.remark AS "remark"
 	</sql>
 	
 	<sql id="docPumpJoins">
+		LEFT JOIN doc_car d ON d.id = a.pump_code
 	</sql>
     
 	<select id="get" resultType="DocPump">
@@ -79,7 +82,7 @@
 			ext_field3,
 			remark
 		) VALUES (
-			#{pumpCode},
+			#{docCar.id},
 			#{pumpName},
 			#{comment},
 			#{extField1},
@@ -91,7 +94,7 @@
 	
 	<update id="update">
 		UPDATE doc_pump SET 	
-			pump_code = #{pumpCode},
+			pump_code = #{docCar.id},
 			pump_name = #{pumpName},
 			comment = #{comment},
 			ext_field1 = #{extField1},

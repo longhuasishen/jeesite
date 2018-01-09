@@ -36,9 +36,9 @@
 		<div class="control-group">
 			<label class="control-label">日期：</label>
 			<div class="controls">
-				<input name="oilingDate" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate required"
-					value="<fmt:formatDate value="${outsourceOiling.oilingDate}" pattern="yyyy-MM-dd HH:mm:ss"/>"
-					onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
+				<input id="oilingDate"  name="oilingDate"  type="text" readonly="readonly" maxlength="20" class="Wdate required" style="width:163px;"
+					   value="${outsourceOiling.oilingDate}"
+					   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
@@ -51,7 +51,9 @@
 		<div class="control-group">
 			<label class="control-label">供应商名称：</label>
 			<div class="controls">
-				<form:input path="supplierName" htmlEscape="false" maxlength="120" class="input-xlarge "/>
+				<%--<form:input path="supplierName" htmlEscape="false" maxlength="120" class="input-xlarge "/>--%>
+				<sys:treeselect id="supplierName" name="docSupplier.id" value="${outsourceOiling.docSupplier.id}" labelName="docSupplier.supName" labelValue="${outsourceOiling.docSupplier.supName}"
+								title="供应商" url="/doc/docSupplier/treeData" cssClass="required"/>
 			</div>
 		</div>
 		<div class="control-group">
@@ -75,13 +77,19 @@
 		<div class="control-group">
 			<label class="control-label">结算人：</label>
 			<div class="controls">
-				<form:input path="oilingPerson" htmlEscape="false" maxlength="60" class="input-xlarge "/>
+				<%--<form:input path="oilingPerson" htmlEscape="false" maxlength="60" class="input-xlarge "/>--%>
+				<sys:treeselect id="oilingPerson" name="docOfficework.id" value="${outsourceOiling.docOfficework.id}" labelName="docOfficework.officeworkName" labelValue="${outsourceOiling.docOfficework.officeworkName}"
+								title="职员档案" url="/doc/docOfficework/treeData" cssClass="required"/>
+				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">车号：</label>
 			<div class="controls">
-				<form:input path="carNo" htmlEscape="false" maxlength="32" class="input-xlarge "/>
+				<%--<form:input path="carNo" htmlEscape="false" maxlength="32" class="input-xlarge "/>--%>
+				<sys:treeselect id="carNo" name="docCar.id" value="${outsourceOiling.docCar.id}" labelName="docCar.carNo" labelValue="${outsourceOiling.docCar.carNo}"
+								title="车辆档案" url="/doc/docCar/treeData" cssClass="required"/>
+				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
@@ -93,29 +101,29 @@
 		<div class="control-group">
 			<label class="control-label">制单人：</label>
 			<div class="controls">
-				<form:input path="createPerson" htmlEscape="false" maxlength="60" class="input-xlarge "/>
+				<form:input path="createPerson" htmlEscape="false" maxlength="60"   readonly="true" value="${user.name}"/>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">审核人：</label>
 			<div class="controls">
-				<form:input path="checkPerson" htmlEscape="false" maxlength="60" class="input-xlarge "/>
+				<form:input path="checkPerson" htmlEscape="false" maxlength="60"   readonly="true" value="${user.name}"/>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">制单日期：</label>
 			<div class="controls">
-				<input name="makeDate" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate "
-					value="<fmt:formatDate value="${outsourceOiling.makeDate}" pattern="yyyy-MM-dd HH:mm:ss"/>"
-					onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
+				<input id="makeDate"  name="makeDate"  type="text" readonly="readonly" maxlength="20" class="Wdate required" style="width:163px;"
+					   value="${outsourceOiling.makeDate}"
+					   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">审核日期：</label>
 			<div class="controls">
-				<input name="checkDate" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate "
-					value="<fmt:formatDate value="${outsourceOiling.checkDate}" pattern="yyyy-MM-dd HH:mm:ss"/>"
-					onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
+				<input id="checkDate"  name="checkDate"  type="text" readonly="readonly" maxlength="20" class="Wdate required" style="width:163px;"
+					   value="${outsourceOiling.checkDate}"
+					   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
 			</div>
 		</div>
 		<div class="control-group">
@@ -123,7 +131,7 @@
 			<div class="controls">
 				<form:select path="checkStatus" class="input-xlarge ">
 					<form:option value="" label=""/>
-					<form:options items="${fns:getDictList('')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+					<form:options items="${fns:getDictList('check_state1')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
 				</form:select>
 			</div>
 		</div>

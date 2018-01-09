@@ -6,12 +6,12 @@
 		a.id AS "id",
 		a.oiling_date AS "oilingDate",
 		a.sample_name AS "sampleName",
-		a.supplier_name AS "supplierName",
+		a.supplier_name AS "docSupplier.id",
 		a.oiling_count AS "oilingCount",
 		a.oiling_price AS "oilingPrice",
 		a.oiling_amount AS "oilingAmount",
-		a.oiling_person AS "oilingPerson",
-		a.car_no AS "carNo",
+		a.oiling_person AS "docOfficework.id",
+		a.car_no AS "docCar.id",
 		a.oiling_remark AS "oilingRemark",
 		a.create_person AS "createPerson",
 		a.check_person AS "checkPerson",
@@ -21,10 +21,19 @@
 		a.ext_field1 AS "extField1",
 		a.ext_field2 AS "extField2",
 		a.ext_field3 AS "extField3",
+		c.sup_code AS "docSupplier.supCode",
+		c.sup_name AS "docSupplier.supName",
+		d.car_code AS "docCar.carCode",
+		d.car_no AS "docCar.carNo",
+		e.officework_code AS "docOfficework.officeworkCode",
+		e.officework_name AS "docOfficework.officeworkName",
 		a.remark AS "remark"
 	</sql>
 	
 	<sql id="outsourceOilingJoins">
+		LEFT JOIN doc_supplier c ON c.id = a.supplier_name
+		LEFT JOIN doc_car d ON d.id = a.car_no
+		LEFT JOIN doc_officework e ON e.id = a.oiling_person
 	</sql>
     
 	<select id="get" resultType="OutsourceOiling">
@@ -134,12 +143,12 @@
 		) VALUES (
 			#{oilingDate},
 			#{sampleName},
-			#{supplierName},
+			#{docSupplier.id},
 			#{oilingCount},
 			#{oilingPrice},
 			#{oilingAmount},
-			#{oilingPerson},
-			#{carNo},
+			#{docOfficework.id},
+			#{docCar.id},
 			#{oilingRemark},
 			#{createPerson},
 			#{checkPerson},
@@ -157,12 +166,12 @@
 		UPDATE outsource_oiling SET 	
 			oiling_date = #{oilingDate},
 			sample_name = #{sampleName},
-			supplier_name = #{supplierName},
+			supplier_name = #{docSupplier.id},
 			oiling_count = #{oilingCount},
 			oiling_price = #{oilingPrice},
 			oiling_amount = #{oilingAmount},
-			oiling_person = #{oilingPerson},
-			car_no = #{carNo},
+			oiling_person = #{docOfficework.id},
+			car_no = #{docCar.id},
 			oiling_remark = #{oilingRemark},
 			create_person = #{createPerson},
 			check_person = #{checkPerson},

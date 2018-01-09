@@ -29,7 +29,18 @@
 		FROM archive_department a
 		<include refid="archiveDepartmentJoins"/>
 		<where>
-			
+			<if test="departmentCode != null and departmentCode != ''">
+				AND a.department_code LIKE
+				<if test="dbName == 'oracle'">'%'||#{departmentCode}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{departmentCode}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{departmentCode}, '%')</if>
+			</if>
+			<if test="departmentName != null and departmentName != ''">
+				AND a.department_name LIKE
+				<if test="dbName == 'oracle'">'%'||#{departmentName}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{departmentName}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{departmentName}, '%')</if>
+			</if>
 		</where>
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">

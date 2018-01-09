@@ -57,6 +57,43 @@ public class DocCustomer extends DataEntity<DocCustomer> {
 	private String isRepayCus;		// 是否预付款客户
 	private String isStopTrans;		// 是否停止交易
 	private String isCusCode;		// 是否客户编码
+
+	public String getCusAddr() {
+		return cusAddr;
+	}
+
+	public void setCusAddr(String cusAddr) {
+		this.cusAddr = cusAddr;
+	}
+
+	public String getReceiver() {
+		return receiver;
+	}
+
+	public void setReceiver(String receiver) {
+		this.receiver = receiver;
+	}
+
+	public String getDistance() {
+		return distance;
+	}
+
+	public void setDistance(String distance) {
+		this.distance = distance;
+	}
+
+	public String getDistanceRmk() {
+		return distanceRmk;
+	}
+
+	public void setDistanceRmk(String distanceRmk) {
+		this.distanceRmk = distanceRmk;
+	}
+
+	private String cusAddr;
+	private String receiver;
+	private String distance;
+	private String distanceRmk;
 	private String extField1;		// ext_field12
 	private String extField2;		// ext_field2
 	private String extField3;		// ext_field3
