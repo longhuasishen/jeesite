@@ -15,15 +15,21 @@
         	return false;
         }
         function getTableRowData(obj) {
-			var contractCode = $(obj).find("td:first").text();
-			$("#svalue").val(contractCode);
-			alert(contractCode);
+			var tds = $(obj).find("td");
+			$("#svalue").val($(tds[0]).text());
+			$("#nvalue").val($(tds[1]).text());
+			$("#lvalue").val($(tds[2]).text());
+			$("#uvalue").val($(tds[4]).text());
+//			alert(contractCode);
 			$(obj).css("background","yellow");
         }
 	</script>
 </head>
 <body>
 	<input type="text" value="" hidden="hidden" id="svalue" style="display: none;"/>
+	<input type="text" value="" hidden="hidden" id="nvalue" style="display: none;"/>
+	<input type="text" value="" hidden="hidden" id="lvalue" style="display: none;"/>
+	<input type="text" value="" hidden="hidden" id="uvalue" style="display: none;"/>
 	<table id="contentTable" class="table table-striped table-bordered table-condensed">
 		<thead>
 		<tr>

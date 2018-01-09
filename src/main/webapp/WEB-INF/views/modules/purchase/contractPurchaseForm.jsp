@@ -290,35 +290,23 @@
                                 label: '品种名称',
                                 name: 'kindName',
                                 width: 150,
-                                editable: false,
+                                editable: true,
                                 edittype:"text",//可以编辑的类型。可选值：text, textarea, select, checkbox, password, button, image and file.s
-//                                editoptions: {
-//                                    // dataInit is the client-side event that fires upon initializing the toolbar search field for a column
-//                                    // use it to place a third party control to customize the toolbar
-//                                    dataInit: function (element) {
-//                                        $(element).datepicker({
-//                                            autoclose: true,
-//                                            format: 'yyyy-mm-dd',
-//                                            orientation : 'auto bottom'
-//                                        });
-//                                    }
-//                                }
+                                editoptions: {
+                                    dataInit: function (element) {
+                                        $(element).attr("readonly","readonly");
+                                    }
+                                }
                             },
                             {
                                 label: '规格型号',
                                 name: 'kindLevel',
                                 width: 150,
-                                editable: false,
+                                editable: true,
                                 edittype:"text",//可以编辑的类型。可选值：text, textarea, select, checkbox, password, button, image and file.s
                                 editoptions: {
-                                    // dataInit is the client-side event that fires upon initializing the toolbar search field for a column
-                                    // use it to place a third party control to customize the toolbar
                                     dataInit: function (element) {
-                                        $(element).datepicker({
-                                            autoclose: true,
-                                            format: 'yyyy-mm-dd',
-                                            orientation : 'auto bottom'
-                                        });
+                                        $(element).attr("readonly","readonly");
                                     }
                                 }
                             },
@@ -327,9 +315,15 @@
                                 name: 'firstUnit',
                                 width: 50,
                                 editable: true,
-                                edittype: "select",
+                                /*edittype: "select",
                                 editoptions: {
                                     value: "ALFKI:ALFKI;ANATR:ANATR;ANTON:ANTON;AROUT:AROUT;BERGS:BERGS;BLAUS:BLAUS;BLONP:BLONP;BOLID:BOLID;BONAP:BONAP;BOTTM:BOTTM;BSBEV:BSBEV;CACTU:CACTU;CENTC:CENTC;CHOPS:CHOPS;COMMI:COMMI;CONSH:CONSH;DRACD:DRACD;DUMON:DUMON;EASTC:EASTC;ERNSH:ERNSH;FAMIA:FAMIA;FISSA:FISSA;FOLIG:FOLIG;FOLKO:FOLKO;FRANK:FRANK;FRANR:FRANR;FRANS:FRANS;FURIB:FURIB;GALED:GALED;GODOS:GODOS;GOURL:GOURL;GREAL:GREAL;GROSR:GROSR;HANAR:HANAR;HILAA:HILAA;HUNGC:HUNGC;HUNGO:HUNGO;ISLAT:ISLAT;KOENE:KOENE;LACOR:LACOR;LAMAI:LAMAI;LAUGB:LAUGB;LAZYK:LAZYK;LEHMS:LEHMS;LETSS:LETSS;LILAS:LILAS;LINOD:LINOD;LONEP:LONEP;MAGAA:MAGAA;MAISD:MAISD;MEREP:MEREP;MORGK:MORGK;NORTS:NORTS;OCEAN:OCEAN;OLDWO:OLDWO;OTTIK:OTTIK;PARIS:PARIS;PERIC:PERIC;PICCO:PICCO;PRINI:PRINI;QUEDE:QUEDE;QUEEN:QUEEN;QUICK:QUICK;RANCH:RANCH;RATTC:RATTC;REGGC:REGGC;RICAR:RICAR;RICSU:RICSU;ROMEY:ROMEY;SANTG:SANTG;SAVEA:SAVEA;SEVES:SEVES;SIMOB:SIMOB;SPECD:SPECD;SPLIR:SPLIR;SUPRD:SUPRD;THEBI:THEBI;THECR:THECR;TOMSP:TOMSP;TORTU:TORTU;TRADH:TRADH;TRAIH:TRAIH;VAFFE:VAFFE;VICTE:VICTE;VINET:VINET;WANDK:WANDK;WARTH:WARTH;WELLI:WELLI;WHITC:WHITC;WILMK:WILMK;WOLZA:WOLZA"
+                                }*/
+                                edittype:"text",//可以编辑的类型。可选值：text, textarea, select, checkbox, password, button, image and file.s
+                                editoptions: {
+                                    dataInit: function (element) {
+                                        $(element).attr("readonly","readonly");
+                                    }
                                 }
                             },
                             {
@@ -338,12 +332,12 @@
                                 width: 50,
                                 sorttype:"number",
                                 editable: true,
-								edittype:"text",
-//                                edittype: "custom",
-//                                editoptions: {
-//                                    custom_value: getFreightElementValue,
-//                                    custom_element: createFreightEditElement
-//                                }
+//								edittype:"text",
+                                edittype: "custom",
+                                editoptions: {
+                                    custom_value: getFreightElementValue,
+                                    custom_element: createFreightEditElement
+                                }
                             },
                             {
                                 label: '单价',
@@ -458,27 +452,40 @@
                         if (id && id !== lastSelection) {
                             var grid = $("#jqGrid");
                             grid.jqGrid('restoreRow',lastSelection);
-                            grid.jqGrid('editRow',id, {keys:true, focusField: 4});
+                            grid.jqGrid('editRow',id, {keys:false, focusField: 4});
+//                            grid.jqGrid('saveRow',id,{url:'clientArray'});
                             lastSelection = id;
                         }
                         $("#userButton").unbind("click").click(function(){
-                            searchKind();
+                            searchKind(id);
                         });
                     }
-                    function searchKind() {
-                        var submit = function (v, h, f) {
-                            var temp=document.getElementById('jbox-iframe').contentWindow.document.getElementById('svalue').value;
-							console.log("temp="+temp);
-                            return true;
-                        };
+                    function searchKind(id) {
                         top.$.jBox.open("iframe:${ctx}/doc/docKind/listFrame",
-                            "品种选择",700,430,submit
+                            "品种选择",700,330,
+							{
+                            	buttons:{"确定":"OK"},
+								submit:function(v,h,f) {
+                                	if (v == 'OK') {
+                                		var svalue = h.find("iframe")[0].contentWindow.document.getElementById('svalue').value;
+                                		var nvalue = h.find("iframe")[0].contentWindow.document.getElementById('nvalue').value;
+                                		var lvalue = h.find("iframe")[0].contentWindow.document.getElementById('lvalue').value;
+                                		var uvalue = h.find("iframe")[0].contentWindow.document.getElementById('uvalue').value;
+                                		if(svalue !=""&& svalue!="undefined"&&svalue!=null){
+                                            $("#kindCode").val(svalue);
+                                            $("#"+id+"_kindName").val(nvalue);
+                                            $("#"+id+"_kindLevel").val(lvalue);
+                                            $("#"+id+"_firstUnit").val(uvalue);
+										}
+                            		}
+								}
+							}
                         );
                     }
 
                     function createKindCodeEditElement(value, editOptions) {
                         var div = $("<div style='margin-top:5px' class='input-append'></div>");
-                        var treeSelect = $("<input>",{type:"text",name:"kindCode",value:value,style:"width:100px",class:'input-xlarge required'});
+                        var treeSelect = $("<input>",{type:"text",name:"kindCode",value:value,style:"width:100px",class:'input-xlarge required',id:'kindCode'});
                         var searchClass = $("<a>",{id:'userButton',href:'#',class:'btn  ',style:'padding-top:0px;padding-right:1px;padding-bottom:0px;padding-left:1px;'});
                         var iClass = $("<i>",{class:'icon-search'});
                         searchClass.append(iClass);
@@ -487,7 +494,10 @@
 					}
 
                     function getKindCodeElementValue(elem, oper, value) {
-                        return value;
+                        if (oper === "get") {
+                            var val = $("#kindCode").val();
+                            return val;
+                        }
 					}
                     function createFreightEditElement(value, editOptions) {
                         var div =$("<div style='margin-top:5px'></div>");
@@ -522,6 +532,7 @@
                             return $(elem).find("input:radio:checked").val();
                         }
                     }
+//                    $('#jqGrid').jqGrid('saveRow',id,{url:'clientArray'});
                     $('#jqGrid').navGrid("#jqGridPager", {edit: false, add: false, del: false, refresh: false, view: false});
                     $('#jqGrid').inlineNav('#jqGridPager',
                         // the buttons to appear on the toolbar of the grid
