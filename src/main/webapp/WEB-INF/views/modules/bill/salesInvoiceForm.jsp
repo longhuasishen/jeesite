@@ -43,9 +43,9 @@
 		<div class="control-group">
 			<label class="control-label">发票日期：</label>
 			<div class="controls">
-				<input name="invoiceDate" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate "
-					value="<fmt:formatDate value="${salesInvoice.invoiceDate}" pattern="yyyy-MM-dd HH:mm:ss"/>"
-					onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
+				<input id="invoiceDate"  name="invoiceDate"  type="text" readonly="readonly" maxlength="20" class="Wdate required" style="width:163px;"
+					   value="${salesInvoice.invoiceDate}"
+					   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
 			</div>
 		</div>
 		<div class="control-group">
@@ -89,36 +89,36 @@
 			<div class="controls">
 				<form:select path="checkStatus" class="input-xlarge ">
 					<form:option value="" label=""/>
-					<form:options items="${fns:getDictList('')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+					<form:options items="${fns:getDictList('check_state1')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
 				</form:select>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">制单人：</label>
 			<div class="controls">
-				<form:input path="createPerson" htmlEscape="false" maxlength="60" class="input-xlarge "/>
+				<form:input path="createPerson" htmlEscape="false" maxlength="50"   readonly="true" value="${user.name}"/>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">审核人：</label>
 			<div class="controls">
-				<form:input path="checkPerson" htmlEscape="false" maxlength="60" class="input-xlarge "/>
+				<form:input path="checkPerson" htmlEscape="false" maxlength="50"   readonly="true" value="${user.name}"/>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">制单日期：</label>
 			<div class="controls">
-				<input name="makeDate" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate "
-					value="<fmt:formatDate value="${salesInvoice.makeDate}" pattern="yyyy-MM-dd HH:mm:ss"/>"
-					onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
+				<input id="makeDate"  name="makeDate"  type="text" readonly="readonly" maxlength="20" class="Wdate required" style="width:163px;"
+					   value="${salesInvoice.makeDate}"
+					   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">审核日期：</label>
 			<div class="controls">
-				<input name="checkDate" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate "
-					value="<fmt:formatDate value="${salesInvoice.checkDate}" pattern="yyyy-MM-dd HH:mm:ss"/>"
-					onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
+				<input id="checkDate"  name="checkDate"  type="text" readonly="readonly" maxlength="20" class="Wdate required" style="width:163px;"
+					   value="${salesInvoice.checkDate}"
+					   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
 			</div>
 		</div>
 		<div class="control-group">

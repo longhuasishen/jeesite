@@ -43,15 +43,17 @@
 		<div class="control-group">
 			<label class="control-label">应收款日期：</label>
 			<div class="controls">
-				<input name="billDate" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate "
-					value="<fmt:formatDate value="${contractReceivable.billDate}" pattern="yyyy-MM-dd HH:mm:ss"/>"
-					onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
+				<input id="billDate"  name="billDate"  type="text" readonly="readonly" maxlength="20" class="Wdate required" style="width:163px;"
+					   value="${contractReceivable.billDate}"
+					   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">客户简称：</label>
 			<div class="controls">
-				<form:input path="customAbbr" htmlEscape="false" maxlength="60" class="input-xlarge "/>
+				<sys:treeselect id="customAbbr" name="docCustomer.id" value="${contractReceivable.docCustomer.id}" labelName="docCustomer.cusShortName" labelValue="${contractReceivable.docCustomer.cusShortName}"
+								title="客户档案" url="/doc/docCustomer/treeDataShortName" cssClass="required"/>
+				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
@@ -71,36 +73,36 @@
 			<div class="controls">
 				<form:select path="checkStatus" class="input-xlarge ">
 					<form:option value="" label=""/>
-					<form:options items="${fns:getDictList('')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+					<form:options items="${fns:getDictList('check_state1')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
 				</form:select>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">制单人：</label>
 			<div class="controls">
-				<form:input path="createPerson" htmlEscape="false" maxlength="60" class="input-xlarge "/>
+				<td><form:input path="createPerson" htmlEscape="false" maxlength="50"   readonly="true" value="${user.name}"/></td>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">审核人：</label>
 			<div class="controls">
-				<form:input path="checkPerson" htmlEscape="false" maxlength="60" class="input-xlarge "/>
+				<td><form:input path="checkPerson" htmlEscape="false" maxlength="50"   readonly="true" value="${user.name}"/></td>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">制单日期：</label>
 			<div class="controls">
-				<input name="makeDate" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate "
-					value="<fmt:formatDate value="${contractReceivable.makeDate}" pattern="yyyy-MM-dd HH:mm:ss"/>"
-					onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
+				<input id="makeDate"  name="makeDate"  type="text" readonly="readonly" maxlength="20" class="Wdate required" style="width:163px;"
+					   value="${contractReceivable.makeDate}"
+					   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">审核日期：</label>
 			<div class="controls">
-				<input name="checkDate" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate "
-					value="<fmt:formatDate value="${contractReceivable.checkDate}" pattern="yyyy-MM-dd HH:mm:ss"/>"
-					onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
+				<input id="checkDate"  name="checkDate"  type="text" readonly="readonly" maxlength="20" class="Wdate required" style="width:163px;"
+					   value="${contractReceivable.checkDate}"
+					   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
 			</div>
 		</div>
 		<div class="control-group">

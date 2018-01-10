@@ -44,14 +44,14 @@
 			<label class="control-label">调帐日期：</label>
 			<div class="controls">
 				<input id="billDate"  name="billDate"  type="text" readonly="readonly" maxlength="20" class="Wdate required" style="width:163px;"
-					   value="${contractSales.contractDate}"
+					   value="${finpayBill.billDate}"
 					   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">供应商名称：</label>
 			<div class="controls">
-				<sys:treeselect id="billSupplier" name="docSupplier.id"  value="${docConcrete.docSupplier.id}" labelName="docSupplier.supName" labelValue="${docConcrete.docSupplier.supName}"
+				<sys:treeselect id="billSupplier" name="docSupplier.id"  value="${finpayBill.docSupplier.id}" labelName="docSupplier.supName" labelValue="${finpayBill.docSupplier.supName}"
 								title="供应商名称" url="/doc/docSupplier/treeData?materialCode=*" cssClass="required"/>
 			</div>
 		</div>
@@ -85,7 +85,7 @@
 			<label class="control-label">制单日期：</label>
 			<div class="controls">
 				<input id="makeDate"  name="makeDate"  type="text" readonly="readonly" maxlength="20" class="Wdate required" style="width:163px;"
-					   value="${contractSales.contractDate}"
+					   value="${finpayBill.makeDate}"
 					   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
 			</div>
 		</div>
@@ -93,7 +93,7 @@
 			<label class="control-label">审核日期：</label>
 			<div class="controls">
 				<td><input id="checkDate"  name="checkDate"  type="text" readonly="readonly" maxlength="20" class="Wdate required" style="width:163px;"
-						   value="${contractSales.contractDate}"
+						   value="${finpayBill.checkDate}"
 						   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
 				</td>
 			</div>

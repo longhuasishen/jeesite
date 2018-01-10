@@ -43,15 +43,17 @@
 		<div class="control-group">
 			<label class="control-label">收款日期：</label>
 			<div class="controls">
-				<input name="billDate" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate "
-					value="<fmt:formatDate value="${incomeBill.billDate}" pattern="yyyy-MM-dd HH:mm:ss"/>"
-					onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
+				<input id="billDate"  name="billDate"  type="text" readonly="readonly" maxlength="20" class="Wdate required" style="width:163px;"
+					   value="${incomeBill.billDate}"
+					   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">客户名称：</label>
 			<div class="controls">
-				<form:input path="customName" htmlEscape="false" maxlength="60" class="input-xlarge "/>
+				<sys:treeselect id="customName" name="docCustomer.id" value="${incomeBill.docCustomer.id}" labelName="docCustomer.cusName" labelValue="${incomeBill.docCustomer.cusName}"
+								title="客户档案" url="/doc/docCustomer/treeData" cssClass="required"/>
+				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
@@ -63,10 +65,9 @@
 		<div class="control-group">
 			<label class="control-label">支付方式：</label>
 			<div class="controls">
-				<form:select path="payWay" class="input-xlarge ">
-					<form:option value="" label=""/>
-					<form:options items="${fns:getDictList('')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
-				</form:select>
+				<sys:treeselect id="payWay" name="docPaymeth.id" value="${incomeBill.docPaymeth.id}" labelName="docPaymeth.paymethName" labelValue="${incomeBill.docPaymeth.paymethName}"
+								title="支付方式档案" url="/doc/docPaymeth/treeData" cssClass="required"/>
+				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
@@ -98,36 +99,36 @@
 			<div class="controls">
 				<form:select path="checkStatus" class="input-xlarge ">
 					<form:option value="" label=""/>
-					<form:options items="${fns:getDictList('')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+					<form:options items="${fns:getDictList('check_state1')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
 				</form:select>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">制单人：</label>
 			<div class="controls">
-				<form:input path="createPerson" htmlEscape="false" maxlength="60" class="input-xlarge "/>
+				<form:input path="createPerson" htmlEscape="false" maxlength="50"   readonly="true" value="${user.name}"/>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">审核人：</label>
 			<div class="controls">
-				<form:input path="checkPerson" htmlEscape="false" maxlength="60" class="input-xlarge "/>
+				<form:input path="checkPerson" htmlEscape="false" maxlength="50"   readonly="true" value="${user.name}"/>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">制单日期：</label>
 			<div class="controls">
-				<input name="makeDate" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate "
-					value="<fmt:formatDate value="${incomeBill.makeDate}" pattern="yyyy-MM-dd HH:mm:ss"/>"
-					onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
+				<input id="makeDate"  name="makeDate"  type="text" readonly="readonly" maxlength="20" class="Wdate required" style="width:163px;"
+					   value="${incomeBill.makeDate}"
+					   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">审核日期：</label>
 			<div class="controls">
-				<input name="checkDate" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate "
-					value="<fmt:formatDate value="${incomeBill.checkDate}" pattern="yyyy-MM-dd HH:mm:ss"/>"
-					onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
+				<input id="checkDate"  name="checkDate"  type="text" readonly="readonly" maxlength="20" class="Wdate required" style="width:163px;"
+					   value="${incomeBill.checkDate}"
+					   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
 			</div>
 		</div>
 		<div class="control-group">

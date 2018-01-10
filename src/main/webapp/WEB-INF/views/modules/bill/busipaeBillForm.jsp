@@ -23,6 +23,18 @@
 				}
 			});
 		});
+
+        function customNameTreeselectCallBack(v,h,f){
+            if("ok" == v){
+                //获取指定客户信息
+                $.get("${ctx}/doc/docCustomer/get?id=" + $("#customNameId").val(), function(data){
+                    //设置input值
+                    $("#customAbbr").val(data.cusShortName);
+                    $("#projectName").val(data.cusProject);
+                });
+
+            }
+        }
 	</script>
 </head>
 <body>
@@ -44,14 +56,16 @@
 			<label class="control-label">调帐日期：</label>
 			<div class="controls">
 				<input id="billDate"  name="billDate"  type="text" readonly="readonly" maxlength="20" class="Wdate required" style="width:163px;"
-					   value="${contractSales.contractDate}"
+					   value="${busipaeBill.billDate}"
 					   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">客户名称：</label>
 			<div class="controls">
-				<form:input path="customName" htmlEscape="false" maxlength="120" class="input-xlarge "/>
+				<sys:treeselect id="customName" name="docCustomer.id" value="${busipaeBill.docCustomer.id}" labelName="docCustomer.cusName" labelValue="${busipaeBill.docCustomer.cusName}"
+								title="客户档案" url="/doc/docCustomer/treeData" cssClass="required"/>
+				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
@@ -96,7 +110,7 @@
 			<label class="control-label">制单日期：</label>
 			<div class="controls">
 				<input id="makeDate"  name="makeDate"  type="text" readonly="readonly" maxlength="20" class="Wdate required" style="width:163px;"
-						   value="${contractSales.contractDate}"
+						   value="${busipaeBill.makeDate}"
 						   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
 			</div>
 		</div>
@@ -104,7 +118,7 @@
 			<label class="control-label">审核日期：</label>
 			<div class="controls">
 				<td><input id="checkDate"  name="checkDate"  type="text" readonly="readonly" maxlength="20" class="Wdate required" style="width:163px;"
-						   value="${contractSales.contractDate}"
+						   value="${busipaeBill.checkDate}"
 						   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
 				</td>
 			</div>

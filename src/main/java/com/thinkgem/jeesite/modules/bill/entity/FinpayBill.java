@@ -3,6 +3,7 @@
  */
 package com.thinkgem.jeesite.modules.bill.entity;
 
+import com.thinkgem.jeesite.modules.doc.entity.DocSupplier;
 import org.hibernate.validator.constraints.Length;
 
 import com.thinkgem.jeesite.common.persistence.DataEntity;
@@ -30,6 +31,15 @@ public class FinpayBill extends DataEntity<FinpayBill> {
 	private String extField2;		// ext_field2
 	private String extField3;		// ext_field3
 	private String remark;		// remark
+	public DocSupplier getDocSupplier() {
+		return docSupplier;
+	}
+
+	public void setDocSupplier(DocSupplier docSupplier) {
+		this.docSupplier = docSupplier;
+	}
+
+	private DocSupplier docSupplier;
 	
 	public FinpayBill() {
 		super();

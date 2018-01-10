@@ -88,11 +88,11 @@
 		<div class="controls">
 				<%--<form:input path="effTerm" htmlEscape="false" maxlength="1" class="input-xlarge "/>--%>
 			<input id="effStart"  name="effStart"  type="text" readonly="readonly" maxlength="20" class="Wdate required" style="width:163px;"
-				   value="${contractSales.contractDate}"
+				   value="${contractSales.effStart}"
 				   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
 			　--　
 			<input id="effEnd" name="effEnd" type="text" readonly="readonly" maxlength="20" class="Wdate required" style="width:163px;"
-				   value="${contractSales.contractDate}"
+				   value="${contractSales.effEnd}"
 				   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
 		</div>
 	</div>
@@ -110,11 +110,11 @@
 		<div class="controls">
 				<%--<form:input path="timeControl" htmlEscape="false" maxlength="1" class="input-xlarge "/>--%>
 			<input id="timeStart"  name="timeStart"  type="text" readonly="readonly" maxlength="20" class="Wdate required" style="width:163px;"
-				   value="${contractSales.contractDate}"
+				   value="${contractSales.timeStart}"
 				   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
 			　--　
 			<input id="timeEnd" name="timeEnd" type="text" readonly="readonly" maxlength="20" class="Wdate required" style="width:163px;"
-				   value="${contractSales.contractDate}"
+				   value="${contractSales.timeEnd}"
 				   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
 		</div>
 	</div>
@@ -131,17 +131,17 @@
 			<tr class="align-center">
 				<td class="tit">制单日期</td>
 				<td><input id="makeDate"  name="makeDate"  type="text" readonly="readonly" maxlength="20" class="Wdate required" style="width:163px;"
-						   value="${contractSales.contractDate}"
+						   value="${contractSales.makeDate}"
 						   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
 				</td>
 				<td class="tit">审核日期</td>
 				<td><input id="checkDate"  name="checkDate"  type="text" readonly="readonly" maxlength="20" class="Wdate required" style="width:163px;"
-						   value="${contractSales.contractDate}"
+						   value="${contractSales.checkDate}"
 						   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
 				</td>
 				<td class="tit">作废日期</td>
 				<td><input id="cancelDate"  name="cancelDate"  type="text" readonly="readonly" maxlength="20" class="Wdate required" style="width:163px;"
-						   value="${contractSales.contractDate}"
+						   value="${contractSales.cancelDate}"
 						   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
 				</td>
 			</tr>

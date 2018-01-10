@@ -43,58 +43,60 @@
 		<where>
 			
 			<if test="invoiceNo != null and invoiceNo != ''">
-				AND a.invoice_no = #{invoiceNo}
+				AND a.invoice_no LIKE
+				<if test="dbName == 'mysql'">CONCAT('%', #{invoiceNo}, '%')</if>
 			</if>
 			<if test="invoiceDate != null and invoiceDate != ''">
-				AND a.invoice_date = #{invoiceDate}
+				AND a.invoice_date LIKE
+				<if test="dbName == 'mysql'">CONCAT('%', #{invoiceDate}, '%')</if>
 			</if>
 			<if test="customAbbr != null and customAbbr != ''">
-				AND a.custom_abbr = #{customAbbr}
+				AND a.custom_abbr LIKE
+				<if test="dbName == 'mysql'">CONCAT('%', #{customAbbr}, '%')</if>
 			</if>
 			<if test="taxNum != null and taxNum != ''">
-				AND a.tax_num = #{taxNum}
+				AND a.tax_num LIKE
+				<if test="dbName == 'mysql'">CONCAT('%', #{taxNum}, '%')</if>
 			</if>
 			<if test="customAcc != null and customAcc != ''">
-				AND a.custom_acc = #{customAcc}
+				AND a.custom_acc LIKE
+				<if test="dbName == 'mysql'">CONCAT('%', #{customAcc}, '%')</if>
 			</if>
 			<if test="bankName != null and bankName != ''">
-				AND a.bank_name = #{bankName}
+				AND a.bank_name LIKE
+				<if test="dbName == 'mysql'">CONCAT('%', #{bankName}, '%')</if>
 			</if>
 			<if test="customPhone != null and customPhone != ''">
-				AND a.custom_phone = #{customPhone}
+				AND a.custom_phone LIKE
+				<if test="dbName == 'mysql'">CONCAT('%', #{customPhone}, '%')</if>
 			</if>
 			<if test="customAddr != null and customAddr != ''">
-				AND a.custom_addr = #{customAddr}
+				AND a.custom_addr LIKE
+				<if test="dbName == 'mysql'">CONCAT('%', #{customAddr}, '%')</if>
 			</if>
 			<if test="checkStatus != null and checkStatus != ''">
-				AND a.check_status = #{checkStatus}
+				AND a.check_status LIKE
+				<if test="dbName == 'mysql'">CONCAT('%', #{checkStatus}, '%')</if>
 			</if>
 			<if test="createPerson != null and createPerson != ''">
-				AND a.create_person = #{createPerson}
+				AND a.create_person LIKE
+				<if test="dbName == 'mysql'">CONCAT('%', #{createPerson}, '%')</if>
 			</if>
 			<if test="checkPerson != null and checkPerson != ''">
-				AND a.check_person = #{checkPerson}
+				AND a.check_person LIKE
+				<if test="dbName == 'mysql'">CONCAT('%', #{checkPerson}, '%')</if>
 			</if>
 			<if test="makeDate != null and makeDate != ''">
-				AND a.make_date = #{makeDate}
+				AND a.make_date LIKE
+				<if test="dbName == 'mysql'">CONCAT('%', #{makeDate}, '%')</if>
 			</if>
 			<if test="checkDate != null and checkDate != ''">
-				AND a.check_date = #{checkDate}
+				AND a.check_date LIKE
+				<if test="dbName == 'mysql'">CONCAT('%', #{checkDate}, '%')</if>
 			</if>
 			<if test="invoiceRemark != null and invoiceRemark != ''">
-				AND a.invoice_remark = #{invoiceRemark}
-			</if>
-			<if test="extField1 != null and extField1 != ''">
-				AND a.ext_field1 = #{extField1}
-			</if>
-			<if test="extField2 != null and extField2 != ''">
-				AND a.ext_field2 = #{extField2}
-			</if>
-			<if test="extField3 != null and extField3 != ''">
-				AND a.ext_field3 = #{extField3}
-			</if>
-			<if test="remark != null and remark != ''">
-				AND a.remark = #{remark}
+				AND a.invoice_remark LIKE
+				<if test="dbName == 'mysql'">CONCAT('%', #{invoiceRemark}, '%')</if>
 			</if>
 		</where>
 		<choose>
@@ -125,7 +127,6 @@
 	
 	<insert id="insert">
 		INSERT INTO sales_invoice(
-			id,
 			invoice_no,
 			invoice_date,
 			custom_abbr,
@@ -145,7 +146,6 @@
 			ext_field3,
 			remark
 		) VALUES (
-			#{id},
 			#{invoiceNo},
 			#{invoiceDate},
 			#{customAbbr},

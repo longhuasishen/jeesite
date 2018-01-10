@@ -6,6 +6,7 @@ package com.thinkgem.jeesite.modules.bill.web;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.thinkgem.jeesite.modules.sys.utils.UserUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -57,6 +58,7 @@ public class ContractReceivableController extends BaseController {
 	@RequiresPermissions("bill:contractReceivable:view")
 	@RequestMapping(value = "form")
 	public String form(ContractReceivable contractReceivable, Model model) {
+		model.addAttribute("user", UserUtils.getUser());
 		model.addAttribute("contractReceivable", contractReceivable);
 		return "modules/bill/contractReceivableForm";
 	}

@@ -29,9 +29,9 @@
 				<form:input path="invoiceNo" htmlEscape="false" maxlength="32" class="input-medium"/>
 			</li>
 			<li><label>发票日期：</label>
-				<input name="invoiceDate" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate"
-					value="<fmt:formatDate value="${salesInvoice.invoiceDate}" pattern="yyyy-MM-dd HH:mm:ss"/>"
-					onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
+				<input id="invoiceDate"  name="invoiceDate"  type="text" readonly="readonly" maxlength="20" class="Wdate required" style="width:163px;"
+					   value="${salesInvoice.invoiceDate}"
+					   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
 			</li>
 			<li><label>客户简称：</label>
 				<form:input path="customAbbr" htmlEscape="false" maxlength="60" class="input-medium"/>
@@ -54,7 +54,7 @@
 			<li><label>审核状态：</label>
 				<form:select path="checkStatus" class="input-medium">
 					<form:option value="" label=""/>
-					<form:options items="${fns:getDictList('')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+					<form:options items="${fns:getDictList('check_state1')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
 				</form:select>
 			</li>
 			<li><label>制单人：</label>
@@ -64,29 +64,14 @@
 				<form:input path="checkPerson" htmlEscape="false" maxlength="60" class="input-medium"/>
 			</li>
 			<li><label>制单日期：</label>
-				<input name="makeDate" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate"
-					value="<fmt:formatDate value="${salesInvoice.makeDate}" pattern="yyyy-MM-dd HH:mm:ss"/>"
-					onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
+				<input id="makeDate"  name="makeDate"  type="text" readonly="readonly" maxlength="20" class="Wdate required" style="width:163px;"
+					   value="${salesInvoice.makeDate}"
+					   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
 			</li>
 			<li><label>审核日期：</label>
-				<input name="checkDate" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate"
-					value="<fmt:formatDate value="${salesInvoice.checkDate}" pattern="yyyy-MM-dd HH:mm:ss"/>"
-					onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
-			</li>
-			<li><label>备注：</label>
-				<form:input path="invoiceRemark" htmlEscape="false" maxlength="200" class="input-medium"/>
-			</li>
-			<li><label>ext_field1：</label>
-				<form:input path="extField1" htmlEscape="false" maxlength="60" class="input-medium"/>
-			</li>
-			<li><label>ext_field2：</label>
-				<form:input path="extField2" htmlEscape="false" maxlength="60" class="input-medium"/>
-			</li>
-			<li><label>ext_field3：</label>
-				<form:input path="extField3" htmlEscape="false" maxlength="120" class="input-medium"/>
-			</li>
-			<li><label>remark：</label>
-				<form:input path="remark" htmlEscape="false" maxlength="1000" class="input-medium"/>
+				<input id="checkDate"  name="checkDate"  type="text" readonly="readonly" maxlength="20" class="Wdate required" style="width:163px;"
+					   value="${salesInvoice.checkDate}"
+					   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
 			</li>
 			<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
 			<li class="clearfix"></li>
@@ -110,10 +95,6 @@
 				<th>制单日期</th>
 				<th>审核日期</th>
 				<th>备注</th>
-				<th>ext_field1</th>
-				<th>ext_field2</th>
-				<th>ext_field3</th>
-				<th>remark</th>
 				<shiro:hasPermission name="bill:salesInvoice:edit"><th>操作</th></shiro:hasPermission>
 			</tr>
 		</thead>
@@ -145,7 +126,7 @@
 					${salesInvoice.customAddr}
 				</td>
 				<td>
-					${fns:getDictLabel(salesInvoice.checkStatus, '', '')}
+					${fns:getDictLabel(salesInvoice.checkStatus, 'check_state1', '')}
 				</td>
 				<td>
 					${salesInvoice.createPerson}
@@ -161,18 +142,6 @@
 				</td>
 				<td>
 					${salesInvoice.invoiceRemark}
-				</td>
-				<td>
-					${salesInvoice.extField1}
-				</td>
-				<td>
-					${salesInvoice.extField2}
-				</td>
-				<td>
-					${salesInvoice.extField3}
-				</td>
-				<td>
-					${salesInvoice.remark}
 				</td>
 				<shiro:hasPermission name="bill:salesInvoice:edit"><td>
     				<a href="${ctx}/bill/salesInvoice/form?id=${salesInvoice.id}">修改</a>

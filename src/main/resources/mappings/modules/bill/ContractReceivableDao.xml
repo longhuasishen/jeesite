@@ -6,7 +6,7 @@
 		a.id AS "id",
 		a.bill_no AS "billNo",
 		a.bill_date AS "billDate",
-		a.custom_abbr AS "customAbbr",
+		a.custom_abbr AS "docCustomer.id",
 		a.month_amount AS "monthAmount",
 		a.contract_amount AS "contractAmount",
 		a.check_status AS "checkStatus",
@@ -18,10 +18,13 @@
 		a.ext_field1 AS "extField1",
 		a.ext_field2 AS "extField2",
 		a.ext_field3 AS "extField3",
+		e.cus_code AS "docCustomer.cusCode",
+		e.cus_short_name AS "docCustomer.cusShortName",
 		a.remark AS "remark"
 	</sql>
 	
 	<sql id="contractReceivableJoins">
+		LEFT JOIN doc_customer e ON e.id = a.custom_abbr
 	</sql>
     
 	<select id="get" resultType="ContractReceivable">
@@ -100,7 +103,18 @@
 		FROM contract_receivable a
 		<include refid="contractReceivableJoins"/>
 		<where>
-			
+			<if test="billDate != null and billDate != ''">
+				AND a.bill_date LIKE
+				<if test="dbName == 'oracle'">'%'||#{billDate}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{billDate}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{billDate}, '%')</if>
+			</if>
+			<if test="customAbbr != null and customAbbr != ''">
+				AND a.custom_abbr LIKE
+				<if test="dbName == 'oracle'">'%'||#{customAbbr}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{customAbbr}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{customAbbr}, '%')</if>
+			</if>
 		</where>		
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
@@ -113,7 +127,6 @@
 	
 	<insert id="insert">
 		INSERT INTO contract_receivable(
-			id,
 			bill_no,
 			bill_date,
 			custom_abbr,
@@ -130,10 +143,9 @@
 			ext_field3,
 			remark
 		) VALUES (
-			#{id},
 			#{billNo},
 			#{billDate},
-			#{customAbbr},
+			#{docCustomer.id},
 			#{monthAmount},
 			#{contractAmount},
 			#{checkStatus},
@@ -153,7 +165,7 @@
 		UPDATE contract_receivable SET 	
 			bill_no = #{billNo},
 			bill_date = #{billDate},
-			custom_abbr = #{customAbbr},
+			custom_abbr = #{docCustomer.id},
 			month_amount = #{monthAmount},
 			contract_amount = #{contractAmount},
 			check_status = #{checkStatus},

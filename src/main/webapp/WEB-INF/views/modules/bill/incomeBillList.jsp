@@ -29,21 +29,20 @@
 				<form:input path="billNo" htmlEscape="false" maxlength="20" class="input-medium"/>
 			</li>
 			<li><label>收款日期：</label>
-				<input name="billDate" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate"
-					value="<fmt:formatDate value="${incomeBill.billDate}" pattern="yyyy-MM-dd HH:mm:ss"/>"
-					onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
+				<input id="billDate"  name="billDate"  type="text" readonly="readonly" maxlength="20" class="Wdate required" style="width:163px;"
+					   value="${incomeBill.billDate}"
+					   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
 			</li>
 			<li><label>客户名称：</label>
-				<form:input path="customName" htmlEscape="false" maxlength="60" class="input-medium"/>
+				<sys:treeselect id="customName" name="customName" value="${incomeBill.docCustomer.id}" labelName="docCustomer.cusName" labelValue="${incomeBill.docCustomer.cusName}"
+								title="客户档案" url="/doc/docCustomer/treeData" />
 			</li>
 			<li><label>工程名称：</label>
 				<form:input path="projectName" htmlEscape="false" maxlength="120" class="input-medium"/>
 			</li>
 			<li><label>支付方式：</label>
-				<form:select path="payWay" class="input-medium">
-					<form:option value="" label=""/>
-					<form:options items="${fns:getDictList('')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
-				</form:select>
+				<sys:treeselect id="payWay" name="payWay" value="${incomeBill.docPaymeth.id}" labelName="docPaymeth.paymethName" labelValue="${incomeBill.docPaymeth.paymethName}"
+								title="支付方式档案" url="/doc/docPaymeth/treeData" cssClass="required"/>
 			</li>
 			<li><label>收款金额：</label>
 				<form:input path="incomeAmount" htmlEscape="false" maxlength="20" class="input-medium"/>
@@ -60,7 +59,7 @@
 			<li><label>审核状态：</label>
 				<form:select path="checkStatus" class="input-medium">
 					<form:option value="" label=""/>
-					<form:options items="${fns:getDictList('')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+					<form:options items="${fns:getDictList('check_state1')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
 				</form:select>
 			</li>
 			<li><label>制单人：</label>
@@ -70,29 +69,17 @@
 				<form:input path="checkPerson" htmlEscape="false" maxlength="60" class="input-medium"/>
 			</li>
 			<li><label>制单日期：</label>
-				<input name="makeDate" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate"
-					value="<fmt:formatDate value="${incomeBill.makeDate}" pattern="yyyy-MM-dd HH:mm:ss"/>"
-					onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
+				<input id="makeDate"  name="makeDate"  type="text" readonly="readonly" maxlength="20" class="Wdate required" style="width:163px;"
+					   value="${incomeBill.makeDate}"
+					   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
 			</li>
 			<li><label>审核日期：</label>
-				<input name="checkDate" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate"
-					value="<fmt:formatDate value="${incomeBill.checkDate}" pattern="yyyy-MM-dd HH:mm:ss"/>"
-					onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
+				<input id="checkDate"  name="checkDate"  type="text" readonly="readonly" maxlength="20" class="Wdate required" style="width:163px;"
+					   value="${incomeBill.checkDate}"
+					   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
 			</li>
 			<li><label>备注：</label>
 				<form:input path="incomeRemark" htmlEscape="false" maxlength="200" class="input-medium"/>
-			</li>
-			<li><label>ext_field1：</label>
-				<form:input path="extField1" htmlEscape="false" maxlength="60" class="input-medium"/>
-			</li>
-			<li><label>ext_field2：</label>
-				<form:input path="extField2" htmlEscape="false" maxlength="60" class="input-medium"/>
-			</li>
-			<li><label>ext_field3：</label>
-				<form:input path="extField3" htmlEscape="false" maxlength="120" class="input-medium"/>
-			</li>
-			<li><label>remark：</label>
-				<form:input path="remark" htmlEscape="false" maxlength="1000" class="input-medium"/>
 			</li>
 			<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
 			<li class="clearfix"></li>
@@ -117,10 +104,6 @@
 				<th>制单日期</th>
 				<th>审核日期</th>
 				<th>备注</th>
-				<th>ext_field1</th>
-				<th>ext_field2</th>
-				<th>ext_field3</th>
-				<th>remark</th>
 				<shiro:hasPermission name="bill:incomeBill:edit"><th>操作</th></shiro:hasPermission>
 			</tr>
 		</thead>
@@ -134,13 +117,13 @@
 					${incomeBill.billDate}
 				</td>
 				<td>
-					${incomeBill.customName}
+					${incomeBill.docCustomer.cusName}
 				</td>
 				<td>
 					${incomeBill.projectName}
 				</td>
 				<td>
-					${fns:getDictLabel(incomeBill.payWay, '', '')}
+					${incomeBill.docPaymeth.paymethName}
 				</td>
 				<td>
 					${incomeBill.incomeAmount}
@@ -155,7 +138,7 @@
 					${incomeBill.bankAcc}
 				</td>
 				<td>
-					${fns:getDictLabel(incomeBill.checkStatus, '', '')}
+					${fns:getDictLabel(incomeBill.checkStatus, 'check_state1', '')}
 				</td>
 				<td>
 					${incomeBill.createPerson}
@@ -171,18 +154,6 @@
 				</td>
 				<td>
 					${incomeBill.incomeRemark}
-				</td>
-				<td>
-					${incomeBill.extField1}
-				</td>
-				<td>
-					${incomeBill.extField2}
-				</td>
-				<td>
-					${incomeBill.extField3}
-				</td>
-				<td>
-					${incomeBill.remark}
 				</td>
 				<shiro:hasPermission name="bill:incomeBill:edit"><td>
     				<a href="${ctx}/bill/incomeBill/form?id=${incomeBill.id}">修改</a>

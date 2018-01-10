@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.thinkgem.jeesite.modules.bill.dao.BusipaeBillDao">
-    
+
 	<sql id="busipaeBillColumns">
 		a.id AS "id",
 		a.bill_no AS "billNo",
 		a.bill_date AS "billDate",
-		a.custom_name AS "customName",
+		a.custom_name AS "docCustomer.id",
 		a.custom_abbr AS "customAbbr",
 		a.project_name AS "projectName",
 		a.bill_direction AS "billDirection",
@@ -20,27 +20,41 @@
 		a.ext_field1 AS "extField1",
 		a.ext_field2 AS "extField2",
 		a.ext_field3 AS "extField3",
+		e.cus_code AS "docCustomer.cusCode",
+		e.cus_name AS "docCustomer.cusName",
 		a.remark AS "remark"
 	</sql>
-	
+
 	<sql id="busipaeBillJoins">
+		LEFT JOIN doc_customer e ON e.id = a.custom_name
 	</sql>
-    
+
 	<select id="get" resultType="BusipaeBill">
-		SELECT 
+		SELECT
 			<include refid="busipaeBillColumns"/>
 		FROM busipae_bill a
 		<include refid="busipaeBillJoins"/>
 		WHERE a.id = #{id}
 	</select>
-	
+
 	<select id="findList" resultType="BusipaeBill">
-		SELECT 
+		SELECT
 			<include refid="busipaeBillColumns"/>
 		FROM busipae_bill a
 		<include refid="busipaeBillJoins"/>
 		<where>
-			
+			<if test="billDate != null and billDate != ''">
+				AND a.bill_date LIKE
+				<if test="dbName == 'oracle'">'%'||#{billDate}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{billDate}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{billDate}, '%')</if>
+			</if>
+			<if test="customName != null and customName != ''">
+				AND a.custom_name LIKE
+				<if test="dbName == 'oracle'">'%'||#{customName}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{customName}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{customName}, '%')</if>
+			</if>
 		</where>
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
@@ -50,15 +64,15 @@
 			</otherwise>
 		</choose>
 	</select>
-	
+
 	<select id="findAllList" resultType="BusipaeBill">
-		SELECT 
+		SELECT
 			<include refid="busipaeBillColumns"/>
 		FROM busipae_bill a
 		<include refid="busipaeBillJoins"/>
 		<where>
-			
-		</where>		
+
+		</where>
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
 				ORDER BY ${page.orderBy}
@@ -67,7 +81,7 @@
 			</otherwise>
 		</choose>
 	</select>
-	
+
 	<insert id="insert">
 		INSERT INTO busipae_bill(
 			bill_no,
@@ -90,7 +104,7 @@
 		) VALUES (
 			#{billNo},
 			#{billDate},
-			#{customName},
+			#{docCustomer.id},
 			#{customAbbr},
 			#{projectName},
 			#{billDirection},
@@ -107,12 +121,12 @@
 			#{remark}
 		)
 	</insert>
-	
+
 	<update id="update">
-		UPDATE busipae_bill SET 	
+		UPDATE busipae_bill SET
 			bill_no = #{billNo},
 			bill_date = #{billDate},
-			custom_name = #{customName},
+			custom_name = #{docCustomer.id},
 			custom_abbr = #{customAbbr},
 			project_name = #{projectName},
 			bill_direction = #{billDirection},
@@ -129,10 +143,10 @@
 			remark = #{remark}
 		WHERE id = #{id}
 	</update>
-	
+
 	<update id="delete">
 		DELETE FROM busipae_bill
 		WHERE id = #{id}
 	</update>
-	
+
 </mapper>

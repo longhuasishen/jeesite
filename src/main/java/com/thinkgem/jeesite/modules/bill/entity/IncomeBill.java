@@ -3,6 +3,8 @@
  */
 package com.thinkgem.jeesite.modules.bill.entity;
 
+import com.thinkgem.jeesite.modules.doc.entity.DocCustomer;
+import com.thinkgem.jeesite.modules.doc.entity.DocPaymeth;
 import org.hibernate.validator.constraints.Length;
 
 import com.thinkgem.jeesite.common.persistence.DataEntity;
@@ -34,6 +36,25 @@ public class IncomeBill extends DataEntity<IncomeBill> {
 	private String extField2;		// ext_field2
 	private String extField3;		// ext_field3
 	private String remark;		// remark
+
+	public DocCustomer getDocCustomer() {
+		return docCustomer;
+	}
+
+	public void setDocCustomer(DocCustomer docCustomer) {
+		this.docCustomer = docCustomer;
+	}
+
+	public DocPaymeth getDocPaymeth() {
+		return docPaymeth;
+	}
+
+	public void setDocPaymeth(DocPaymeth docPaymeth) {
+		this.docPaymeth = docPaymeth;
+	}
+
+	private DocCustomer docCustomer;
+	private DocPaymeth docPaymeth;
 	
 	public IncomeBill() {
 		super();
