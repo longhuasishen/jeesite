@@ -97,8 +97,21 @@
 			#{extField3}
 		)
 	</insert>
-	
-	<update id="update">
+    <insert id="saveList" parameterType="java.util.List">
+		insert into contract_purchase_detail(
+		contract_code,kind_code,kind_name,kind_level,first_unit,item_amount,item_number,item_price,conversion_rate,other_rate,is_complete
+		)
+		values
+		<foreach collection="list" item="item" index="index" separator=",">
+			(#{item.contractCode}, #{item.kindCode}, #{item.kindName},
+			#{item.kindLevel}, #{item.firstUnit}, #{item.itemAmount},
+			#{item.itemNumber,jdbcType=TIMESTAMP}, #{item.itemPrice}, #{item.conversionRate},
+			#{item.otherRate}, #{item.isComplete}
+			)
+		</foreach>
+	</insert>
+
+    <update id="update">
 		UPDATE contract_purchase_detail SET 	
 			contract_code = #{contractCode},
 			kind_code = #{kindCode},

@@ -58,7 +58,7 @@ function saveRowById(obj) {
 }
 
 function getTableDatasById(tableId) {
-    var tableArray = [];
+    /*var tableArray = [];
     $("#"+tableId+" tbody").find("tr").each(function () {
         var tdArray = [];
         var obj = $(this);
@@ -69,6 +69,8 @@ function getTableDatasById(tableId) {
             }
         });
         tableArray.push(tdArray);
-    });
-    return tableArray;
+    });*/
+    var o = jQuery("#jqGrid");
+    var rows = o.jqGrid('getRowData');
+    return encodeHtml(JSON.stringify(rows));
 }

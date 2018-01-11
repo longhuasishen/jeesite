@@ -55,6 +55,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<downloadSources>true</downloadSources>
 		<lombok.version>1.16.10</lombok.version>
+		<netsf.version>2.4</netsf.version>
 	</properties>
 	
 	<!-- 设定主仓库，按设定顺序进行查找。 -->
@@ -251,6 +252,12 @@
 			<artifactId>jsp-api</artifactId>
 			<version>2.1</version>
 			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.json-lib</groupId>
+			<artifactId>json-lib</artifactId>
+			<version>${netsf.version}</version>
+			<classifier>jdk15</classifier>
 		</dependency>
 		<!-- <dependency>
 			<groupId>javax.servlet</groupId>

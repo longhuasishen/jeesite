@@ -6,7 +6,9 @@
 	<meta name="decorator" content="default"/>
 	<script type="text/javascript">
 		$(document).ready(function() {
-
+			$("#contentTable tr").on("mouseenter",function () {
+                $(this).css("cursor","pointer");
+            })
 		});
 		function page(n,s){
 			$("#pageNo").val(n);
@@ -22,6 +24,11 @@
 			$("#uvalue").val($(tds[4]).text());
 //			alert(contractCode);
 			$(obj).css("background","yellow");
+			$(obj).parent().find("tr").each(function(){
+			   if(parseInt(this.rowIndex,10) != parseInt(obj.rowIndex,10)){
+                   $(this).css("background","");
+			   }
+			});
         }
 	</script>
 </head>
@@ -30,7 +37,7 @@
 	<input type="text" value="" hidden="hidden" id="nvalue" style="display: none;"/>
 	<input type="text" value="" hidden="hidden" id="lvalue" style="display: none;"/>
 	<input type="text" value="" hidden="hidden" id="uvalue" style="display: none;"/>
-	<table id="contentTable" class="table table-striped table-bordered table-condensed">
+	<table id="contentTable" class="table table-bordered table-condensed">
 		<thead>
 		<tr>
 			<th>品种编码</th>

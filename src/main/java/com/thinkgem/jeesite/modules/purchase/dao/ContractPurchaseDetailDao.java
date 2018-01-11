@@ -7,6 +7,8 @@ import com.thinkgem.jeesite.common.persistence.CrudDao;
 import com.thinkgem.jeesite.common.persistence.annotation.MyBatisDao;
 import com.thinkgem.jeesite.modules.purchase.entity.ContractPurchaseDetail;
 
+import java.util.List;
+
 /**
  * 采购合同明细DAO接口
  * @author lisy
@@ -14,5 +16,5 @@ import com.thinkgem.jeesite.modules.purchase.entity.ContractPurchaseDetail;
  */
 @MyBatisDao
 public interface ContractPurchaseDetailDao extends CrudDao<ContractPurchaseDetail> {
-	
+	public void saveList(List<ContractPurchaseDetail> detailList);
 }

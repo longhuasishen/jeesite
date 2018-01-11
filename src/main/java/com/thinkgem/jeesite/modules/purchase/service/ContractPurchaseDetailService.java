@@ -38,6 +38,10 @@ public class ContractPurchaseDetailService extends CrudService<ContractPurchaseD
 	public void save(ContractPurchaseDetail contractPurchaseDetail) {
 		super.save(contractPurchaseDetail);
 	}
+	@Transactional(readOnly = false)
+	public void saveList(List<ContractPurchaseDetail> detailList) {
+		dao.saveList(detailList);
+	}
 	
 	@Transactional(readOnly = false)
 	public void delete(ContractPurchaseDetail contractPurchaseDetail) {
