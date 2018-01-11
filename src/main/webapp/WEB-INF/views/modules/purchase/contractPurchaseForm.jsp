@@ -437,7 +437,7 @@
                             }
                         ],
                         loadonce : true,
-                        onSelectRow: editRow, // the javascript function to call on row click. will ues to to put the row in edit mode
+//                        onSelectRow: editRow, // the javascript function to call on row click. will ues to to put the row in edit mode
                         viewrecords: true,
                         caption: "采购明细单列表",
                         rowList: [10, 20, 30],//用于改变显示行数的下拉列表框的元素数组。
@@ -473,9 +473,12 @@
                                 		var uvalue = h.find("iframe")[0].contentWindow.document.getElementById('uvalue').value;
                                 		if(svalue !=""&& svalue!="undefined"&&svalue!=null){
                                             $("#kindCode").val(svalue);
-                                            $("#"+id+"_kindName").val(nvalue);
-                                            $("#"+id+"_kindLevel").val(lvalue);
-                                            $("#"+id+"_firstUnit").val(uvalue);
+                                            $("#"+id.value+"_kindName").val(nvalue);
+                                            $("#"+id.value+"_kindLevel").val(lvalue);
+                                            $("#"+id.value+"_firstUnit").val(uvalue);
+                                            $("#jqg"+id.value+"_kindName").val(nvalue);
+                                            $("#jqg"+id.value+"_kindLevel").val(lvalue);
+                                            $("#jqg"+id.value+"_firstUnit").val(uvalue);
 										}
                             		}
 								}
@@ -532,7 +535,11 @@
                             return $(elem).find("input:radio:checked").val();
                         }
                     }
-//                    $('#jqGrid').jqGrid('saveRow',id,{url:'clientArray'});
+                    /*$('#jqGrid').jqGrid('editRow',id,{url:'clientArray',oneditfunc:function(){
+                        $("#userButton").unbind("click").click(function(){
+                            searchKind(id);
+                        });
+					}});*/
                     $('#jqGrid').navGrid("#jqGridPager", {edit: false, add: false, del: false, refresh: false, view: false});
                     $('#jqGrid').inlineNav('#jqGridPager',
                         // the buttons to appear on the toolbar of the grid
@@ -543,9 +550,21 @@
                             cancel: true,
                             editParams: {
                                 keys: true,
+								oneditfunc:function () {
+                                    $("#userButton").unbind("click").click(function(){
+                                        searchKind(id);
+                                    });
+                                }
                             },
                             addParams: {
-                                keys: true
+                                keys: true,
+                                addRowParams:{
+                                    oneditfunc:function () {
+                                        $("#userButton").unbind("click").click(function(){
+                                            searchKind(id);
+                                        });
+                                    }
+                                }
                             }
                         }
 					);
