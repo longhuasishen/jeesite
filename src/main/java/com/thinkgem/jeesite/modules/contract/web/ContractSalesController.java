@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.thinkgem.jeesite.modules.doc.entity.DocConcretetyp;
+import com.thinkgem.jeesite.modules.sys.utils.UserUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -64,6 +65,7 @@ public class ContractSalesController extends BaseController {
 	@RequiresPermissions("contract:contractSales:view")
 	@RequestMapping(value = "form")
 	public String form(ContractSales contractSales, Model model) {
+		model.addAttribute("user", UserUtils.getUser());
 		model.addAttribute("contractSales", contractSales);
 		return "modules/contract/contractSalesForm";
 	}

@@ -4,18 +4,24 @@
     
 	<sql id="docDriverColumns">
 		a.id AS "id",
-		a.driver_code AS "driverCode",
+		a.driver_code AS "docOfficework.id",
 		a.driver_name AS "driverName",
-		a.car_no AS "carNo",
+		a.car_no AS "docCar.id",
 		a.licence_no AS "licenceNo",
 		a.comment AS "comment",
 		a.ext_field1 AS "extField1",
 		a.ext_field2 AS "extField2",
 		a.ext_field3 AS "extField3",
+		c.officework_code AS "docOfficework.officeworkCode",
+		c.officework_name AS "docOfficework.officeworkName",
+		d.car_code AS "docCar.carCode",
+		d.car_no AS "docCar.carNo",
 		a.remark AS "remark"
 	</sql>
 	
 	<sql id="docDriverJoins">
+		LEFT JOIN doc_officework c ON c.id = a.driver_code
+		LEFT JOIN doc_car d ON d.id = a.car_no
 	</sql>
     
 	<select id="get" resultType="DocDriver">
@@ -95,9 +101,9 @@
 			ext_field3,
 			remark
 		) VALUES (
-			#{driverCode},
+			#{docOfficework.id},
 			#{driverName},
-			#{carNo},
+			#{docCar.id},
 			#{licenceNo},
 			#{comment},
 			#{extField1},
@@ -109,9 +115,9 @@
 	
 	<update id="update">
 		UPDATE doc_driver SET 	
-			driver_code = #{driverCode},
+			driver_code = #{docOfficework.id},
 			driver_name = #{driverName},
-			car_no = #{carNo},
+			car_no = #{docCar.id},
 			licence_no = #{licenceNo},
 			comment = #{comment},
 			ext_field1 = #{extField1},

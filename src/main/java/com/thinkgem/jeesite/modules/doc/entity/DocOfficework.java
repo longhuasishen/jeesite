@@ -49,6 +49,16 @@ public class DocOfficework extends DataEntity<DocOfficework> {
 	private String extField2;		// ext_field2
 	private String extField3;		// ext_field3
 	private String remark;		// remark
+
+	public DocDepartment getDocDepartment() {
+		return docDepartment;
+	}
+
+	public void setDocDepartment(DocDepartment docDepartment) {
+		this.docDepartment = docDepartment;
+	}
+
+	private DocDepartment docDepartment;
 	
 	public DocOfficework() {
 		super();

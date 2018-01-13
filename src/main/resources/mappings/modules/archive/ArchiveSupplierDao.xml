@@ -29,7 +29,18 @@
 		FROM archive_supplier a
 		<include refid="archiveSupplierJoins"/>
 		<where>
-			
+			<if test="supplierCode != null and supplierCode != ''">
+				AND a.supplier_code LIKE
+				<if test="dbName == 'oracle'">'%'||#{supplierCode}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{supplierCode}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{supplierCode}, '%')</if>
+			</if>
+			<if test="supplierName != null and supplierName != ''">
+				AND a.supplier_name LIKE
+				<if test="dbName == 'oracle'">'%'||#{supplierName}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{supplierName}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{supplierName}, '%')</if>
+			</if>
 		</where>
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">

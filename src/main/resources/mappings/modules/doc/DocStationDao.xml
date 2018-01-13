@@ -6,14 +6,17 @@
 		a.id AS "id",
 		a.station_code AS "stationCode",
 		a.station_name AS "stationName",
-		a.repertory_name AS "repertoryName",
+		a.repertory_name AS "docRepertory.id",
 		a.ext_field1 AS "extField1",
 		a.ext_field2 AS "extField2",
 		a.ext_field3 AS "extField3",
+		d.repertory_code AS "docRepertory.repertoryCode",
+		d.repertory_name AS "docRepertory.repertoryName",
 		a.remark AS "remark"
 	</sql>
 	
 	<sql id="docStationJoins">
+		LEFT JOIN doc_repertory d ON d.id = a.repertory_name
 	</sql>
     
 	<select id="get" resultType="DocStation">
@@ -88,7 +91,7 @@
 		) VALUES (
 			#{stationCode},
 			#{stationName},
-			#{repertoryName},
+			#{docRepertory.id},
 			#{extField1},
 			#{extField2},
 			#{extField3},
@@ -100,7 +103,7 @@
 		UPDATE doc_station SET 	
 			station_code = #{stationCode},
 			station_name = #{stationName},
-			repertory_name = #{repertoryName},
+			repertory_name = #{docRepertory.id},
 			ext_field1 = #{extField1},
 			ext_field2 = #{extField2},
 			ext_field3 = #{extField3},

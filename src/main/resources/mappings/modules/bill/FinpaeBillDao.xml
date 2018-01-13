@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.bill.dao.FinpaeBillDao">
+    
+	<sql id="finpaeBillColumns">
+		a.id AS "id",
+		a.bill_no AS "billNo",
+		a.bill_date AS "billDate",
+		a.custom_name AS "docCustomer.id",
+		a.custom_abbr AS "customAbbr",
+		a.project_name AS "projectName",
+		a.bill_direction AS "billDirection",
+		a.bill_amt AS "billAmt",
+		a.create_person AS "createPerson",
+		a.check_person AS "checkPerson",
+		a.make_date AS "makeDate",
+		a.check_date AS "checkDate",
+		a.bill_status AS "billStatus",
+		a.fin_remark AS "finRemark",
+		a.ext_field1 AS "extField1",
+		a.ext_field2 AS "extField2",
+		a.ext_field3 AS "extField3",
+		e.cus_code AS "docCustomer.cusCode",
+		e.cus_name AS "docCustomer.cusName",
+		a.remark AS "remark"
+	</sql>
+	
+	<sql id="finpaeBillJoins">
+		LEFT JOIN doc_customer e ON e.id = a.custom_name
+	</sql>
+    
+	<select id="get" resultType="FinpaeBill">
+		SELECT 
+			<include refid="finpaeBillColumns"/>
+		FROM finpae_bill a
+		<include refid="finpaeBillJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="FinpaeBill">
+		SELECT 
+			<include refid="finpaeBillColumns"/>
+		FROM finpae_bill a
+		<include refid="finpaeBillJoins"/>
+		<where>
+			<if test="billDate != null and billDate != ''">
+				AND a.bill_date LIKE
+				<if test="dbName == 'oracle'">'%'||#{billDate}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{billDate}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{billDate}, '%')</if>
+			</if>
+			<if test="customName != null and customName != ''">
+				AND a.custom_name LIKE
+				<if test="dbName == 'oracle'">'%'||#{customName}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{customName}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{customName}, '%')</if>
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="FinpaeBill">
+		SELECT 
+			<include refid="finpaeBillColumns"/>
+		FROM finpae_bill a
+		<include refid="finpaeBillJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO finpae_bill(
+			bill_no,
+			bill_date,
+			custom_name,
+			custom_abbr,
+			project_name,
+			bill_direction,
+			bill_amt,
+			create_person,
+			check_person,
+			make_date,
+			check_date,
+			bill_status,
+			fin_remark,
+			ext_field1,
+			ext_field2,
+			ext_field3,
+			remark
+		) VALUES (
+			#{billNo},
+			#{billDate},
+			#{docCustomer.id},
+			#{customAbbr},
+			#{projectName},
+			#{billDirection},
+			#{billAmt},
+			#{createPerson},
+			#{checkPerson},
+			#{makeDate},
+			#{checkDate},
+			#{billStatus},
+			#{finRemark},
+			#{extField1},
+			#{extField2},
+			#{extField3},
+			#{remark}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE finpae_bill SET 	
+			bill_no = #{billNo},
+			bill_date = #{billDate},
+			custom_name = #{docCustomer.id},
+			custom_abbr = #{customAbbr},
+			project_name = #{projectName},
+			bill_direction = #{billDirection},
+			bill_amt = #{billAmt},
+			create_person = #{createPerson},
+			check_person = #{checkPerson},
+			make_date = #{makeDate},
+			check_date = #{checkDate},
+			bill_status = #{billStatus},
+			fin_remark = #{finRemark},
+			ext_field1 = #{extField1},
+			ext_field2 = #{extField2},
+			ext_field3 = #{extField3},
+			remark = #{remark}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM finpae_bill
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

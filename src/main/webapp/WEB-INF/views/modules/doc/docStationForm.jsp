@@ -43,13 +43,16 @@
 		<div class="control-group">
 			<label class="control-label">搅拌站名称：</label>
 			<div class="controls">
-				<form:input path="stationName" htmlEscape="false" maxlength="120" class="input-xlarge "/>
+				<form:input path="stationName" htmlEscape="false" maxlength="120" class="input-xlarge required"/>
+				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">仓库名称：</label>
 			<div class="controls">
-				<form:input path="repertoryName" htmlEscape="false" maxlength="120" class="input-xlarge "/>
+				<sys:treeselect id="repertoryName" name="docRepertory.id" value="${docStation.docRepertory.id}" labelName="docRepertory.repertoryName" labelValue="${docStation.docRepertory.repertoryName}"
+								title="仓库档案" url="/doc/docRepertory/treeData" cssClass="required"/>
+				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">

@@ -31,21 +31,6 @@
 			<li><label>部门名称：</label>
 				<form:input path="departmentName" htmlEscape="false" maxlength="200" class="input-medium"/>
 			</li>
-			<li><label>所属分类：</label>
-				<form:input path="departmentCategory" htmlEscape="false" maxlength="200" class="input-medium"/>
-			</li>
-			<li><label>负责人：</label>
-				<form:input path="managerPerson" htmlEscape="false" maxlength="200" class="input-medium"/>
-			</li>
-			<li><label>联系电话：</label>
-				<form:input path="phoneNo" htmlEscape="false" maxlength="200" class="input-medium"/>
-			</li>
-			<li><label>地址：</label>
-				<form:input path="firstUnit" htmlEscape="false" maxlength="200" class="input-medium"/>
-			</li>
-			<li><label>备注：</label>
-				<form:input path="comment" htmlEscape="false" maxlength="200" class="input-medium"/>
-			</li>
 			<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
 			<li class="clearfix"></li>
 		</ul>
@@ -74,7 +59,7 @@
 						${fns:abbr(docDepartment.departmentName,50)}
 				</td>
 				<td>
-						${fns:abbr(docDepartment.departmentCategory,50)}
+						${fns:abbr(docDepartment.archiveDepartment.departmentName,50)}
 				</td>
 				<td>
 						${fns:abbr(docDepartment.managerPerson,50)}

@@ -6,22 +6,31 @@
 		a.id AS "id",
 		a.repertory_code AS "repertoryCode",
 		a.repertory_name AS "repertoryName",
-		a.kind_category AS "kindCategory",
-		a.repertory_department AS "repertoryDepartment",
+		a.kind_category AS "archiveRepertory.id",
+		a.repertory_department AS "docDepartment.id",
 		a.manager_person AS "managerPerson",
 		a.phone_no AS "phoneNo",
 		a.max_stock AS "maxStock",
 		a.pricing_method AS "pricingMethod",
 		a.repertory_addr AS "repertoryAddr",
-		a.repertory_station AS "repertoryStation",
+		a.repertory_station AS "docStation.id",
 		a.comment AS "comment",
 		a.ext_field1 AS "extField1",
 		a.ext_field2 AS "extField2",
 		a.ext_field3 AS "extField3",
+		c.repertory_code AS "archiveRepertory.repertoryCode",
+		c.repertory_name AS "archiveRepertory.repertoryName",
+		d.department_code AS "docDepartment.departmentCode",
+		d.department_name AS "docDepartment.departmentName",
+		e.station_code AS "docStation.stationCode",
+		e.station_name AS "docStation.stationName",
 		a.remark AS "remark"
 	</sql>
 	
 	<sql id="docRepertoryJoins">
+		LEFT JOIN archive_repertory c ON c.id = a.kind_category
+		LEFT JOIN doc_department d ON d.id = a.repertory_department
+		LEFT JOIN doc_station e ON e.id = a.repertory_station
 	</sql>
     
 	<select id="get" resultType="DocRepertory">
@@ -97,14 +106,14 @@
 		) VALUES (
 			#{repertoryCode},
 			#{repertoryName},
-			#{kindCategory},
-			#{repertoryDepartment},
+			#{archiveRepertory.id},
+			#{docDepartment.id},
 			#{managerPerson},
 			#{phoneNo},
 			#{maxStock},
 			#{pricingMethod},
 			#{repertoryAddr},
-			#{repertoryStation},
+			#{docStation.id},
 			#{comment},
 			#{extField1},
 			#{extField2},
@@ -117,14 +126,14 @@
 		UPDATE doc_repertory SET 	
 			repertory_code = #{repertoryCode},
 			repertory_name = #{repertoryName},
-			kind_category = #{kindCategory},
-			repertory_department = #{repertoryDepartment},
+			kind_category = #{archiveRepertory.id},
+			repertory_department = #{docDepartment.id},
 			manager_person = #{managerPerson},
 			phone_no = #{phoneNo},
 			max_stock = #{maxStock},
 			pricing_method = #{pricingMethod},
 			repertory_addr = #{repertoryAddr},
-			repertory_station = #{repertoryStation},
+			repertory_station = #{docStation.id},
 			comment = #{comment},
 			ext_field1 = #{extField1},
 			ext_field2 = #{extField2},

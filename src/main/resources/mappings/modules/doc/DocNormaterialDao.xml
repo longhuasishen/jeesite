@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.thinkgem.jeesite.modules.doc.dao.DocNormaterialDao">
-    
+
 	<sql id="docNormaterialColumns">
 		a.id AS "id",
 		a.kind_code AS "kindCode",
 		a.kind_name AS "kindName",
 		a.kind_level AS "kindLevel",
 		a.stand_name AS "standName",
-		a.kind_category AS "kindCategory",
-		a.kind_type AS "kindType",
+		a.kind_category AS "archiveMaterial.id",
+		a.kind_type AS "docConcretetyp.id",
 		a.sec_unit AS "secUnit",
 		a.first_unit AS "firstUnit",
 		a.rate AS "rate",
-		a.primary_provider AS "primaryProvider",
+		a.primary_provider AS "docSupplier.id",
 		a.pricing_mode AS "pricingMode",
 		a.brand_name AS "brandName",
 		a.sales AS "sales",
@@ -37,23 +37,32 @@
 		a.ext_field1 AS "extField1",
 		a.ext_field2 AS "extField2",
 		a.ext_field3 AS "extField3",
+		c.material_code AS "archiveMaterial.materialCode",
+		c.material_name AS "archiveMaterial.materialName",
+		d.concretetyp_code AS "docConcretetyp.concretetypCode",
+		d.concretetyp_name AS "docConcretetyp.concretetypName",
+		e.sup_code AS "docSupplier.supCode",
+		e.sup_name AS "docSupplier.supName",
 		a.remark AS "remark"
 	</sql>
-	
+
 	<sql id="docNormaterialJoins">
+		LEFT JOIN archive_material c ON c.id = a.kind_category
+		LEFT JOIN doc_concretetyp d ON d.id = a.kind_type
+		LEFT JOIN doc_supplier e ON e.id = a.primary_provider
 	</sql>
-    
+
 	<select id="get" resultType="DocNormaterial">
-		SELECT 
-			<include refid="docNormaterialColumns"/>
+		SELECT
+		<include refid="docNormaterialColumns"/>
 		FROM doc_normaterial a
 		<include refid="docNormaterialJoins"/>
 		WHERE a.id = #{id}
 	</select>
-	
+
 	<select id="findList" resultType="DocNormaterial">
-		SELECT 
-			<include refid="docNormaterialColumns"/>
+		SELECT
+		<include refid="docNormaterialColumns"/>
 		FROM doc_normaterial a
 		<include refid="docNormaterialJoins"/>
 		<where>
@@ -78,15 +87,15 @@
 			</otherwise>
 		</choose>
 	</select>
-	
+
 	<select id="findAllList" resultType="DocNormaterial">
-		SELECT 
-			<include refid="docNormaterialColumns"/>
+		SELECT
+		<include refid="docNormaterialColumns"/>
 		FROM doc_normaterial a
 		<include refid="docNormaterialJoins"/>
 		<where>
-			
-		</where>		
+
+		</where>
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
 				ORDER BY ${page.orderBy}
@@ -95,123 +104,123 @@
 			</otherwise>
 		</choose>
 	</select>
-	
+
 	<insert id="insert">
 		INSERT INTO doc_normaterial(
-			kind_code,
-			kind_name,
-			kind_level,
-			stand_name,
-			kind_category,
-			kind_type,
-			sec_unit,
-			first_unit,
-			rate,
-			primary_provider,
-			pricing_mode,
-			brand_name,
-			sales,
-			outsourcing,
-			mad_self,
-			tax_service,
-			comp_set,
-			mortar,
-			min_inventory,
-			cost_prices,
-			max_inventory,
-			sum_control,
-			save_inventory,
-			stock_stand,
-			abc_category,
-			tax_rate,
-			quality_manage,
-			bat_manage,
-			entrust_manage,
-			stock_manage,
-			ext_field1,
-			ext_field2,
-			ext_field3,
-			remark
+		kind_code,
+		kind_name,
+		kind_level,
+		stand_name,
+		kind_category,
+		kind_type,
+		sec_unit,
+		first_unit,
+		rate,
+		primary_provider,
+		pricing_mode,
+		brand_name,
+		sales,
+		outsourcing,
+		mad_self,
+		tax_service,
+		comp_set,
+		mortar,
+		min_inventory,
+		cost_prices,
+		max_inventory,
+		sum_control,
+		save_inventory,
+		stock_stand,
+		abc_category,
+		tax_rate,
+		quality_manage,
+		bat_manage,
+		entrust_manage,
+		stock_manage,
+		ext_field1,
+		ext_field2,
+		ext_field3,
+		remark
 		) VALUES (
-			#{kindCode},
-			#{kindName},
-			#{kindLevel},
-			#{standName},
-			#{kindCategory},
-			#{kindType},
-			#{secUnit},
-			#{firstUnit},
-			#{rate},
-			#{primaryProvider},
-			#{pricingMode},
-			#{brandName},
-			#{sales},
-			#{outsourcing},
-			#{madSelf},
-			#{taxService},
-			#{compSet},
-			#{mortar},
-			#{minInventory},
-			#{costPrices},
-			#{maxInventory},
-			#{sumControl},
-			#{saveInventory},
-			#{stockStand},
-			#{abcCategory},
-			#{taxRate},
-			#{qualityManage},
-			#{batManage},
-			#{entrustManage},
-			#{stockManage},
-			#{extField1},
-			#{extField2},
-			#{extField3},
-			#{remark}
+		#{kindCode},
+		#{kindName},
+		#{kindLevel},
+		#{standName},
+		#{archiveMaterial.id},
+		#{docConcretetyp.id},
+		#{secUnit},
+		#{firstUnit},
+		#{rate},
+		#{docSupplier.id},
+		#{pricingMode},
+		#{brandName},
+		#{sales},
+		#{outsourcing},
+		#{madSelf},
+		#{taxService},
+		#{compSet},
+		#{mortar},
+		#{minInventory},
+		#{costPrices},
+		#{maxInventory},
+		#{sumControl},
+		#{saveInventory},
+		#{stockStand},
+		#{abcCategory},
+		#{taxRate},
+		#{qualityManage},
+		#{batManage},
+		#{entrustManage},
+		#{stockManage},
+		#{extField1},
+		#{extField2},
+		#{extField3},
+		#{remark}
 		)
 	</insert>
-	
+
 	<update id="update">
-		UPDATE doc_normaterial SET 	
-			kind_code = #{kindCode},
-			kind_name = #{kindName},
-			kind_level = #{kindLevel},
-			stand_name = #{standName},
-			kind_category = #{kindCategory},
-			kind_type = #{kindType},
-			sec_unit = #{secUnit},
-			first_unit = #{firstUnit},
-			rate = #{rate},
-			primary_provider = #{primaryProvider},
-			pricing_mode = #{pricingMode},
-			brand_name = #{brandName},
-			sales = #{sales},
-			outsourcing = #{outsourcing},
-			mad_self = #{madSelf},
-			tax_service = #{taxService},
-			comp_set = #{compSet},
-			mortar = #{mortar},
-			min_inventory = #{minInventory},
-			cost_prices = #{costPrices},
-			max_inventory = #{maxInventory},
-			sum_control = #{sumControl},
-			save_inventory = #{saveInventory},
-			stock_stand = #{stockStand},
-			abc_category = #{abcCategory},
-			tax_rate = #{taxRate},
-			quality_manage = #{qualityManage},
-			bat_manage = #{batManage},
-			entrust_manage = #{entrustManage},
-			stock_manage = #{stockManage},
-			ext_field1 = #{extField1},
-			ext_field2 = #{extField2},
-			ext_field3 = #{extField3},
-			remark = #{remark}
+		UPDATE doc_normaterial SET
+		kind_code = #{kindCode},
+		kind_name = #{kindName},
+		kind_level = #{kindLevel},
+		stand_name = #{standName},
+		kind_category = #{archiveMaterial.id},
+		kind_type = #{docConcretetyp.id},
+		sec_unit = #{secUnit},
+		first_unit = #{firstUnit},
+		rate = #{rate},
+		primary_provider = #{docSupplier.id},
+		pricing_mode = #{pricingMode},
+		brand_name = #{brandName},
+		sales = #{sales},
+		outsourcing = #{outsourcing},
+		mad_self = #{madSelf},
+		tax_service = #{taxService},
+		comp_set = #{compSet},
+		mortar = #{mortar},
+		min_inventory = #{minInventory},
+		cost_prices = #{costPrices},
+		max_inventory = #{maxInventory},
+		sum_control = #{sumControl},
+		save_inventory = #{saveInventory},
+		stock_stand = #{stockStand},
+		abc_category = #{abcCategory},
+		tax_rate = #{taxRate},
+		quality_manage = #{qualityManage},
+		bat_manage = #{batManage},
+		entrust_manage = #{entrustManage},
+		stock_manage = #{stockManage},
+		ext_field1 = #{extField1},
+		ext_field2 = #{extField2},
+		ext_field3 = #{extField3},
+		remark = #{remark}
 		WHERE id = #{id}
 	</update>
-	
+
 	<update id="delete">
 		DELETE FROM doc_normaterial
 		WHERE id = #{id}
 	</update>
-	
+
 </mapper>

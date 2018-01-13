@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.produces.dao.ProduceDesignDao">
+    
+	<sql id="produceDesignColumns">
+		a.id AS "id",
+		a.notice_no AS "noticeNo",
+		a.goods_date AS "goodsDate",
+		a.first_date AS "firstDate",
+		a.custom_name AS "customName",
+		a.build_unit AS "buildUnit",
+		a.receive_unit AS "receiveUnit",
+		a.goods_count AS "goodsCount",
+		a.task_count AS "taskCount",
+		a.hetong_accmeth AS "hetongAccmeth",
+		a.kind_name AS "kindName",
+		a.build_site AS "buildSite",
+		a.water_meth AS "waterMeth",
+		a.locale_dispatch AS "localeDispatch",
+		a.beng_name AS "bengName",
+		a.distance AS "distance",
+		a.project_addr AS "projectAddr",
+		a.contact AS "contact",
+		a.special_require AS "specialRequire",
+		a.concrete_name AS "concreteName",
+		a.produce_dispatch AS "produceDispatch",
+		a.check_person AS "checkPerson",
+		a.cancle_person AS "canclePerson",
+		a.make_date AS "makeDate",
+		a.check_date AS "checkDate",
+		a.cancel_date AS "cancelDate",
+		a.salesman AS "salesman",
+		a.slumps AS "slumps",
+		a.status AS "status",
+		a.notice_flag AS "noticeFlag",
+		a.ext_field1 AS "extField1",
+		a.ext_field2 AS "extField2",
+		a.ext_field3 AS "extField3",
+		a.remark AS "remark"
+	</sql>
+	
+	<sql id="produceDesignJoins">
+	</sql>
+    
+	<select id="get" resultType="ProduceDesign">
+		SELECT 
+			<include refid="produceDesignColumns"/>
+		FROM produce_design a
+		<include refid="produceDesignJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="ProduceDesign">
+		SELECT 
+			<include refid="produceDesignColumns"/>
+		FROM produce_design a
+		<include refid="produceDesignJoins"/>
+		<where>
+			
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="ProduceDesign">
+		SELECT 
+			<include refid="produceDesignColumns"/>
+		FROM produce_design a
+		<include refid="produceDesignJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO produce_design(
+			notice_no,
+			goods_date,
+			first_date,
+			custom_name,
+			build_unit,
+			receive_unit,
+			goods_count,
+			task_count,
+			hetong_accmeth,
+			kind_name,
+			build_site,
+			water_meth,
+			locale_dispatch,
+			beng_name,
+			distance,
+			project_addr,
+			contact,
+			special_require,
+			concrete_name,
+			produce_dispatch,
+			check_person,
+			cancle_person,
+			make_date,
+			check_date,
+			cancel_date,
+			salesman,
+			slumps,
+			status,
+			notice_flag,
+			ext_field1,
+			ext_field2,
+			ext_field3,
+			remark
+		) VALUES (
+			#{noticeNo},
+			#{goodsDate},
+			#{firstDate},
+			#{customName},
+			#{buildUnit},
+			#{receiveUnit},
+			#{goodsCount},
+			#{taskCount},
+			#{hetongAccmeth},
+			#{kindName},
+			#{buildSite},
+			#{waterMeth},
+			#{localeDispatch},
+			#{bengName},
+			#{distance},
+			#{projectAddr},
+			#{contact},
+			#{specialRequire},
+			#{concreteName},
+			#{produceDispatch},
+			#{checkPerson},
+			#{canclePerson},
+			#{makeDate},
+			#{checkDate},
+			#{cancelDate},
+			#{salesman},
+			#{slumps},
+			#{status},
+			#{noticeFlag},
+			#{extField1},
+			#{extField2},
+			#{extField3},
+			#{remark}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE produce_design SET 	
+			notice_no = #{noticeNo},
+			goods_date = #{goodsDate},
+			first_date = #{firstDate},
+			custom_name = #{customName},
+			build_unit = #{buildUnit},
+			receive_unit = #{receiveUnit},
+			goods_count = #{goodsCount},
+			task_count = #{taskCount},
+			hetong_accmeth = #{hetongAccmeth},
+			kind_name = #{kindName},
+			build_site = #{buildSite},
+			water_meth = #{waterMeth},
+			locale_dispatch = #{localeDispatch},
+			beng_name = #{bengName},
+			distance = #{distance},
+			project_addr = #{projectAddr},
+			contact = #{contact},
+			special_require = #{specialRequire},
+			concrete_name = #{concreteName},
+			produce_dispatch = #{produceDispatch},
+			check_person = #{checkPerson},
+			cancle_person = #{canclePerson},
+			make_date = #{makeDate},
+			check_date = #{checkDate},
+			cancel_date = #{cancelDate},
+			salesman = #{salesman},
+			slumps = #{slumps},
+			status = #{status},
+			notice_flag = #{noticeFlag},
+			ext_field1 = #{extField1},
+			ext_field2 = #{extField2},
+			ext_field3 = #{extField3},
+			remark = #{remark}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM produce_design
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

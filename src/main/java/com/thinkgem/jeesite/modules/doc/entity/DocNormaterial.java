@@ -3,9 +3,12 @@
  */
 package com.thinkgem.jeesite.modules.doc.entity;
 
+import com.thinkgem.jeesite.modules.archive.entity.ArchiveMaterial;
 import org.hibernate.validator.constraints.Length;
 
 import com.thinkgem.jeesite.common.persistence.DataEntity;
+
+import java.util.List;
 
 /**
  * 普通物资档案Entity
@@ -49,6 +52,48 @@ public class DocNormaterial extends DataEntity<DocNormaterial> {
 	private String extField2;		// ext_field2
 	private String extField3;		// ext_field3
 	private String remark;		// remark
+
+	private List<String> childNormaterialList1;//原材料勾选1
+	private List<String> childNormaterialList2;//原材料勾选2
+
+	private ArchiveMaterial archiveMaterial;		// 原材料分类
+	private DocConcretetyp docConcretetyp;		// 原材料档案分类
+	private DocSupplier docSupplier;		// 供应商档案
+
+	public DocConcretetyp getDocConcretetyp() {
+		return docConcretetyp;
+	}
+	public void setDocConcretetyp(DocConcretetyp docConcretetyp) {
+		this.docConcretetyp = docConcretetyp;
+	}
+
+	public ArchiveMaterial getArchiveMaterial() {
+		return archiveMaterial;
+	}
+	public void setArchiveMaterial(ArchiveMaterial archiveMaterial) {
+		this.archiveMaterial = archiveMaterial;
+	}
+
+	public DocSupplier getDocSupplier() {
+		return docSupplier;
+	}
+
+	public void setDocSupplier(DocSupplier docSupplier) {
+		this.docSupplier = docSupplier;
+	}
+
+	public List<String> getChildNormaterialList1() {
+		return childNormaterialList1;
+	}
+	public void setChildNormaterialList1(List<String> childNormaterialList1) {
+		this.childNormaterialList1 = childNormaterialList1;
+	}
+	public List<String> getChildNormaterialList2() {
+		return childNormaterialList2;
+	}
+	public void setChildNormaterialList2(List<String> childNormaterialList2) {
+		this.childNormaterialList2 = childNormaterialList2;
+	}
 	
 	public DocNormaterial() {
 		super();

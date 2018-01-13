@@ -92,13 +92,13 @@ public class ArchiveMaterialController extends BaseController {
 	public List<Map<String, Object>> treeData(@RequestParam(required=false) String materialCode, HttpServletResponse response) {
 		List<Map<String, Object>> mapList = Lists.newArrayList();
 		ArchiveMaterial am = new ArchiveMaterial();
-		am.setMaterialCode(materialCode);
+//		am.setMaterialCode(materialCode);
 		List<ArchiveMaterial> list = archiveMaterialService.findList(am);
 		for (int i=0; i<list.size(); i++){
 			ArchiveMaterial e = list.get(i);
 			Map<String, Object> map = Maps.newHashMap();
 			map.put("id", e.getId());
-			map.put("name", e.getMaterialName());
+			map.put("name", e.getMaterialCode()+"["+e.getMaterialName()+"]");
 			map.put("code", e.getMaterialCode());
 
 			mapList.add(map);

@@ -22,6 +22,16 @@ public class DocPump extends DataEntity<DocPump> {
 	private String extField2;		// ext_field2
 	private String extField3;		// ext_field3
 	private String remark;		// remark
+
+	public DocCar getDocCar() {
+		return docCar;
+	}
+
+	public void setDocCar(DocCar docCar) {
+		this.docCar = docCar;
+	}
+
+	private DocCar docCar;
 	
 	public DocPump() {
 		super();

@@ -107,7 +107,7 @@ public class DocStationController extends BaseController {
 		for (int i=0; i<list.size(); i++){
 			DocStation e = list.get(i);
 			Map<String, Object> map = Maps.newHashMap();
-			map.put("id", e.getStationCode());
+			map.put("id", e.getId());
 			map.put("name", e.getStationName()+"["+e.getStationCode()+"]");
 
 			mapList.add(map);

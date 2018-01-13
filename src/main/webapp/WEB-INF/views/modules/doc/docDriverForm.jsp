@@ -23,6 +23,12 @@
 				}
 			});
 		});
+
+        function driverCodeTreeselectCallBack(v,h,f){
+            if("ok" == v){
+                $("#driverName").val($("#driverCodeName").val().substring(0,$("#driverCodeName").val().indexOf("[")));
+            }
+        }
 	</script>
 </head>
 <body>
@@ -36,20 +42,24 @@
 		<div class="control-group">
 			<label class="control-label">司机编码：</label>
 			<div class="controls">
-				<form:input path="driverCode" htmlEscape="false" maxlength="16" class="input-xlarge required"/>
+				<sys:treeselect id="driverCode" name="docOfficework.id" value="${docDriver.docOfficework.id}" labelName="docOfficework.officeworkName" labelValue="${docDriver.docOfficework.officeworkName}"
+								title="职员档案" url="/doc/docOfficework/treeData" cssClass="required"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">司机名称：</label>
 			<div class="controls">
-				<form:input path="driverName" htmlEscape="false" maxlength="120" class="input-xlarge "/>
+				<form:input path="driverName" htmlEscape="false" maxlength="120" class="input-xlarge required"/>
+				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">车牌号码：</label>
 			<div class="controls">
-				<form:input path="carNo" htmlEscape="false" maxlength="60" class="input-xlarge "/>
+				<sys:treeselect id="carNo" name="docCar.id" value="${docDriver.docCar.id}" labelName="docCar.carNo" labelValue="${docDriver.docCar.carNo}"
+								title="车辆档案" url="/doc/docCar/treeData" cssClass="required"/>
+				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">

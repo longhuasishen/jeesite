@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.bill.dao.IncomeBillDao">
+    
+	<sql id="incomeBillColumns">
+		a.id AS "id",
+		a.bill_no AS "billNo",
+		a.bill_date AS "billDate",
+		a.custom_name AS "docCustomer.id",
+		a.project_name AS "projectName",
+		a.pay_way AS "docPaymeth.id",
+		a.income_amount AS "incomeAmount",
+		a.with_no AS "withNo",
+		a.bank_name AS "bankName",
+		a.bank_acc AS "bankAcc",
+		a.check_status AS "checkStatus",
+		a.create_person AS "createPerson",
+		a.check_person AS "checkPerson",
+		a.make_date AS "makeDate",
+		a.check_date AS "checkDate",
+		a.income_remark AS "incomeRemark",
+		a.ext_field1 AS "extField1",
+		a.ext_field2 AS "extField2",
+		a.ext_field3 AS "extField3",
+		e.cus_code AS "docCustomer.cusCode",
+		e.cus_name AS "docCustomer.cusName",
+		c.paymeth_code AS "docPaymeth.paymethCode",
+		c.paymeth_name AS "docPaymeth.paymethName",
+		a.remark AS "remark"
+	</sql>
+	
+	<sql id="incomeBillJoins">
+		LEFT JOIN doc_customer e ON e.id = a.custom_name
+		LEFT JOIN doc_paymeth c ON c.id = a.pay_way
+	</sql>
+    
+	<select id="get" resultType="IncomeBill">
+		SELECT 
+			<include refid="incomeBillColumns"/>
+		FROM income_bill a
+		<include refid="incomeBillJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="IncomeBill">
+		SELECT 
+			<include refid="incomeBillColumns"/>
+		FROM income_bill a
+		<include refid="incomeBillJoins"/>
+		<where>
+			
+			<if test="billNo != null and billNo != ''">
+				AND a.bill_no  LIKE
+				<if test="dbName == 'mysql'">CONCAT('%', #{billNo}, '%')</if>
+			</if>
+			<if test="billDate != null and billDate != ''">
+				AND a.bill_date LIKE
+				<if test="dbName == 'mysql'">CONCAT('%', #{billDate}, '%')</if>
+			</if>
+			<if test="customName != null and customName != ''">
+				AND a.custom_name LIKE
+				<if test="dbName == 'mysql'">CONCAT('%', #{customName}, '%')</if>
+			</if>
+			<if test="projectName != null and projectName != ''">
+				AND a.project_name LIKE
+				<if test="dbName == 'mysql'">CONCAT('%', #{projectName}, '%')</if>
+			</if>
+			<if test="payWay != null and payWay != ''">
+				AND a.pay_way LIKE
+				<if test="dbName == 'mysql'">CONCAT('%', #{payWay}, '%')</if>
+			</if>
+			<if test="incomeAmount != null and incomeAmount != ''">
+				AND a.income_amount LIKE
+				<if test="dbName == 'mysql'">CONCAT('%', #{incomeAmount}, '%')</if>
+			</if>
+			<if test="withNo != null and withNo != ''">
+				AND a.with_no LIKE
+				<if test="dbName == 'mysql'">CONCAT('%', #{withNo}, '%')</if>
+			</if>
+			<if test="bankName != null and bankName != ''">
+				AND a.bank_name LIKE
+				<if test="dbName == 'mysql'">CONCAT('%', #{bankName}, '%')</if>
+			</if>
+			<if test="bankAcc != null and bankAcc != ''">
+				AND a.bank_acc LIKE
+				<if test="dbName == 'mysql'">CONCAT('%', #{bankAcc}, '%')</if>
+			</if>
+			<if test="checkStatus != null and checkStatus != ''">
+				AND a.check_status LIKE
+				<if test="dbName == 'mysql'">CONCAT('%', #{checkStatus}, '%')</if>
+			</if>
+			<if test="createPerson != null and createPerson != ''">
+				AND a.create_person LIKE
+				<if test="dbName == 'mysql'">CONCAT('%', #{createPerson}, '%')</if>
+			</if>
+			<if test="checkPerson != null and checkPerson != ''">
+				AND a.check_person LIKE
+				<if test="dbName == 'mysql'">CONCAT('%', #{checkPerson}, '%')</if>
+			</if>
+			<if test="makeDate != null and makeDate != ''">
+				AND a.make_date LIKE
+				<if test="dbName == 'mysql'">CONCAT('%', #{makeDate}, '%')</if>
+			</if>
+			<if test="checkDate != null and checkDate != ''">
+				AND a.check_date LIKE
+				<if test="dbName == 'mysql'">CONCAT('%', #{checkDate}, '%')</if>
+			</if>
+			<if test="incomeRemark != null and incomeRemark != ''">
+				AND a.income_remark LIKE
+				<if test="dbName == 'mysql'">CONCAT('%', #{incomeRemark}, '%')</if>
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="IncomeBill">
+		SELECT 
+			<include refid="incomeBillColumns"/>
+		FROM income_bill a
+		<include refid="incomeBillJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO income_bill(
+			bill_no,
+			bill_date,
+			custom_name,
+			project_name,
+			pay_way,
+			income_amount,
+			with_no,
+			bank_name,
+			bank_acc,
+			check_status,
+			create_person,
+			check_person,
+			make_date,
+			check_date,
+			income_remark,
+			ext_field1,
+			ext_field2,
+			ext_field3,
+			remark
+		) VALUES (
+			#{billNo},
+			#{billDate},
+			#{docCustomer.id},
+			#{projectName},
+			#{docPaymeth.id},
+			#{incomeAmount},
+			#{withNo},
+			#{bankName},
+			#{bankAcc},
+			#{checkStatus},
+			#{createPerson},
+			#{checkPerson},
+			#{makeDate},
+			#{checkDate},
+			#{incomeRemark},
+			#{extField1},
+			#{extField2},
+			#{extField3},
+			#{remark}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE income_bill SET 	
+			bill_no = #{billNo},
+			bill_date = #{billDate},
+			custom_name = #{docCustomer.id},
+			project_name = #{projectName},
+			pay_way = #{docPaymeth.id},
+			income_amount = #{incomeAmount},
+			with_no = #{withNo},
+			bank_name = #{bankName},
+			bank_acc = #{bankAcc},
+			check_status = #{checkStatus},
+			create_person = #{createPerson},
+			check_person = #{checkPerson},
+			make_date = #{makeDate},
+			check_date = #{checkDate},
+			income_remark = #{incomeRemark},
+			ext_field1 = #{extField1},
+			ext_field2 = #{extField2},
+			ext_field3 = #{extField3},
+			remark = #{remark}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM income_bill
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

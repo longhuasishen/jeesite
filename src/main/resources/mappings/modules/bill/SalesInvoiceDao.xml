@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.bill.dao.SalesInvoiceDao">
+    
+	<sql id="salesInvoiceColumns">
+		a.id AS "id",
+		a.invoice_no AS "invoiceNo",
+		a.invoice_date AS "invoiceDate",
+		a.custom_abbr AS "customAbbr",
+		a.tax_num AS "taxNum",
+		a.custom_acc AS "customAcc",
+		a.bank_name AS "bankName",
+		a.custom_phone AS "customPhone",
+		a.custom_addr AS "customAddr",
+		a.check_status AS "checkStatus",
+		a.create_person AS "createPerson",
+		a.check_person AS "checkPerson",
+		a.make_date AS "makeDate",
+		a.check_date AS "checkDate",
+		a.invoice_remark AS "invoiceRemark",
+		a.ext_field1 AS "extField1",
+		a.ext_field2 AS "extField2",
+		a.ext_field3 AS "extField3",
+		a.remark AS "remark"
+	</sql>
+	
+	<sql id="salesInvoiceJoins">
+	</sql>
+    
+	<select id="get" resultType="SalesInvoice">
+		SELECT 
+			<include refid="salesInvoiceColumns"/>
+		FROM sales_invoice a
+		<include refid="salesInvoiceJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="SalesInvoice">
+		SELECT 
+			<include refid="salesInvoiceColumns"/>
+		FROM sales_invoice a
+		<include refid="salesInvoiceJoins"/>
+		<where>
+			
+			<if test="invoiceNo != null and invoiceNo != ''">
+				AND a.invoice_no LIKE
+				<if test="dbName == 'mysql'">CONCAT('%', #{invoiceNo}, '%')</if>
+			</if>
+			<if test="invoiceDate != null and invoiceDate != ''">
+				AND a.invoice_date LIKE
+				<if test="dbName == 'mysql'">CONCAT('%', #{invoiceDate}, '%')</if>
+			</if>
+			<if test="customAbbr != null and customAbbr != ''">
+				AND a.custom_abbr LIKE
+				<if test="dbName == 'mysql'">CONCAT('%', #{customAbbr}, '%')</if>
+			</if>
+			<if test="taxNum != null and taxNum != ''">
+				AND a.tax_num LIKE
+				<if test="dbName == 'mysql'">CONCAT('%', #{taxNum}, '%')</if>
+			</if>
+			<if test="customAcc != null and customAcc != ''">
+				AND a.custom_acc LIKE
+				<if test="dbName == 'mysql'">CONCAT('%', #{customAcc}, '%')</if>
+			</if>
+			<if test="bankName != null and bankName != ''">
+				AND a.bank_name LIKE
+				<if test="dbName == 'mysql'">CONCAT('%', #{bankName}, '%')</if>
+			</if>
+			<if test="customPhone != null and customPhone != ''">
+				AND a.custom_phone LIKE
+				<if test="dbName == 'mysql'">CONCAT('%', #{customPhone}, '%')</if>
+			</if>
+			<if test="customAddr != null and customAddr != ''">
+				AND a.custom_addr LIKE
+				<if test="dbName == 'mysql'">CONCAT('%', #{customAddr}, '%')</if>
+			</if>
+			<if test="checkStatus != null and checkStatus != ''">
+				AND a.check_status LIKE
+				<if test="dbName == 'mysql'">CONCAT('%', #{checkStatus}, '%')</if>
+			</if>
+			<if test="createPerson != null and createPerson != ''">
+				AND a.create_person LIKE
+				<if test="dbName == 'mysql'">CONCAT('%', #{createPerson}, '%')</if>
+			</if>
+			<if test="checkPerson != null and checkPerson != ''">
+				AND a.check_person LIKE
+				<if test="dbName == 'mysql'">CONCAT('%', #{checkPerson}, '%')</if>
+			</if>
+			<if test="makeDate != null and makeDate != ''">
+				AND a.make_date LIKE
+				<if test="dbName == 'mysql'">CONCAT('%', #{makeDate}, '%')</if>
+			</if>
+			<if test="checkDate != null and checkDate != ''">
+				AND a.check_date LIKE
+				<if test="dbName == 'mysql'">CONCAT('%', #{checkDate}, '%')</if>
+			</if>
+			<if test="invoiceRemark != null and invoiceRemark != ''">
+				AND a.invoice_remark LIKE
+				<if test="dbName == 'mysql'">CONCAT('%', #{invoiceRemark}, '%')</if>
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="SalesInvoice">
+		SELECT 
+			<include refid="salesInvoiceColumns"/>
+		FROM sales_invoice a
+		<include refid="salesInvoiceJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO sales_invoice(
+			invoice_no,
+			invoice_date,
+			custom_abbr,
+			tax_num,
+			custom_acc,
+			bank_name,
+			custom_phone,
+			custom_addr,
+			check_status,
+			create_person,
+			check_person,
+			make_date,
+			check_date,
+			invoice_remark,
+			ext_field1,
+			ext_field2,
+			ext_field3,
+			remark
+		) VALUES (
+			#{invoiceNo},
+			#{invoiceDate},
+			#{customAbbr},
+			#{taxNum},
+			#{customAcc},
+			#{bankName},
+			#{customPhone},
+			#{customAddr},
+			#{checkStatus},
+			#{createPerson},
+			#{checkPerson},
+			#{makeDate},
+			#{checkDate},
+			#{invoiceRemark},
+			#{extField1},
+			#{extField2},
+			#{extField3},
+			#{remark}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE sales_invoice SET 	
+			invoice_no = #{invoiceNo},
+			invoice_date = #{invoiceDate},
+			custom_abbr = #{customAbbr},
+			tax_num = #{taxNum},
+			custom_acc = #{customAcc},
+			bank_name = #{bankName},
+			custom_phone = #{customPhone},
+			custom_addr = #{customAddr},
+			check_status = #{checkStatus},
+			create_person = #{createPerson},
+			check_person = #{checkPerson},
+			make_date = #{makeDate},
+			check_date = #{checkDate},
+			invoice_remark = #{invoiceRemark},
+			ext_field1 = #{extField1},
+			ext_field2 = #{extField2},
+			ext_field3 = #{extField3},
+			remark = #{remark}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM sales_invoice
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

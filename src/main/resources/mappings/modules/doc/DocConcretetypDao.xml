@@ -6,14 +6,17 @@
 		a.id AS "id",
 		a.concretetyp_code AS "concretetypCode",
 		a.concretetyp_name AS "concretetypName",
-		a.stock_name AS "stockName",
+		a.stock_name AS "archiveMaterial.id",
 		a.ext_field1 AS "extField1",
 		a.ext_field2 AS "extField2",
 		a.ext_field3 AS "extField3",
+		d.material_code AS "archiveMaterial.materialCode",
+		d.material_name AS "archiveMaterial.materialName",
 		a.remark AS "remark"
 	</sql>
 	
 	<sql id="docConcretetypJoins">
+		LEFT JOIN archive_material d ON d.id = a.stock_name
 	</sql>
     
 	<select id="get" resultType="DocConcretetyp">
@@ -87,7 +90,7 @@
 		) VALUES (
 			#{concretetypCode},
 			#{concretetypName},
-			#{stockName},
+			#{archiveMaterial.id},
 			#{extField1},
 			#{extField2},
 			#{extField3},
@@ -99,7 +102,7 @@
 		UPDATE doc_concretetyp SET 	
 			concretetyp_code = #{concretetypCode},
 			concretetyp_name = #{concretetypName},
-			stock_name = #{stockName},
+			stock_name = #{archiveMaterial.id},
 			ext_field1 = #{extField1},
 			ext_field2 = #{extField2},
 			ext_field3 = #{extField3},

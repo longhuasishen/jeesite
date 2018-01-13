@@ -5,111 +5,114 @@
 	<title>混凝土档案管理</title>
 	<meta name="decorator" content="default"/>
 	<script type="text/javascript">
-		$(document).ready(function() {
-			
-		});
-		function page(n,s){
-			$("#pageNo").val(n);
-			$("#pageSize").val(s);
-			$("#searchForm").submit();
-        	return false;
+        $(document).ready(function() {
+
+        });
+        function page(n,s){
+            $("#pageNo").val(n);
+            $("#pageSize").val(s);
+            $("#searchForm").submit();
+            return false;
         }
 	</script>
 </head>
 <body>
-	<ul class="nav nav-tabs">
-		<li class="active"><a href="${ctx}/doc/docBeton/">混凝土档案列表</a></li>
-		<shiro:hasPermission name="doc:docBeton:edit"><li><a href="${ctx}/doc/docBeton/form">混凝土档案添加</a></li></shiro:hasPermission>
+<ul class="nav nav-tabs">
+	<li class="active"><a href="${ctx}/doc/docBeton/">混凝土档案列表</a></li>
+	<shiro:hasPermission name="doc:docBeton:edit"><li><a href="${ctx}/doc/docBeton/form">混凝土档案添加</a></li></shiro:hasPermission>
+</ul>
+<form:form id="searchForm" modelAttribute="docBeton" action="${ctx}/doc/docBeton/" method="post" class="breadcrumb form-search">
+	<input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
+	<input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
+	<ul class="ul-form">
+		<li><label>品种编码：</label>
+			<form:input path="kindCode" htmlEscape="false" maxlength="200" class="input-medium"/>
+		</li>
+		<li><label>品种名称：</label>
+			<form:input path="kindName" htmlEscape="false" maxlength="200" class="input-medium"/>
+		</li>
+		<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
+		<li class="clearfix"></li>
 	</ul>
-	<form:form id="searchForm" modelAttribute="docBeton" action="${ctx}/doc/docBeton/" method="post" class="breadcrumb form-search">
-		<input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
-		<input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
-		<ul class="ul-form">
-			<li><label>品种编码：</label>
-				<form:input path="kindCode" htmlEscape="false" maxlength="200" class="input-medium"/>
-			</li>
-			<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
-			<li class="clearfix"></li>
-		</ul>
-	</form:form>
-	<sys:message content="${message}"/>
-	<table id="contentTable" class="table table-striped table-bordered table-condensed">
-		<thead>
-			<tr>
-				<th>品种编码</th>
-				<th>品种名称</th>
-				<th>材质等级</th>
-				<th>标准名称</th>
-				<th>所属分类</th>
-				<th>原材料类型</th>
-				<th>辅记量单位</th>
-				<th>主记量单位</th>
-				<th>换算率</th>
-				<th>主要供应商</th>
-				<th>计价方式</th>
-				<th>品牌名称</th>
-				<th>销售</th>
-				<th>外购</th>
-				<th>自制</th>
-				<th>应税劳务</th>
-				<th>成套件</th>
-				<th>砂浆</th>
-				<th>最低库存</th>
-				<th>成本参考核算单价</th>
-				<th>最高存库</th>
-				<th>配方上下限控制</th>
-				<th>安全库存</th>
-				<th>安全库存</th>
-				<th>ABC分类</th>
-				<th>税率</th>
-				<th>保质期管理</th>
-				<th>批次管理</th>
-				<th>委托代锁管理</th>
-				<th>呆滞积压管理</th>
-				<shiro:hasPermission name="doc:docBeton:edit"><th>操作</th></shiro:hasPermission>
-			</tr>
-		</thead>
-		<tbody>
-		<c:forEach items="${page.list}" var="docBeton">
-			<tr>
-				<td> ${fns:abbr(kind_code,16)}</td>
-				<td> ${fns:abbr(kind_name,120)}</td>
-				<td> ${fns:abbr(kind_level,60)}</td>
-				<td> ${fns:abbr(stand_name,120)}</td>
-				<td> ${fns:abbr(kind_category,60)}</td>
-				<td> ${fns:abbr(kind_type,60)}</td>
-				<td> ${fns:abbr(sec_unit,20)}</td>
-				<td> ${fns:abbr(first_unit,60)}</td>
-				<td> ${fns:abbr(rate,12)}</td>
-				<td> ${fns:abbr(primary_provider,240)}</td>
-				<td> ${fns:abbr(pricing_mode,32)}</td>
-				<td> ${fns:abbr(brand_name,120)}</td>
-				<td> ${fns:abbr(sales,1)}</td>
-				<td> ${fns:abbr(outsourcing,1)}</td>
-				<td> ${fns:abbr(mad_self,1)}</td>
-				<td> ${fns:abbr(tax_service,1)}</td>
-				<td> ${fns:abbr(comp_set,1)}</td>
-				<td> ${fns:abbr(mortar,1)}</td>
-				<td> ${fns:abbr(min_inventory,1)}</td>
-				<td> ${fns:abbr(cost_prices,1)}</td>
-				<td> ${fns:abbr(max_inventory,1)}</td>
-				<td> ${fns:abbr(sum_control,1)}</td>
-				<td> ${fns:abbr(save_inventory,1)}</td>
-				<td> ${fns:abbr(stock_stand,1)}</td>
-				<td> ${fns:abbr(abc_category,1)}</td>
-				<td> ${fns:abbr(tax_rate,1)}</td>
-				<td> ${fns:abbr(quality_manage,1)}</td>
-				<td> ${fns:abbr(bat_manage,1)}</td>
-				<td> ${fns:abbr(entrust_manage,1)}</td>
-				<td> ${fns:abbr(stock_manage,1)}</td>
-				<shiro:hasPermission name="doc:docBeton:edit"><td>
-    				<a href="${ctx}/doc/docBeton/form?id=${docBeton.id}">修改</a>
-					<a href="${ctx}/doc/docBeton/delete?id=${docBeton.id}" onclick="return confirmx('确认要删除该混凝土档案吗？', this.href)">删除</a>
-				</td></shiro:hasPermission>
-			</tr>
-		</c:forEach>
-		</tbody>
-	</table>
-	<div class="pagination">${page}</div>
+</form:form>
+<sys:message content="${message}"/>
+<table id="contentTable" class="table table-striped table-bordered table-condensed">
+	<thead>
+	<tr>
+		<th>品种编码</th>
+		<th>品种名称</th>
+		<th>材质等级</th>
+		<th>标准名称</th>
+		<th>所属分类</th>
+		<th>原材料类型</th>
+		<th>辅记量单位</th>
+		<th>主记量单位</th>
+		<th>换算率</th>
+		<th>主要供应商</th>
+		<th>计价方式</th>
+		<th>品牌名称</th>
+		<th>销售</th>
+		<th>外购</th>
+		<th>自制</th>
+		<th>应税劳务</th>
+		<th>成套件</th>
+		<th>砂浆</th>
+		<th>最低库存</th>
+		<th>成本参考核算单价</th>
+		<th>最高存库</th>
+		<th>配方上下限控制</th>
+		<th>安全库存</th>
+		<th>安全库存</th>
+		<th>ABC分类</th>
+		<th>税率</th>
+		<th>保质期管理</th>
+		<th>批次管理</th>
+		<th>委托代锁管理</th>
+		<th>呆滞积压管理</th>
+		<shiro:hasPermission name="doc:docBeton:edit"><th>操作</th></shiro:hasPermission>
+	</tr>
+	</thead>
+	<tbody>
+	<c:forEach items="${page.list}" var="docBeton">
+		<tr>
+			<td> ${fns:abbr(docBeton.kindCode,16)}</td>
+			<td> ${fns:abbr(docBeton.kindName,120)}</td>
+			<td> ${fns:abbr(docBeton.kindLevel,60)}</td>
+			<td> ${fns:abbr(docBeton.standName,120)}</td>
+			<td> ${fns:abbr(docBeton.archiveMaterial.materialName,60)}</td>
+			<td> ${fns:abbr(docBeton.docConcretetyp.concretetypName,60)}</td>
+			<td> ${fns:abbr(docBeton.secUnit,20)}</td>
+			<td> ${fns:abbr(docBeton.firstUnit,60)}</td>
+			<td> ${fns:abbr(docBeton.rate,12)}</td>
+			<td> ${fns:abbr(docBeton.docSupplier.supName,240)}</td>
+			<td> ${fns:getDictLabel(docBeton.pricingMode,"pricing_method","")}</td>
+			<td> ${fns:abbr(docBeton.brandName,120)}</td>
+			<td> ${fns:abbr(docBeton.sales,100)}</td>
+			<td> ${fns:abbr(docBeton.outsourcing,100)}</td>
+			<td> ${fns:abbr(docBeton.madSelf,100)}</td>
+			<td> ${fns:abbr(docBeton.taxService,100)}</td>
+			<td> ${fns:abbr(docBeton.compSet,100)}</td>
+			<td> ${fns:abbr(docBeton.mortar,100)}</td>
+			<td> ${fns:abbr(docBeton.minInventory,100)}</td>
+			<td> ${fns:abbr(docBeton.costPrices,100)}</td>
+			<td> ${fns:abbr(docBeton.maxInventory,100)}</td>
+			<td> ${fns:abbr(docBeton.sumControl,100)}</td>
+			<td> ${fns:abbr(docBeton.saveInventory,100)}</td>
+			<td> ${fns:abbr(docBeton.stockStand,100)}</td>
+			<td> ${fns:getDictLabel(docBeton.abcCategory,"abcCategory_list","")}</td>
+			<td> ${fns:abbr(docBeton.taxRate,100)}</td>
+			<td> ${fns:abbr(docBeton.qualityManage,100)}</td>
+			<td> ${fns:abbr(docBeton.batManage,100)}</td>
+			<td> ${fns:abbr(docBeton.entrustManage,100)}</td>
+			<td> ${fns:abbr(docBeton.stockManage,100)}</td>
+			<shiro:hasPermission name="doc:docBeton:edit"><td>
+				<a href="${ctx}/doc/docBeton/form?id=${docBeton.id}">修改</a>
+				<a href="${ctx}/doc/docBeton/delete?id=${docBeton.id}" onclick="return confirmx('确认要删除该混凝土档案吗？', this.href)">删除</a>
+			</td></shiro:hasPermission>
+		</tr>
+	</c:forEach>
+	</tbody>
+</table>
+<div class="pagination">${page}</div>
 </body>
 </html>

@@ -3,6 +3,7 @@
  */
 package com.thinkgem.jeesite.modules.doc.entity;
 
+import com.thinkgem.jeesite.modules.archive.entity.ArchiveMaterial;
 import org.hibernate.validator.constraints.Length;
 
 import com.thinkgem.jeesite.common.persistence.DataEntity;
@@ -22,6 +23,16 @@ public class DocConcretetyp extends DataEntity<DocConcretetyp> {
 	private String extField2;		// ext_field2
 	private String extField3;		// ext_field3
 	private String remark;		// remark
+
+	public ArchiveMaterial getArchiveMaterial() {
+		return archiveMaterial;
+	}
+
+	public void setArchiveMaterial(ArchiveMaterial archiveMaterial) {
+		this.archiveMaterial = archiveMaterial;
+	}
+
+	private ArchiveMaterial archiveMaterial;
 	
 	public DocConcretetyp() {
 		super();

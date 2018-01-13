@@ -39,6 +39,7 @@
 	<table id="contentTable" class="table table-striped table-bordered table-condensed">
 		<thead>
 			<tr>
+				<th>职员编码</th>
 				<th>职员名称</th>
 				<th>所属部门</th>
 				<th>职务</th>
@@ -75,10 +76,13 @@
 		<c:forEach items="${page.list}" var="docOfficework">
 			<tr>
 				<td>
+						${fns:abbr(docOfficework.officeworkCode,50)}
+				</td>
+				<td>
 						${fns:abbr(docOfficework.officeworkName,50)}
 				</td>
 				<td>
-						${fns:abbr(docOfficework.officeworkDep,50)}
+						${fns:abbr(docOfficework.docDepartment.departmentName,50)}
 				</td>
 				<td>
 						${fns:abbr(docOfficework.officeworkPost,50)}

@@ -6,7 +6,7 @@
 		a.id AS "id",
 		a.department_code AS "departmentCode",
 		a.department_name AS "departmentName",
-		a.department_category AS "departmentCategory",
+		a.department_category AS "archiveDepartment.id",
 		a.manager_person AS "managerPerson",
 		a.phone_no AS "phoneNo",
 		a.first_unit AS "firstUnit",
@@ -14,10 +14,13 @@
 		a.ext_field1 AS "extField1",
 		a.ext_field2 AS "extField2",
 		a.ext_field3 AS "extField3",
+		d.department_code AS "archiveDepartment.departmentCode",
+		d.department_name AS "archiveDepartment.departmentName",
 		a.remark AS "remark"
 	</sql>
 	
 	<sql id="docDepartmentJoins">
+		LEFT JOIN archive_department d ON d.id = a.department_category
 	</sql>
     
 	<select id="get" resultType="DocDepartment">
@@ -107,7 +110,7 @@
 		) VALUES (
 			#{departmentCode},
 			#{departmentName},
-			#{departmentCategory},
+			#{archiveDepartment.id},
 			#{managerPerson},
 			#{phoneNo},
 			#{firstUnit},
@@ -123,7 +126,7 @@
 		UPDATE doc_department SET 	
 			department_code = #{departmentCode},
 			department_name = #{departmentName},
-			department_category = #{departmentCategory},
+			department_category = #{archiveDepartment.id},
 			manager_person = #{managerPerson},
 			phone_no = #{phoneNo},
 			first_unit = #{firstUnit},

@@ -28,6 +28,9 @@
 			<li><label>品种编码：</label>
 				<form:input path="kindCode" htmlEscape="false" maxlength="200" class="input-medium"/>
 			</li>
+			<li><label>品种名称：</label>
+				<form:input path="kindName" htmlEscape="false" maxlength="200" class="input-medium"/>
+			</li>
 			<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
 			<li class="clearfix"></li>
 		</ul>

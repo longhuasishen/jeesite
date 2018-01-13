@@ -24,6 +24,26 @@ public class DocDriver extends DataEntity<DocDriver> {
 	private String extField2;		// ext_field2
 	private String extField3;		// ext_field3
 	private String remark;		// remark
+
+
+	public DocOfficework getDocOfficework() {
+		return docOfficework;
+	}
+
+	public void setDocOfficework(DocOfficework docOfficework) {
+		this.docOfficework = docOfficework;
+	}
+
+	public DocCar getDocCar() {
+		return docCar;
+	}
+
+	public void setDocCar(DocCar docCar) {
+		this.docCar = docCar;
+	}
+
+	private DocCar docCar;
+	private DocOfficework docOfficework;
 	
 	public DocDriver() {
 		super();

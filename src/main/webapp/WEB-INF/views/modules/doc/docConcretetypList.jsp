@@ -31,9 +31,6 @@
 			<li><label>原材料名称：</label>
 				<form:input path="concretetypName" htmlEscape="false" maxlength="200" class="input-medium"/>
 			</li>
-			<li><label>存货名称：</label>
-				<form:input path="stockName" htmlEscape="false" maxlength="200" class="input-medium"/>
-			</li>
 			<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
 			<li class="clearfix"></li>
 		</ul>
@@ -58,7 +55,7 @@
 						${fns:abbr(docConcretetyp.concretetypName,50)}
 				</td>
 				<td>
-						${fns:abbr(docConcretetyp.stockName,50)}
+						${fns:abbr(docConcretetyp.archiveMaterial.materialName,50)}
 				</td>
 				<shiro:hasPermission name="doc:docConcretetyp:edit"><td>
     				<a href="${ctx}/doc/docConcretetyp/form?id=${docConcretetyp.id}">修改</a>

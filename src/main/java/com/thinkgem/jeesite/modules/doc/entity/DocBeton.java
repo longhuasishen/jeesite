@@ -3,9 +3,12 @@
  */
 package com.thinkgem.jeesite.modules.doc.entity;
 
+import com.thinkgem.jeesite.modules.archive.entity.ArchiveMaterial;
 import org.hibernate.validator.constraints.Length;
 
 import com.thinkgem.jeesite.common.persistence.DataEntity;
+
+import java.util.List;
 
 /**
  * 混凝土档案Entity
@@ -49,6 +52,48 @@ public class DocBeton extends DataEntity<DocBeton> {
 	private String extField2;		// ext_field2
 	private String extField3;		// ext_field3
 	private String remark;		// remark
+
+	private List<String> childBetonList1;//原材料勾选1
+	private List<String> childBetonList2;//原材料勾选2
+
+	private ArchiveMaterial archiveMaterial;		// 原材料分类
+	private DocConcretetyp docConcretetyp;		// 原材料档案分类
+	private DocSupplier docSupplier;		// 供应商档案
+
+	public DocConcretetyp getDocConcretetyp() {
+		return docConcretetyp;
+	}
+	public void setDocConcretetyp(DocConcretetyp docConcretetyp) {
+		this.docConcretetyp = docConcretetyp;
+	}
+
+	public ArchiveMaterial getArchiveMaterial() {
+		return archiveMaterial;
+	}
+	public void setArchiveMaterial(ArchiveMaterial archiveMaterial) {
+		this.archiveMaterial = archiveMaterial;
+	}
+
+	public DocSupplier getDocSupplier() {
+		return docSupplier;
+	}
+
+	public void setDocSupplier(DocSupplier docSupplier) {
+		this.docSupplier = docSupplier;
+	}
+
+	public List<String> getChildBetonList1() {
+		return childBetonList1;
+	}
+	public void setChildBetonList1(List<String> childBetonList1) {
+		this.childBetonList1 = childBetonList1;
+	}
+	public List<String> getChildBetonList2() {
+		return childBetonList2;
+	}
+	public void setChildBetonList2(List<String> childBetonList2) {
+		this.childBetonList2 = childBetonList2;
+	}
 	
 	public DocBeton() {
 		super();

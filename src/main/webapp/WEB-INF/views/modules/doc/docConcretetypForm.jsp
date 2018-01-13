@@ -43,15 +43,16 @@
 		<div class="control-group">
 			<label class="control-label">原材料名称：</label>
 			<div class="controls">
-				<form:input path="concretetypName" htmlEscape="false" maxlength="120" class="input-xlarge "/>
+				<form:input path="concretetypName" htmlEscape="false" maxlength="120" class="input-xlarge required"/>
+				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">存货名称：</label>
 			<div class="controls">
-				<sys:treeselect id="stock_name" name="archiveMaterial.id" value="${archiveMaterial.id}" labelName="archiveMaterial.name" labelValue="${archiveMaterial.name}"
+				<sys:treeselect id="stock_name" name="archiveMaterial.id" value="${docConcretetyp.archiveMaterial.id}" labelName="archiveMaterial.materialName" labelValue="${docConcretetyp.archiveMaterial.materialName}"
 								title="物资" url="/archive/archiveMaterial/treeData?materialCode=1TS" cssClass="required"/>
-				<!--<form:input path="stockName" htmlEscape="false" maxlength="60" class="input-xlarge "/>-->
+				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">

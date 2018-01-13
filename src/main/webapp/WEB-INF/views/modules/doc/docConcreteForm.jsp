@@ -43,19 +43,22 @@
 	<div class="control-group">
 		<label class="control-label">品种名称：</label>
 		<div class="controls">
-			<form:input path="kindName" htmlEscape="false" maxlength="120" class="input-xlarge "/>
+			<form:input path="kindName" htmlEscape="false" maxlength="120" class="input-xlarge required"/>
+			<span class="help-inline"><font color="red">*</font> </span>
 		</div>
 	</div>
 	<div class="control-group">
 		<label class="control-label">材质等级：</label>
 		<div class="controls">
-			<form:input path="kindLevel" htmlEscape="false" maxlength="60" class="input-xlarge "/>
+			<form:input path="kindLevel" htmlEscape="false" maxlength="60" class="input-xlarge required"/>
+			<span class="help-inline"><font color="red">*</font> </span>
 		</div>
 	</div>
 	<div class="control-group">
 		<label class="control-label">标准名称：</label>
 		<div class="controls">
-			<form:input path="standName" htmlEscape="false" maxlength="120" class="input-xlarge "/>
+			<form:input path="standName" htmlEscape="false" maxlength="120" class="input-xlarge required"/>
+			<span class="help-inline"><font color="red">*</font> </span>
 		</div>
 	</div>
 	<div class="control-group">
@@ -63,6 +66,7 @@
 		<div class="controls">
 			<sys:treeselect id="kindCategory" name="archiveMaterial.id" value="${docConcrete.archiveMaterial.id}" labelName="archiveMaterial.materialName" labelValue="${docConcrete.archiveMaterial.materialName}"
 							title="物资" url="/archive/archiveMaterial/treeData?materialCode=01" cssClass="required"/>
+			<span class="help-inline"><font color="red">*</font> </span>
 		</div>
 	</div>
 	<div class="control-group">
@@ -70,31 +74,35 @@
 		<div class="controls">
 			<sys:treeselect id="kindType" name="docConcretetyp.id" value="${docConcrete.docConcretetyp.id}" labelName="docConcretetyp.concretetypName" labelValue="${docConcrete.docConcretetyp.concretetypName}"
 							title="原材料类型" url="/doc/docConcretetyp/treeData?materialCode=*" cssClass="required"/>
+			<span class="help-inline"><font color="red">*</font> </span>
 		</div>
 	</div>
 	<div class="control-group">
 		<label class="control-label">辅记量单位：</label>
 		<div class="controls">
-			<form:input path="secUnit" htmlEscape="false" maxlength="20" class="input-xlarge "/>
+			<form:input path="secUnit" htmlEscape="false" maxlength="20" class="input-xlarge required"/>
+			<span class="help-inline"><font color="red">*</font> </span>
 		</div>
 	</div>
 	<div class="control-group">
 		<label class="control-label">主记量单位：</label>
 		<div class="controls">
-			<form:input path="firstUnit" htmlEscape="false" maxlength="60" class="input-xlarge "/>
+			<form:input path="firstUnit" htmlEscape="false" maxlength="60" class="input-xlarge required"/>
+			<span class="help-inline"><font color="red">*</font> </span>
 		</div>
 	</div>
 	<div class="control-group">
 		<label class="control-label">换算率：</label>
 		<div class="controls">
-			<form:input path="rate" htmlEscape="false" maxlength="12" class="input-xlarge  number"/>
+			<form:input path="rate" htmlEscape="false" maxlength="12" class="input-xlarge  number required"/>
+			<span class="help-inline"><font color="red">*</font> </span>
 		</div>
 	</div>
 	<div class="control-group">
 		<label class="control-label">主要供应商：</label>
 		<div class="controls">
 			<sys:treeselect id="primaryProvider" name="docSupplier.id"  value="${docConcrete.docSupplier.id}" labelName="docSupplier.supName" labelValue="${docConcrete.docSupplier.supName}"
-							title="原材料类型" url="/doc/docSupplier/treeData?materialCode=*" cssClass="required"/>
+							title="原材料类型" url="/doc/docSupplier/treeData?materialCode=*" />
 		</div>
 	</div>
 	<div class="control-group">
@@ -115,7 +123,7 @@
 	<div class="control-group">
 		<label class="control-label">原材料勾选1:</label>
 		<div class="controls">
-			<form:checkboxes path="childConcreteList1" items="${fns:getDictList('concrete_box1')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+			<form:checkboxes path="childConcreteList1" items="${fns:getDictList('concrete_box1')}" itemLabel="label" itemValue="value" htmlEscape="false" class="required"/>
 		</div>
 	</div>
 	<!-- <div class="control-group">

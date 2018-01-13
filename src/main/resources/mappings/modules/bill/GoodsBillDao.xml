@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.bill.dao.GoodsBillDao">
+    
+	<sql id="goodsBillColumns">
+		a.id AS "id",
+		a.goods_no AS "goodsNo",
+		a.out_date AS "outDate",
+		a.contract_no AS "contractNo",
+		a.custom_name AS "customName",
+		a.project_name AS "projectName",
+		a.car_count AS "carCount",
+		a.goods_addr AS "goodsAddr",
+		a.build_site AS "buildSite",
+		a.notice_no AS "noticeNo",
+		a.strength_grade AS "strengthGrade",
+		a.goods_name AS "goodsName",
+		a.water_meth AS "waterMeth",
+		a.slumps_start AS "slumpsStart",
+		a.slumps_end AS "slumpsEnd",
+		a.custom_no AS "customNo",
+		a.with_station AS "withStation",
+		a.special_material AS "specialMaterial",
+		a.repertory_name AS "repertoryName",
+		a.curcar_count AS "curcarCount",
+		a.mortar__count AS "mortarCount",
+		a.about_num AS "aboutNum",
+		a.goods_driver AS "goodsDriver",
+		a.car_no AS "carNo",
+		a.goods_increment AS "goodsIncrement",
+		a.depart_time AS "departTime",
+		a.reach_time AS "reachTime",
+		a.unload_time AS "unloadTime",
+		a.depart_person AS "departPerson",
+		a.quality_person AS "qualityPerson",
+		a.goods_clerk AS "goodsClerk",
+		a.create_person AS "createPerson",
+		a.check_person AS "checkPerson",
+		a.check_status AS "checkStatus",
+		a.make_date AS "makeDate",
+		a.check_date AS "checkDate",
+		a.total_cars AS "totalCars",
+		a.total_cube AS "totalCube",
+		a.goods_remark AS "goodsRemark",
+		a.except_handle AS "exceptHandle",
+		a.ext_field1 AS "extField1",
+		a.ext_field2 AS "extField2",
+		a.ext_field3 AS "extField3",
+		a.remark AS "remark"
+	</sql>
+	
+	<sql id="goodsBillJoins">
+	</sql>
+    
+	<select id="get" resultType="GoodsBill">
+		SELECT 
+			<include refid="goodsBillColumns"/>
+		FROM goods_bill a
+		<include refid="goodsBillJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="GoodsBill">
+		SELECT 
+			<include refid="goodsBillColumns"/>
+		FROM goods_bill a
+		<include refid="goodsBillJoins"/>
+		<where>
+			
+			<if test="goodsNo != null and goodsNo != ''">
+				AND a.goods_no = #{goodsNo}
+			</if>
+			<if test="outDate != null and outDate != ''">
+				AND a.out_date = #{outDate}
+			</if>
+			<if test="contractNo != null and contractNo != ''">
+				AND a.contract_no = #{contractNo}
+			</if>
+			<if test="customName != null and customName != ''">
+				AND a.custom_name = #{customName}
+			</if>
+			<if test="projectName != null and projectName != ''">
+				AND a.project_name = #{projectName}
+			</if>
+			<if test="carCount != null and carCount != ''">
+				AND a.car_count = #{carCount}
+			</if>
+			<if test="goodsAddr != null and goodsAddr != ''">
+				AND a.goods_addr = #{goodsAddr}
+			</if>
+			<if test="buildSite != null and buildSite != ''">
+				AND a.build_site = #{buildSite}
+			</if>
+			<if test="noticeNo != null and noticeNo != ''">
+				AND a.notice_no = #{noticeNo}
+			</if>
+			<if test="strengthGrade != null and strengthGrade != ''">
+				AND a.strength_grade = #{strengthGrade}
+			</if>
+			<if test="goodsName != null and goodsName != ''">
+				AND a.goods_name = #{goodsName}
+			</if>
+			<if test="waterMeth != null and waterMeth != ''">
+				AND a.water_meth = #{waterMeth}
+			</if>
+			<if test="slumpsStart != null and slumpsStart != ''">
+				AND a.slumps_start = #{slumpsStart}
+			</if>
+			<if test="slumpsEnd != null and slumpsEnd != ''">
+				AND a.slumps_end = #{slumpsEnd}
+			</if>
+			<if test="customNo != null and customNo != ''">
+				AND a.custom_no = #{customNo}
+			</if>
+			<if test="withStation != null and withStation != ''">
+				AND a.with_station = #{withStation}
+			</if>
+			<if test="specialMaterial != null and specialMaterial != ''">
+				AND a.special_material = #{specialMaterial}
+			</if>
+			<if test="repertoryName != null and repertoryName != ''">
+				AND a.repertory_name = #{repertoryName}
+			</if>
+			<if test="curcarCount != null and curcarCount != ''">
+				AND a.curcar_count = #{curcarCount}
+			</if>
+			<if test="mortarCount != null and mortarCount != ''">
+				AND a.mortar__count = #{mortarCount}
+			</if>
+			<if test="aboutNum != null and aboutNum != ''">
+				AND a.about_num = #{aboutNum}
+			</if>
+			<if test="goodsDriver != null and goodsDriver != ''">
+				AND a.goods_driver = #{goodsDriver}
+			</if>
+			<if test="carNo != null and carNo != ''">
+				AND a.car_no = #{carNo}
+			</if>
+			<if test="goodsIncrement != null and goodsIncrement != ''">
+				AND a.goods_increment = #{goodsIncrement}
+			</if>
+			<if test="departTime != null and departTime != ''">
+				AND a.depart_time = #{departTime}
+			</if>
+			<if test="reachTime != null and reachTime != ''">
+				AND a.reach_time = #{reachTime}
+			</if>
+			<if test="unloadTime != null and unloadTime != ''">
+				AND a.unload_time = #{unloadTime}
+			</if>
+			<if test="departPerson != null and departPerson != ''">
+				AND a.depart_person = #{departPerson}
+			</if>
+			<if test="qualityPerson != null and qualityPerson != ''">
+				AND a.quality_person = #{qualityPerson}
+			</if>
+			<if test="goodsClerk != null and goodsClerk != ''">
+				AND a.goods_clerk = #{goodsClerk}
+			</if>
+			<if test="createPerson != null and createPerson != ''">
+				AND a.create_person = #{createPerson}
+			</if>
+			<if test="checkPerson != null and checkPerson != ''">
+				AND a.check_person = #{checkPerson}
+			</if>
+			<if test="checkStatus != null and checkStatus != ''">
+				AND a.check_status = #{checkStatus}
+			</if>
+			<if test="makeDate != null and makeDate != ''">
+				AND a.make_date = #{makeDate}
+			</if>
+			<if test="checkDate != null and checkDate != ''">
+				AND a.check_date = #{checkDate}
+			</if>
+			<if test="totalCars != null and totalCars != ''">
+				AND a.total_cars = #{totalCars}
+			</if>
+			<if test="totalCube != null and totalCube != ''">
+				AND a.total_cube = #{totalCube}
+			</if>
+			<if test="goodsRemark != null and goodsRemark != ''">
+				AND a.goods_remark = #{goodsRemark}
+			</if>
+			<if test="exceptHandle != null and exceptHandle != ''">
+				AND a.except_handle = #{exceptHandle}
+			</if>
+			<if test="extField1 != null and extField1 != ''">
+				AND a.ext_field1 = #{extField1}
+			</if>
+			<if test="extField2 != null and extField2 != ''">
+				AND a.ext_field2 = #{extField2}
+			</if>
+			<if test="extField3 != null and extField3 != ''">
+				AND a.ext_field3 = #{extField3}
+			</if>
+			<if test="remark != null and remark != ''">
+				AND a.remark = #{remark}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="GoodsBill">
+		SELECT 
+			<include refid="goodsBillColumns"/>
+		FROM goods_bill a
+		<include refid="goodsBillJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO goods_bill(
+			id,
+			goods_no,
+			out_date,
+			contract_no,
+			custom_name,
+			project_name,
+			car_count,
+			goods_addr,
+			build_site,
+			notice_no,
+			strength_grade,
+			goods_name,
+			water_meth,
+			slumps_start,
+			slumps_end,
+			custom_no,
+			with_station,
+			special_material,
+			repertory_name,
+			curcar_count,
+			mortar__count,
+			about_num,
+			goods_driver,
+			car_no,
+			goods_increment,
+			depart_time,
+			reach_time,
+			unload_time,
+			depart_person,
+			quality_person,
+			goods_clerk,
+			create_person,
+			check_person,
+			check_status,
+			make_date,
+			check_date,
+			total_cars,
+			total_cube,
+			goods_remark,
+			except_handle,
+			ext_field1,
+			ext_field2,
+			ext_field3,
+			remark
+		) VALUES (
+			#{id},
+			#{goodsNo},
+			#{outDate},
+			#{contractNo},
+			#{customName},
+			#{projectName},
+			#{carCount},
+			#{goodsAddr},
+			#{buildSite},
+			#{noticeNo},
+			#{strengthGrade},
+			#{goodsName},
+			#{waterMeth},
+			#{slumpsStart},
+			#{slumpsEnd},
+			#{customNo},
+			#{withStation},
+			#{specialMaterial},
+			#{repertoryName},
+			#{curcarCount},
+			#{mortarCount},
+			#{aboutNum},
+			#{goodsDriver},
+			#{carNo},
+			#{goodsIncrement},
+			#{departTime},
+			#{reachTime},
+			#{unloadTime},
+			#{departPerson},
+			#{qualityPerson},
+			#{goodsClerk},
+			#{createPerson},
+			#{checkPerson},
+			#{checkStatus},
+			#{makeDate},
+			#{checkDate},
+			#{totalCars},
+			#{totalCube},
+			#{goodsRemark},
+			#{exceptHandle},
+			#{extField1},
+			#{extField2},
+			#{extField3},
+			#{remark}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE goods_bill SET 	
+			goods_no = #{goodsNo},
+			out_date = #{outDate},
+			contract_no = #{contractNo},
+			custom_name = #{customName},
+			project_name = #{projectName},
+			car_count = #{carCount},
+			goods_addr = #{goodsAddr},
+			build_site = #{buildSite},
+			notice_no = #{noticeNo},
+			strength_grade = #{strengthGrade},
+			goods_name = #{goodsName},
+			water_meth = #{waterMeth},
+			slumps_start = #{slumpsStart},
+			slumps_end = #{slumpsEnd},
+			custom_no = #{customNo},
+			with_station = #{withStation},
+			special_material = #{specialMaterial},
+			repertory_name = #{repertoryName},
+			curcar_count = #{curcarCount},
+			mortar__count = #{mortarCount},
+			about_num = #{aboutNum},
+			goods_driver = #{goodsDriver},
+			car_no = #{carNo},
+			goods_increment = #{goodsIncrement},
+			depart_time = #{departTime},
+			reach_time = #{reachTime},
+			unload_time = #{unloadTime},
+			depart_person = #{departPerson},
+			quality_person = #{qualityPerson},
+			goods_clerk = #{goodsClerk},
+			create_person = #{createPerson},
+			check_person = #{checkPerson},
+			check_status = #{checkStatus},
+			make_date = #{makeDate},
+			check_date = #{checkDate},
+			total_cars = #{totalCars},
+			total_cube = #{totalCube},
+			goods_remark = #{goodsRemark},
+			except_handle = #{exceptHandle},
+			ext_field1 = #{extField1},
+			ext_field2 = #{extField2},
+			ext_field3 = #{extField3},
+			remark = #{remark}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM goods_bill
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.produces.dao.ProjectDistanceDao">
+    
+	<sql id="projectDistanceColumns">
+		a.id AS "id",
+		a.custom_id AS "customId",
+		a.custom_name AS "customName",
+		a.custom_abbr AS "customAbbr",
+		a.custom_addr AS "customAddr",
+		a.receiver AS "receiver",
+		a.distance AS "distance",
+		a.distance_remark AS "distanceRemark",
+		a.ext_field1 AS "extField1",
+		a.ext_field2 AS "extField2",
+		a.ext_field3 AS "extField3",
+		d.id AS "docCustomer.id",
+		d.cus_code AS "docCustomer.cusCode",
+		d.cus_name AS "docCustomer.cusName",
+		d.cus_short_name AS "docCustomer.cusShortName",
+		d.cus_addr AS "docCustomer.cusAddr",
+		d.receiver AS "docCustomer.receiver",
+		d.distance AS "docCustomer.distance",
+		d.distance_rmk AS "docCustomer.distanceRmk",
+		a.remark AS "remark"
+	</sql>
+	
+	<sql id="projectDistanceJoins">
+		right outer join doc_customer d on 1=1
+	</sql>
+    
+	<select id="get" resultType="ProjectDistance">
+		SELECT 
+			<include refid="projectDistanceColumns"/>
+		FROM project_distance a
+		<include refid="projectDistanceJoins"/>
+		WHERE d.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="ProjectDistance">
+		SELECT 
+			<include refid="projectDistanceColumns"/>
+		FROM project_distance a
+		<include refid="projectDistanceJoins"/>
+		<where>
+			<if test="customId != null and customId != ''">
+				AND d.cus_code LIKE
+				<if test="dbName == 'oracle'">'%'||#{customId}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{customId}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{customId}, '%')</if>
+			</if>
+			<if test="customName != null and customName != ''">
+				AND d.cus_name LIKE
+				<if test="dbName == 'oracle'">'%'||#{customName}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{customName}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{customName}, '%')</if>
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="ProjectDistance">
+		SELECT 
+			<include refid="projectDistanceColumns"/>
+		FROM project_distance a
+		<include refid="projectDistanceJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO project_distance(
+			custom_id,
+			custom_name,
+			custom_abbr,
+			custom_addr,
+			receiver,
+			distance,
+			distance_remark,
+			ext_field1,
+			ext_field2,
+			ext_field3,
+			remark
+		) VALUES (
+			#{customId},
+			#{customName},
+			#{customAbbr},
+			#{customAddr},
+			#{receiver},
+			#{distance},
+			#{distanceRemark},
+			#{extField1},
+			#{extField2},
+			#{extField3},
+			#{remark}
+		)
+	</insert>
+
+	<update id="update">
+		UPDATE doc_customer SET
+			cus_addr = #{docCustomer.cusAddr},
+			receiver = #{docCustomer.receiver},
+			distance = #{docCustomer.distance},
+			distance_rmk = #{docCustomer.distanceRmk}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM project_distance
+		WHERE id = #{id}
+	</update>
+	
+</mapper>
