@@ -60,7 +60,7 @@ public class DocKindController extends BaseController {
 		model.addAttribute("page", page);
 		return "modules/doc/docKindList";
 	}
-	@RequestMapping(value = {"listFrame", ""})
+	@RequestMapping(value = {"listFrame"})
 	public String listFrame(DocKind docKind, HttpServletRequest request, HttpServletResponse response, Model model) {
 		Page<DocKind> page = docKindService.findPage(new Page<DocKind>(request, response), docKind);
 		model.addAttribute("page", page);

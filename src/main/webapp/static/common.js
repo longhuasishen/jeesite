@@ -58,17 +58,15 @@ function saveRowById(obj) {
 }
 
 function getTableDatasById(tableId) {
-    var tableArray = [];
-    $("#"+tableId+" tbody").find("tr").each(function () {
-        var tdArray = [];
-        var obj = $(this);
-        var tds = obj.find("td").length;
-        obj.find("td").each(function (i) {
-            if(i<tds-1){
-                tdArray.push($(this).text());
-            }
-        });
-        tableArray.push(tdArray);
-    });
-    return tableArray;
+    var o = jQuery("#jqGrid");
+    var rows = o.jqGrid('getRowData');
+    return encodeHtml(JSON.stringify(rows));
+}
+function btnResetClick(){
+    $("#searchForm")[0].reset();
+    $(':input','#searchForm')
+        .not(':button, :submit, :reset')
+        .val('')
+        .removeAttr('checked')
+        .removeAttr('selected');
 }

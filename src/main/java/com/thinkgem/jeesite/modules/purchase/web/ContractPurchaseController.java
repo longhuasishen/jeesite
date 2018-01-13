@@ -16,6 +16,9 @@ import com.thinkgem.jeesite.modules.purchase.entity.ContractPurchaseDetail;
 import com.thinkgem.jeesite.modules.purchase.service.ContractPurchaseDetailService;
 import com.thinkgem.jeesite.modules.sys.utils.UserUtils;
 import lombok.extern.slf4j.Slf4j;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.ibatis.annotations.Param;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +37,9 @@ import com.thinkgem.jeesite.common.utils.StringUtils;
 import com.thinkgem.jeesite.modules.purchase.entity.ContractPurchase;
 import com.thinkgem.jeesite.modules.purchase.service.ContractPurchaseService;
 
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -89,40 +95,47 @@ public class ContractPurchaseController extends BaseController {
 	@RequiresPermissions("purchase:contractPurchase:edit")
 	@RequestMapping(value = "save")
 	public String save(ContractPurchase contractPurchase, Model model, RedirectAttributes redirectAttributes, @RequestParam(value = "tableDatas",required = false) String tableDatas) {
-		if (!beanValidator(model, contractPurchase)){
-			return form(contractPurchase, model);
+		try {
+			if (!beanValidator(model, contractPurchase)) {
+				return form(contractPurchase, model);
+			}
+			if (StringUtils.isEmpty(contractPurchase.getContractCreateDate())) {
+				contractPurchase.setContractCreateDate(DateUtils.formatDateTime(new Date()));
+			}
+
+			List<ContractPurchaseDetail> detailList = new ArrayList<ContractPurchaseDetail>();
+			if (StringUtils.isNotEmpty(tableDatas)) {
+				JSONArray detailArray = JSONArray.fromObject(StringEscapeUtils.unescapeHtml4(tableDatas));
+				log.info("合同明细{}", detailArray);
+				for (Object object : detailArray.toArray()) {
+					ContractPurchaseDetail detail = buildVO((JSONObject) object, ContractPurchaseDetail.class);
+					detail.setContractCode(contractPurchase.getContractCode());
+					detailList.add(detail);
+				}
+//				contractPurchaseDetailService.saveList(detailList);
+			}
+			contractPurchaseService.saveAll(contractPurchase,detailList);
+			addMessage(redirectAttributes, "保存采购合同成功");
+		}catch (Exception e){
+			e.printStackTrace();
+			return "error";
 		}
-		if(StringUtils.isEmpty(contractPurchase.getContractCreateDate())){
-			contractPurchase.setContractCreateDate(DateUtils.formatDateTime(new Date()));
-		}
-		/*DocSupplier docSupplier = contractPurchase.getDocSupplier();
-		docSupplier.setSupCode(docSupplier.getSupCode().substring(
-				docSupplier.getSupCode().indexOf("[")+1,docSupplier.getSupCode().length()-1)
-		);
-		DocDepartment docDepartment = contractPurchase.getDocDepartment();
-		docDepartment.setDepartmentCode(docDepartment.getDepartmentCode().substring(
-				docDepartment.getDepartmentCode().indexOf("[")+1,docDepartment.getDepartmentCode().length()-1)
-		);
-		DocAccmeth docAccmeth = contractPurchase.getDocAccmeth();
-		docAccmeth.setAccmethCode(docAccmeth.getAccmethCode().substring(
-				docAccmeth.getAccmethCode().indexOf("[")+1,docAccmeth.getAccmethCode().length()-1)
-		);
-		DocOfficework docOfficework = contractPurchase.getDocOfficework();
-		docOfficework.setOfficeworkCode(docOfficework.getOfficeworkCode().substring(
-				docOfficework.getOfficeworkCode().indexOf("[")+1,docOfficework.getOfficeworkCode().length()-1)
-		);
-		ArchiveContract archiveContract = contractPurchase.getArchiveContract();
-		archiveContract.setContractCode(archiveContract.getContractCode().substring(
-				archiveContract.getContractCode().indexOf("[")+1,archiveContract.getContractCode().length()-1)
-		);*/
-		if(StringUtils.isNotEmpty(tableDatas)){
-			log.info("合同明细{}",tableDatas);
-		}
-		contractPurchaseService.save(contractPurchase);
-		addMessage(redirectAttributes, "保存采购合同成功");
 		return "redirect:"+Global.getAdminPath()+"/purchase/contractPurchase/?repage";
 	}
-	
+
+	private ContractPurchaseDetail buildVO(JSONObject object, Class<ContractPurchaseDetail> contractPurchaseDetailClass) throws IllegalAccessException {
+		ContractPurchaseDetail detail = new ContractPurchaseDetail();
+		Field[] fields = contractPurchaseDetailClass.getDeclaredFields();
+		for(Field field : fields){
+			String fieldName = field.getName();
+			if(null != object.get(fieldName)){
+				field.setAccessible(true);
+				field.set(detail,object.get(fieldName));
+			}
+		}
+		return detail;
+	}
+
 	@RequiresPermissions("purchase:contractPurchase:edit")
 	@RequestMapping(value = "delete")
 	public String delete(ContractPurchase contractPurchase, RedirectAttributes redirectAttributes) {

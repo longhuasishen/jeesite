@@ -104,6 +104,11 @@
         $.jgrid.defaults.responsive = true;
         $.jgrid.defaults.styleUI = 'Bootstrap';
 	</script>
+	<style type="text/css">
+		.ui-jqgrid-sortable{
+			line-height: 14px;
+		}
+	</style>
 	<%--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>--%>
 </head>
 <body>
@@ -271,13 +276,14 @@
 
                 $(document).ready(function () {
                     $("#jqGrid").jqGrid({
-//                        url: 'http://localhost:8080/test/data.json',
                         url: '${ctx}/purchase/contractPurchaseDetail/listJson?contractCode=${contractPurchase.contractCode}',
                         editurl: 'clientArray',
                         mtype: "GET",
                         datatype: "json",
                         page: 1,
                         colModel: [
+                            { label: '序号', name: 'id', key: true, width: 150,hidden:true
+                            },
                             { label: '品种编码', name: 'kindCode', key: false, width: 150,
                                 editable: true,
                                 edittype: "custom",
@@ -295,25 +301,33 @@
                                 editoptions: {
                                     dataInit: function (element) {
                                         $(element).attr("readonly","readonly");
+                                        $(element).attr("id","kindName");
+                                        $(element).css("padding-top","0px");
+                                        $(element).css("padding-bottom","0px");
+                                        $(element).css("width","150px");
                                     }
                                 }
                             },
                             {
                                 label: '规格型号',
                                 name: 'kindLevel',
-                                width: 150,
+                                width: 100,
                                 editable: true,
                                 edittype:"text",//可以编辑的类型。可选值：text, textarea, select, checkbox, password, button, image and file.s
                                 editoptions: {
                                     dataInit: function (element) {
                                         $(element).attr("readonly","readonly");
+                                        $(element).attr("id","kindLevel");
+                                        $(element).css("padding-top","0px");
+                                        $(element).css("padding-bottom","0px");
+                                        $(element).css("width","100px");
                                     }
                                 }
                             },
                             {
                                 label: '计量单位',
                                 name: 'firstUnit',
-                                width: 50,
+                                width: 75,
                                 editable: true,
                                 /*edittype: "select",
                                 editoptions: {
@@ -323,115 +337,84 @@
                                 editoptions: {
                                     dataInit: function (element) {
                                         $(element).attr("readonly","readonly");
+                                        $(element).attr("id","firstUnit");
+                                        $(element).css("padding-top","0px");
+                                        $(element).css("padding-bottom","0px");
+                                        $(element).css("width","75px");
                                     }
                                 }
                             },
                             {
                                 label: '数量',
                                 name: 'itemNumber',
-                                width: 50,
+                                width: 75,
                                 sorttype:"number",
                                 editable: true,
-//								edittype:"text",
-                                edittype: "custom",
+								edittype:"text",
+//                                edittype: "custom",
                                 editoptions: {
-                                    custom_value: getFreightElementValue,
-                                    custom_element: createFreightEditElement
+//                                    custom_value: getFreightElementValue,
+//                                    custom_element: createFreightEditElement
+                                    dataInit: function (element) {
+                                        $(element).css("padding-top","0px");
+                                        $(element).css("padding-bottom","0px");
+                                        $(element).css("width","75px");
+                                    }
                                 }
                             },
                             {
                                 label: '单价',
                                 name: 'itemPrice',
-                                width: 50,
+                                width: 75,
                                 editable: true,
                                 edittype: "text",
                                 editoptions: {
-                                    // dataInit is the client-side event that fires upon initializing the toolbar search field for a column
-                                    // use it to place a third party control to customize the toolbar
                                     dataInit: function (element) {
-                                        $(element).attr("autocomplete","off").typeahead({
-                                            appendTo : "body",
-                                            source: function(query, proxy) {
-                                                $.ajax({
-                                                    url: 'http://trirand.com/blog/phpjqgrid/examples/jsonp/autocompletepbs.php?callback=?&acelem=ShipName',
-                                                    dataType: "jsonp",
-                                                    data: {term: query},
-                                                    success : proxy
-                                                });
-                                            }
-                                        });
+                                        $(element).css("padding-top","0px");
+                                        $(element).css("padding-bottom","0px");
+                                        $(element).css("width","75px");
                                     }
                                 }
                             },
                             {
                                 label: '金额',
                                 name: 'itemAmount',
-                                width: 100,
+                                width: 75,
                                 editable: true,
                                 edittype: "text",
                                 editoptions: {
-                                    // dataInit is the client-side event that fires upon initializing the toolbar search field for a column
-                                    // use it to place a third party control to customize the toolbar
                                     dataInit: function (element) {
-                                        $(element).attr("autocomplete","off").typeahead({
-                                            appendTo : "body",
-                                            source: function(query, proxy) {
-                                                $.ajax({
-                                                    url: 'http://trirand.com/blog/phpjqgrid/examples/jsonp/autocompletepbs.php?callback=?&acelem=ShipName',
-                                                    dataType: "jsonp",
-                                                    data: {term: query},
-                                                    success : proxy
-                                                });
-                                            }
-                                        });
+                                        $(element).css("padding-top","0px");
+                                        $(element).css("padding-bottom","0px");
+                                        $(element).css("width","75px");
                                     }
                                 }
                             },
                             {
                                 label: '折算比',
                                 name: 'conversionRate',
-                                width: 150,
+                                width: 75,
                                 editable: true,
                                 edittype: "text",
                                 editoptions: {
-                                    // dataInit is the client-side event that fires upon initializing the toolbar search field for a column
-                                    // use it to place a third party control to customize the toolbar
                                     dataInit: function (element) {
-                                        $(element).attr("autocomplete","off").typeahead({
-                                            appendTo : "body",
-                                            source: function(query, proxy) {
-                                                $.ajax({
-                                                    url: 'http://trirand.com/blog/phpjqgrid/examples/jsonp/autocompletepbs.php?callback=?&acelem=ShipName',
-                                                    dataType: "jsonp",
-                                                    data: {term: query},
-                                                    success : proxy
-                                                });
-                                            }
-                                        });
+                                        $(element).css("padding-top","0px");
+                                        $(element).css("padding-bottom","0px");
+                                        $(element).css("width","75px");
                                     }
                                 }
                             },
                             {
                                 label: '扣称比例',
                                 name: 'otherRate',
-                                width: 150,
+                                width: 75,
                                 editable: true,
                                 edittype: "text",
                                 editoptions: {
-                                    // dataInit is the client-side event that fires upon initializing the toolbar search field for a column
-                                    // use it to place a third party control to customize the toolbar
                                     dataInit: function (element) {
-                                        $(element).attr("autocomplete","off").typeahead({
-                                            appendTo : "body",
-                                            source: function(query, proxy) {
-                                                $.ajax({
-                                                    url: 'http://trirand.com/blog/phpjqgrid/examples/jsonp/autocompletepbs.php?callback=?&acelem=ShipName',
-                                                    dataType: "jsonp",
-                                                    data: {term: query},
-                                                    success : proxy
-                                                });
-                                            }
-                                        });
+                                        $(element).css("padding-top","0px");
+                                        $(element).css("padding-bottom","0px");
+                                        $(element).css("width","75px");
                                     }
                                 }
                             }
@@ -473,12 +456,9 @@
                                 		var uvalue = h.find("iframe")[0].contentWindow.document.getElementById('uvalue').value;
                                 		if(svalue !=""&& svalue!="undefined"&&svalue!=null){
                                             $("#kindCode").val(svalue);
-                                            $("#"+id.value+"_kindName").val(nvalue);
-                                            $("#"+id.value+"_kindLevel").val(lvalue);
-                                            $("#"+id.value+"_firstUnit").val(uvalue);
-                                            $("#jqg"+id.value+"_kindName").val(nvalue);
-                                            $("#jqg"+id.value+"_kindLevel").val(lvalue);
-                                            $("#jqg"+id.value+"_firstUnit").val(uvalue);
+                                            $("#kindName").val(nvalue);
+                                            $("#kindLevel").val(lvalue);
+                                            $("#firstUnit").val(uvalue);
 										}
                             		}
 								}
@@ -487,8 +467,8 @@
                     }
 
                     function createKindCodeEditElement(value, editOptions) {
-                        var div = $("<div style='margin-top:5px' class='input-append'></div>");
-                        var treeSelect = $("<input>",{type:"text",name:"kindCode",value:value,style:"width:100px",class:'input-xlarge required',id:'kindCode'});
+                        var div = $("<div class='input-append'></div>");
+                        var treeSelect = $("<input>",{type:"text",name:"kindCode",readonly:"readonly",value:value,style:"width:120px;padding-top:0px;padding-bottom:0px",class:'required',id:'kindCode'});
                         var searchClass = $("<a>",{id:'userButton',href:'#',class:'btn  ',style:'padding-top:0px;padding-right:1px;padding-bottom:0px;padding-left:1px;'});
                         var iClass = $("<i>",{class:'icon-search'});
                         searchClass.append(iClass);
@@ -502,7 +482,7 @@
                             return val;
                         }
 					}
-                    function createFreightEditElement(value, editOptions) {
+                    /*function createFreightEditElement(value, editOptions) {
                         var div =$("<div style='margin-top:5px'></div>");
                         var label = $("<label class='radio-inline'></label>");
                         var radio = $("<input>", { type: "radio", value: "0", name: "freight", id: "zero", checked: (value != 25 && value != 50 && value != 100) });
@@ -519,11 +499,11 @@
                         div.append(label).append(label1).append(label2);//.append(label3);
 
                         return div;
-                    }
+                    }*/
 
                     // The javascript executed specified by JQGridColumn.EditTypeCustomGetValue when EditType = EditType.Custom
                     // One parameter passed - the custom element created in JQGridColumn.EditTypeCustomCreateElement
-                    function getFreightElementValue(elem, oper, value) {
+                    /*function getFreightElementValue(elem, oper, value) {
                         if (oper === "set") {
                             var radioButton = $(elem).find("input:radio[value='" + value + "']");
                             if (radioButton.length > 0) {
@@ -534,13 +514,13 @@
                         if (oper === "get") {
                             return $(elem).find("input:radio:checked").val();
                         }
-                    }
+                    }*/
                     /*$('#jqGrid').jqGrid('editRow',id,{url:'clientArray',oneditfunc:function(){
                         $("#userButton").unbind("click").click(function(){
                             searchKind(id);
                         });
 					}});*/
-                    $('#jqGrid').navGrid("#jqGridPager", {edit: false, add: false, del: false, refresh: false, view: false});
+                    $('#jqGrid').navGrid("#jqGridPager", {edit: false, add: false, del: true, refresh: false, view: false});
                     $('#jqGrid').inlineNav('#jqGridPager',
                         // the buttons to appear on the toolbar of the grid
                         {
@@ -568,17 +548,9 @@
                             }
                         }
 					);
-                    /*$(window).resize(function(){
-                        $("#jqGrid").setGridWidth($(window).width()*0.99);
-                        $("#jqGrid").setGridWidth(document.body.clientWidth*0.99);
-                    });*/
-
                 });
 
 			</script>
-				<%--<div>
-					<input type="button" id="addRowBtn" value="添加一行" onclick="addDetail()"></input>
-				</div>--%>
 			</p>
 		</div>
 	</div>

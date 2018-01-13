@@ -51,7 +51,25 @@
 		FROM contract_purchase a
 		<include refid="contractPurchaseJoins"/>
 		<where>
-			
+
+			<if test="contractCode != null and contractCode != ''">
+				AND a.contract_code = #{contractCode}
+			</if>
+			<if test="docSupplier != null and docSupplier != '' and docSupplier.supCode != null and docSupplier.supCode !=''">
+				AND a.supplier_code = #{docSupplier.supCode}
+			</if>
+			<if test="archiveContract != null and archiveContract != '' and archiveContract.contractCode != null and archiveContract.contractCode !=''">
+				AND a.contract_type_code = #{archiveContract.contractCode}
+			</if>
+			<if test="signDate != null and signDate != ''">
+				AND a.sign_date = #{signDate}
+			</if>
+			<if test="docAccmeth != null and docAccmeth != '' and docAccmeth.accmethCode != null and docAccmeth.accmethCode !=''">
+				AND a.setting_type_code = #{docAccmeth.accmethCode}
+			</if>
+			<if test="docOfficework != null and docOfficework != '' and docOfficework.officeworkCode != null and docOfficework.officeworkCode !=''">
+				AND a.saleman_code = #{docOfficework.officeworkCode}
+			</if>
 		</where>
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
