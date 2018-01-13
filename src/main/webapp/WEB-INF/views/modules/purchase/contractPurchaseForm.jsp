@@ -276,13 +276,14 @@
 
                 $(document).ready(function () {
                     $("#jqGrid").jqGrid({
-//                        url: 'http://localhost:8080/test/data.json',
                         url: '${ctx}/purchase/contractPurchaseDetail/listJson?contractCode=${contractPurchase.contractCode}',
                         editurl: 'clientArray',
                         mtype: "GET",
                         datatype: "json",
                         page: 1,
                         colModel: [
+                            { label: '序号', name: 'id', key: true, width: 150,hidden:true
+                            },
                             { label: '品种编码', name: 'kindCode', key: false, width: 150,
                                 editable: true,
                                 edittype: "custom",
@@ -428,12 +429,6 @@
                                             $("#kindName").val(nvalue);
                                             $("#kindLevel").val(lvalue);
                                             $("#firstUnit").val(uvalue);
-//                                            $("#"+id.value+"_kindName").val(nvalue);
-//                                            $("#"+id.value+"_kindLevel").val(lvalue);
-//                                            $("#"+id.value+"_firstUnit").val(uvalue);
-//                                            $("#jqg"+id.value+"_kindName").val(nvalue);
-//                                            $("#jqg"+id.value+"_kindLevel").val(lvalue);
-//                                            $("#jqg"+id.value+"_firstUnit").val(uvalue);
 										}
                             		}
 								}
@@ -457,7 +452,7 @@
                             return val;
                         }
 					}
-                    function createFreightEditElement(value, editOptions) {
+                    /*function createFreightEditElement(value, editOptions) {
                         var div =$("<div style='margin-top:5px'></div>");
                         var label = $("<label class='radio-inline'></label>");
                         var radio = $("<input>", { type: "radio", value: "0", name: "freight", id: "zero", checked: (value != 25 && value != 50 && value != 100) });
@@ -474,11 +469,11 @@
                         div.append(label).append(label1).append(label2);//.append(label3);
 
                         return div;
-                    }
+                    }*/
 
                     // The javascript executed specified by JQGridColumn.EditTypeCustomGetValue when EditType = EditType.Custom
                     // One parameter passed - the custom element created in JQGridColumn.EditTypeCustomCreateElement
-                    function getFreightElementValue(elem, oper, value) {
+                    /*function getFreightElementValue(elem, oper, value) {
                         if (oper === "set") {
                             var radioButton = $(elem).find("input:radio[value='" + value + "']");
                             if (radioButton.length > 0) {
@@ -489,7 +484,7 @@
                         if (oper === "get") {
                             return $(elem).find("input:radio:checked").val();
                         }
-                    }
+                    }*/
                     /*$('#jqGrid').jqGrid('editRow',id,{url:'clientArray',oneditfunc:function(){
                         $("#userButton").unbind("click").click(function(){
                             searchKind(id);

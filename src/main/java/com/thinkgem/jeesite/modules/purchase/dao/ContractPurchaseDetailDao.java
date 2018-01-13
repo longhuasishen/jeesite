@@ -6,6 +6,7 @@ package com.thinkgem.jeesite.modules.purchase.dao;
 import com.thinkgem.jeesite.common.persistence.CrudDao;
 import com.thinkgem.jeesite.common.persistence.annotation.MyBatisDao;
 import com.thinkgem.jeesite.modules.purchase.entity.ContractPurchaseDetail;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -17,4 +18,6 @@ import java.util.List;
 @MyBatisDao
 public interface ContractPurchaseDetailDao extends CrudDao<ContractPurchaseDetail> {
 	public void saveList(List<ContractPurchaseDetail> detailList);
+	public ContractPurchaseDetail getByContraceCode(@Param("contractCode")String contractCode);
+	public int deleteByContract(@Param("contractCode")String contractCode);
 }

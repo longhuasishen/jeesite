@@ -31,6 +31,13 @@
 		<include refid="contractPurchaseDetailJoins"/>
 		WHERE a.id = #{id}
 	</select>
+	<select id="getByContraceCode" resultType="ContractPurchaseDetail" parameterType="string">
+		SELECT
+		<include refid="contractPurchaseDetailColumns"/>
+		FROM contract_purchase_detail a
+		<include refid="contractPurchaseDetailJoins"/>
+		WHERE a.contract_code = #{contractCode}
+	</select>
 	
 	<select id="findList" resultType="ContractPurchaseDetail">
 		SELECT 
@@ -38,7 +45,9 @@
 		FROM contract_purchase_detail a
 		<include refid="contractPurchaseDetailJoins"/>
 		<where>
-			
+			<if test="contractCode != null and contractCode != ''">
+				AND a.contract_code = #{contractCode}
+			</if>
 		</where>
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
@@ -68,7 +77,6 @@
 	
 	<insert id="insert">
 		INSERT INTO contract_purchase_detail(
-			id,
 			contract_code,
 			kind_code,
 			item_amount,
@@ -82,7 +90,6 @@
 			ext_field2,
 			ext_field3
 		) VALUES (
-			#{id},
 			#{contractCode},
 			#{kindCode},
 			#{itemAmount},
@@ -131,6 +138,10 @@
 	<update id="delete">
 		DELETE FROM contract_purchase_detail
 		WHERE id = #{id}
+	</update>
+	<update id="deleteByContract" parameterType="string">
+		DELETE FROM contract_purchase_detail
+		WHERE contract_code = #{contractCode}
 	</update>
 	
 </mapper>

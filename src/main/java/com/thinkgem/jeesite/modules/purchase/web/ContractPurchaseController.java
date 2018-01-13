@@ -103,18 +103,18 @@ public class ContractPurchaseController extends BaseController {
 				contractPurchase.setContractCreateDate(DateUtils.formatDateTime(new Date()));
 			}
 
+			List<ContractPurchaseDetail> detailList = new ArrayList<ContractPurchaseDetail>();
 			if (StringUtils.isNotEmpty(tableDatas)) {
 				JSONArray detailArray = JSONArray.fromObject(StringEscapeUtils.unescapeHtml4(tableDatas));
 				log.info("合同明细{}", detailArray);
-				List<ContractPurchaseDetail> detailList = new ArrayList<ContractPurchaseDetail>();
 				for (Object object : detailArray.toArray()) {
 					ContractPurchaseDetail detail = buildVO((JSONObject) object, ContractPurchaseDetail.class);
 					detail.setContractCode(contractPurchase.getContractCode());
 					detailList.add(detail);
 				}
-				contractPurchaseDetailService.saveList(detailList);
+//				contractPurchaseDetailService.saveList(detailList);
 			}
-			contractPurchaseService.save(contractPurchase);
+			contractPurchaseService.saveAll(contractPurchase,detailList);
 			addMessage(redirectAttributes, "保存采购合同成功");
 		}catch (Exception e){
 			e.printStackTrace();
