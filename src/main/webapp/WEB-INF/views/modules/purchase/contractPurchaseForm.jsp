@@ -302,26 +302,32 @@
                                     dataInit: function (element) {
                                         $(element).attr("readonly","readonly");
                                         $(element).attr("id","kindName");
+                                        $(element).css("padding-top","0px");
+                                        $(element).css("padding-bottom","0px");
+                                        $(element).css("width","150px");
                                     }
                                 }
                             },
                             {
                                 label: '规格型号',
                                 name: 'kindLevel',
-                                width: 150,
+                                width: 100,
                                 editable: true,
                                 edittype:"text",//可以编辑的类型。可选值：text, textarea, select, checkbox, password, button, image and file.s
                                 editoptions: {
                                     dataInit: function (element) {
                                         $(element).attr("readonly","readonly");
                                         $(element).attr("id","kindLevel");
+                                        $(element).css("padding-top","0px");
+                                        $(element).css("padding-bottom","0px");
+                                        $(element).css("width","100px");
                                     }
                                 }
                             },
                             {
                                 label: '计量单位',
                                 name: 'firstUnit',
-                                width: 50,
+                                width: 75,
                                 editable: true,
                                 /*edittype: "select",
                                 editoptions: {
@@ -332,13 +338,16 @@
                                     dataInit: function (element) {
                                         $(element).attr("readonly","readonly");
                                         $(element).attr("id","firstUnit");
+                                        $(element).css("padding-top","0px");
+                                        $(element).css("padding-bottom","0px");
+                                        $(element).css("width","75px");
                                     }
                                 }
                             },
                             {
                                 label: '数量',
                                 name: 'itemNumber',
-                                width: 50,
+                                width: 75,
                                 sorttype:"number",
                                 editable: true,
 								edittype:"text",
@@ -346,46 +355,67 @@
                                 editoptions: {
 //                                    custom_value: getFreightElementValue,
 //                                    custom_element: createFreightEditElement
+                                    dataInit: function (element) {
+                                        $(element).css("padding-top","0px");
+                                        $(element).css("padding-bottom","0px");
+                                        $(element).css("width","75px");
+                                    }
                                 }
                             },
                             {
                                 label: '单价',
                                 name: 'itemPrice',
-                                width: 50,
+                                width: 75,
                                 editable: true,
                                 edittype: "text",
                                 editoptions: {
-
+                                    dataInit: function (element) {
+                                        $(element).css("padding-top","0px");
+                                        $(element).css("padding-bottom","0px");
+                                        $(element).css("width","75px");
+                                    }
                                 }
                             },
                             {
                                 label: '金额',
                                 name: 'itemAmount',
-                                width: 100,
+                                width: 75,
                                 editable: true,
                                 edittype: "text",
                                 editoptions: {
-
+                                    dataInit: function (element) {
+                                        $(element).css("padding-top","0px");
+                                        $(element).css("padding-bottom","0px");
+                                        $(element).css("width","75px");
+                                    }
                                 }
                             },
                             {
                                 label: '折算比',
                                 name: 'conversionRate',
-                                width: 150,
+                                width: 75,
                                 editable: true,
                                 edittype: "text",
                                 editoptions: {
-
+                                    dataInit: function (element) {
+                                        $(element).css("padding-top","0px");
+                                        $(element).css("padding-bottom","0px");
+                                        $(element).css("width","75px");
+                                    }
                                 }
                             },
                             {
                                 label: '扣称比例',
                                 name: 'otherRate',
-                                width: 150,
+                                width: 75,
                                 editable: true,
                                 edittype: "text",
                                 editoptions: {
-
+                                    dataInit: function (element) {
+                                        $(element).css("padding-top","0px");
+                                        $(element).css("padding-bottom","0px");
+                                        $(element).css("width","75px");
+                                    }
                                 }
                             }
                         ],
@@ -437,8 +467,8 @@
                     }
 
                     function createKindCodeEditElement(value, editOptions) {
-                        var div = $("<div style='margin-top:5px' class='input-append'></div>");
-                        var treeSelect = $("<input>",{type:"text",name:"kindCode",value:value,style:"width:100px",class:'input-xlarge required',id:'kindCode'});
+                        var div = $("<div class='input-append'></div>");
+                        var treeSelect = $("<input>",{type:"text",name:"kindCode",readonly:"readonly",value:value,style:"width:120px;padding-top:0px;padding-bottom:0px",class:'required',id:'kindCode'});
                         var searchClass = $("<a>",{id:'userButton',href:'#',class:'btn  ',style:'padding-top:0px;padding-right:1px;padding-bottom:0px;padding-left:1px;'});
                         var iClass = $("<i>",{class:'icon-search'});
                         searchClass.append(iClass);

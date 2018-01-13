@@ -37,6 +37,14 @@
 	<input type="text" value="" hidden="hidden" id="nvalue" style="display: none;"/>
 	<input type="text" value="" hidden="hidden" id="lvalue" style="display: none;"/>
 	<input type="text" value="" hidden="hidden" id="uvalue" style="display: none;"/>
+	<form:form id="searchForm" modelAttribute="docKind" action="${ctx}/doc/docKind/listFrame" method="post" class="breadcrumb form-search">
+		<input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
+		<input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
+		<%--<ul class="ul-form">
+			<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
+			<li class="clearfix"></li>
+		</ul>--%>
+	</form:form>
 	<table id="contentTable" class="table table-bordered table-condensed">
 		<thead>
 		<tr>
