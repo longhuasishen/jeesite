@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.purchase.dao.ContractPurchaseSupplementDao">
+    
+	<sql id="contractPurchaseSupplementColumns">
+		a.id AS "id",
+		a.contract_code AS "contractCode",
+		a.supplier_code AS "docSupplier.supCode",
+		a.supplier_name AS "docSupplier.supName",
+		a.sign_date AS "signDate",
+		a.sign_place AS "signPlace",
+		a.period_start AS "periodStart",
+		a.period_end AS "periodEnd",
+		a.setting_type_code AS "docAccmeth.accmethCode",
+		a.setting_type_name AS "docAccmeth.accmethName",
+		a.contrace_create AS "contraceCreate",
+		a.contract_create_date AS "contractCreateDate",
+		a.contract_auditor AS "contractAuditor",
+		a.contract_audit_date AS "contractAuditDate",
+		a.contract_cancel AS "contractCancel",
+		a.contract_cancel_date AS "contractCancelDate",
+		a.remark AS "remark",
+		a.ext_field1 AS "extField1",
+		a.ext_field2 AS "extField2",
+		a.ext_field3 AS "extField3"
+	</sql>
+	
+	<sql id="contractPurchaseSupplementJoins">
+	</sql>
+    
+	<select id="get" resultType="ContractPurchaseSupplement">
+		SELECT 
+			<include refid="contractPurchaseSupplementColumns"/>
+		FROM contract_purchase_supplement a
+		<include refid="contractPurchaseSupplementJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="ContractPurchaseSupplement">
+		SELECT 
+			<include refid="contractPurchaseSupplementColumns"/>
+		FROM contract_purchase_supplement a
+		<include refid="contractPurchaseSupplementJoins"/>
+		<where>
+			
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="ContractPurchaseSupplement">
+		SELECT 
+			<include refid="contractPurchaseSupplementColumns"/>
+		FROM contract_purchase_supplement a
+		<include refid="contractPurchaseSupplementJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO contract_purchase_supplement(
+			contract_code,
+			supplier_code,
+			supplier_name,
+			sign_date,
+			sign_place,
+			period_start,
+			period_end,
+			setting_type_code,
+			setting_type_name,
+			contrace_create,
+			contract_create_date,
+			contract_auditor,
+			contract_audit_date,
+			contract_cancel,
+			contract_cancel_date,
+			remark,
+			ext_field1,
+			ext_field2,
+			ext_field3
+		) VALUES (
+			#{contractCode},
+			#{docSupplier.supCode},
+			#{docSupplier.supName},
+			#{signDate},
+			#{signPlace},
+			#{periodStart},
+			#{periodEnd},
+			#{docAccmeth.accmethCode},
+			#{docAccmeth.accmethName},
+			#{contraceCreate},
+			#{contractCreateDate},
+			#{contractAuditor},
+			#{contractAuditDate},
+			#{contractCancel},
+			#{contractCancelDate},
+			#{remark},
+			#{extField1},
+			#{extField2},
+			#{extField3}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE contract_purchase_supplement SET 	
+			contract_code = #{contractCode},
+			supplier_code = #{docSupplier.supCode},
+			supplier_name = #{docSupplier.supName},
+			sign_date = #{signDate},
+			sign_place = #{signPlace},
+			period_start = #{periodStart},
+			period_end = #{periodEnd},
+			setting_type_code = #{docAccmeth.accmethCode},
+			setting_type_name = #{docAccmeth.accmethName},
+			contrace_create = #{contraceCreate},
+			contract_create_date = #{contractCreateDate},
+			contract_auditor = #{contractAuditor},
+			contract_audit_date = #{contractAuditDate},
+			contract_cancel = #{contractCancel},
+			contract_cancel_date = #{contractCancelDate},
+			remark = #{remark},
+			ext_field1 = #{extField1},
+			ext_field2 = #{extField2},
+			ext_field3 = #{extField3}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM contract_purchase_supplement
+		WHERE id = #{id}
+	</update>
+	
+</mapper>
