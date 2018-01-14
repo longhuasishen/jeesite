@@ -41,7 +41,7 @@
 			<tr>
 				<th>搅拌站编码</th>
 				<th>搅拌站名称</th>
-				<th>仓库名称</th>
+				<%--<th>仓库名称</th>--%>
 				<shiro:hasPermission name="doc:docStation:edit"><th>操作</th></shiro:hasPermission>
 			</tr>
 		</thead>
@@ -54,9 +54,9 @@
 				<td>
 						${fns:abbr(docStation.stationName,50)}
 				</td>
-				<td>
-						${fns:abbr(docStation.docRepertory.repertoryName,50)}
-				</td>
+				<%--<td>--%>
+						<%--${fns:abbr(docStation.docRepertory.repertoryName,50)}--%>
+				<%--</td>--%>
 				<shiro:hasPermission name="doc:docStation:edit"><td>
     				<a href="${ctx}/doc/docStation/form?id=${docStation.id}">修改</a>
 					<a href="${ctx}/doc/docStation/delete?id=${docStation.id}" onclick="return confirmx('确认要删除该搅拌站档案吗？', this.href)">删除</a>

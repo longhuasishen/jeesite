@@ -41,13 +41,13 @@
 			<tr>
 				<th>仓库编码</th>
 				<th>仓库名称</th>
-				<th>所属分类</th>
-				<th>所属部门</th>
-				<th>负责人</th>
-				<th>电话</th>
+				<%--<th>所属分类</th>--%>
+				<%--<th>所属部门</th>--%>
+				<%--<th>负责人</th>--%>
+				<%--<th>电话</th>--%>
 				<th>最高存库</th>
-				<th>计价方式</th>
-				<th>地址</th>
+				<%--<th>计价方式</th>--%>
+				<%--<th>地址</th>--%>
 				<th>搅拌站</th>
 				<th>备注</th>
 				<shiro:hasPermission name="doc:docRepertory:edit"><th>操作</th></shiro:hasPermission>
@@ -58,13 +58,13 @@
 			<tr>
 				<td>${fns:abbr(docRepertory.repertoryCode,50)}</td>
 				<td>${fns:abbr(docRepertory.repertoryName,50)}</td>
-				<td>${fns:abbr(docRepertory.archiveRepertory.repertoryName,50)}</td>
-				<td>${fns:abbr(docRepertory.docDepartment.departmentName,50)}</td>
-				<td>${fns:abbr(docRepertory.managerPerson,50)}</td>
-				<td>${fns:abbr(docRepertory.phoneNo,50)}</td>
+				<%--<td>${fns:abbr(docRepertory.archiveRepertory.repertoryName,50)}</td>--%>
+				<%--<td>${fns:abbr(docRepertory.docDepartment.departmentName,50)}</td>--%>
+				<%--<td>${fns:abbr(docRepertory.managerPerson,50)}</td>--%>
+				<%--<td>${fns:abbr(docRepertory.phoneNo,50)}</td>--%>
 				<td>${fns:abbr(docRepertory.maxStock,50)}</td>
-				<td>${fns:getDictLabel(docRepertory.pricingMethod,"pricing_method","")}</td>
-				<td>${fns:abbr(docRepertory.repertoryAddr,50)}</td>
+				<%--<td>${fns:getDictLabel(docRepertory.pricingMethod,"pricing_method","")}</td>--%>
+				<%--<td>${fns:abbr(docRepertory.repertoryAddr,50)}</td>--%>
 				<td>${fns:abbr(docRepertory.docStation.stationName,50)}</td>
 				<td>${fns:abbr(docRepertory.comment,50)}</td>
 				<shiro:hasPermission name="doc:docRepertory:edit"><td>

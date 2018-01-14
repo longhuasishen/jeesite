@@ -41,10 +41,10 @@
 			<tr>
 				<th>部门编码</th>
 				<th>部门名称</th>
-				<th>所属分类</th>
+				<%--<th>所属分类</th>--%>
 				<th>负责人</th>
 				<th>联系电话</th>
-				<th>地址</th>
+				<%--<th>地址</th>--%>
 				<th>备注</th>
 				<shiro:hasPermission name="doc:docDepartment:edit"><th>操作</th></shiro:hasPermission>
 			</tr>
@@ -58,18 +58,18 @@
 				<td>
 						${fns:abbr(docDepartment.departmentName,50)}
 				</td>
-				<td>
-						${fns:abbr(docDepartment.archiveDepartment.departmentName,50)}
-				</td>
+				<%--<td>--%>
+						<%--${fns:abbr(docDepartment.archiveDepartment.departmentName,50)}--%>
+				<%--</td>--%>
 				<td>
 						${fns:abbr(docDepartment.managerPerson,50)}
 				</td>
 				<td>
 						${fns:abbr(docDepartment.phoneNo,50)}
 				</td>
-				<td>
-						${fns:abbr(docDepartment.firstUnit,50)}
-				</td>
+				<%--<td>--%>
+						<%--${fns:abbr(docDepartment.firstUnit,50)}--%>
+				<%--</td>--%>
 				<td>
 						${fns:abbr(docDepartment.comment,50)}
 				</td>

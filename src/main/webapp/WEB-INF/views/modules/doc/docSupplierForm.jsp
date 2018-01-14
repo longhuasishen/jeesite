@@ -60,7 +60,8 @@
 				<div class="control-group">
 					<label class="control-label">供应商名称：</label>
 					<div class="controls">
-						<form:input path="supName" htmlEscape="false" maxlength="60" class="input-xlarge "/>
+						<form:input path="supName" htmlEscape="false" maxlength="60" class="input-xlarge required"/>
+						<span class="help-inline"><font color="red">*</font> </span>
 					</div>
 				</div>
 				<div class="control-group">
@@ -69,7 +70,7 @@
 						<form:input path="supShortName" htmlEscape="false" maxlength="60" class="input-xlarge "/>
 					</div>
 				</div>
-				<div class="control-group">
+				<div class="control-group" style="display:none">
 					<label class="control-label">供应商分类：</label>
 					<div class="controls">
 						<sys:treeselect id="archiveSupplier" name="archiveSupplier.id" value="${docSupplier.archiveSupplier.id}" labelName="archiveSupplier.supplierName" labelValue="${docSupplier.archiveSupplier.supplierName}"
@@ -85,8 +86,10 @@
 				<div class="control-group">
 					<label class="control-label">所属行业：</label>
 					<div class="controls">
-						<sys:treeselect id="cusIndustry" name="archiveIndustry.id" value="${docSupplier.archiveIndustry.id}" labelName="archiveIndustry.industryName" labelValue="${docSupplier.archiveIndustry.industryName}"
-										title="所属行业" url="/archive/archiveIndustry/treeData" cssClass="required"/>
+						<%--<sys:treeselect id="cusIndustry" name="archiveIndustry.id" value="${docSupplier.archiveIndustry.id}" labelName="archiveIndustry.industryName" labelValue="${docSupplier.archiveIndustry.industryName}"--%>
+										<%--title="所属行业" url="/archive/archiveIndustry/treeData" cssClass="required"/>--%>
+							<form:input path="supIndustry" htmlEscape="false" maxlength="60" class="input-xlarge  required"/>
+							<span class="help-inline"><font color="red">*</font> </span>
 					</div>
 				</div>
 				<div class="control-group">

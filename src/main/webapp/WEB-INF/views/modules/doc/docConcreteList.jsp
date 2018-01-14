@@ -41,34 +41,35 @@
 			<tr>
 				<th>品种编码</th>
 				<th>品种名称</th>
-				<th>材质等级</th>
-				<th>标准名称</th>
-				<th>所属分类</th>
+
+				<%--<th>标准名称</th>--%>
+				<%--<th>所属分类</th>--%>
 				<th>原材料类型</th>
-				<th>辅记量单位</th>
-				<th>主记量单位</th>
-				<th>换算率</th>
-				<th>主要供应商</th>
-				<th>计价方式</th>
-				<th>品牌名称</th>
-				<th>销售</th>
-				<th>外购</th>
-				<th>自制</th>
-				<th>应税劳务</th>
-				<th>成套件</th>
-				<th>砂浆</th>
-				<th>最低库存</th>
-				<th>成本参考核算单价</th>
-				<th>最高存库</th>
-				<th>配方上下限控制</th>
-				<th>安全库存</th>
-				<th>安全库存</th>
 				<th>ABC分类</th>
-				<th>税率</th>
-				<th>保质期管理</th>
-				<th>批次管理</th>
-				<th>委托代锁管理</th>
-				<th>呆滞积压管理</th>
+				<th>主记量单位</th>
+				<th>辅记量单位</th>
+				<th>材质等级</th>
+				<%--<th>换算率</th>--%>
+				<%--<th>主要供应商</th>--%>
+				<%--<th>计价方式</th>--%>
+				<%--<th>品牌名称</th>--%>
+				<%--<th>销售</th>--%>
+				<%--<th>外购</th>--%>
+				<%--<th>自制</th>--%>
+				<%--<th>应税劳务</th>--%>
+				<%--<th>成套件</th>--%>
+				<%--<th>砂浆</th>--%>
+				<%--<th>最低库存</th>--%>
+				<th>成本参考核算单价</th>
+				<%--<th>最高存库</th>--%>
+				<th>配方上下限控制</th>
+				<%--<th>安全库存</th>--%>
+				<%--<th>安全库存</th>--%>
+				<%--<th>税率</th>--%>
+				<%--<th>保质期管理</th>--%>
+				<%--<th>批次管理</th>--%>
+				<%--<th>委托代锁管理</th>--%>
+				<%--<th>呆滞积压管理</th>--%>
 				<shiro:hasPermission name="doc:docConcrete:edit"><th>操作</th></shiro:hasPermission>
 			</tr>
 		</thead>
@@ -77,34 +78,34 @@
 			<tr>
 				<td> ${fns:abbr(docConcrete.kindCode,16)}</td>
 				<td> ${fns:abbr(docConcrete.kindName,120)}</td>
-				<td> ${fns:abbr(docConcrete.kindLevel,60)}</td>
-				<td> ${fns:abbr(docConcrete.standName,120)}</td>
-				<td> ${fns:abbr(docConcrete.archiveMaterial.materialName,60)}</td>
+				<%--<td> ${fns:abbr(docConcrete.standName,120)}</td>--%>
+				<%--<td> ${fns:abbr(docConcrete.archiveMaterial.materialName,60)}</td>--%>
 				<td> ${fns:abbr(docConcrete.docConcretetyp.concretetypName,60)}</td>
-				<td> ${fns:abbr(docConcrete.secUnit,20)}</td>
-				<td> ${fns:abbr(docConcrete.firstUnit,60)}</td>
-				<td> ${fns:abbr(docConcrete.rate,12)}</td>
-				<td> ${fns:abbr(docConcrete.docSupplier.supName,240)}</td>
-				<td> ${fns:getDictLabel(docConcrete.pricingMode,"pricing_method","")}</td>
-				<td> ${fns:abbr(docConcrete.brandName,120)}</td>
-				<td> ${fns:abbr(docConcrete.sales,100)}</td>
-				<td> ${fns:abbr(docConcrete.outsourcing,100)}</td>
-				<td> ${fns:abbr(docConcrete.madSelf,100)}</td>
-				<td> ${fns:abbr(docConcrete.taxService,100)}</td>
-				<td> ${fns:abbr(docConcrete.compSet,100)}</td>
-				<td> ${fns:abbr(docConcrete.mortar,100)}</td>
-				<td> ${fns:abbr(docConcrete.minInventory,100)}</td>
-				<td> ${fns:abbr(docConcrete.costPrices,100)}</td>
-				<td> ${fns:abbr(docConcrete.maxInventory,100)}</td>
-				<td> ${fns:abbr(docConcrete.sumControl,100)}</td>
-				<td> ${fns:abbr(docConcrete.saveInventory,100)}</td>
-				<td> ${fns:abbr(docConcrete.stockStand,100)}</td>
 				<td> ${fns:getDictLabel(docConcrete.abcCategory,"abcCategory_list","")}</td>
-				<td> ${fns:abbr(docConcrete.taxRate,100)}</td>
-				<td> ${fns:abbr(docConcrete.qualityManage,100)}</td>
-				<td> ${fns:abbr(docConcrete.batManage,100)}</td>
-				<td> ${fns:abbr(docConcrete.entrustManage,100)}</td>
-				<td> ${fns:abbr(docConcrete.stockManage,100)}</td>
+				<td> ${fns:abbr(docConcrete.firstUnit,60)}</td>
+				<td> ${fns:abbr(docConcrete.secUnit,20)}</td>
+				<td> ${fns:abbr(docConcrete.kindLevel,60)}</td>
+				<%--<td> ${fns:abbr(docConcrete.rate,12)}</td>--%>
+				<%--<td> ${fns:abbr(docConcrete.docSupplier.supName,240)}</td>--%>
+				<%--<td> ${fns:getDictLabel(docConcrete.pricingMode,"pricing_method","")}</td>--%>
+				<%--<td> ${fns:abbr(docConcrete.brandName,120)}</td>--%>
+				<%--<td> ${fns:abbr(docConcrete.sales,100)}</td>--%>
+				<%--<td> ${fns:abbr(docConcrete.outsourcing,100)}</td>--%>
+				<%--<td> ${fns:abbr(docConcrete.madSelf,100)}</td>--%>
+				<%--<td> ${fns:abbr(docConcrete.taxService,100)}</td>--%>
+				<%--<td> ${fns:abbr(docConcrete.compSet,100)}</td>--%>
+				<%--<td> ${fns:abbr(docConcrete.mortar,100)}</td>--%>
+				<%--<td> ${fns:abbr(docConcrete.minInventory,100)}</td>--%>
+				<td> ${fns:abbr(docConcrete.costPrices,100)}</td>
+				<%--<td> ${fns:abbr(docConcrete.maxInventory,100)}</td>--%>
+				<td> ${fns:abbr(docConcrete.sumControl,100)}</td>
+				<%--<td> ${fns:abbr(docConcrete.saveInventory,100)}</td>--%>
+				<%--<td> ${fns:abbr(docConcrete.stockStand,100)}</td>--%>
+				<%--<td> ${fns:abbr(docConcrete.taxRate,100)}</td>--%>
+				<%--<td> ${fns:abbr(docConcrete.qualityManage,100)}</td>--%>
+				<%--<td> ${fns:abbr(docConcrete.batManage,100)}</td>--%>
+				<%--<td> ${fns:abbr(docConcrete.entrustManage,100)}</td>--%>
+				<%--<td> ${fns:abbr(docConcrete.stockManage,100)}</td>--%>
 				<shiro:hasPermission name="doc:docConcrete:edit"><td>
     				<a href="${ctx}/doc/docConcrete/form?id=${docConcrete.id}">修改</a>
 					<a href="${ctx}/doc/docConcrete/delete?id=${docConcrete.id}" onclick="return confirmx('确认要删除该原材料档案吗？', this.href)">删除</a>

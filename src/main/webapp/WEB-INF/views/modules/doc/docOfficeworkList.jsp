@@ -61,14 +61,18 @@
 				<th>录入时间</th>
 				<th>级别</th>
 				<th>家庭地址</th>
-				<th>在职状态</th>
+				<th>职员类型</th>
 				<th>技术职称</th>
 				<th>民族</th>
 				<th>岗位</th>
 				<th>业务员</th>
 				<th>合同签否</th>
 				<th>标志</th>
-				<th>注销</th>
+				<th>离职</th>
+				<th>罐车司机</th>
+				<th>车牌号码</th>
+				<th>驾驶证号码</th>
+				<th>备注</th>
 				<shiro:hasPermission name="doc:docOfficework:edit"><th>操作</th></shiro:hasPermission>
 			</tr>
 		</thead>
@@ -91,13 +95,13 @@
 						${fns:abbr(docOfficework.officeworkEdu,50)}
 				</td>
 				<td>
-						${fns:abbr(docOfficework.officeworkMarry,50)}
+						${fns:getDictLabel(workStatus.officeworkMarry, 'marry_state', '')}
 				</td>
 				<td>
 						${fns:abbr(docOfficework.officeworkPol,50)}
 				</td>
 				<td>
-						${fns:abbr(docOfficework.officeworkSex,50)}
+						${fns:getDictLabel(workStatus.officeworkSex, 'sex', '')}
 				</td>
 				<td>
 						${fns:abbr(docOfficework.officeworkPhone,50)}
@@ -142,7 +146,7 @@
 						${fns:abbr(docOfficework.officeworkAddr,50)}
 				</td>
 				<td>
-						${fns:abbr(docOfficework.workStatus,50)}
+						${fns:getDictLabel(workStatus.checkStatus, 'officework_type', '')}
 				</td>
 				<td>
 						${fns:abbr(docOfficework.postLevel,50)}
@@ -154,17 +158,21 @@
 						${fns:abbr(docOfficework.officeworkPost,50)}
 				</td>
 				<td>
-						${fns:abbr(docOfficework.officeworkSales,50)}
+						${fns:getDictLabel(docOfficework.officeworkSales, 'yes_no', '')}
 				</td>
 				<td>
-						${fns:abbr(docOfficework.contractFlg,50)}
+						${fns:getDictLabel(docOfficework.contractFlg, 'yes_no', '')}
 				</td>
 				<td>
-						${fns:abbr(docOfficework.officeworkFlg,50)}
+						${fns:getDictLabel(docOfficework.officeworkFlg, 'yes_no', '')}
 				</td>
 				<td>
-						${fns:abbr(docOfficework.officeworkCancel,50)}
+						${fns:getDictLabel(docOfficework.officeworkCancel, 'yes_no', '')}
 				</td>
+				<td>${fns:abbr(docOfficework.isDriver,50)}</td>
+				<td>${fns:abbr(docOfficework.carNo,60)}</td>
+				<td>${fns:abbr(docOfficework.licenceNo,60)}</td>
+				<td>${fns:abbr(docOfficework.comment,120)}</td>
 				<shiro:hasPermission name="doc:docOfficework:edit"><td>
     				<a href="${ctx}/doc/docOfficework/form?id=${docOfficework.id}">修改</a>
 					<a href="${ctx}/doc/docOfficework/delete?id=${docOfficework.id}" onclick="return confirmx('确认要删除该职员档案吗？', this.href)">删除</a>

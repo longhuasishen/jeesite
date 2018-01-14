@@ -28,6 +28,16 @@ public class DocSupplier extends DataEntity<DocSupplier> {
 	private ArchiveSupplier archiveSupplier;		// 供应商分类
 	private String supArea;		// 所属地区
 	private ArchiveIndustry archiveIndustry;		// 所属行业
+
+	public String getSupIndustry() {
+		return supIndustry;
+	}
+
+	public void setSupIndustry(String supIndustry) {
+		this.supIndustry = supIndustry;
+	}
+
+	private String supIndustry;
 	private String supSettle;		// 结算单位
 	private String supLicence;		// 营业执照
 	private String supTaxno;		// 税号

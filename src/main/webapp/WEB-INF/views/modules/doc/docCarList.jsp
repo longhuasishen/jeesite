@@ -41,17 +41,17 @@
 			<tr>
 				<th>车辆编码</th>
 				<th>车牌号码</th>
-				<th>司机姓名</th>
-				<th>车主</th>
-				<th>行驶执照</th>
-				<th>卡号</th>
-				<th>车型名称</th>
-				<th>空重</th>
-				<th>装载方量</th>
-				<th>联系电话</th>
+				<th>司机姓名1</th>
+				<th>司机姓名2</th>
+				<th>司机姓名3</th>
+			<%--<th>行驶执照</th>--%>
 				<th>搅拌车</th>
 				<th>泵车</th>
 				<th>其它设备</th>
+				<th>卡号</th>
+				<th>空重</th>
+				<th>装载方量</th>
+			<%--<th>联系电话</th>--%>
 				<th>是否可用</th>
 				<th>行驶记录</th>
 				<shiro:hasPermission name="doc:docCar:edit"><th>操作</th></shiro:hasPermission>
@@ -73,23 +73,11 @@
 						${fns:abbr(docCar.carOwner,50)}
 				</td>
 				<td>
-						${fns:abbr(docCar.carLicence,50)}
-				</td>
-				<td>
-						${fns:abbr(docCar.cardNo,50)}
-				</td>
-				<td>
 						${fns:abbr(docCar.carTypename,50)}
 				</td>
-				<td>
-						${fns:abbr(docCar.emptyWeight,50)}
-				</td>
-				<td>
-						${fns:abbr(docCar.driveCube,50)}
-				</td>
-				<td>
-						${fns:abbr(docCar.carPhone,50)}
-				</td>
+			<%--<td>--%>
+			<%--${fns:abbr(docCar.carLicence,50)}--%>
+			<%--</td>--%>
 				<td>
 						${fns:abbr(docCar.isMixing,50)}
 				</td>
@@ -99,6 +87,18 @@
 				<td>
 						${fns:abbr(docCar.isOther,50)}
 				</td>
+				<td>
+			${fns:abbr(docCar.cardNo,50)}
+				</td>
+				<td>
+			${fns:abbr(docCar.emptyWeight,50)}
+				</td>
+				<td>
+			${fns:abbr(docCar.driveCube,50)}
+				</td>
+			<%--<td>--%>
+			<%--${fns:abbr(docCar.carPhone,50)}--%>
+			<%--</td>--%>
 				<td>
 						${fns:abbr(docCar.isAvalable,50)}
 				</td>

@@ -87,8 +87,13 @@
 					<div class="control-group">
 						<label class="control-label">客户分类：</label>
 						<div class="controls">
-							<sys:treeselect id="archiveCustom" name="archiveCustom.id" value="${docCustomer.archiveCustom.id}" labelName="archiveCustom.customName" labelValue="${docCustomer.archiveCustom.customName}"
-											title="客户" url="/archive/archiveCustom/treeData" cssClass="required"/>
+							<%--<sys:treeselect id="archiveCustom" name="archiveCustom.id" value="${docCustomer.archiveCustom.id}" labelName="archiveCustom.customName" labelValue="${docCustomer.archiveCustom.customName}"--%>
+											<%--title="客户" url="/archive/archiveCustom/treeData" cssClass="required"/>--%>
+								<form:select path="cusType"  class="input-xlarge required">
+									<form:option value="" label=""/>
+									<form:options items="${fns:getDictList('cus_archivetype')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+								</form:select>
+								<span class="help-inline"><font color="red">*</font> </span>
 						</div>
 					</div>
 					<div class="control-group">
@@ -100,8 +105,10 @@
 					<div class="control-group">
 						<label class="control-label">所属行业：</label>
 						<div class="controls">
-							<sys:treeselect id="cusIndustry" name="archiveIndustry.id" value="${docCustomer.archiveIndustry.id}" labelName="archiveIndustry.industryName" labelValue="${docCustomer.archiveIndustry.industryName}"
-											title="所属行业" url="/archive/archiveIndustry/treeData" cssClass="required"/>
+							<%--<sys:treeselect id="cusIndustry" name="archiveIndustry.id" value="${docCustomer.archiveIndustry.id}" labelName="archiveIndustry.industryName" labelValue="${docCustomer.archiveIndustry.industryName}"--%>
+											<%--title="所属行业" url="/archive/archiveIndustry/treeData" cssClass="required"/>--%>
+								<form:input path="cusIndustry" htmlEscape="false" maxlength="60" class="input-xlarge  required"/>
+								<span class="help-inline"><font color="red">*</font> </span>
 						</div>
 					</div>
 					<div class="control-group">

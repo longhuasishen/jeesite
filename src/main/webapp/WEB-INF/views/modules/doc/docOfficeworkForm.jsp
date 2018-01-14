@@ -51,15 +51,13 @@
 			<label class="control-label">所属部门：</label>
 			<div class="controls">
 				<sys:treeselect id="officeworkDep" name="docDepartment.id" value="${docOfficework.docDepartment.id}" labelName="docDepartment.departmentName" labelValue="${docOfficework.docDepartment.departmentName}"
-								title="部门档案" url="/doc/docDepartment/treeData" cssClass="required"/>
-				<span class="help-inline"><font color="red">*</font> </span>
+								title="部门档案" url="/doc/docDepartment/treeData" />
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">职务：</label>
 			<div class="controls">
-				<form:input path="officeworkPost" htmlEscape="false" maxlength="20" class="input-xlarge required"/>
-				<span class="help-inline"><font color="red">*</font> </span>
+				<form:input path="officeworkPost" htmlEscape="false" maxlength="20" class="input-xlarge"/>
 			</div>
 		</div>
 		<div class="control-group">
@@ -71,7 +69,10 @@
 		<div class="control-group">
 			<label class="control-label">婚姻状况：</label>
 			<div class="controls">
-				<form:input path="officeworkMarry" htmlEscape="false" maxlength="10" class="input-xlarge "/>
+				<form:select path="officeworkMarry" class="input-xlarge ">
+					<form:option value="" label=""/>
+					<form:options items="${fns:getDictList('marry_state')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+				</form:select>
 			</div>
 		</div>
 		<div class="control-group">
@@ -83,7 +84,9 @@
 		<div class="control-group">
 			<label class="control-label">性别：</label>
 			<div class="controls">
-				<form:input path="officeworkSex" htmlEscape="false" maxlength="10" class="input-xlarge "/>
+				<form:select path="officeworkSex" class="input-xlarge ">
+					<form:options items="${fns:getDictList('sex')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+				</form:select>
 			</div>
 		</div>
 		<div class="control-group">
@@ -95,11 +98,9 @@
 		<div class="control-group">
 			<label class="control-label">出生日期：</label>
 			<div class="controls">
-				<%--<form:input path="officeworkBirth" htmlEscape="false" maxlength="20" class="input-xlarge required"/>--%>
-				<input id="officeworkBirth"  name="officeworkBirth"  type="text" readonly="readonly" maxlength="20" class="Wdate required" style="width:163px;"
+				<input id="officeworkBirth"  name="officeworkBirth"  type="text" readonly="readonly" maxlength="20" style="width:163px;"
 					   value="${docOfficework.officeworkBirth}"
-					   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});" class="required"/>
-					<span class="help-inline"><font color="red">*</font> </span>
+					   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});" />
 			</div>
 		</div>
 		<div class="control-group">
@@ -111,11 +112,9 @@
 		<div class="control-group">
 			<label class="control-label">入司日期：</label>
 			<div class="controls">
-				<%--<form:input path="joinDate" htmlEscape="false" maxlength="20" class="input-xlarge required"/>--%>
-				<input id="joinDate"  name="joinDate"  type="text" readonly="readonly" maxlength="20" class="Wdate required" style="width:163px;"
+				<input id="joinDate"  name="joinDate"  type="text" readonly="readonly" maxlength="20" style="width:163px;"
 					   value="${docOfficework.joinDate}"
-					   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});" class="required"/>
-				<span class="help-inline"><font color="red">*</font> </span>
+					   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});" />
 			</div>
 		</div>
 		<div class="control-group">
@@ -152,7 +151,7 @@
 			<label class="control-label">毕业时间：</label>
 			<div class="controls">
 				<%--<form:input path="overuniTime" htmlEscape="false" maxlength="20" class="input-xlarge "/>--%>
-				<input id="overuniTime"  name="overuniTime"  type="text" readonly="readonly" maxlength="20" class="Wdate required" style="width:163px;"
+				<input id="overuniTime"  name="overuniTime"  type="text" readonly="readonly" maxlength="20" style="width:163px;"
 					   value="${docOfficework.overuniTime}"
 					   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
 			</div>
@@ -169,8 +168,7 @@
 				<%--<form:input path="inputTime" htmlEscape="false" maxlength="20" class="input-xlarge required"/>--%>
 				<input id="inputTime"  name="inputTime"  type="text" readonly="readonly" maxlength="20" class="Wdate required" style="width:163px;"
 					   value="${docOfficework.inputTime}"
-					   onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'});" class="required"/>
-				<span class="help-inline"><font color="red">*</font> </span>
+					   onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'});" />
 			</div>
 		</div>
 		<div class="control-group">
@@ -186,9 +184,11 @@
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label">在职状态：</label>
+			<label class="control-label">职员类型：</label>
 			<div class="controls">
-				<form:input path="workStatus" htmlEscape="false" maxlength="10" class="input-xlarge "/>
+				<form:select path="workStatus" class="input-xlarge ">
+					<form:options items="${fns:getDictList('officework_type')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+				</form:select>
 			</div>
 		</div>
 		<div class="control-group">
@@ -240,7 +240,7 @@
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label">注销：</label>
+			<label class="control-label">离职：</label>
 			<div class="controls">
 				<%--<form:input path="officeworkCancel" htmlEscape="false" maxlength="1" class="input-xlarge "/>--%>
 				<form:select path="officeworkCancel" class="input-xlarge ">
@@ -250,24 +250,55 @@
 			</div>
 		</div>
 		<div class="control-group">
+			<label class="control-label">罐车司机：</label>
+			<div class="controls">
+					<%--<form:input path="officeworkCancel" htmlEscape="false" maxlength="1" class="input-xlarge "/>--%>
+				<form:select path="isDriver" class="input-xlarge required">
+					<form:option value="" label=""/>
+					<form:options items="${fns:getDictList('yes_no')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+				</form:select>
+						<span class="help-inline"><font color="red">*</font> </span>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">车牌号码：</label>
+			<div class="controls">
+				<form:input path="carNo" htmlEscape="false" maxlength="60" class="input-xlarge required"/>
+				<span class="help-inline"><font color="red">*</font> </span>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">驾驶证号码：</label>
+			<div class="controls">
+				<form:input path="licenceNo" htmlEscape="false" maxlength="60" class="input-xlarge required"/>
+				<span class="help-inline"><font color="red">*</font> </span>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">备注：</label>
+			<div class="controls">
+				<form:input path="comment" htmlEscape="false" maxlength="120" class="input-xlarge "/>
+			</div>
+		</div>
+		<div class="control-group" style="display:none">
 			<label class="control-label">ext_field1：</label>
 			<div class="controls">
 				<form:input path="extField1" htmlEscape="false" maxlength="60" class="input-xlarge "/>
 			</div>
 		</div>
-		<div class="control-group">
+		<div class="control-group" style="display:none">
 			<label class="control-label">ext_field2：</label>
 			<div class="controls">
 				<form:input path="extField2" htmlEscape="false" maxlength="60" class="input-xlarge "/>
 			</div>
 		</div>
-		<div class="control-group">
+		<div class="control-group" style="display:none">
 			<label class="control-label">ext_field3：</label>
 			<div class="controls">
 				<form:input path="extField3" htmlEscape="false" maxlength="120" class="input-xlarge "/>
 			</div>
 		</div>
-		<div class="control-group">
+		<div class="control-group" style="display:none">
 			<label class="control-label">remark：</label>
 			<div class="controls">
 				<form:input path="remark" htmlEscape="false" maxlength="1000" class="input-xlarge "/>
