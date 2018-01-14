@@ -101,5 +101,21 @@ public class DocRepertoryController extends BaseController {
 		}
 		return mapList;
 	}
+	@ResponseBody
+	@RequestMapping(value = "treeData2")
+	public List<Map<String, Object>> treeData2(HttpServletResponse response) {
+		List<Map<String, Object>> mapList = Lists.newArrayList();
+		DocRepertory docRepertory = new DocRepertory();
+		List<DocRepertory> list = docRepertoryService.findList(docRepertory);
+		for (int i=0; i<list.size(); i++){
+			DocRepertory e = list.get(i);
+			Map<String, Object> map = Maps.newHashMap();
+			map.put("id", e.getRepertoryCode());
+			map.put("name", e.getRepertoryName()+"["+e.getRepertoryCode()+"]");
+
+			mapList.add(map);
+		}
+		return mapList;
+	}
 
 }

@@ -58,10 +58,10 @@
 					${contractPurchaseSupplement.contractCode}
 				</a></td>
 				<td>
-						${fns:abbr(contractPurchase.docSupplier.supCode,50)}
+						${fns:abbr(contractPurchaseSupplement.docSupplier.supCode,50)}
 				</td>
 				<td>
-						${contractPurchase.docSupplier.supName}
+						${contractPurchaseSupplement.docSupplier.supName}
 				</td>
 				<td>
 					${contractPurchaseSupplement.signDate}

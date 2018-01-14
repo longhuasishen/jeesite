@@ -335,3 +335,55 @@ CREATE TABLE `doc_kind` (
   `brand_name` varchar(120) DEFAULT NULL COMMENT '品牌名称',
   PRIMARY KEY (`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='品种档案表或存货档案表';
+
+drop table if EXISTS  `contract_purchase_storage_main`;
+CREATE TABLE `contract_purchase_storage_main` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `doc_code` varchar(12) NOT NULL COMMENT '单据编号',
+  `storage_code` varchar(50) DEFAULT NULL COMMENT '入库单号',
+  `storage_date` varchar(20) NOT NULL COMMENT '入库日期时间',
+  `storage_department_code` varchar(20) NOT NULL COMMENT '入库部门编码',
+  `storage_department_name` varchar(20) NOT NULL COMMENT '入库部门名称',
+  `storage_repertory_code` varchar(20) NOT NULL COMMENT '入库仓库编码',
+  `storage_repertory_name` varchar(20) NOT NULL COMMENT '入库仓库名称',
+  `storage_flag` varchar(1) NOT NULL COMMENT '红蓝标志',
+  `storage_audit_flag` varchar(1) default '1' COMMENT '审核状态',
+  `storage_type` varchar(20) NOT NULL COMMENT '入库类型',
+  `storage_create` varchar(20) not null COMMENT '制单人',
+  `storage_auditor` varchar(20)  COMMENT '审核人',
+  `storage_handler` varchar(20)  COMMENT '经手人',
+  `storage_create_date` varchar(20) COMMENT '制单日期',
+  `storage_audit_date` varchar(20) COMMENT '审核日期',
+  `remark` varchar(1000) DEFAULT NULL COMMENT '备注',
+  `ext_field1` varchar(60) DEFAULT NULL COMMENT 'ext_field1',
+  `ext_field2` varchar(60) DEFAULT NULL COMMENT 'ext_field2',
+  `ext_field3` varchar(120) DEFAULT NULL COMMENT 'ext_field3',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='采购入库主表';
+
+drop table if EXISTS  `contract_purchase_storage_detail`;
+CREATE TABLE `contract_purchase_storage_detail` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `storage_code` varchar(50) NOT NULL COMMENT '入库单号',
+  `kind_code` varchar(16) NOT NULL COMMENT '品种编码',
+  `kind_name` varchar(120) DEFAULT NULL COMMENT '品种名称',
+  `kind_level` varchar(60) DEFAULT NULL COMMENT '材质等级',
+  `first_unit` varchar(60) DEFAULT NULL COMMENT '主记量单位',
+  `item_amount` varchar(20) NOT NULL COMMENT '结算金额',
+  `item_number` varchar(20) NOT NULL COMMENT '结算数量',
+  `item_price` varchar(20) NOT NULL COMMENT '结算单价',
+  `origin_item_amount` varchar(20) NOT NULL COMMENT '入库原始金额',
+  `origin_item_number` varchar(20) NOT NULL COMMENT '入库原始数量',
+  `origin_item_price` varchar(20) NOT NULL COMMENT '入库原始单价',
+  `origin_item_tare` varchar(20) NOT NULL COMMENT '入库皮重',
+  `origin_item_gross` varchar(20) NOT NULL COMMENT '入库毛重',
+  `supplier_code` varchar(16) NOT NULL COMMENT '供应商编码',
+  `supplier_name` varchar(60) NOT NULL COMMENT '供应商名称',
+  `saleman_code` varchar(20)  COMMENT '采购员编码',
+  `saleman_name` varchar(20)  COMMENT '采购员名称',
+  `remark` varchar(1000) DEFAULT NULL COMMENT '备注',
+  `ext_field1` varchar(60) DEFAULT NULL COMMENT 'ext_field1',
+  `ext_field2` varchar(60) DEFAULT NULL COMMENT 'ext_field2',
+  `ext_field3` varchar(120) DEFAULT NULL COMMENT 'ext_field3',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='采购入库明细表';

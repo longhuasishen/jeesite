@@ -3,15 +3,18 @@
  */
 package com.thinkgem.jeesite.modules.purchase.service;
 
-import java.util.List;
-
+import com.thinkgem.jeesite.common.persistence.Page;
+import com.thinkgem.jeesite.common.service.CrudService;
+import com.thinkgem.jeesite.modules.purchase.dao.ContractPurchaseSupplementDao;
+import com.thinkgem.jeesite.modules.purchase.dao.ContractPurchaseSupplementDetailDao;
+import com.thinkgem.jeesite.modules.purchase.entity.ContractPurchaseDetail;
+import com.thinkgem.jeesite.modules.purchase.entity.ContractPurchaseSupplement;
+import com.thinkgem.jeesite.modules.purchase.entity.ContractPurchaseSupplementDetail;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.thinkgem.jeesite.common.persistence.Page;
-import com.thinkgem.jeesite.common.service.CrudService;
-import com.thinkgem.jeesite.modules.purchase.entity.ContractPurchaseSupplement;
-import com.thinkgem.jeesite.modules.purchase.dao.ContractPurchaseSupplementDao;
+import java.util.List;
 
 /**
  * 采购合同补充协议Service
@@ -21,6 +24,9 @@ import com.thinkgem.jeesite.modules.purchase.dao.ContractPurchaseSupplementDao;
 @Service
 @Transactional(readOnly = true)
 public class ContractPurchaseSupplementService extends CrudService<ContractPurchaseSupplementDao, ContractPurchaseSupplement> {
+
+	@Autowired
+	private ContractPurchaseSupplementDetailDao detailDao;
 
 	public ContractPurchaseSupplement get(String id) {
 		return super.get(id);
@@ -38,7 +44,22 @@ public class ContractPurchaseSupplementService extends CrudService<ContractPurch
 	public void save(ContractPurchaseSupplement contractPurchaseSupplement) {
 		super.save(contractPurchaseSupplement);
 	}
-	
+
+	@Transactional(readOnly = false)
+	public void saveAll(ContractPurchaseSupplement contractPurchase, List<ContractPurchaseSupplementDetail> detailList) {
+		super.save(contractPurchase);
+		if(!detailList.isEmpty()) {
+			for(ContractPurchaseSupplementDetail detail : detailList){
+				ContractPurchaseSupplementDetail temp = detailDao.get(detail.getId());
+				if(null != temp){
+					detail.setId(temp.getId());
+				}
+			}
+			detailDao.deleteByContract(contractPurchase.getContractCode());
+			detailDao.saveList(detailList);
+		}
+	}
+
 	@Transactional(readOnly = false)
 	public void delete(ContractPurchaseSupplement contractPurchaseSupplement) {
 		super.delete(contractPurchaseSupplement);
