@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.purchase.dao.ContractPurchaseStorageMainDao">
+    
+	<sql id="contractPurchaseStorageMainColumns">
+		a.id AS "id",
+		a.doc_code AS "docCode",
+		a.storage_code AS "storageCode",
+		a.storage_date AS "storageDate",
+		a.storage_department_code AS "docDepartment.departmentCode",
+		a.storage_department_name AS "docDepartment.departmentName",
+		a.storage_repertory_code AS "docRepertory.repertoryCode",
+		a.storage_repertory_name AS "docRepertory.repertoryName",
+		a.storage_flag AS "storageFlag",
+		a.storage_audit_flag AS "storageAuditFlag",
+		a.storage_type AS "storageType",
+		a.storage_create AS "storageCreate",
+		a.storage_auditor AS "storageAuditor",
+		a.storage_handler AS "storageHandler",
+		a.storage_create_date AS "storageCreateDate",
+		a.storage_audit_date AS "storageAuditDate",
+		a.remark AS "remark",
+		a.ext_field1 AS "extField1",
+		a.ext_field2 AS "extField2",
+		a.ext_field3 AS "extField3"
+	</sql>
+	
+	<sql id="contractPurchaseStorageMainJoins">
+	</sql>
+    
+	<select id="get" resultType="ContractPurchaseStorageMain">
+		SELECT 
+			<include refid="contractPurchaseStorageMainColumns"/>
+		FROM contract_purchase_storage_main a
+		<include refid="contractPurchaseStorageMainJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="ContractPurchaseStorageMain">
+		SELECT 
+			<include refid="contractPurchaseStorageMainColumns"/>
+		FROM contract_purchase_storage_main a
+		<include refid="contractPurchaseStorageMainJoins"/>
+		<where>
+			
+			<if test="docCode != null and docCode != ''">
+				AND a.doc_code = #{docCode}
+			</if>
+			<if test="storageCode != null and storageCode != ''">
+				AND a.storage_code = #{storageCode}
+			</if>
+			<if test="storageDate != null and storageDate != ''">
+				AND a.storage_date = #{storageDate}
+			</if>
+			<if test="docDepartment != null and docDepartment.departmentCode !=null and docDepartment.departmentCode != ''">
+				AND a.storage_department_code = #{docDepartment.departmentCode}
+			</if>
+			<if test="docRepertory != null and docRepertory.repertoryCode !=null and docRepertory.repertoryCode != ''">
+				AND a.storage_repertory_code = #{docRepertory.repertoryCode}
+			</if>
+			<if test="storageFlag != null and storageFlag != ''">
+				AND a.storage_flag = #{storageFlag}
+			</if>
+			<if test="storageAuditFlag != null and storageAuditFlag != ''">
+				AND a.storage_audit_flag = #{storageAuditFlag}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="ContractPurchaseStorageMain">
+		SELECT 
+			<include refid="contractPurchaseStorageMainColumns"/>
+		FROM contract_purchase_storage_main a
+		<include refid="contractPurchaseStorageMainJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO contract_purchase_storage_main(
+			doc_code,
+			storage_code,
+			storage_date,
+			storage_department_code,
+			storage_department_name,
+			storage_repertory_code,
+			storage_repertory_name,
+			storage_flag,
+			storage_audit_flag,
+			storage_type,
+			storage_create,
+			storage_auditor,
+			storage_handler,
+			storage_create_date,
+			storage_audit_date,
+			remark,
+			ext_field1,
+			ext_field2,
+			ext_field3
+		) VALUES (
+			#{docCode},
+			#{storageCode},
+			#{storageDate},
+			#{docDepartment.departmentCode},
+			#{docDepartment.departmentName},
+			#{docRepertory.repertoryCode},
+			#{docRepertory.repertoryName},
+			#{storageFlag},
+			#{storageAuditFlag},
+			#{storageType},
+			#{storageCreate},
+			#{storageAuditor},
+			#{storageHandler},
+			#{storageCreateDate},
+			#{storageAuditDate},
+			#{remark},
+			#{extField1},
+			#{extField2},
+			#{extField3}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE contract_purchase_storage_main SET 	
+			doc_code = #{docCode},
+			storage_code = #{storageCode},
+			storage_date = #{storageDate},
+			storage_department_code = #{docDepartment.departmentCode},
+			storage_department_name = #{docDepartment.departmentName},
+			storage_repertory_code = #{docRepertory.repertoryCode},
+			storage_repertory_name = #{docRepertory.repertoryName},
+			storage_flag = #{storageFlag},
+			storage_audit_flag = #{storageAuditFlag},
+			storage_type = #{storageType},
+			storage_create = #{storageCreate},
+			storage_auditor = #{storageAuditor},
+			storage_handler = #{storageHandler},
+			storage_create_date = #{storageCreateDate},
+			storage_audit_date = #{storageAuditDate},
+			remark = #{remark},
+			ext_field1 = #{extField1},
+			ext_field2 = #{extField2},
+			ext_field3 = #{extField3}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM contract_purchase_storage_main
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.purchase.dao.ContractPurchaseSupplementDetailDao">
+    
+	<sql id="contractPurchaseSupplementDetailColumns">
+		a.id AS "id",
+		a.contract_code AS "contractCode",
+		a.kind_code AS "kindCode",
+		a.kind_name AS "kindName",
+		a.kind_level AS "kindLevel",
+		a.first_unit AS "firstUnit",
+		a.item_amount AS "itemAmount",
+		a.item_number AS "itemNumber",
+		a.item_price AS "itemPrice",
+		a.origin_item_amount AS "originItemAmount",
+		a.origin_item_number AS "originItemNumber",
+		a.origin_item_price AS "originItemPrice",
+		a.conversion_rate AS "conversionRate",
+		a.other_rate AS "otherRate",
+		a.is_complete AS "isComplete",
+		a.remark AS "remark",
+		a.ext_field1 AS "extField1",
+		a.ext_field2 AS "extField2",
+		a.ext_field3 AS "extField3"
+	</sql>
+	
+	<sql id="contractPurchaseSupplementDetailJoins">
+	</sql>
+    
+	<select id="get" resultType="ContractPurchaseSupplementDetail">
+		SELECT 
+			<include refid="contractPurchaseSupplementDetailColumns"/>
+		FROM contract_purchase_supplement_detail a
+		<include refid="contractPurchaseSupplementDetailJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	<select id="getByContraceCode" resultType="ContractPurchaseSupplementDetail" parameterType="string">
+		SELECT
+		<include refid="contractPurchaseSupplementDetailColumns"/>
+		FROM contract_purchase_detail a
+		<include refid="contractPurchaseSupplementDetailJoins"/>
+		WHERE a.contract_code = #{contractCode}
+	</select>
+	<select id="findList" resultType="ContractPurchaseSupplementDetail">
+		SELECT 
+			<include refid="contractPurchaseSupplementDetailColumns"/>
+		FROM contract_purchase_supplement_detail a
+		<include refid="contractPurchaseSupplementDetailJoins"/>
+		<where>
+			
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="ContractPurchaseSupplementDetail">
+		SELECT 
+			<include refid="contractPurchaseSupplementDetailColumns"/>
+		FROM contract_purchase_supplement_detail a
+		<include refid="contractPurchaseSupplementDetailJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO contract_purchase_supplement_detail(
+			contract_code,
+			kind_code,
+			kind_name,
+			kind_level,
+			first_unit,
+			item_amount,
+			item_number,
+			item_price,
+			origin_item_amount,
+			origin_item_number,
+			origin_item_price,
+			conversion_rate,
+			other_rate,
+			is_complete,
+			remark,
+			ext_field1,
+			ext_field2,
+			ext_field3
+		) VALUES (
+			#{contractCode},
+			#{kindCode},
+			#{kindName},
+			#{kindLevel},
+			#{firstUnit},
+			#{itemAmount},
+			#{itemNumber},
+			#{itemPrice},
+			#{originItemAmount},
+			#{originItemNumber},
+			#{originItemPrice},
+			#{conversionRate},
+			#{otherRate},
+			#{isComplete},
+			#{remark},
+			#{extField1},
+			#{extField2},
+			#{extField3}
+		)
+	</insert>
+	<insert id="saveList" parameterType="java.util.List">
+		insert into contract_purchase_supplement_detail(
+		contract_code,kind_code,kind_name,kind_level,first_unit,item_amount,item_number,item_price,origin_item_amount,origin_item_number,origin_item_price,conversion_rate,other_rate,is_complete
+		)
+		values
+		<foreach collection="list" item="item" index="index" separator=",">
+			(#{item.contractCode}, #{item.kindCode}, #{item.kindName},
+			#{item.kindLevel}, #{item.firstUnit}, #{item.itemAmount},
+			#{item.itemNumber}, #{item.itemPrice}, #{item.originItemAmount},
+			#{item.originItemNumber}, #{item.originItemPrice},#{item.conversionRate},
+			#{item.otherRate}, #{item.isComplete}
+			)
+		</foreach>
+	</insert>
+	<update id="update">
+		UPDATE contract_purchase_supplement_detail SET 	
+			contract_code = #{contractCode},
+			kind_code = #{kindCode},
+			kind_name = #{kindName},
+			kind_level = #{kindLevel},
+			first_unit = #{firstUnit},
+			item_amount = #{itemAmount},
+			item_number = #{itemNumber},
+			item_price = #{itemPrice},
+			origin_item_amount = #{originItemAmount},
+			origin_item_number = #{originItemNumber},
+			origin_item_price = #{originItemPrice},
+			conversion_rate = #{conversionRate},
+			other_rate = #{otherRate},
+			is_complete = #{isComplete},
+			remark = #{remark},
+			ext_field1 = #{extField1},
+			ext_field2 = #{extField2},
+			ext_field3 = #{extField3}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM contract_purchase_supplement_detail
+		WHERE id = #{id}
+	</update>
+	<update id="deleteByContract" parameterType="string">
+		DELETE FROM contract_purchase_supplement_detail
+		WHERE contract_code = #{contractCode}
+	</update>
+	
+</mapper>
