@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.purchase.dao.ContractPurchaseStorageDetailDao">
+    
+	<sql id="contractPurchaseStorageDetailColumns">
+		a.id AS "id",
+		a.storage_code AS "storageCode",
+		a.kind_code AS "kindCode",
+		a.kind_name AS "kindName",
+		a.kind_level AS "kindLevel",
+		a.first_unit AS "firstUnit",
+		a.item_amount AS "itemAmount",
+		a.item_number AS "itemNumber",
+		a.item_price AS "itemPrice",
+		a.origin_item_amount AS "originItemAmount",
+		a.origin_item_number AS "originItemNumber",
+		a.origin_item_price AS "originItemPrice",
+		a.origin_item_tare AS "originItemTare",
+		a.origin_item_gross AS "originItemGross",
+		a.supplier_code AS "supplierCode",
+		a.supplier_name AS "supplierName",
+		a.saleman_code AS "salemanCode",
+		a.saleman_name AS "salemanName",
+		a.remark AS "remark",
+		a.ext_field1 AS "extField1",
+		a.ext_field2 AS "extField2",
+		a.ext_field3 AS "extField3"
+	</sql>
+	
+	<sql id="contractPurchaseStorageDetailJoins">
+	</sql>
+    
+	<select id="get" resultType="ContractPurchaseStorageDetail">
+		SELECT 
+			<include refid="contractPurchaseStorageDetailColumns"/>
+		FROM contract_purchase_storage_detail a
+		<include refid="contractPurchaseStorageDetailJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="ContractPurchaseStorageDetail">
+		SELECT 
+			<include refid="contractPurchaseStorageDetailColumns"/>
+		FROM contract_purchase_storage_detail a
+		<include refid="contractPurchaseStorageDetailJoins"/>
+		<where>
+			<if test="storageCode != null and storageCode != ''">
+				AND a.storage_code = #{storageCode}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="ContractPurchaseStorageDetail">
+		SELECT 
+			<include refid="contractPurchaseStorageDetailColumns"/>
+		FROM contract_purchase_storage_detail a
+		<include refid="contractPurchaseStorageDetailJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	<select id="getByContraceCode" resultType="ContractPurchaseStorageDetail" parameterType="string">
+		SELECT
+		<include refid="contractPurchaseStorageDetailColumns"/>
+		FROM contract_purchase_detail a
+		<include refid="contractPurchaseStorageDetailJoins"/>
+		WHERE a.storage_code = #{storageCode}
+	</select>
+
+	<insert id="insert">
+		INSERT INTO contract_purchase_storage_detail(
+			storage_code,
+			kind_code,
+			kind_name,
+			kind_level,
+			first_unit,
+			item_amount,
+			item_number,
+			item_price,
+			origin_item_amount,
+			origin_item_number,
+			origin_item_price,
+			origin_item_tare,
+			origin_item_gross,
+			supplier_code,
+			supplier_name,
+			saleman_code,
+			saleman_name,
+			remark,
+			ext_field1,
+			ext_field2,
+			ext_field3
+		) VALUES (
+			#{storageCode},
+			#{kindCode},
+			#{kindName},
+			#{kindLevel},
+			#{firstUnit},
+			#{itemAmount},
+			#{itemNumber},
+			#{itemPrice},
+			#{originItemAmount},
+			#{originItemNumber},
+			#{originItemPrice},
+			#{originItemTare},
+			#{originItemGross},
+			#{supplierCode},
+			#{supplierName},
+			#{salemanCode},
+			#{salemanName},
+			#{remark},
+			#{extField1},
+			#{extField2},
+			#{extField3}
+		)
+	</insert>
+	<insert id="saveList" parameterType="java.util.List">
+		insert into contract_purchase_storage_detail(
+		storage_code,kind_code,kind_name,kind_level,first_unit,item_amount,item_number,item_price,
+		origin_item_amount,origin_item_number,origin_item_price,origin_item_tare,origin_item_gross,
+		supplier_code,supplier_name,saleman_code,saleman_name,remark
+		)
+		values
+		<foreach collection="list" item="item" index="index" separator=",">
+			(#{item.storageCode}, #{item.kindCode}, #{item.kindName},
+			#{item.kindLevel}, #{item.firstUnit}, #{item.itemAmount},
+			#{item.itemNumber}, #{item.itemPrice},
+			#{item.originItemAmount}, #{item.originItemNumber},#{item.originItemPrice},#{item.originItemTare},#{item.originItemGross},
+			#{item.supplierCode},#{item.supplierName},#{item.salemanCode},#{item.salemanName},#{item.remark}
+			)
+		</foreach>
+	</insert>
+	<update id="update">
+		UPDATE contract_purchase_storage_detail SET 	
+			storage_code = #{storageCode},
+			kind_code = #{kindCode},
+			kind_name = #{kindName},
+			kind_level = #{kindLevel},
+			first_unit = #{firstUnit},
+			item_amount = #{itemAmount},
+			item_number = #{itemNumber},
+			item_price = #{itemPrice},
+			origin_item_amount = #{originItemAmount},
+			origin_item_number = #{originItemNumber},
+			origin_item_price = #{originItemPrice},
+			origin_item_tare = #{originItemTare},
+			origin_item_gross = #{originItemGross},
+			supplier_code = #{supplierCode},
+			supplier_name = #{supplierName},
+			saleman_code = #{salemanCode},
+			saleman_name = #{salemanName},
+			remark = #{remark},
+			ext_field1 = #{extField1},
+			ext_field2 = #{extField2},
+			ext_field3 = #{extField3}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM contract_purchase_storage_detail
+		WHERE id = #{id}
+	</update>
+	<update id="deleteByStorage" parameterType="string">
+		DELETE FROM contract_purchase_storage_detail
+		WHERE storage_code = #{storageCode}
+	</update>
+	
+</mapper>
