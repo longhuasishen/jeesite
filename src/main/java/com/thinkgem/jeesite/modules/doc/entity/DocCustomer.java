@@ -26,7 +26,27 @@ public class DocCustomer extends DataEntity<DocCustomer> {
 	private String cusName;		// 客户名称
 	private String cusProject;		// 工程名称
 	private String cusShortName;		// 客户简称
+
+	public String getCusIndustry() {
+		return cusIndustry;
+	}
+
+	public void setCusIndustry(String cusIndustry) {
+		this.cusIndustry = cusIndustry;
+	}
+
+	private String cusIndustry;
 	private ArchiveCustom archiveCustom;		// 客户分类
+
+	public String getCusType() {
+		return cusType;
+	}
+
+	public void setCusType(String cusType) {
+		this.cusType = cusType;
+	}
+
+	private String cusType;		// 客户分类
 	private String cusArea;		// 所属地区
 	private ArchiveIndustry archiveIndustry;		// 所属行业
 	private String cusSettle;		// 结算单位

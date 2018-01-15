@@ -61,7 +61,7 @@
 						${fns:abbr(docCustomer.cusShortName,50)}
 				</td>
 				<td>
-						${fns:abbr(docCustomer.archiveCustom.customName,50)}
+						${fns:getDictLabel(docCustomer.cusType, 'cus_archivetype', '')}
 				</td>
 				<shiro:hasPermission name="doc:docCustomer:edit"><td>
     				<a href="${ctx}/doc/docCustomer/form?id=${docCustomer.id}">修改</a>

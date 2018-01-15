@@ -41,34 +41,34 @@
 	<tr>
 		<th>品种编码</th>
 		<th>品种名称</th>
-		<th>材质等级</th>
-		<th>标准名称</th>
-		<th>所属分类</th>
+		<%--<th>标准名称</th>--%>
+		<%--<th>所属分类</th>--%>
 		<th>原材料类型</th>
-		<th>辅记量单位</th>
 		<th>主记量单位</th>
-		<th>换算率</th>
-		<th>主要供应商</th>
-		<th>计价方式</th>
-		<th>品牌名称</th>
-		<th>销售</th>
-		<th>外购</th>
-		<th>自制</th>
-		<th>应税劳务</th>
-		<th>成套件</th>
-		<th>砂浆</th>
-		<th>最低库存</th>
+		<th>辅记量单位</th>
+		<th>材质等级</th>
+		<%--<th>换算率</th>--%>
+		<%--<th>主要供应商</th>--%>
+		<%--<th>计价方式</th>--%>
+		<%--<th>品牌名称</th>--%>
+		<%--<th>销售</th>--%>
+		<%--<th>外购</th>--%>
+		<%--<th>自制</th>--%>
+		<%--<th>应税劳务</th>--%>
+		<%--<th>成套件</th>--%>
+		<%--<th>砂浆</th>--%>
+		<%--<th>最低库存</th>--%>
 		<th>成本参考核算单价</th>
-		<th>最高存库</th>
+		<%--<th>最高存库</th>--%>
 		<th>配方上下限控制</th>
-		<th>安全库存</th>
-		<th>安全库存</th>
-		<th>ABC分类</th>
-		<th>税率</th>
-		<th>保质期管理</th>
-		<th>批次管理</th>
-		<th>委托代锁管理</th>
-		<th>呆滞积压管理</th>
+		<%--<th>安全库存</th>--%>
+		<%--<th>安全库存</th>--%>
+		<%--<th>ABC分类</th>--%>
+		<%--<th>税率</th>--%>
+		<%--<th>保质期管理</th>--%>
+		<%--<th>批次管理</th>--%>
+		<%--<th>委托代锁管理</th>--%>
+		<%--<th>呆滞积压管理</th>--%>
 		<shiro:hasPermission name="doc:docBeton:edit"><th>操作</th></shiro:hasPermission>
 	</tr>
 	</thead>
@@ -77,34 +77,34 @@
 		<tr>
 			<td> ${fns:abbr(docBeton.kindCode,16)}</td>
 			<td> ${fns:abbr(docBeton.kindName,120)}</td>
-			<td> ${fns:abbr(docBeton.kindLevel,60)}</td>
-			<td> ${fns:abbr(docBeton.standName,120)}</td>
-			<td> ${fns:abbr(docBeton.archiveMaterial.materialName,60)}</td>
+			<%--<td> ${fns:abbr(docBeton.standName,120)}</td>--%>
+			<%--<td> ${fns:abbr(docBeton.archiveMaterial.materialName,60)}</td>--%>
 			<td> ${fns:abbr(docBeton.docConcretetyp.concretetypName,60)}</td>
-			<td> ${fns:abbr(docBeton.secUnit,20)}</td>
 			<td> ${fns:abbr(docBeton.firstUnit,60)}</td>
-			<td> ${fns:abbr(docBeton.rate,12)}</td>
-			<td> ${fns:abbr(docBeton.docSupplier.supName,240)}</td>
-			<td> ${fns:getDictLabel(docBeton.pricingMode,"pricing_method","")}</td>
-			<td> ${fns:abbr(docBeton.brandName,120)}</td>
-			<td> ${fns:abbr(docBeton.sales,100)}</td>
-			<td> ${fns:abbr(docBeton.outsourcing,100)}</td>
-			<td> ${fns:abbr(docBeton.madSelf,100)}</td>
-			<td> ${fns:abbr(docBeton.taxService,100)}</td>
-			<td> ${fns:abbr(docBeton.compSet,100)}</td>
-			<td> ${fns:abbr(docBeton.mortar,100)}</td>
-			<td> ${fns:abbr(docBeton.minInventory,100)}</td>
+			<td> ${fns:abbr(docBeton.secUnit,20)}</td>
+			<td> ${fns:abbr(docBeton.kindLevel,60)}</td>
+			<%--<td> ${fns:abbr(docBeton.rate,12)}</td>--%>
+			<%--<td> ${fns:abbr(docBeton.docSupplier.supName,240)}</td>--%>
+			<%--<td> ${fns:getDictLabel(docBeton.pricingMode,"pricing_method","")}</td>--%>
+			<%--<td> ${fns:abbr(docBeton.brandName,120)}</td>--%>
+			<%--<td> ${fns:abbr(docBeton.sales,100)}</td>--%>
+			<%--<td> ${fns:abbr(docBeton.outsourcing,100)}</td>--%>
+			<%--<td> ${fns:abbr(docBeton.madSelf,100)}</td>--%>
+			<%--<td> ${fns:abbr(docBeton.taxService,100)}</td>--%>
+			<%--<td> ${fns:abbr(docBeton.compSet,100)}</td>--%>
+			<%--<td> ${fns:abbr(docBeton.mortar,100)}</td>--%>
+			<%--<td> ${fns:abbr(docBeton.minInventory,100)}</td>--%>
 			<td> ${fns:abbr(docBeton.costPrices,100)}</td>
-			<td> ${fns:abbr(docBeton.maxInventory,100)}</td>
+			<%--<td> ${fns:abbr(docBeton.maxInventory,100)}</td>--%>
 			<td> ${fns:abbr(docBeton.sumControl,100)}</td>
-			<td> ${fns:abbr(docBeton.saveInventory,100)}</td>
-			<td> ${fns:abbr(docBeton.stockStand,100)}</td>
-			<td> ${fns:getDictLabel(docBeton.abcCategory,"abcCategory_list","")}</td>
-			<td> ${fns:abbr(docBeton.taxRate,100)}</td>
-			<td> ${fns:abbr(docBeton.qualityManage,100)}</td>
-			<td> ${fns:abbr(docBeton.batManage,100)}</td>
-			<td> ${fns:abbr(docBeton.entrustManage,100)}</td>
-			<td> ${fns:abbr(docBeton.stockManage,100)}</td>
+			<%--<td> ${fns:abbr(docBeton.saveInventory,100)}</td>--%>
+			<%--<td> ${fns:abbr(docBeton.stockStand,100)}</td>--%>
+			<%--<td> ${fns:getDictLabel(docBeton.abcCategory,"abcCategory_list","")}</td>--%>
+			<%--<td> ${fns:abbr(docBeton.taxRate,100)}</td>--%>
+			<%--<td> ${fns:abbr(docBeton.qualityManage,100)}</td>--%>
+			<%--<td> ${fns:abbr(docBeton.batManage,100)}</td>--%>
+			<%--<td> ${fns:abbr(docBeton.entrustManage,100)}</td>--%>
+			<%--<td> ${fns:abbr(docBeton.stockManage,100)}</td>--%>
 			<shiro:hasPermission name="doc:docBeton:edit"><td>
 				<a href="${ctx}/doc/docBeton/form?id=${docBeton.id}">修改</a>
 				<a href="${ctx}/doc/docBeton/delete?id=${docBeton.id}" onclick="return confirmx('确认要删除该混凝土档案吗？', this.href)">删除</a>

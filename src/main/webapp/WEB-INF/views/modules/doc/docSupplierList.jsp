@@ -36,7 +36,7 @@
 				<th>供应商编码</th>
 				<th>供应商名称</th>
 				<th>供应商简称</th>
-				<th>供应商分类</th>
+				<%--<th>供应商分类</th>--%>
 				<shiro:hasPermission name="doc:docSupplier:edit"><th>操作</th></shiro:hasPermission>
 			</tr>
 		</thead>
@@ -52,9 +52,9 @@
 				<td>
 						${fns:abbr(docSupplier.supShortName,50)}
 				</td>
-				<td>
-						${fns:abbr(docSupplier.archiveSupplier.supplierName,50)}
-				</td>
+				<%--<td>--%>
+						<%--${fns:abbr(docSupplier.archiveSupplier.supplierName,50)}--%>
+				<%--</td>--%>
 				<shiro:hasPermission name="doc:docSupplier:edit"><td>
     				<a href="${ctx}/doc/docSupplier/form?id=${docSupplier.id}">修改</a>
 					<a href="${ctx}/doc/docSupplier/delete?id=${docSupplier.id}" onclick="return confirmx('确认要删除该供应商档案吗？', this.href)">删除</a>

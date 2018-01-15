@@ -47,7 +47,7 @@
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
-		<div class="control-group">
+		<div class="control-group" style="display:none">
 			<label class="control-label">所属分类：</label>
 			<div class="controls">
 				<sys:treeselect id="kindCategory" name="archiveRepertory.id" value="${docRepertory.archiveRepertory.id}" labelName="archiveRepertory.repertoryName" labelValue="${docRepertory.archiveRepertory.repertoryName}"
@@ -55,7 +55,7 @@
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
-		<div class="control-group">
+		<div class="control-group" style="display:none">
 			<label class="control-label">所属部门：</label>
 			<div class="controls">
 				<sys:treeselect id="repertoryDepartment" name="docDepartment.id" value="${docRepertory.docDepartment.id}" labelName="docDepartment.departmentName" labelValue="${docRepertory.docDepartment.departmentName}"
@@ -63,13 +63,13 @@
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
-		<div class="control-group">
+		<div class="control-group" style="display:none">
 			<label class="control-label">负责人：</label>
 			<div class="controls">
 				<form:input path="managerPerson" htmlEscape="false" maxlength="60" class="input-xlarge "/>
 			</div>
 		</div>
-		<div class="control-group">
+		<div class="control-group" style="display:none">
 			<label class="control-label">联系电话：</label>
 			<div class="controls">
 				<form:input path="phoneNo" htmlEscape="false" maxlength="20" class="input-xlarge "/>
@@ -81,7 +81,7 @@
 				<form:input path="maxStock" htmlEscape="false" maxlength="20" class="input-xlarge "/>
 			</div>
 		</div>
-		<div class="control-group">
+		<div class="control-group" style="display:none">
 			<label class="control-label">计价方式：</label>
 			<div class="controls">
 				<form:select path="pricingMethod" class="input-xlarge ">
@@ -91,7 +91,7 @@
 			</div>
 
 		</div>
-		<div class="control-group">
+		<div class="control-group" style="display:none">
 			<label class="control-label">地址：</label>
 			<div class="controls">
 				<form:input path="repertoryAddr" htmlEscape="false" maxlength="120" class="input-xlarge "/>
@@ -110,25 +110,25 @@
 				<form:input path="comment" htmlEscape="false" maxlength="120" class="input-xlarge "/>
 			</div>
 		</div>
-		<div class="control-group">
+		<div class="control-group" style="display:none">
 			<label class="control-label">ext_field1：</label>
 			<div class="controls">
 				<form:input path="extField1" htmlEscape="false" maxlength="60" class="input-xlarge "/>
 			</div>
 		</div>
-		<div class="control-group">
+		<div class="control-group" style="display:none">
 			<label class="control-label">ext_field2：</label>
 			<div class="controls">
 				<form:input path="extField2" htmlEscape="false" maxlength="60" class="input-xlarge "/>
 			</div>
 		</div>
-		<div class="control-group">
+		<div class="control-group" style="display:none">
 			<label class="control-label">ext_field3：</label>
 			<div class="controls">
 				<form:input path="extField3" htmlEscape="false" maxlength="120" class="input-xlarge "/>
 			</div>
 		</div>
-		<div class="control-group">
+		<div class="control-group" style="display:none">
 			<label class="control-label">remark：</label>
 			<div class="controls">
 				<form:input path="remark" htmlEscape="false" maxlength="1000" class="input-xlarge "/>

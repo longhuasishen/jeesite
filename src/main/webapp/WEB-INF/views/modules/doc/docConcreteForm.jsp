@@ -47,21 +47,14 @@
 			<span class="help-inline"><font color="red">*</font> </span>
 		</div>
 	</div>
-	<div class="control-group">
-		<label class="control-label">材质等级：</label>
-		<div class="controls">
-			<form:input path="kindLevel" htmlEscape="false" maxlength="60" class="input-xlarge required"/>
-			<span class="help-inline"><font color="red">*</font> </span>
-		</div>
-	</div>
-	<div class="control-group">
+	<div class="control-group"  style="display:none">
 		<label class="control-label">标准名称：</label>
 		<div class="controls">
 			<form:input path="standName" htmlEscape="false" maxlength="120" class="input-xlarge required"/>
 			<span class="help-inline"><font color="red">*</font> </span>
 		</div>
 	</div>
-	<div class="control-group">
+	<div class="control-group"  style="display:none">
 		<label class="control-label">所属分类：</label>
 		<div class="controls">
 			<sys:treeselect id="kindCategory" name="archiveMaterial.id" value="${docConcrete.archiveMaterial.id}" labelName="archiveMaterial.materialName" labelValue="${docConcrete.archiveMaterial.materialName}"
@@ -78,10 +71,12 @@
 		</div>
 	</div>
 	<div class="control-group">
-		<label class="control-label">辅记量单位：</label>
+		<label class="control-label">ABC分类：</label>
 		<div class="controls">
-			<form:input path="secUnit" htmlEscape="false" maxlength="20" class="input-xlarge required"/>
-			<span class="help-inline"><font color="red">*</font> </span>
+			<form:select path="abcCategory" class="input-xlarge required">
+				<form:option value="" label=""/>
+				<form:options items="${fns:getDictList('abcCategory_list')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+			</form:select>
 		</div>
 	</div>
 	<div class="control-group">
@@ -92,20 +87,32 @@
 		</div>
 	</div>
 	<div class="control-group">
+		<label class="control-label">辅记量单位：</label>
+		<div class="controls">
+			<form:input path="secUnit" htmlEscape="false" maxlength="20" class="input-xlarge"/>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">材质等级：</label>
+		<div class="controls">
+			<form:input path="kindLevel" htmlEscape="false" maxlength="60" class="input-xlarge"/>
+		</div>
+	</div>
+	<div class="control-group"  style="display:none">
 		<label class="control-label">换算率：</label>
 		<div class="controls">
 			<form:input path="rate" htmlEscape="false" maxlength="12" class="input-xlarge  number required"/>
 			<span class="help-inline"><font color="red">*</font> </span>
 		</div>
 	</div>
-	<div class="control-group">
+	<div class="control-group"  style="display:none">
 		<label class="control-label">主要供应商：</label>
 		<div class="controls">
 			<sys:treeselect id="primaryProvider" name="docSupplier.id"  value="${docConcrete.docSupplier.id}" labelName="docSupplier.supName" labelValue="${docConcrete.docSupplier.supName}"
 							title="原材料类型" url="/doc/docSupplier/treeData?materialCode=*" />
 		</div>
 	</div>
-	<div class="control-group">
+	<div class="control-group"  style="display:none">
 		<label class="control-label">计价方式：</label>
 		<div class="controls">
 			<form:select path="pricingMode" class="input-xlarge ">
@@ -114,13 +121,13 @@
 			</form:select>
 		</div>
 	</div>
-	<div class="control-group">
+	<div class="control-group"  style="display:none">
 		<label class="control-label">品牌名称：</label>
 		<div class="controls">
 			<form:input path="brandName" htmlEscape="false" maxlength="120" class="input-xlarge "/>
 		</div>
 	</div>
-	<div class="control-group">
+	<div class="control-group"  style="display:none">
 		<label class="control-label">原材料勾选1:</label>
 		<div class="controls">
 			<form:checkboxes path="childConcreteList1" items="${fns:getDictList('concrete_box1')}" itemLabel="label" itemValue="value" htmlEscape="false" class="required"/>
@@ -162,7 +169,7 @@
 			<form:checkboxes path="mortar" items="${fns:getDictList('')}" itemLabel="label" itemValue="value" htmlEscape="false" class=""/>
 		</div>
 	</div>-->
-	<div class="control-group">
+	<div class="control-group"  style="display:none">
 		<label class="control-label">最低库存：</label>
 		<div class="controls">
 			<form:input path="minInventory" htmlEscape="false" maxlength="50" class="input-xlarge  digits"/>
@@ -174,7 +181,7 @@
 			<form:input path="costPrices" htmlEscape="false" maxlength="50" class="input-xlarge  number"/>
 		</div>
 	</div>
-	<div class="control-group">
+	<div class="control-group"  style="display:none">
 		<label class="control-label">最高存库：</label>
 		<div class="controls">
 			<form:input path="maxInventory" htmlEscape="false" maxlength="50" class="input-xlarge  digits"/>
@@ -186,34 +193,25 @@
 			<form:input path="sumControl" htmlEscape="false" maxlength="50" class="input-xlarge  digits"/>
 		</div>
 	</div>
-	<div class="control-group">
+	<div class="control-group"  style="display:none">
 		<label class="control-label">安全库存：</label>
 		<div class="controls">
 			<form:input path="saveInventory" htmlEscape="false" maxlength="50" class="input-xlarge  digits"/>
 		</div>
 	</div>
-	<div class="control-group">
+	<div class="control-group"  style="display:none">
 		<label class="control-label">积压标准：</label>
 		<div class="controls">
 			<form:input path="stockStand" htmlEscape="false" maxlength="50" class="input-xlarge  digits"/>
 		</div>
 	</div>
-	<div class="control-group">
-		<label class="control-label">ABC分类：</label>
-		<div class="controls">
-			<form:select path="abcCategory" class="input-xlarge ">
-				<form:option value="" label=""/>
-				<form:options items="${fns:getDictList('abcCategory_list')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
-			</form:select>
-		</div>
-	</div>
-	<div class="control-group">
+	<div class="control-group"  style="display:none">
 		<label class="control-label">税率：</label>
 		<div class="controls">
 			<form:input path="taxRate" htmlEscape="false" maxlength="50" class="input-xlarge  number"/>
 		</div>
 	</div>
-	<div class="control-group">
+	<div class="control-group"  style="display:none">
 		<label class="control-label">原材料勾选2:</label>
 		<div class="controls">
 			<form:checkboxes path="childConcreteList2" items="${fns:getDictList('concrete_box2')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
@@ -243,19 +241,19 @@
 			<form:checkboxes path="stockManage" items="${fns:getDictList('')}" itemLabel="label" itemValue="value" htmlEscape="false" class=""/>
 		</div>
 	</div>-->
-	<div class="control-group">
+	<div class="control-group"  style="display:none">
 		<label class="control-label">ext_field2：</label>
 		<div class="controls">
 			<form:input path="extField2" htmlEscape="false" maxlength="60" class="input-xlarge "/>
 		</div>
 	</div>
-	<div class="control-group">
+	<div class="control-group"  style="display:none">
 		<label class="control-label">ext_field3：</label>
 		<div class="controls">
 			<form:input path="extField3" htmlEscape="false" maxlength="120" class="input-xlarge "/>
 		</div>
 	</div>
-	<div class="control-group">
+	<div class="control-group"  style="display:none">
 		<label class="control-label">remark：</label>
 		<div class="controls">
 			<form:input path="remark" htmlEscape="false" maxlength="1000" class="input-xlarge "/>

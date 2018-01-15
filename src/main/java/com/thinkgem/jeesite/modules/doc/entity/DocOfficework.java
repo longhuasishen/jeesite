@@ -50,6 +50,44 @@ public class DocOfficework extends DataEntity<DocOfficework> {
 	private String extField3;		// ext_field3
 	private String remark;		// remark
 
+	public String getCarNo() {
+		return carNo;
+	}
+
+	public void setCarNo(String carNo) {
+		this.carNo = carNo;
+	}
+
+	public String getLicenceNo() {
+		return licenceNo;
+	}
+
+	public void setLicenceNo(String licenceNo) {
+		this.licenceNo = licenceNo;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
+	public String getIsDriver() {
+		return isDriver;
+	}
+
+	public void setIsDriver(String isDriver) {
+		this.isDriver = isDriver;
+	}
+
+	private String carNo;		// 车牌号码
+	private String licenceNo;		// 驾驶证号码
+	private String comment;		// 备注
+	private String isDriver;		// 是否司机
+
+
 	public DocDepartment getDocDepartment() {
 		return docDepartment;
 	}
