@@ -60,7 +60,7 @@ function saveRowById(obj) {
 function getTableDatasById(tableId) {
     var o = jQuery("#jqGrid");
     var rows = o.jqGrid('getRowData');
-    return encodeHtml(JSON.stringify(rows));
+    return JSON.stringify(rows);
 }
 function btnResetClick(){
     $("#searchForm")[0].reset();

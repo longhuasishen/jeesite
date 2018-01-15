@@ -112,7 +112,7 @@
 		<foreach collection="list" item="item" index="index" separator=",">
 			(#{item.contractCode}, #{item.kindCode}, #{item.kindName},
 			#{item.kindLevel}, #{item.firstUnit}, #{item.itemAmount},
-			#{item.itemNumber,jdbcType=TIMESTAMP}, #{item.itemPrice}, #{item.conversionRate},
+			#{item.itemNumber}, #{item.itemPrice}, #{item.conversionRate},
 			#{item.otherRate}, #{item.isComplete}
 			)
 		</foreach>

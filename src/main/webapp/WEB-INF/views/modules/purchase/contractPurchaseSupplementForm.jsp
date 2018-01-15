@@ -69,10 +69,6 @@
         }
         $(function () {
             $("#addDetailTable"+" tbody").find("tr").find('td:eq(0)').hide();
-            /*$("#addRowBtn").click(function(){
-                $.jBox($("#importBox").html(), {title:"导入数据", buttons:{"关闭":true},
-                    bottomText:"导入文件不能超过5M，仅允许导入“xls”或“xlsx”格式文件！"});
-            });*/
 
             $("#btnSubmit").click(function () {
                 var tableDatas = getTableDatasById("addDetailTable");
@@ -114,8 +110,8 @@
 <body>
 
 <ul class="nav nav-tabs">
-	<li><a href="${ctx}/purchase/contractPurchaseSupplement/">采购合同列表</a></li>
-	<li class="active"><a href="${ctx}/purchase/contractPurchaseSupplement/form?id=${contractPurchaseSupplement.id}">采购合同<shiro:hasPermission name="purchase:contractPurchaseSupplement:edit">${not empty contractPurchaseSupplement.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="purchase:contractPurchaseSupplement:edit">查看</shiro:lacksPermission></a></li>
+	<li><a href="${ctx}/purchase/contractPurchaseSupplement/">采购合同补充协议列表</a></li>
+	<li class="active"><a href="${ctx}/purchase/contractPurchaseSupplement/form?id=${contractPurchaseSupplement.id}">采购合同补充协议添加<shiro:hasPermission name="purchase:contractPurchaseSupplement:edit">${not empty contractPurchaseSupplement.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="purchase:contractPurchaseSupplement:edit">查看</shiro:lacksPermission></a></li>
 </ul><br/>
 <form:form id="inputForm" modelAttribute="contractPurchaseSupplement" action="${ctx}/purchase/contractPurchaseSupplement/save" method="post" class="form-horizontal">
 	<form:hidden path="id"/>
@@ -172,12 +168,6 @@
 			</div>
 
 			<div class="control-group">
-				<label class="control-label">违约金比例：</label>
-				<div class="controls">
-					<form:input path="liquidDateRate" htmlEscape="false" maxlength="20" class="input-xlarge required"/>
-				</div>
-			</div>
-			<div class="control-group">
 				<label class="control-label">有效期：</label>
 				<div class="controls">
 					<input id="periodStart" name="periodStart" type="text" readonly="readonly" maxlength="20" class="Wdate required" readonly="readonly"
@@ -189,12 +179,7 @@
 						   onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
 				</div>
 			</div>
-			<div class="control-group">
-				<label class="control-label">是否需要承运：</label>
-				<div class="controls">
-					<form:input path="transportType" htmlEscape="false" maxlength="20" class="input-xlarge "/>
-				</div>
-			</div>
+
 			<div class="control-group">
 				<label class="control-label">制单人：</label>
 				<div class="controls">
@@ -239,11 +224,6 @@
 				</div>
 			</div>
 			<input type="text" id="tableDatas" name ="tableDatas" value="" style="display:none;"></input>
-				<%--<input name="docDepartment.departmentName" id="departmentName" type="text" style="display:none;"/>
-                <input name="docSupplier.supName" id="supName" type="text" style="display:none;" value="123"/>
-			<input name="archiveContract.contractName" id="contractName" type="text" style="display:none;"/>
-			<input name="docAccmeth.accmethName" id="accmethName" type="text" style="display:none;"/>
-			<input name="docOfficework.officeworkName" id="officeworkName" type="text" style="display:none;"/>--%>
 			</p>
 		</div>
 		<div class="tab-pane fade" id="persons">
@@ -262,9 +242,9 @@
                         datatype: "json",
                         page: 1,
                         colModel: [
-                            { label: '序号', name: 'id', key: true, width: 150,hidden:true
+                            { label: '序号', name: 'id', key: true, width: 50,hidden:true
                             },
-                            { label: '品种编码', name: 'kindCode', key: false, width: 150,
+                            { label: '品种编码', name: 'kindCode', key: false, width: 100,
                                 editable: true,
                                 edittype: "custom",
                                 editoptions: {
@@ -291,7 +271,7 @@
                             {
                                 label: '规格型号',
                                 name: 'kindLevel',
-                                width: 100,
+                                width: 75,
                                 editable: true,
                                 edittype:"text",//可以编辑的类型。可选值：text, textarea, select, checkbox, password, button, image and file.s
                                 editoptions: {
@@ -300,14 +280,14 @@
                                         $(element).attr("id","kindLevel");
                                         $(element).css("padding-top","0px");
                                         $(element).css("padding-bottom","0px");
-                                        $(element).css("width","100px");
+                                        $(element).css("width","75px");
                                     }
                                 }
                             },
                             {
                                 label: '计量单位',
                                 name: 'firstUnit',
-                                width: 75,
+                                width: 50,
                                 editable: true,
                                 /*edittype: "select",
                                 editoptions: {
@@ -320,14 +300,14 @@
                                         $(element).attr("id","firstUnit");
                                         $(element).css("padding-top","0px");
                                         $(element).css("padding-bottom","0px");
-                                        $(element).css("width","75px");
+                                        $(element).css("width","50px");
                                     }
                                 }
                             },
                             {
                                 label: '数量',
                                 name: 'itemNumber',
-                                width: 75,
+                                width: 50,
                                 sorttype:"number",
                                 editable: true,
                                 edittype:"text",
@@ -338,35 +318,81 @@
                                     dataInit: function (element) {
                                         $(element).css("padding-top","0px");
                                         $(element).css("padding-bottom","0px");
-                                        $(element).css("width","75px");
+                                        $(element).css("width","50px");
                                     }
                                 }
                             },
                             {
                                 label: '单价',
                                 name: 'itemPrice',
-                                width: 75,
+                                width: 50,
                                 editable: true,
                                 edittype: "text",
                                 editoptions: {
                                     dataInit: function (element) {
                                         $(element).css("padding-top","0px");
                                         $(element).css("padding-bottom","0px");
-                                        $(element).css("width","75px");
+                                        $(element).css("width","50px");
                                     }
                                 }
                             },
                             {
                                 label: '金额',
                                 name: 'itemAmount',
-                                width: 75,
+                                width: 50,
                                 editable: true,
                                 edittype: "text",
                                 editoptions: {
                                     dataInit: function (element) {
                                         $(element).css("padding-top","0px");
                                         $(element).css("padding-bottom","0px");
-                                        $(element).css("width","75px");
+                                        $(element).css("width","50px");
+                                    }
+                                }
+                            },
+                            {
+                                label: '原始数量',
+                                name: 'originItemNumber',
+                                width: 50,
+                                sorttype:"number",
+                                editable: true,
+                                edittype:"text",
+//                                edittype: "custom",
+                                editoptions: {
+//                                    custom_value: getFreightElementValue,
+//                                    custom_element: createFreightEditElement
+                                    dataInit: function (element) {
+                                        $(element).css("padding-top","0px");
+                                        $(element).css("padding-bottom","0px");
+                                        $(element).css("width","50px");
+                                    }
+                                }
+                            },
+                            {
+                                label: '原始单价',
+                                name: 'originItemPrice',
+                                width: 50,
+                                editable: true,
+                                edittype: "text",
+                                editoptions: {
+                                    dataInit: function (element) {
+                                        $(element).css("padding-top","0px");
+                                        $(element).css("padding-bottom","0px");
+                                        $(element).css("width","50px");
+                                    }
+                                }
+                            },
+                            {
+                                label: '原始金额',
+                                name: 'originItemAmount',
+                                width: 50,
+                                editable: true,
+                                edittype: "text",
+                                editoptions: {
+                                    dataInit: function (element) {
+                                        $(element).css("padding-top","0px");
+                                        $(element).css("padding-bottom","0px");
+                                        $(element).css("width","50px");
                                     }
                                 }
                             },
@@ -402,7 +428,7 @@
                         loadonce : true,
 //                        onSelectRow: editRow, // the javascript function to call on row click. will ues to to put the row in edit mode
                         viewrecords: true,
-                        caption: "采购明细单列表",
+                        caption: "采购明细单补充列表",
                         rowList: [10, 20, 30],//用于改变显示行数的下拉列表框的元素数组。
                         height: 250,
                         rowNum: 20,
@@ -448,7 +474,7 @@
 
                     function createKindCodeEditElement(value, editOptions) {
                         var div = $("<div class='input-append'></div>");
-                        var treeSelect = $("<input>",{type:"text",name:"kindCode",readonly:"readonly",value:value,style:"width:120px;padding-top:0px;padding-bottom:0px",class:'required',id:'kindCode'});
+                        var treeSelect = $("<input>",{type:"text",name:"kindCode",readonly:"readonly",value:value,style:"width:100px;padding-top:0px;padding-bottom:0px",class:'required',id:'kindCode'});
                         var searchClass = $("<a>",{id:'userButton',href:'#',class:'btn  ',style:'padding-top:0px;padding-right:1px;padding-bottom:0px;padding-left:1px;'});
                         var iClass = $("<i>",{class:'icon-search'});
                         searchClass.append(iClass);
