@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.contract.dao.ContractSalesBetonDao">
+    
+	<sql id="contractSalesBetonColumns">
+		a.id AS "id",
+		a.contract_id AS "contractId",
+		a.kind_code AS "kindCode",
+		a.kind_name AS "kindName",
+		a.univalent AS "univalent",
+		a.ext_field1 AS "extField1",
+		a.ext_field2 AS "extField2",
+		a.ext_field3 AS "extField3",
+		a.remark AS "remark"
+	</sql>
+	
+	<sql id="contractSalesBetonJoins">
+	</sql>
+    
+	<select id="get" resultType="ContractSalesBeton">
+		SELECT 
+			<include refid="contractSalesBetonColumns"/>
+		FROM contract_sales_beton a
+		<include refid="contractSalesBetonJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="ContractSalesBeton">
+		SELECT 
+			<include refid="contractSalesBetonColumns"/>
+		FROM contract_sales_beton a
+		<include refid="contractSalesBetonJoins"/>
+		<where>
+			
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	<select id="getByContraceId" resultType="ContractSalesBeton" parameterType="string">
+		SELECT
+		<include refid="contractSalesBetonColumns"/>
+		FROM contract_sales_beton a
+		<include refid="contractSalesBetonJoins"/>
+		WHERE a.contract_id = #{contractId}
+	</select>
+	<select id="findAllList" resultType="ContractSalesBeton">
+		SELECT 
+			<include refid="contractSalesBetonColumns"/>
+		FROM contract_sales_beton a
+		<include refid="contractSalesBetonJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO contract_sales_beton(
+			contract_id,
+			kind_code,
+			kind_name,
+			univalent,
+			ext_field1,
+			ext_field2,
+			ext_field3,
+			remark
+		) VALUES (
+			#{contractId},
+			#{kindCode},
+			#{kindName},
+			#{univalent},
+			#{extField1},
+			#{extField2},
+			#{extField3},
+			#{remark}
+		)
+	</insert>
+	<insert id="saveList" parameterType="java.util.List">
+		insert into contract_sales_beton(
+		contract_id,kind_code,kind_name,univalent,ext_field1,ext_field2,ext_field3,remark
+		)
+		values
+		<foreach collection="list" item="item" index="index" separator=",">
+			(#{item.contractId}, #{item.kindCode}, #{item.kindName},
+			#{item.univalent}, #{item.extField1}, #{item.extField2},
+			#{item.extField3}, #{item.remark}
+			)
+		</foreach>
+	</insert>
+	<update id="update">
+		UPDATE contract_sales_beton SET 	
+			contract_id = #{contractId},
+			kind_code = #{kindCode},
+			kind_name = #{kindName},
+			univalent = #{univalent},
+			ext_field1 = #{extField1},
+			ext_field2 = #{extField2},
+			ext_field3 = #{extField3},
+			remark = #{remark}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM contract_sales_beton
+		WHERE id = #{id}
+	</update>
+
+	<update id="deleteByContract" parameterType="string">
+		DELETE FROM contract_sales_beton
+		WHERE contract_id = #{contractId}
+	</update>
+	
+</mapper>

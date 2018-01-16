@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.contract.dao.ContractSalesWatermethDao">
+    
+	<sql id="contractSalesWatermethColumns">
+		a.id AS "id",
+		a.contract_id AS "contractId",
+		a.watermeth_code AS "watermethCode",
+		a.watermeth_name AS "watermethName",
+		a.watermeth_univalent AS "watermethUnivalent",
+		a.ext_field1 AS "extField1",
+		a.ext_field2 AS "extField2",
+		a.ext_field3 AS "extField3",
+		a.remark AS "remark"
+	</sql>
+	
+	<sql id="contractSalesWatermethJoins">
+	</sql>
+    
+	<select id="get" resultType="ContractSalesWatermeth">
+		SELECT 
+			<include refid="contractSalesWatermethColumns"/>
+		FROM contract_sales_watermeth a
+		<include refid="contractSalesWatermethJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="ContractSalesWatermeth">
+		SELECT 
+			<include refid="contractSalesWatermethColumns"/>
+		FROM contract_sales_watermeth a
+		<include refid="contractSalesWatermethJoins"/>
+		<where>
+			
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="ContractSalesWatermeth">
+		SELECT 
+			<include refid="contractSalesWatermethColumns"/>
+		FROM contract_sales_watermeth a
+		<include refid="contractSalesWatermethJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO contract_sales_watermeth(
+			id,
+			contract_id,
+			watermeth_code,
+			watermeth_name,
+			watermeth_univalent,
+			ext_field1,
+			ext_field2,
+			ext_field3,
+			remark
+		) VALUES (
+			#{id},
+			#{contractId},
+			#{watermethCode},
+			#{watermethName},
+			#{watermethUnivalent},
+			#{extField1},
+			#{extField2},
+			#{extField3},
+			#{remark}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE contract_sales_watermeth SET 	
+			contract_id = #{contractId},
+			watermeth_code = #{watermethCode},
+			watermeth_name = #{watermethName},
+			watermeth_univalent = #{watermethUnivalent},
+			ext_field1 = #{extField1},
+			ext_field2 = #{extField2},
+			ext_field3 = #{extField3},
+			remark = #{remark}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM contract_sales_watermeth
+		WHERE id = #{id}
+	</update>
+	<select id="getByContraceId" resultType="ContractSalesWatermeth" parameterType="string">
+		SELECT
+		<include refid="contractSalesWatermethColumns"/>
+		FROM contract_sales_watermeth a
+		<include refid="contractSalesWatermethJoins"/>
+		WHERE a.contract_id = #{contractId}
+	</select>
+	<insert id="saveList" parameterType="java.util.List">
+		insert into contract_sales_watermeth(
+		contract_id,watermeth_code,watermeth_name,watermeth_univalent,ext_field1,ext_field2,ext_field3,remark
+		)
+		values
+		<foreach collection="list" item="item" index="index" separator=",">
+			(#{item.contractId}, #{item.watermethCode}, #{item.watermethName},
+			#{item.watermethUnivalent}, #{item.extField1}, #{item.extField2},
+			#{item.extField3}, #{item.remark}
+			)
+		</foreach>
+	</insert>
+	<update id="deleteByContract" parameterType="string">
+		DELETE FROM contract_sales_watermeth
+		WHERE contract_id = #{contractId}
+	</update>
+</mapper>

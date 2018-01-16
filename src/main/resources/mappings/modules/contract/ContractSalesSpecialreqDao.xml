@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.contract.dao.ContractSalesSpecialreqDao">
+    
+	<sql id="contractSalesSpecialreqColumns">
+		a.id AS "id",
+		a.contract_id AS "contractId",
+		a.specialreq_code AS "specialreqCode",
+		a.specialreq_name AS "specialreqName",
+		a.specialreq_univalent AS "specialreqUnivalent",
+		a.ext_field1 AS "extField1",
+		a.ext_field2 AS "extField2",
+		a.ext_field3 AS "extField3",
+		a.remark AS "remark"
+	</sql>
+	
+	<sql id="contractSalesSpecialreqJoins">
+	</sql>
+    
+	<select id="get" resultType="ContractSalesSpecialreq">
+		SELECT 
+			<include refid="contractSalesSpecialreqColumns"/>
+		FROM contract_sales_specialreq a
+		<include refid="contractSalesSpecialreqJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="ContractSalesSpecialreq">
+		SELECT 
+			<include refid="contractSalesSpecialreqColumns"/>
+		FROM contract_sales_specialreq a
+		<include refid="contractSalesSpecialreqJoins"/>
+		<where>
+			
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="ContractSalesSpecialreq">
+		SELECT 
+			<include refid="contractSalesSpecialreqColumns"/>
+		FROM contract_sales_specialreq a
+		<include refid="contractSalesSpecialreqJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO contract_sales_specialreq(
+			id,
+			contract_id,
+			specialreq_code,
+			specialreq_name,
+			specialreq_univalent,
+			ext_field1,
+			ext_field2,
+			ext_field3,
+			remark
+		) VALUES (
+			#{id},
+			#{contractId},
+			#{specialreqCode},
+			#{specialreqName},
+			#{specialreqUnivalent},
+			#{extField1},
+			#{extField2},
+			#{extField3},
+			#{remark}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE contract_sales_specialreq SET 	
+			contract_id = #{contractId},
+			specialreq_code = #{specialreqCode},
+			specialreq_name = #{specialreqName},
+			specialreq_univalent = #{specialreqUnivalent},
+			ext_field1 = #{extField1},
+			ext_field2 = #{extField2},
+			ext_field3 = #{extField3},
+			remark = #{remark}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM contract_sales_specialreq
+		WHERE id = #{id}
+	</update>
+	<select id="getByContraceId" resultType="ContractSalesSpecialreq" parameterType="string">
+		SELECT
+		<include refid="contractSalesSpecialreqColumns"/>
+		FROM contract_sales_specialreq a
+		<include refid="contractSalesSpecialreqJoins"/>
+		WHERE a.contract_id = #{contractId}
+	</select>
+	<insert id="saveList" parameterType="java.util.List">
+		insert into contract_sales_specialreq(
+		contract_id,specialreq_code,specialreq_name,specialreq_univalent,ext_field1,ext_field2,ext_field3,remark
+		)
+		values
+		<foreach collection="list" item="item" index="index" separator=",">
+			(#{item.contractId}, #{item.specialreqCode}, #{item.specialreqName},
+			#{item.specialreqUnivalent}, #{item.extField1}, #{item.extField2},
+			#{item.extField3}, #{item.remark}
+			)
+		</foreach>
+	</insert>
+	<update id="deleteByContract" parameterType="string">
+		DELETE FROM contract_sales_specialreq
+		WHERE contract_id = #{contractId}
+	</update>
+</mapper>
