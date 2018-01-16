@@ -7,7 +7,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.thinkgem.jeesite.common.utils.DateUtils;
+import com.thinkgem.jeesite.modules.financedoc.entity.DocInitStorageDetail;
+import com.thinkgem.jeesite.modules.purchase.entity.ContractPurchaseDetail;
 import com.thinkgem.jeesite.modules.sys.utils.UserUtils;
+import lombok.extern.slf4j.Slf4j;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,7 +30,10 @@ import com.thinkgem.jeesite.common.utils.StringUtils;
 import com.thinkgem.jeesite.modules.financedoc.entity.DocInitStorageMain;
 import com.thinkgem.jeesite.modules.financedoc.service.DocInitStorageMainService;
 
+import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 期初入库Controller
@@ -33,6 +42,7 @@ import java.util.Date;
  */
 @Controller
 @RequestMapping(value = "${adminPath}/financedoc/docInitStorageMain")
+@Slf4j
 public class DocInitStorageMainController extends BaseController {
 
 	@Autowired
@@ -68,16 +78,38 @@ public class DocInitStorageMainController extends BaseController {
 
 	@RequiresPermissions("financedoc:docInitStorageMain:edit")
 	@RequestMapping(value = "save")
-	public String save(DocInitStorageMain docInitStorageMain, Model model, RedirectAttributes redirectAttributes) {
+	public String save(DocInitStorageMain docInitStorageMain, Model model, RedirectAttributes redirectAttributes,@RequestParam(value = "tableDatas",required = false) String tableDatas) throws IllegalAccessException {
 		if (!beanValidator(model, docInitStorageMain)){
 			return form(docInitStorageMain, model);
 		}
 		if(StringUtils.isEmpty(docInitStorageMain.getStorageCreateDate())){
 			docInitStorageMain.setStorageCreateDate(DateUtils.formatDateTime(new Date()));
 		}
-		docInitStorageMainService.save(docInitStorageMain);
+		List<DocInitStorageDetail> detailList = new ArrayList<DocInitStorageDetail>();
+		if (StringUtils.isNotEmpty(tableDatas)) {
+			JSONArray detailArray = JSONArray.fromObject(StringEscapeUtils.unescapeHtml4(tableDatas));
+			log.info("合同明细{}", detailArray);
+			for (Object object : detailArray.toArray()) {
+				DocInitStorageDetail detail = buildVO((JSONObject) object, DocInitStorageDetail.class);
+				detail.setStorageCode(docInitStorageMain.getStorageCode());
+				detailList.add(detail);
+			}
+		}
+		docInitStorageMainService.saveAll(docInitStorageMain,detailList);
 		addMessage(redirectAttributes, "保存期初入库成功");
 		return "redirect:"+Global.getAdminPath()+"/financedoc/docInitStorageMain/?repage";
+	}
+	private DocInitStorageDetail buildVO(JSONObject object, Class<DocInitStorageDetail> contractPurchaseDetailClass) throws IllegalAccessException {
+		DocInitStorageDetail detail = new DocInitStorageDetail();
+		Field[] fields = contractPurchaseDetailClass.getDeclaredFields();
+		for(Field field : fields){
+			String fieldName = field.getName();
+			if(null != object.get(fieldName)){
+				field.setAccessible(true);
+				field.set(detail,object.get(fieldName));
+			}
+		}
+		return detail;
 	}
 	
 	@RequiresPermissions("financedoc:docInitStorageMain:edit")

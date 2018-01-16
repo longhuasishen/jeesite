@@ -7,10 +7,10 @@
 		a.doc_code AS "docCode",
 		a.storage_code AS "storageCode",
 		a.storage_date AS "storageDate",
-		c.department_code AS "docDepartment.departmentCode",
-		c.department_name AS "docDepartment.departmentName",
-		r.repertory_code AS "docRepertory.repertoryCode",
-		r.repertory_name AS "docRepertory.repertoryName",
+		a.storage_department AS "docDepartment.departmentCode",
+		a.storage_department_name AS "docDepartment.departmentName",
+		a.storage_repertory AS "docRepertory.repertoryCode",
+		a.storage_repertory_name AS "docRepertory.repertoryName",
 		a.storage_flag AS "storageFlag",
 		a.storage_audit_flag AS "storageAuditFlag",
 		a.storage_type AS "storageType",
@@ -27,8 +27,6 @@
 	</sql>
 	
 	<sql id="docInitStorageMainJoins">
-		LEFT JOIN doc_department c on c.department_code = a.storage_department
-		LEFT JOIN doc_repertory r on r.repertory_code = a.storage_repertory
 	</sql>
     
 	<select id="get" resultType="DocInitStorageMain">
@@ -79,7 +77,9 @@
 			storage_code,
 			storage_date,
 			storage_department,
+			storage_department_name,
 			storage_repertory,
+			storage_repertory_name,
 			storage_flag,
 			storage_audit_flag,
 			storage_type,
@@ -96,10 +96,12 @@
 			#{docCode},
 			#{storageCode},
 			#{storageDate},
-			#{docDepartment.id},
-			#{docRepertory.id},
+			#{docDepartment.departmentCode},
+			#{docDepartment.departmentName},
+			#{docRepertory.repertoryCode},
+			#{docRepertory.repertoryName},
 			#{storageFlag},
-			#{storageAuditFlag},
+			'0',
 			#{storageType},
 			#{storageCreate},
 			#{storageAuditor},
@@ -118,8 +120,10 @@
 			doc_code = #{docCode},
 			storage_code = #{storageCode},
 			storage_date = #{storageDate},
-			storage_department = #{docDepartment.id},
-			storage_repertory = #{docRepertory.id},
+			storage_department= #{docDepartment.departmentCode},
+			storage_department_name = #{docDepartment.departmentName},
+			storage_repertory = #{docRepertory.repertoryCode},
+			storage_repertory_name = #{docRepertory.repertoryName},
 			storage_flag = #{storageFlag},
 			storage_audit_flag = #{storageAuditFlag},
 			storage_type = #{storageType},
@@ -139,5 +143,4 @@
 		DELETE FROM doc_init_storage_main
 		WHERE id = #{id}
 	</update>
-	
 </mapper>

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.financedoc.dao.DocInitStorageDetailDao">
+    
+	<sql id="docInitStorageDetailColumns">
+		a.id AS "id",
+		a.storage_code AS "storageCode",
+		a.kind_code AS "kindCode",
+		a.kind_name AS "kindName",
+		a.kind_level AS "kindLevel",
+		a.first_unit AS "firstUnit",
+		a.item_amount AS "itemAmount",
+		a.item_number AS "itemNumber",
+		a.item_price AS "itemPrice",
+		a.remark AS "remark",
+		a.ext_field1 AS "extField1",
+		a.ext_field2 AS "extField2",
+		a.ext_field3 AS "extField3"
+	</sql>
+	
+	<sql id="docInitStorageDetailJoins">
+	</sql>
+    
+	<select id="get" resultType="DocInitStorageDetail">
+		SELECT 
+			<include refid="docInitStorageDetailColumns"/>
+		FROM doc_init_storage_detail a
+		<include refid="docInitStorageDetailJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="DocInitStorageDetail">
+		SELECT 
+			<include refid="docInitStorageDetailColumns"/>
+		FROM doc_init_storage_detail a
+		<include refid="docInitStorageDetailJoins"/>
+		<where>
+			<if test="storageCode != null and storageCode != ''">
+				AND a.storage_code = #{storageCode}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="DocInitStorageDetail">
+		SELECT 
+			<include refid="docInitStorageDetailColumns"/>
+		FROM doc_init_storage_detail a
+		<include refid="docInitStorageDetailJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO doc_init_storage_detail(
+			id,
+			storage_code,
+			kind_code,
+			kind_name,
+			kind_level,
+			first_unit,
+			item_amount,
+			item_number,
+			item_price,
+			remark,
+			ext_field1,
+			ext_field2,
+			ext_field3
+		) VALUES (
+			#{id},
+			#{storageCode},
+			#{kindCode},
+			#{kindName},
+			#{kindLevel},
+			#{firstUnit},
+			#{itemAmount},
+			#{itemNumber},
+			#{itemPrice},
+			#{remark},
+			#{extField1},
+			#{extField2},
+			#{extField3}
+		)
+	</insert>
+	<insert id="saveList" parameterType="java.util.List">
+		insert into doc_init_storage_detail(
+		storage_code,kind_code,kind_name,kind_level,first_unit,item_amount,item_number,item_price,remark
+		)
+		values
+		<foreach collection="list" item="item" index="index" separator=",">
+			(#{item.storageCode}, #{item.kindCode}, #{item.kindName},
+			#{item.kindLevel}, #{item.firstUnit}, #{item.itemAmount},
+			#{item.itemNumber}, #{item.itemPrice}, #{item.remark}
+			)
+		</foreach>
+	</insert>
+	
+	<update id="update">
+		UPDATE doc_init_storage_detail SET 	
+			storage_code = #{storageCode},
+			kind_code = #{kindCode},
+			kind_name = #{kindName},
+			kind_level = #{kindLevel},
+			first_unit = #{firstUnit},
+			item_amount = #{itemAmount},
+			item_number = #{itemNumber},
+			item_price = #{itemPrice},
+			remark = #{remark},
+			ext_field1 = #{extField1},
+			ext_field2 = #{extField2},
+			ext_field3 = #{extField3}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM doc_init_storage_detail
+		WHERE id = #{id}
+	</update>
+	<update id="deleteByStorage" parameterType="string">
+		DELETE FROM doc_init_storage_detail
+		WHERE storage_code = #{storageCode}
+	</update>
+	
+</mapper>
