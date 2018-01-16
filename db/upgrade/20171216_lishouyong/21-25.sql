@@ -62,19 +62,21 @@ CREATE TABLE `doc_finance_initpay` (
 drop TABLE if EXISTS  doc_init_storage_main;
 CREATE TABLE `doc_init_storage_main` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-	`doc_code` varchar(12) not null comment '单据编号',
+  `doc_code` varchar(12) not null comment '单据编号',
   `storage_code` varchar(50) DEFAULT NULL comment '入库单号',
-	`storage_date` varchar(20) not null comment '入库日期时间',
-	`storage_department` varchar(20) not null comment '入库部门',
-	`storage_repertory` varchar(20) not null comment '入库仓库',
-	`storage_flag` varchar(1) not null comment '红蓝标志',
-	`storage_audit_flag` varchar(1) not null comment '审核状态',
-	`storage_type` varchar(20) not null comment '入库类型',
-	`storage_create` varchar(20) not null comment '制单人',
-	`storage_auditor` varchar(20) not null comment '审核人',
-	`storage_handler` varchar(20) not null comment '经手人',
-	`storage_create_date` varchar(20) not null comment '制单日期',
-	`storage_audit_date` varchar(20) not null comment '审核日期',
+  `storage_date` varchar(20) not null comment '入库日期时间',
+  `storage_department` varchar(20) not null comment '入库部门代码',
+  `storage_department_name` varchar(20) not null comment '入库部门名称',
+  `storage_repertory` varchar(20) not null comment '入库仓库代码',
+  `storage_repertory_name` varchar(20) not null comment '入库仓库名称',
+  `storage_flag` varchar(1) not null comment '红蓝标志',
+  `storage_audit_flag` varchar(1) default '0' comment '审核状态',
+  `storage_type` varchar(20) not null comment '入库类型',
+  `storage_create` varchar(20) not null comment '制单人',
+  `storage_auditor` varchar(20)  null comment '审核人',
+  `storage_handler` varchar(20)  null comment '经手人',
+  `storage_create_date` varchar(20) not null comment '制单日期',
+  `storage_audit_date` varchar(20)  null comment '审核日期',
   `remark` varchar(1000) DEFAULT NULL COMMENT '备注',	
   `ext_field1` varchar(60) DEFAULT NULL COMMENT 'ext_field1',
   `ext_field2` varchar(60) DEFAULT NULL COMMENT 'ext_field2',
@@ -387,3 +389,21 @@ CREATE TABLE `contract_purchase_storage_detail` (
   `ext_field3` varchar(120) DEFAULT NULL COMMENT 'ext_field3',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='采购入库明细表';
+
+drop table if EXISTS  `doc_init_storage_detail`;
+CREATE TABLE `doc_init_storage_detail` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `storage_code` varchar(50) NOT NULL COMMENT '入库单号',
+  `kind_code` varchar(16) NOT NULL COMMENT '品种编码',
+  `kind_name` varchar(120) DEFAULT NULL COMMENT '品种名称',
+  `kind_level` varchar(60) DEFAULT NULL COMMENT '材质等级',
+  `first_unit` varchar(60) DEFAULT NULL COMMENT '主记量单位',
+  `item_amount` varchar(20) NOT NULL COMMENT '结算金额',
+  `item_number` varchar(20) NOT NULL COMMENT '结算数量',
+  `item_price` varchar(20) NOT NULL COMMENT '结算单价',
+  `remark` varchar(1000) DEFAULT NULL COMMENT '备注',
+  `ext_field1` varchar(60) DEFAULT NULL COMMENT 'ext_field1',
+  `ext_field2` varchar(60) DEFAULT NULL COMMENT 'ext_field2',
+  `ext_field3` varchar(120) DEFAULT NULL COMMENT 'ext_field3',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='期初入库明细表';
