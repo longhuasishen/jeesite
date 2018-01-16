@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/include/taglib.jsp"%>
 <html>
 <head>
-	<title>原材料类型档案管理</title>
+	<title>原材料类型档案</title>
 	<meta name="decorator" content="default"/>
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -47,7 +47,7 @@
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
-		<div class="control-group">
+		<div class="control-group" style="display:none">
 			<label class="control-label">存货名称：</label>
 			<div class="controls">
 				<sys:treeselect id="stock_name" name="archiveMaterial.id" value="${docConcretetyp.archiveMaterial.id}" labelName="archiveMaterial.materialName" labelValue="${docConcretetyp.archiveMaterial.materialName}"
@@ -55,25 +55,25 @@
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
-		<div class="control-group">
+		<div class="control-group" style="display:none">
 			<label class="control-label">ext_field1：</label>
 			<div class="controls">
 				<form:input path="extField1" htmlEscape="false" maxlength="60" class="input-xlarge "/>
 			</div>
 		</div>
-		<div class="control-group">
+		<div class="control-group" style="display:none">
 			<label class="control-label">ext_field2：</label>
 			<div class="controls">
 				<form:input path="extField2" htmlEscape="false" maxlength="60" class="input-xlarge "/>
 			</div>
 		</div>
-		<div class="control-group">
+		<div class="control-group" style="display:none">
 			<label class="control-label">ext_field3：</label>
 			<div class="controls">
 				<form:input path="extField3" htmlEscape="false" maxlength="120" class="input-xlarge "/>
 			</div>
 		</div>
-		<div class="control-group">
+		<div class="control-group" style="display:none">
 			<label class="control-label">remark：</label>
 			<div class="controls">
 				<form:input path="remark" htmlEscape="false" maxlength="1000" class="input-xlarge "/>

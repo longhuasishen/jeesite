@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.thinkgem.jeesite.common.config.Global;
@@ -23,6 +24,7 @@ import com.thinkgem.jeesite.common.utils.StringUtils;
 import com.thinkgem.jeesite.modules.doc.entity.DocBeton;
 import com.thinkgem.jeesite.modules.doc.service.DocBetonService;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -147,6 +149,16 @@ public class DocBetonController extends BaseController {
 		docBetonService.delete(docBeton);
 		addMessage(redirectAttributes, "删除混凝土档案成功");
 		return "redirect:"+Global.getAdminPath()+"/doc/docBeton/?repage";
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "listJson")
+	public List<DocBeton> listJson( HttpServletRequest request, HttpServletResponse response) {
+		DocBeton docBeton = new DocBeton();
+		List<DocBeton> list = Arrays.asList();
+		Page<DocBeton> page = docBetonService.findPage(new Page<DocBeton>(request, response), docBeton);
+		list = page.getList();
+		return list;
 	}
 
 }

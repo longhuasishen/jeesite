@@ -41,7 +41,7 @@
 			<tr>
 				<th>原材料编码</th>
 				<th>原材料名称</th>
-				<th>存货名称</th>
+				<%--<th>存货名称</th>--%>
 				<shiro:hasPermission name="doc:docConcretetyp:edit"><th>操作</th></shiro:hasPermission>
 			</tr>
 		</thead>
@@ -54,9 +54,9 @@
 				<td>
 						${fns:abbr(docConcretetyp.concretetypName,50)}
 				</td>
-				<td>
-						${fns:abbr(docConcretetyp.archiveMaterial.materialName,50)}
-				</td>
+				<%--<td>--%>
+						<%--${fns:abbr(docConcretetyp.archiveMaterial.materialName,50)}--%>
+				<%--</td>--%>
 				<shiro:hasPermission name="doc:docConcretetyp:edit"><td>
     				<a href="${ctx}/doc/docConcretetyp/form?id=${docConcretetyp.id}">修改</a>
 					<a href="${ctx}/doc/docConcretetyp/delete?id=${docConcretetyp.id}" onclick="return confirmx('确认要删除该原材料类型档案吗？', this.href)">删除</a>

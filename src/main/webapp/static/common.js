@@ -62,6 +62,16 @@ function getTableDatasById(tableId) {
     var rows = o.jqGrid('getRowData');
     return JSON.stringify(rows);
 }
+function getTableDatasById2(tableId) {
+    var o = jQuery("#jqGrid2");
+    var rows = o.jqGrid('getRowData');
+    return JSON.stringify(rows);
+}
+function getTableDatasById3(tableId) {
+    var o = jQuery("#jqGrid3");
+    var rows = o.jqGrid('getRowData');
+    return JSON.stringify(rows);
+}
 function btnResetClick(){
     $("#searchForm")[0].reset();
     $(':input','#searchForm')

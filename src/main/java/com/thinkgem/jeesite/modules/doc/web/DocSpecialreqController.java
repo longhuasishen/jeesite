@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.thinkgem.jeesite.common.config.Global;
@@ -21,6 +22,9 @@ import com.thinkgem.jeesite.common.web.BaseController;
 import com.thinkgem.jeesite.common.utils.StringUtils;
 import com.thinkgem.jeesite.modules.doc.entity.DocSpecialreq;
 import com.thinkgem.jeesite.modules.doc.service.DocSpecialreqService;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * 特殊要求档案Controller
@@ -54,6 +58,13 @@ public class DocSpecialreqController extends BaseController {
 		return "modules/doc/docSpecialreqList";
 	}
 
+	@RequestMapping(value = {"listFrame"})
+	public String listFrame(DocSpecialreq docSpecialreq, HttpServletRequest request, HttpServletResponse response, Model model) {
+		Page<DocSpecialreq> page = docSpecialreqService.findPage(new Page<DocSpecialreq>(request, response), docSpecialreq);
+		model.addAttribute("page", page);
+		return "modules/doc/docSpecialreqListFrame";
+	}
+
 	@RequiresPermissions("doc:docSpecialreq:view")
 	@RequestMapping(value = "form")
 	public String form(DocSpecialreq docSpecialreq, Model model) {
@@ -78,6 +89,16 @@ public class DocSpecialreqController extends BaseController {
 		docSpecialreqService.delete(docSpecialreq);
 		addMessage(redirectAttributes, "删除特殊要求档案成功");
 		return "redirect:"+Global.getAdminPath()+"/doc/docSpecialreq/?repage";
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "listJson")
+	public List<DocSpecialreq> listJson(HttpServletRequest request, HttpServletResponse response) {
+		DocSpecialreq docSpecialreq = new DocSpecialreq();
+		List<DocSpecialreq> list = Arrays.asList();
+		Page<DocSpecialreq> page = docSpecialreqService.findPage(new Page<DocSpecialreq>(request, response), docSpecialreq);
+		list = page.getList();
+		return list;
 	}
 
 }

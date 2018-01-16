@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.thinkgem.jeesite.common.config.Global;
@@ -21,6 +22,9 @@ import com.thinkgem.jeesite.common.web.BaseController;
 import com.thinkgem.jeesite.common.utils.StringUtils;
 import com.thinkgem.jeesite.modules.doc.entity.DocWatermeth;
 import com.thinkgem.jeesite.modules.doc.service.DocWatermethService;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * 浇灌方式档案Controller
@@ -54,6 +58,13 @@ public class DocWatermethController extends BaseController {
 		return "modules/doc/docWatermethList";
 	}
 
+	@RequestMapping(value = {"listFrame"})
+	public String listFrame(DocWatermeth docWatermeth, HttpServletRequest request, HttpServletResponse response, Model model) {
+		Page<DocWatermeth> page = docWatermethService.findPage(new Page<DocWatermeth>(request, response), docWatermeth);
+		model.addAttribute("page", page);
+		return "modules/doc/docWatermethListFrame";
+	}
+
 	@RequiresPermissions("doc:docWatermeth:view")
 	@RequestMapping(value = "form")
 	public String form(DocWatermeth docWatermeth, Model model) {
@@ -78,6 +89,16 @@ public class DocWatermethController extends BaseController {
 		docWatermethService.delete(docWatermeth);
 		addMessage(redirectAttributes, "删除浇灌方式档案成功");
 		return "redirect:"+Global.getAdminPath()+"/doc/docWatermeth/?repage";
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "listJson")
+	public List<DocWatermeth> listJson(HttpServletRequest request, HttpServletResponse response) {
+		DocWatermeth docWatermeth = new DocWatermeth();
+		List<DocWatermeth> list = Arrays.asList();
+		Page<DocWatermeth> page = docWatermethService.findPage(new Page<DocWatermeth>(request, response), docWatermeth);
+		list = page.getList();
+		return list;
 	}
 
 }
