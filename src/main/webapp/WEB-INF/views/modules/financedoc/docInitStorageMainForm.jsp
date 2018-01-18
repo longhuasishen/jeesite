@@ -150,8 +150,19 @@
 				<script type="text/javascript">
 
                     $(document).ready(function () {
+						var url = '${ctx}/financedoc/docInitStorageDetail/listJson?storageCode=${docInitStorageMain.storageCode}';
+                        setDetail(url);
+
+                    });
+                    function setDetail2(){
+                        var url = '${ctx}/financedoc/docInitStorageDetail/listJson?storageCode=01';
+                        $("#jqGrid").jqGrid('clearGridData');
+                        $("#jqGrid").jqGrid('setGridParam',{url:url}).trigger('reloadGrid');
+					}
+                    function setDetail(url){
+                        $("#jqGrid").jqGrid('clearGridData');
                         $("#jqGrid").jqGrid({
-                            url: '${ctx}/financedoc/docInitStorageDetail/listJson?storageCode=${docInitStorageMain.storageCode}',
+                            url:url,
                             editurl: 'clientArray',
                             mtype: "GET",
                             datatype: "json",
@@ -274,7 +285,7 @@
                                     }
                                 }
                             ],
-                            loadonce : true,
+//                            loadonce : true,
 //                        onSelectRow: editRow, // the javascript function to call on row click. will ues to to put the row in edit mode
                             viewrecords: true,
                             caption: "入库明细单列表",
@@ -283,7 +294,6 @@
                             rowNum: 20,
                             pager: "#jqGridPager"
                         });
-
                         var lastSelection;
 
                         function editRow(id) {
@@ -370,9 +380,9 @@
                                 useColSpanStyle: true,
                                 groupHeaders: [
                                     { "numberOfColumns": 3, "titleText": "入库情况", "startColumnName": "itemPrice" }
-                                    ]
+                                ]
                             });
-                    });
+					}
 
 				</script>
 				</p>
@@ -380,7 +390,7 @@
 		</div>
 		<div class="form-actions">
 			<shiro:hasPermission name="financedoc:docInitStorageMain:edit"><input id="btnSubmit" class="btn btn-primary" type="submit" value="保 存"/>&nbsp;</shiro:hasPermission>
-			<shiro:hasPermission name="financedoc:docInitStorageMain:edit"><input id="btnAduit" class="btn btn-primary" type="onclick" value="审 核"/>&nbsp;</shiro:hasPermission>
+			<shiro:hasPermission name="financedoc:docInitStorageMain:edit"><input id="btnAduit" class="btn btn-primary" type="button" value="审 核" onclick="setDetail2()"/>&nbsp;</shiro:hasPermission>
 			<input id="btnCancel" class="btn" type="button" value="返 回" onclick="history.go(-1)"/>
 		</div>
 	</form:form>
