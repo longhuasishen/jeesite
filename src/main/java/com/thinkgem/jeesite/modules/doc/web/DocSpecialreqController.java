@@ -6,6 +6,8 @@ package com.thinkgem.jeesite.modules.doc.web;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +27,7 @@ import com.thinkgem.jeesite.modules.doc.service.DocSpecialreqService;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 特殊要求档案Controller
@@ -99,6 +102,22 @@ public class DocSpecialreqController extends BaseController {
 		Page<DocSpecialreq> page = docSpecialreqService.findPage(new Page<DocSpecialreq>(request, response), docSpecialreq);
 		list = page.getList();
 		return list;
+	}
+	@ResponseBody
+	@RequestMapping(value = "treeData")
+	public List<Map<String, Object>> treeData(HttpServletResponse response) {
+		List<Map<String, Object>> mapList = Lists.newArrayList();
+		DocSpecialreq docSpecialreq = new DocSpecialreq();
+		List<DocSpecialreq> list = docSpecialreqService.treeData(docSpecialreq);
+		for (int i=0; i<list.size(); i++){
+			DocSpecialreq e = list.get(i);
+			Map<String, Object> map = Maps.newHashMap();
+			map.put("id", e.getId());
+			map.put("name", e.getSpecialreqName()+"["+e.getSpecialreqCode()+"]");
+
+			mapList.add(map);
+		}
+		return mapList;
 	}
 
 }

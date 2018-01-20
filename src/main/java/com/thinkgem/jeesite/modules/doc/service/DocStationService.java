@@ -43,5 +43,7 @@ public class DocStationService extends CrudService<DocStationDao, DocStation> {
 	public void delete(DocStation docStation) {
 		super.delete(docStation);
 	}
-	
+	public List<DocStation> treeData(DocStation docStation) {
+		return dao.treeData(docStation);
+	}
 }

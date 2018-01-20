@@ -43,5 +43,8 @@ public class DocPaymethService extends CrudService<DocPaymethDao, DocPaymeth> {
 	public void delete(DocPaymeth docPaymeth) {
 		super.delete(docPaymeth);
 	}
+	public List<DocPaymeth> treeData(DocPaymeth docPaymeth) {
+		return dao.treeData(docPaymeth);
+	}
 	
 }

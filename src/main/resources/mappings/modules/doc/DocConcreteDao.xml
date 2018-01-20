@@ -222,5 +222,13 @@
 		DELETE FROM doc_concrete
 		WHERE id = #{id}
 	</update>
+	<select id="treeData" resultType="DocConcrete">
+		select * from doc_concrete
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+		</choose>
+	</select>
 	
 </mapper>

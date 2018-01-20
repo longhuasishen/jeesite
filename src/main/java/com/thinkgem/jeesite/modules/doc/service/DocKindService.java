@@ -43,5 +43,8 @@ public class DocKindService extends CrudService<DocKindDao, DocKind> {
 	public void delete(DocKind docKind) {
 		super.delete(docKind);
 	}
+	public List<DocKind> treeData(DocKind docKind) {
+		return dao.treeData(docKind);
+	}
 	
 }

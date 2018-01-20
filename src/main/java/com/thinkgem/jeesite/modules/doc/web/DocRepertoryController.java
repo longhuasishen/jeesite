@@ -90,7 +90,7 @@ public class DocRepertoryController extends BaseController {
 	public List<Map<String, Object>> treeData(HttpServletResponse response) {
 		List<Map<String, Object>> mapList = Lists.newArrayList();
 		DocRepertory docRepertory = new DocRepertory();
-		List<DocRepertory> list = docRepertoryService.findList(docRepertory);
+		List<DocRepertory> list = docRepertoryService.treeData(docRepertory);
 		for (int i=0; i<list.size(); i++){
 			DocRepertory e = list.get(i);
 			Map<String, Object> map = Maps.newHashMap();

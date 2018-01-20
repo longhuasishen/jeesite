@@ -222,5 +222,13 @@
 		DELETE FROM doc_normaterial
 		WHERE id = #{id}
 	</update>
+	<select id="treeData" resultType="DocNormaterial">
+		select * from doc_normaterial
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+		</choose>
+	</select>
 
 </mapper>

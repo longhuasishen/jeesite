@@ -101,5 +101,13 @@
 		DELETE FROM doc_paymeth
 		WHERE id = #{id}
 	</update>
+	<select id="treeData" resultType="DocPaymeth">
+		select * from doc_paymeth
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+		</choose>
+	</select>
 	
 </mapper>

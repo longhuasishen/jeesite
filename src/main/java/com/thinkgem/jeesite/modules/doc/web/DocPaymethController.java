@@ -92,7 +92,7 @@ public class DocPaymethController extends BaseController {
 	public List<Map<String, Object>> treeData(HttpServletResponse response) {
 		List<Map<String, Object>> mapList = Lists.newArrayList();
 		DocPaymeth docPaymeth = new DocPaymeth();
-		List<DocPaymeth> list = docPaymethService.findList(docPaymeth);
+		List<DocPaymeth> list = docPaymethService.treeData(docPaymeth);
 		for (int i=0; i<list.size(); i++){
 			DocPaymeth e = list.get(i);
 			Map<String, Object> map = Maps.newHashMap();

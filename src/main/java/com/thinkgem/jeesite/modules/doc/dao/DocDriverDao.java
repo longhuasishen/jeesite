@@ -7,6 +7,8 @@ import com.thinkgem.jeesite.common.persistence.CrudDao;
 import com.thinkgem.jeesite.common.persistence.annotation.MyBatisDao;
 import com.thinkgem.jeesite.modules.doc.entity.DocDriver;
 
+import java.util.List;
+
 /**
  * 司机档案DAO接口
  * @author spark
@@ -14,5 +16,5 @@ import com.thinkgem.jeesite.modules.doc.entity.DocDriver;
  */
 @MyBatisDao
 public interface DocDriverDao extends CrudDao<DocDriver> {
-	
+    public List<DocDriver> treeData(DocDriver docDriver);
 }

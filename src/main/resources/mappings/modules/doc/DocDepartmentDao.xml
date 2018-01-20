@@ -142,5 +142,13 @@
 		DELETE FROM doc_department
 		WHERE id = #{id}
 	</update>
+	<select id="treeData" resultType="DocDepartment">
+		select * from doc_department
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+		</choose>
+	</select>
 	
 </mapper>

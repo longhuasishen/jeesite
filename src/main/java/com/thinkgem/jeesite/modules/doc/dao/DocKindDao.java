@@ -7,6 +7,8 @@ import com.thinkgem.jeesite.common.persistence.CrudDao;
 import com.thinkgem.jeesite.common.persistence.annotation.MyBatisDao;
 import com.thinkgem.jeesite.modules.doc.entity.DocKind;
 
+import java.util.List;
+
 /**
  * 品种档案DAO接口
  * @author lisy
@@ -14,5 +16,5 @@ import com.thinkgem.jeesite.modules.doc.entity.DocKind;
  */
 @MyBatisDao
 public interface DocKindDao extends CrudDao<DocKind> {
-	
+    public List<DocKind> treeData(DocKind docKind);
 }

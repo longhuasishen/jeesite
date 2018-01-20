@@ -7,6 +7,8 @@ import com.thinkgem.jeesite.common.persistence.CrudDao;
 import com.thinkgem.jeesite.common.persistence.annotation.MyBatisDao;
 import com.thinkgem.jeesite.modules.doc.entity.DocNormaterial;
 
+import java.util.List;
+
 /**
  * 普通物资档案DAO接口
  * @author spark
@@ -14,5 +16,5 @@ import com.thinkgem.jeesite.modules.doc.entity.DocNormaterial;
  */
 @MyBatisDao
 public interface DocNormaterialDao extends CrudDao<DocNormaterial> {
-	
+    public List<DocNormaterial> treeData(DocNormaterial docNormaterial);
 }

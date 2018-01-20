@@ -97,7 +97,7 @@ public class DocKindController extends BaseController {
 	public List<Map<String, Object>> treeData(HttpServletResponse response) {
 		List<Map<String, Object>> mapList = Lists.newArrayList();
 		DocKind docKind = new DocKind();
-		List<DocKind> list = docKindService.findList(docKind);
+		List<DocKind> list = docKindService.treeData(docKind);
 		for (int i=0; i<list.size(); i++){
 			DocKind e = list.get(i);
 			Map<String, Object> map = Maps.newHashMap();

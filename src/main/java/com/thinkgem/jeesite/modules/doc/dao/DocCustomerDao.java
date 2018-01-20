@@ -20,4 +20,5 @@ public interface DocCustomerDao extends CrudDao<DocCustomer> {
 
     public List<DocCustomer> findNameShort(@Param("docCustomer") DocCustomer docCustomer);
     public DocCustomer findByCode(@Param("cusCode") String cusCode);
+    public List<DocCustomer> treeData(DocCustomer docCustomer);
 }

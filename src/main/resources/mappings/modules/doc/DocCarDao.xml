@@ -225,5 +225,12 @@
 		DELETE FROM doc_car
 		WHERE id = #{id}
 	</update>
-	
+	<select id="treeData" resultType="DocCar">
+		select * from doc_car
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+		</choose>
+	</select>
 </mapper>

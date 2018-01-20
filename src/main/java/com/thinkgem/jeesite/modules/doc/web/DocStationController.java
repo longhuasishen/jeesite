@@ -103,7 +103,7 @@ public class DocStationController extends BaseController {
 	public List<Map<String, Object>> treeData(HttpServletResponse response) {
 		List<Map<String, Object>> mapList = Lists.newArrayList();
 		DocStation docStation = new DocStation();
-		List<DocStation> list = docStationService.findList(docStation);
+		List<DocStation> list = docStationService.treeData(docStation);
 		for (int i=0; i<list.size(); i++){
 			DocStation e = list.get(i);
 			Map<String, Object> map = Maps.newHashMap();

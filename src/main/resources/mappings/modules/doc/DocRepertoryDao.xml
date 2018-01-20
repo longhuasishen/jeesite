@@ -146,5 +146,12 @@
 		DELETE FROM doc_repertory
 		WHERE id = #{id}
 	</update>
-	
+	<select id="treeData" resultType="DocRepertory">
+		select * from doc_repertory
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+		</choose>
+	</select>
 </mapper>

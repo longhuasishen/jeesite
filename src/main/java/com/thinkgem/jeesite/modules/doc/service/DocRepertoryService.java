@@ -43,5 +43,8 @@ public class DocRepertoryService extends CrudService<DocRepertoryDao, DocReperto
 	public void delete(DocRepertory docRepertory) {
 		super.delete(docRepertory);
 	}
+	public List<DocRepertory> treeData(DocRepertory docRepertory) {
+		return dao.treeData(docRepertory);
+	}
 	
 }

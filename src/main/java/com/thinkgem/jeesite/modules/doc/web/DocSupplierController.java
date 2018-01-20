@@ -109,7 +109,7 @@ public class DocSupplierController extends BaseController {
 	public List<Map<String, Object>> treeData(HttpServletResponse response) {
 		List<Map<String, Object>> mapList = Lists.newArrayList();
 		DocSupplier docSupplier = new DocSupplier();
-		List<DocSupplier> list = docSupplierService.findList(docSupplier);
+		List<DocSupplier> list = docSupplierService.treeData(docSupplier);
 		for (int i=0; i<list.size(); i++){
 			DocSupplier e = list.get(i);
 			Map<String, Object> map = Maps.newHashMap();

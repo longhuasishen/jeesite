@@ -43,5 +43,7 @@ public class DocNormaterialService extends CrudService<DocNormaterialDao, DocNor
 	public void delete(DocNormaterial docNormaterial) {
 		super.delete(docNormaterial);
 	}
-	
+	public List<DocNormaterial> treeData(DocNormaterial docNormaterial) {
+		return dao.treeData(docNormaterial);
+	}
 }

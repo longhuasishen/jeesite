@@ -87,22 +87,22 @@ public class DocAccmethController extends BaseController {
 		return "redirect:"+Global.getAdminPath()+"/doc/docAccmeth/?repage";
 	}
 
-	@ResponseBody
-	@RequestMapping(value = "treeData")
-	public List<Map<String, Object>> treeData(HttpServletResponse response) {
-		List<Map<String, Object>> mapList = Lists.newArrayList();
-		DocAccmeth docAccmeth = new DocAccmeth();
-		List<DocAccmeth> list = docAccmethService.findList(docAccmeth);
-		for (int i=0; i<list.size(); i++){
-			DocAccmeth e = list.get(i);
-			Map<String, Object> map = Maps.newHashMap();
-			map.put("id", e.getId());
-			map.put("name", e.getAccmethName()+"["+e.getAccmethCode()+"]");
-
-			mapList.add(map);
-		}
-		return mapList;
-	}
+//	@ResponseBody
+//	@RequestMapping(value = "treeData")
+//	public List<Map<String, Object>> treeData(HttpServletResponse response) {
+//		List<Map<String, Object>> mapList = Lists.newArrayList();
+//		DocAccmeth docAccmeth = new DocAccmeth();
+//		List<DocAccmeth> list = docAccmethService.findList(docAccmeth);
+//		for (int i=0; i<list.size(); i++){
+//			DocAccmeth e = list.get(i);
+//			Map<String, Object> map = Maps.newHashMap();
+//			map.put("id", e.getId());
+//			map.put("name", e.getAccmethName()+"["+e.getAccmethCode()+"]");
+//
+//			mapList.add(map);
+//		}
+//		return mapList;
+//	}
 	@ResponseBody
 	@RequestMapping(value = "treeData2")
 	public List<Map<String, Object>> treeData2(HttpServletResponse response) {
@@ -113,6 +113,23 @@ public class DocAccmethController extends BaseController {
 			DocAccmeth e = list.get(i);
 			Map<String, Object> map = Maps.newHashMap();
 			map.put("id", e.getAccmethCode());
+			map.put("name", e.getAccmethName()+"["+e.getAccmethCode()+"]");
+
+			mapList.add(map);
+		}
+		return mapList;
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "treeData")
+	public List<Map<String, Object>> treeData(HttpServletResponse response) {
+		List<Map<String, Object>> mapList = Lists.newArrayList();
+		DocAccmeth docAccmeth = new DocAccmeth();
+		List<DocAccmeth> list = docAccmethService.treeData(docAccmeth);
+		for (int i=0; i<list.size(); i++){
+			DocAccmeth e = list.get(i);
+			Map<String, Object> map = Maps.newHashMap();
+			map.put("id", e.getId());
 			map.put("name", e.getAccmethName()+"["+e.getAccmethCode()+"]");
 
 			mapList.add(map);

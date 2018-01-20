@@ -113,7 +113,7 @@ public class DocCarController extends BaseController {
 	public List<Map<String, Object>> treeData(HttpServletResponse response) {
 		List<Map<String, Object>> mapList = Lists.newArrayList();
 		DocCar docCar = new DocCar();
-		List<DocCar> list = docCarService.findList(docCar);
+		List<DocCar> list = docCarService.treeData(docCar);
 		for (int i=0; i<list.size(); i++){
 			DocCar e = list.get(i);
 			Map<String, Object> map = Maps.newHashMap();

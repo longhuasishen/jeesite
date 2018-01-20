@@ -49,5 +49,8 @@ public class DocConcretetypService extends CrudService<DocConcretetypDao, DocCon
 	public List<DocConcretetyp> findListByArray(String[] s) {
 		return super.findList(s);
 	}
+	public List<DocConcretetyp> treeData(DocConcretetyp docConcretetyp) {
+		return dao.treeData(docConcretetyp);
+	}
 
 }

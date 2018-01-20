@@ -91,7 +91,7 @@ public class DocDepartmentController extends BaseController {
 	public List<Map<String, Object>> treeData(HttpServletResponse response) {
 		List<Map<String, Object>> mapList = Lists.newArrayList();
 		DocDepartment docDepartment = new DocDepartment();
-		List<DocDepartment> list = docDepartmentService.findList(docDepartment);
+		List<DocDepartment> list = docDepartmentService.treeData(docDepartment);
 		for (int i=0; i<list.size(); i++){
 			DocDepartment e = list.get(i);
 			Map<String, Object> map = Maps.newHashMap();

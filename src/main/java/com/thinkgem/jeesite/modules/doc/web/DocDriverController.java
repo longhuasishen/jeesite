@@ -92,7 +92,7 @@ public class DocDriverController extends BaseController {
 	public List<Map<String, Object>> treeData(HttpServletResponse response) {
 		List<Map<String, Object>> mapList = Lists.newArrayList();
 		DocDriver docDriver = new DocDriver();
-		List<DocDriver> list = docDriverService.findList(docDriver);
+		List<DocDriver> list = docDriverService.treeData(docDriver);
 		for (int i=0; i<list.size(); i++){
 			DocDriver e = list.get(i);
 			Map<String, Object> map = Maps.newHashMap();

@@ -51,5 +51,8 @@ public class DocCustomerService extends CrudService<DocCustomerDao, DocCustomer>
 	public DocCustomer findByCode(String cusCode) {
 		return dao.findByCode(cusCode);
 	}
+	public List<DocCustomer> treeData(DocCustomer docCustomer) {
+		return dao.treeData(docCustomer);
+	}
 	
 }

@@ -239,5 +239,12 @@
 	<select id="findByCode" resultType="DocCustomer">
 		select * from doc_customer a where cus_code = #{cusCode};
 	</select>
-	
+	<select id="treeData" resultType="DocCustomer">
+		select * from doc_customer
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+		</choose>
+	</select>
 </mapper>

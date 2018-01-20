@@ -43,5 +43,8 @@ public class DocDepartmentService extends CrudService<DocDepartmentDao, DocDepar
 	public void delete(DocDepartment docDepartment) {
 		super.delete(docDepartment);
 	}
+	public List<DocDepartment> treeData(DocDepartment docDepartment) {
+		return dao.treeData(docDepartment);
+	}
 	
 }

@@ -143,5 +143,13 @@
 		DELETE FROM doc_stationinfo
 		WHERE id = #{id}
 	</update>
+	<select id="treeData" resultType="DocStationinfo">
+		select * from doc_stationinfo
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+		</choose>
+	</select>
 	
 </mapper>

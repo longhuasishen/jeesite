@@ -7,6 +7,8 @@ import com.thinkgem.jeesite.common.persistence.CrudDao;
 import com.thinkgem.jeesite.common.persistence.annotation.MyBatisDao;
 import com.thinkgem.jeesite.modules.doc.entity.DocConcretetyp;
 
+import java.util.List;
+
 /**
  * 原材料类型档案DAO接口
  * @author spark
@@ -14,5 +16,5 @@ import com.thinkgem.jeesite.modules.doc.entity.DocConcretetyp;
  */
 @MyBatisDao
 public interface DocConcretetypDao extends CrudDao<DocConcretetyp> {
-	
+    public List<DocConcretetyp> treeData(DocConcretetyp docConcretetyp);
 }

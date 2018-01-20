@@ -43,5 +43,9 @@ public class DocCarService extends CrudService<DocCarDao, DocCar> {
 	public void delete(DocCar docCar) {
 		super.delete(docCar);
 	}
+
+	public List<DocCar> treeData(DocCar docCar) {
+		return dao.treeData(docCar);
+	}
 	
 }

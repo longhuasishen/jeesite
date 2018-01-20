@@ -43,5 +43,8 @@ public class DocSpecialreqService extends CrudService<DocSpecialreqDao, DocSpeci
 	public void delete(DocSpecialreq docSpecialreq) {
 		super.delete(docSpecialreq);
 	}
+	public List<DocSpecialreq> treeData(DocSpecialreq docSpecialreq) {
+		return dao.treeData(docSpecialreq);
+	}
 	
 }

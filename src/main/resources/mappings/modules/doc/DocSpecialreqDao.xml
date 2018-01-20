@@ -101,5 +101,13 @@
 		DELETE FROM doc_specialreq
 		WHERE id = #{id}
 	</update>
+	<select id="treeData" resultType="DocSpecialreq">
+		select * from doc_specialreq
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+		</choose>
+	</select>
 	
 </mapper>

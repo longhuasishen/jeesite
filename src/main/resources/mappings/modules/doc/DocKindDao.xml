@@ -108,5 +108,13 @@
 		DELETE FROM doc_kind
 		WHERE id = #{id}
 	</update>
+	<select id="treeData" resultType="DocKind">
+		select * from doc_kind
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+		</choose>
+	</select>
 	
 </mapper>

@@ -43,5 +43,8 @@ public class DocDriverService extends CrudService<DocDriverDao, DocDriver> {
 	public void delete(DocDriver docDriver) {
 		super.delete(docDriver);
 	}
+	public List<DocDriver> treeData(DocDriver docDriver) {
+		return dao.treeData(docDriver);
+	}
 	
 }

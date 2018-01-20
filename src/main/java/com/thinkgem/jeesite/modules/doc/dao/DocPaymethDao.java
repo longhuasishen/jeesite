@@ -7,6 +7,8 @@ import com.thinkgem.jeesite.common.persistence.CrudDao;
 import com.thinkgem.jeesite.common.persistence.annotation.MyBatisDao;
 import com.thinkgem.jeesite.modules.doc.entity.DocPaymeth;
 
+import java.util.List;
+
 /**
  * 支付方式档案DAO接口
  * @author spark
@@ -14,5 +16,5 @@ import com.thinkgem.jeesite.modules.doc.entity.DocPaymeth;
  */
 @MyBatisDao
 public interface DocPaymethDao extends CrudDao<DocPaymeth> {
-	
+    public List<DocPaymeth> treeData(DocPaymeth docPaymeth);
 }

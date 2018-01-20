@@ -101,5 +101,14 @@
 		DELETE FROM doc_accmeth
 		WHERE id = #{id}
 	</update>
+
+	<select id="treeData" resultType="DocAccmeth">
+		select * from doc_accmeth
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+		</choose>
+	</select>
 	
 </mapper>

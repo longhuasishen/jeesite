@@ -7,6 +7,8 @@ import com.thinkgem.jeesite.common.persistence.CrudDao;
 import com.thinkgem.jeesite.common.persistence.annotation.MyBatisDao;
 import com.thinkgem.jeesite.modules.doc.entity.DocDepartment;
 
+import java.util.List;
+
 /**
  * 部门档案DAO接口
  * @author spark
@@ -14,5 +16,5 @@ import com.thinkgem.jeesite.modules.doc.entity.DocDepartment;
  */
 @MyBatisDao
 public interface DocDepartmentDao extends CrudDao<DocDepartment> {
-	
+    public List<DocDepartment> treeData(DocDepartment docDepartment);
 }

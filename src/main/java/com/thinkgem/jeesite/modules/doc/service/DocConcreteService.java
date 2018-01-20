@@ -43,5 +43,9 @@ public class DocConcreteService extends CrudService<DocConcreteDao, DocConcrete>
 	public void delete(DocConcrete docConcrete) {
 		super.delete(docConcrete);
 	}
+
+	public List<DocConcrete> treeData(DocConcrete docConcrete) {
+		return dao.treeData(docConcrete);
+	}
 	
 }

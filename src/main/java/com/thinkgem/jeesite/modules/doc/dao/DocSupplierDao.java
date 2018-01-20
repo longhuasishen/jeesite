@@ -7,6 +7,8 @@ import com.thinkgem.jeesite.common.persistence.CrudDao;
 import com.thinkgem.jeesite.common.persistence.annotation.MyBatisDao;
 import com.thinkgem.jeesite.modules.doc.entity.DocSupplier;
 
+import java.util.List;
+
 /**
  * 供应商档案DAO接口
  * @author lisy
@@ -14,5 +16,5 @@ import com.thinkgem.jeesite.modules.doc.entity.DocSupplier;
  */
 @MyBatisDao
 public interface DocSupplierDao extends CrudDao<DocSupplier> {
-	
+    public List<DocSupplier> treeData(DocSupplier docSupplier);
 }

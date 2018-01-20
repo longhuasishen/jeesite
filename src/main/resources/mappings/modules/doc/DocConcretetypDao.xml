@@ -26,6 +26,14 @@
 		<include refid="docConcretetypJoins"/>
 		WHERE a.id = #{id}
 	</select>
+	<select id="treeData" resultType="DocConcretetyp">
+		select * from doc_concretetyp
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+		</choose>
+	</select>
 	
 	<select id="findList" resultType="DocConcretetyp">
 		SELECT 

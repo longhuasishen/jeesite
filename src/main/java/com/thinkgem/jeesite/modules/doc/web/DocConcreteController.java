@@ -158,5 +158,21 @@ public class DocConcreteController extends BaseController {
 		addMessage(redirectAttributes, "删除原材料档案成功");
 		return "redirect:"+Global.getAdminPath()+"/doc/docConcrete/?repage";
 	}
+	@ResponseBody
+	@RequestMapping(value = "treeData")
+	public List<Map<String, Object>> treeData(HttpServletResponse response) {
+		List<Map<String, Object>> mapList = Lists.newArrayList();
+		DocConcrete docConcrete = new DocConcrete();
+		List<DocConcrete> list = docConcreteService.treeData(docConcrete);
+		for (int i=0; i<list.size(); i++){
+			DocConcrete e = list.get(i);
+			Map<String, Object> map = Maps.newHashMap();
+			map.put("id", e.getId());
+			map.put("name", e.getKindName()+"["+e.getKindCode()+"]");
+
+			mapList.add(map);
+		}
+		return mapList;
+	}
 
 }

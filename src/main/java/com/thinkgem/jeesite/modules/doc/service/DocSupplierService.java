@@ -43,5 +43,7 @@ public class DocSupplierService extends CrudService<DocSupplierDao, DocSupplier>
 	public void delete(DocSupplier docSupplier) {
 		super.delete(docSupplier);
 	}
-	
+	public List<DocSupplier> treeData(DocSupplier docSupplier) {
+		return dao.treeData(docSupplier);
+	}
 }

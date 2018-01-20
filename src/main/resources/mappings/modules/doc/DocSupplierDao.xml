@@ -192,5 +192,13 @@
 		DELETE FROM doc_supplier
 		WHERE id = #{id}
 	</update>
+	<select id="treeData" resultType="DocSupplier">
+		select * from doc_supplier
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+		</choose>
+	</select>
 	
 </mapper>

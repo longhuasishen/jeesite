@@ -43,5 +43,8 @@ public class DocAccmethService extends CrudService<DocAccmethDao, DocAccmeth> {
 	public void delete(DocAccmeth docAccmeth) {
 		super.delete(docAccmeth);
 	}
-	
+
+	public List<DocAccmeth> treeData(DocAccmeth docAccmeth) {
+		return dao.treeData(docAccmeth);
+	}
 }
