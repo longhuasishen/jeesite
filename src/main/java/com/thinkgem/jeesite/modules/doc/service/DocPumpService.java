@@ -43,5 +43,8 @@ public class DocPumpService extends CrudService<DocPumpDao, DocPump> {
 	public void delete(DocPump docPump) {
 		super.delete(docPump);
 	}
-	
+
+	public List<DocPump> treeData(DocPump docPump) {
+		return dao.treeData(docPump);
+	}
 }

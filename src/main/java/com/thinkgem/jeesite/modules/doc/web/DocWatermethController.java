@@ -6,6 +6,8 @@ package com.thinkgem.jeesite.modules.doc.web;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +27,7 @@ import com.thinkgem.jeesite.modules.doc.service.DocWatermethService;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 浇灌方式档案Controller
@@ -101,4 +104,20 @@ public class DocWatermethController extends BaseController {
 		return list;
 	}
 
+	@ResponseBody
+	@RequestMapping(value = "treeData")
+	public List<Map<String, Object>> treeData(HttpServletResponse response) {
+		List<Map<String, Object>> mapList = Lists.newArrayList();
+		DocWatermeth docWatermeth = new DocWatermeth();
+		List<DocWatermeth> list = docWatermethService.treeData(docWatermeth);
+		for (int i=0; i<list.size(); i++){
+			DocWatermeth e = list.get(i);
+			Map<String, Object> map = Maps.newHashMap();
+			map.put("id", e.getId());
+			map.put("name", e.getWatermethName()+"["+e.getWatermethCode()+"]");
+
+			mapList.add(map);
+		}
+		return mapList;
+	}
 }

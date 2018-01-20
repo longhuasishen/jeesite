@@ -47,7 +47,10 @@ public class ContractSalesService extends CrudService<ContractSalesDao, Contract
 	public Page<ContractSales> findPage(Page<ContractSales> page, ContractSales contractSales) {
 		return super.findPage(page, contractSales);
 	}
-	
+	public List<ContractSales> findCusProject(ContractSales contractSales) {
+		return dao.findCusProject(contractSales);
+	}
+
 	@Transactional(readOnly = false)
 	public void save(ContractSales contractSales) {
 		super.save(contractSales);

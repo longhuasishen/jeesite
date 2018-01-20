@@ -5,6 +5,7 @@ package com.thinkgem.jeesite.modules.produces.service;
 
 import java.util.List;
 
+import com.thinkgem.jeesite.modules.doc.entity.DocCustomer;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -50,5 +51,9 @@ public class ProjectDistanceService extends CrudService<ProjectDistanceDao, Proj
 	public void delete(ProjectDistance projectDistance) {
 		super.delete(projectDistance);
 	}
-	
+
+	public List<ProjectDistance> treeData(ProjectDistance projectDistance) {
+		return dao.treeData(projectDistance);
+	}
+
 }

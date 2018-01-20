@@ -155,4 +155,27 @@ public class DocCustomerController extends BaseController {
 		return mapList;
 	}
 
+	@ResponseBody
+	@RequestMapping(value = "treeDataNameShort")
+	public List<Map<String, Object>> treeDataNameShort( HttpServletResponse response) {
+		List<Map<String, Object>> mapList = Lists.newArrayList();
+		DocCustomer docCustomer = new DocCustomer();
+		List<DocCustomer> list = docCustomerService.findNameShort(docCustomer);
+		for (int i=0; i<list.size(); i++){
+			DocCustomer e = list.get(i);
+			Map<String, Object> map = Maps.newHashMap();
+			map.put("id", e.getId());
+			map.put("name", e.getCusName()+"["+e.getCusCode()+"]");
+
+			mapList.add(map);
+		}
+		return mapList;
+	}
+
+	@ResponseBody
+	@RequestMapping(value = {"findByCode"})
+	public DocCustomer findByCode(String cusCode) {
+		DocCustomer docCustomer = docCustomerService.findByCode(cusCode);
+		return docCustomer;
+	}
 }

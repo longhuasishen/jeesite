@@ -43,5 +43,8 @@ public class DocWatermethService extends CrudService<DocWatermethDao, DocWaterme
 	public void delete(DocWatermeth docWatermeth) {
 		super.delete(docWatermeth);
 	}
-	
+
+	public List<DocWatermeth> treeData(DocWatermeth docWatermeth) {
+		return dao.treeData(docWatermeth);
+	}
 }

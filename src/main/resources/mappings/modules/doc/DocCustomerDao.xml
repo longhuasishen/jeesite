@@ -79,7 +79,10 @@
 			</otherwise>
 		</choose>
 	</select>
-	
+	<select id="findNameShort" resultType="DocCustomer">
+
+
+	</select>
 	<select id="findAllList" resultType="DocCustomer">
 		SELECT 
 			<include refid="docCustomerColumns"/>
@@ -96,7 +99,7 @@
 			</otherwise>
 		</choose>
 	</select>
-	
+
 	<insert id="insert">
 		INSERT INTO doc_customer(
 			cus_code,
@@ -232,5 +235,9 @@
 		DELETE FROM doc_customer
 		WHERE id = #{id}
 	</update>
+
+	<select id="findByCode" resultType="DocCustomer">
+		select * from doc_customer a where cus_code = #{cusCode};
+	</select>
 	
 </mapper>

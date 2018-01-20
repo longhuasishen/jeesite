@@ -16,7 +16,7 @@ import com.thinkgem.jeesite.modules.doc.dao.DocCarDao;
 /**
  * 车辆档案Service
  * @author spark
- * @version 2017-12-15
+ * @version 2018-01-20
  */
 @Service
 @Transactional(readOnly = true)

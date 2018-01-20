@@ -6,6 +6,9 @@ package com.thinkgem.jeesite.modules.doc.dao;
 import com.thinkgem.jeesite.common.persistence.CrudDao;
 import com.thinkgem.jeesite.common.persistence.annotation.MyBatisDao;
 import com.thinkgem.jeesite.modules.doc.entity.DocCustomer;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * 客户档案DAO接口
@@ -14,5 +17,7 @@ import com.thinkgem.jeesite.modules.doc.entity.DocCustomer;
  */
 @MyBatisDao
 public interface DocCustomerDao extends CrudDao<DocCustomer> {
-	
+
+    public List<DocCustomer> findNameShort(@Param("docCustomer") DocCustomer docCustomer);
+    public DocCustomer findByCode(@Param("cusCode") String cusCode);
 }

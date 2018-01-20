@@ -7,6 +7,8 @@ import com.thinkgem.jeesite.common.persistence.CrudDao;
 import com.thinkgem.jeesite.common.persistence.annotation.MyBatisDao;
 import com.thinkgem.jeesite.modules.contract.entity.ContractSales;
 
+import java.util.List;
+
 /**
  * 销售合同DAO接口
  * @author spark
@@ -14,5 +16,5 @@ import com.thinkgem.jeesite.modules.contract.entity.ContractSales;
  */
 @MyBatisDao
 public interface ContractSalesDao extends CrudDao<ContractSales> {
-	
+    public List<ContractSales> findCusProject(ContractSales contractSales);
 }

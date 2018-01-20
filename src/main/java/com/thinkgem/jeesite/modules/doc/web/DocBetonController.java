@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +27,7 @@ import com.thinkgem.jeesite.modules.doc.service.DocBetonService;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 混凝土档案Controller
@@ -159,6 +161,23 @@ public class DocBetonController extends BaseController {
 		Page<DocBeton> page = docBetonService.findPage(new Page<DocBeton>(request, response), docBeton);
 		list = page.getList();
 		return list;
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "treeData")
+	public List<Map<String, Object>> treeData(HttpServletResponse response) {
+		List<Map<String, Object>> mapList = Lists.newArrayList();
+		DocBeton docBeton = new DocBeton();
+		List<DocBeton> list = docBetonService.treeData(docBeton);
+		for (int i=0; i<list.size(); i++){
+			DocBeton e = list.get(i);
+			Map<String, Object> map = Maps.newHashMap();
+			map.put("id", e.getId());
+			map.put("name", e.getKindName()+"["+e.getKindCode()+"]");
+
+			mapList.add(map);
+		}
+		return mapList;
 	}
 
 }

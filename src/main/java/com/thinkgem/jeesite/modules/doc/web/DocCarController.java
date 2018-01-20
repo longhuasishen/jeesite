@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.thinkgem.jeesite.modules.doc.entity.DocDriver;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,7 +31,7 @@ import java.util.Map;
 /**
  * 车辆档案Controller
  * @author spark
- * @version 2017-12-15
+ * @version 2018-01-20
  */
 @Controller
 @RequestMapping(value = "${adminPath}/doc/docCar")
@@ -75,7 +74,6 @@ public class DocCarController extends BaseController {
 			childCarList1.add("3");
 		}
 		docCar.setChildCarList1(childCarList1);
-
 		model.addAttribute("docCar", docCar);
 		return "modules/doc/docCarForm";
 	}

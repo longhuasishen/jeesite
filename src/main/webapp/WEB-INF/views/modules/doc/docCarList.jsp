@@ -26,11 +26,50 @@
 		<input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
 		<ul class="ul-form">
 			<li><label>车辆编码：</label>
-				<form:input path="carCode" htmlEscape="false" maxlength="200" class="input-medium"/>
+				<form:input path="carCode" htmlEscape="false" maxlength="16" class="input-medium"/>
 			</li>
 			<li><label>车牌号码：</label>
-				<form:input path="carNo" htmlEscape="false" maxlength="200" class="input-medium"/>
+				<form:input path="carNo" htmlEscape="false" maxlength="10" class="input-medium"/>
 			</li>
+			<%--<li><label>司机姓名：</label>--%>
+				<%--<form:input path="driverName" htmlEscape="false" maxlength="60" class="input-medium"/>--%>
+			<%--</li>--%>
+			<%--<li><label>车主：</label>--%>
+				<%--<form:input path="carOwner" htmlEscape="false" maxlength="20" class="input-medium"/>--%>
+			<%--</li>--%>
+			<%--<li><label>行驶执照：</label>--%>
+				<%--<form:input path="carLicence" htmlEscape="false" maxlength="32" class="input-medium"/>--%>
+			<%--</li>--%>
+			<%--<li><label>卡号：</label>--%>
+				<%--<form:input path="cardNo" htmlEscape="false" maxlength="32" class="input-medium"/>--%>
+			<%--</li>--%>
+			<%--<li><label>车型名称：</label>--%>
+				<%--<form:input path="carTypename" htmlEscape="false" maxlength="120" class="input-medium"/>--%>
+			<%--</li>--%>
+			<%--<li><label>空重：</label>--%>
+				<%--<form:input path="emptyWeight" htmlEscape="false" maxlength="20" class="input-medium"/>--%>
+			<%--</li>--%>
+			<%--<li><label>装载方量：</label>--%>
+				<%--<form:input path="driveCube" htmlEscape="false" maxlength="20" class="input-medium"/>--%>
+			<%--</li>--%>
+			<%--<li><label>联系电话：</label>--%>
+				<%--<form:input path="carPhone" htmlEscape="false" maxlength="20" class="input-medium"/>--%>
+			<%--</li>--%>
+			<%--<li><label>搅拌车：</label>--%>
+				<%--<form:input path="isMixing" htmlEscape="false" maxlength="1" class="input-medium"/>--%>
+			<%--</li>--%>
+			<%--<li><label>泵车：</label>--%>
+				<%--<form:input path="isPump" htmlEscape="false" maxlength="1" class="input-medium"/>--%>
+			<%--</li>--%>
+			<%--<li><label>其它设备：</label>--%>
+				<%--<form:input path="isOther" htmlEscape="false" maxlength="1" class="input-medium"/>--%>
+			<%--</li>--%>
+			<%--<li><label>是否可用：</label>--%>
+				<%--<form:input path="isAvalable" htmlEscape="false" maxlength="1" class="input-medium"/>--%>
+			<%--</li>--%>
+			<%--<li><label>行驶记录：</label>--%>
+				<%--<form:input path="driveRecord" htmlEscape="false" maxlength="240" class="input-medium"/>--%>
+			<%--</li>--%>
 			<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
 			<li class="clearfix"></li>
 		</ul>
@@ -43,15 +82,15 @@
 				<th>车牌号码</th>
 				<th>司机姓名1</th>
 				<th>司机姓名2</th>
-				<th>司机姓名3</th>
-			<%--<th>行驶执照</th>--%>
+				<%--<th>行驶执照</th>--%>
 				<th>搅拌车</th>
 				<th>泵车</th>
 				<th>其它设备</th>
 				<th>卡号</th>
+				<th>车型名称</th>
 				<th>空重</th>
 				<th>装载方量</th>
-			<%--<th>联系电话</th>--%>
+				<%--<th>联系电话</th>--%>
 				<th>是否可用</th>
 				<th>行驶记录</th>
 				<shiro:hasPermission name="doc:docCar:edit"><th>操作</th></shiro:hasPermission>
@@ -60,50 +99,50 @@
 		<tbody>
 		<c:forEach items="${page.list}" var="docCar">
 			<tr>
+				<td><a href="${ctx}/doc/docCar/form?id=${docCar.id}">
+					${docCar.carCode}
+				</a></td>
 				<td>
-						${fns:abbr(docCar.carCode,50)}
+					${docCar.carNo}
 				</td>
 				<td>
-						${fns:abbr(docCar.carNo,50)}
+					${docCar.driverName}
 				</td>
 				<td>
-						${fns:abbr(docCar.driverName,50)}
+					${docCar.carOwner}
+				</td>
+				<%--<td>--%>
+					<%--${docCar.carLicence}--%>
+				<%--</td>--%>
+				<td>
+						${docCar.isMixing}
 				</td>
 				<td>
-						${fns:abbr(docCar.carOwner,50)}
+						${docCar.isPump}
 				</td>
 				<td>
-						${fns:abbr(docCar.carTypename,50)}
-				</td>
-			<%--<td>--%>
-			<%--${fns:abbr(docCar.carLicence,50)}--%>
-			<%--</td>--%>
-				<td>
-						${fns:abbr(docCar.isMixing,50)}
+						${docCar.isOther}
 				</td>
 				<td>
-						${fns:abbr(docCar.isPump,50)}
+					${docCar.cardNo}
 				</td>
 				<td>
-						${fns:abbr(docCar.isOther,50)}
+					${docCar.carTypename}
 				</td>
 				<td>
-			${fns:abbr(docCar.cardNo,50)}
+					${docCar.emptyWeight}
 				</td>
 				<td>
-			${fns:abbr(docCar.emptyWeight,50)}
+					${docCar.driveCube}
+				</td>
+				<%--<td>--%>
+					<%--${docCar.carPhone}--%>
+				<%--</td>--%>
+				<td>
+					${docCar.isAvalable}
 				</td>
 				<td>
-			${fns:abbr(docCar.driveCube,50)}
-				</td>
-			<%--<td>--%>
-			<%--${fns:abbr(docCar.carPhone,50)}--%>
-			<%--</td>--%>
-				<td>
-						${fns:abbr(docCar.isAvalable,50)}
-				</td>
-				<td>
-						${fns:abbr(docCar.driveRecord,50)}
+					${docCar.driveRecord}
 				</td>
 				<shiro:hasPermission name="doc:docCar:edit"><td>
     				<a href="${ctx}/doc/docCar/form?id=${docCar.id}">修改</a>

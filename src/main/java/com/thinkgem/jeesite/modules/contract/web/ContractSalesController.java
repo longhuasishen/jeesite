@@ -6,6 +6,8 @@ package com.thinkgem.jeesite.modules.contract.web;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.thinkgem.jeesite.modules.contract.entity.ContractSalesBeton;
 import com.thinkgem.jeesite.modules.contract.entity.ContractSalesSpecialreq;
 import com.thinkgem.jeesite.modules.contract.entity.ContractSalesWatermeth;
@@ -35,6 +37,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 销售合同Controller
@@ -184,23 +187,20 @@ public class ContractSalesController extends BaseController {
 		return "redirect:"+Global.getAdminPath()+"/contract/contractSales/?repage";
 	}
 
-//	@RequiresPermissions("user")
-//	@ResponseBody
-//	@RequestMapping(value = "treeData")
-//	public List<Map<String, Object>> treeData(@RequestParam(required=false) String materialCode, HttpServletResponse response) {
-//		List<Map<String, Object>> mapList = Lists.newArrayList();
-//		ContractSales am = new ContractSales();
-//		List<ContractSales> list  = contractSalesService.findList(am);
-//
-//		for (int i=0; i<list.size(); i++){
-//			ContractSales e = list.get(i);
-//			Map<String, Object> map = Maps.newHashMap();
-//			map.put("id", e.getId());
-//			map.put("name", e.getCu);
-//			map.put("code", e.getCuspCode());
-//
-//			mapList.add(map);
-//		}
-//		return mapList;
-//	}
+	@ResponseBody
+	@RequestMapping(value = "treeDataCusProject")
+	public List<Map<String, Object>> treeDataCusProject(HttpServletResponse response) {
+		List<Map<String, Object>> mapList = Lists.newArrayList();
+		ContractSales contractSales = new ContractSales();
+		List<ContractSales> list = contractSalesService.findCusProject(contractSales);
+		for (int i=0; i<list.size(); i++){
+			ContractSales e = list.get(i);
+			Map<String, Object> map = Maps.newHashMap();
+			map.put("id", e.getId());
+			map.put("name", e.getProjectName()+"["+e.getExtField1()+"]");
+
+			mapList.add(map);
+		}
+		return mapList;
+	}
 }

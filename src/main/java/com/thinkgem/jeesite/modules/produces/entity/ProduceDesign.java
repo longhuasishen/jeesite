@@ -3,6 +3,11 @@
  */
 package com.thinkgem.jeesite.modules.produces.entity;
 
+import com.thinkgem.jeesite.modules.contract.entity.ContractSales;
+import com.thinkgem.jeesite.modules.doc.entity.DocBeton;
+import com.thinkgem.jeesite.modules.doc.entity.DocOfficework;
+import com.thinkgem.jeesite.modules.doc.entity.DocPump;
+import com.thinkgem.jeesite.modules.doc.entity.DocWatermeth;
 import org.hibernate.validator.constraints.Length;
 
 import com.thinkgem.jeesite.common.persistence.DataEntity;
@@ -48,7 +53,62 @@ public class ProduceDesign extends DataEntity<ProduceDesign> {
 	private String extField2;		// ext_field2
 	private String extField3;		// ext_field3
 	private String remark;		// remark
-	
+	private ContractSales contractSales;
+
+	private DocBeton docBeton;
+	private DocWatermeth docWatermeth;
+	private DocOfficework docOfficework;
+	private DocPump docPump;
+	private ProjectDistance projectDistance;
+
+	public DocBeton getDocBeton() {
+		return docBeton;
+	}
+
+	public void setDocBeton(DocBeton docBeton) {
+		this.docBeton = docBeton;
+	}
+
+	public DocWatermeth getDocWatermeth() {
+		return docWatermeth;
+	}
+
+	public void setDocWatermeth(DocWatermeth docWatermeth) {
+		this.docWatermeth = docWatermeth;
+	}
+
+	public DocOfficework getDocOfficework() {
+		return docOfficework;
+	}
+
+	public void setDocOfficework(DocOfficework docOfficework) {
+		this.docOfficework = docOfficework;
+	}
+
+	public DocPump getDocPump() {
+		return docPump;
+	}
+
+	public void setDocPump(DocPump docPump) {
+		this.docPump = docPump;
+	}
+
+	public ProjectDistance getProjectDistance() {
+		return projectDistance;
+	}
+
+	public void setProjectDistance(ProjectDistance projectDistance) {
+		this.projectDistance = projectDistance;
+	}
+
+	public ContractSales getContractSales() {
+		return contractSales;
+	}
+
+	public void setContractSales(ContractSales contractSales) {
+		this.contractSales = contractSales;
+	}
+
 	public ProduceDesign() {
 		super();
 	}

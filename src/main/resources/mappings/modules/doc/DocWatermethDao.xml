@@ -68,8 +68,9 @@
 			</otherwise>
 		</choose>
 	</select>
-	
-	<insert id="insert">
+
+
+    <insert id="insert">
 		INSERT INTO doc_watermeth(
 			watermeth_code,
 			watermeth_name,
@@ -105,5 +106,13 @@
 		DELETE FROM doc_watermeth
 		WHERE id = #{id}
 	</update>
-	
+
+	<select id="treeData" resultType="DocWatermeth">
+		select * from doc_watermeth
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+		</choose>
+	</select>
 </mapper>

@@ -6,6 +6,10 @@ package com.thinkgem.jeesite.modules.produces.web;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.thinkgem.jeesite.modules.doc.entity.DocCustomer;
+import com.thinkgem.jeesite.modules.sys.utils.UserUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.thinkgem.jeesite.common.config.Global;
@@ -21,6 +26,9 @@ import com.thinkgem.jeesite.common.web.BaseController;
 import com.thinkgem.jeesite.common.utils.StringUtils;
 import com.thinkgem.jeesite.modules.produces.entity.ProjectDistance;
 import com.thinkgem.jeesite.modules.produces.service.ProjectDistanceService;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * 工程运距管理Controller
@@ -58,6 +66,7 @@ public class ProjectDistanceController extends BaseController {
 	@RequestMapping(value = "form")
 	public String form(ProjectDistance projectDistance, Model model) {
 		model.addAttribute("projectDistance", projectDistance);
+		model.addAttribute("user", UserUtils.getUser());
 		return "modules/produces/projectDistanceForm";
 	}
 
@@ -78,6 +87,23 @@ public class ProjectDistanceController extends BaseController {
 		projectDistanceService.delete(projectDistance);
 		addMessage(redirectAttributes, "删除工程运距管理成功");
 		return "redirect:"+Global.getAdminPath()+"/produces/projectDistance/?repage";
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "treeData")
+	public List<Map<String, Object>> treeData(HttpServletResponse response) {
+		List<Map<String, Object>> mapList = Lists.newArrayList();
+		ProjectDistance projectDistance = new ProjectDistance();
+		List<ProjectDistance> list = projectDistanceService.treeData(projectDistance);
+		for (int i=0; i<list.size(); i++){
+			ProjectDistance e = list.get(i);
+			Map<String, Object> map = Maps.newHashMap();
+			map.put("id", e.getId());
+			map.put("name", e.getDistance()+"["+e.getDistanceCode()+"]");
+
+			mapList.add(map);
+		}
+		return mapList;
 	}
 
 }

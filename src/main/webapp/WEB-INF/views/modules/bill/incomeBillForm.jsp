@@ -22,6 +22,11 @@
 					}
 				}
 			});
+            var mydate = new Date();
+            var dateS = mydate.getFullYear()+"-"+mydate.getMonth()+1 + "-" + mydate.getDate();
+            $( "#billDate" ).val(dateS);
+            $( "#makeDate" ).val(dateS);
+            $( "#checkDate" ).val(dateS);
 		});
 	</script>
 </head>

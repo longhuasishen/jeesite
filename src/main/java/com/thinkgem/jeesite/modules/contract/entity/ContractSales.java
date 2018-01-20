@@ -43,6 +43,16 @@ public class ContractSales extends DataEntity<ContractSales> {
 	private String checkPerson;		// 审核人
 	private String canclePerson;		// 作废人
 
+	public String getCusCode() {
+		return cusCode;
+	}
+
+	public void setCusCode(String cusCode) {
+		this.cusCode = cusCode;
+	}
+
+	private String cusCode;			//客户编码
+
 	public String getMakeDate() {
 		return makeDate;
 	}

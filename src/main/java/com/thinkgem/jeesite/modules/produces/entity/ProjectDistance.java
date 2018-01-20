@@ -28,6 +28,16 @@ public class ProjectDistance extends DataEntity<ProjectDistance> {
 	private String extField3;		// ext_field3
 	private String remark;		// remark
 
+	private String distanceCode; //运距编码
+
+	public String getDistanceCode() {
+		return distanceCode;
+	}
+
+	public void setDistanceCode(String distanceCode) {
+		this.distanceCode = distanceCode;
+	}
+
 	public DocCustomer getDocCustomer() {
 		return docCustomer;
 	}

@@ -108,5 +108,13 @@
 		DELETE FROM doc_pump
 		WHERE id = #{id}
 	</update>
-	
+	<select id="treeData" resultType="DocPump">
+		select * from doc_pump
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+		</choose>
+	</select>
+
 </mapper>

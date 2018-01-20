@@ -6,6 +6,7 @@
 		a.id AS "id",
 		a.project_name AS "docCustomer.id",
 		a.contract_id AS "contractId",
+		a.cus_code AS "cusCode",
 		a.contract_date AS "contractDate",
 		a.contract_comp AS "contractComp",
 		a.project_addr AS "projectAddr",
@@ -103,11 +104,15 @@
 			</otherwise>
 		</choose>
 	</select>
-	
-	<insert id="insert">
+    <select id="findCusProject" resultType="ContractSales">
+		select * from contract_sales a;
+	</select>
+
+    <insert id="insert">
 		INSERT INTO contract_sales(
 			project_name,
 			contract_id,
+			cus_code,
 			contract_date,
 			contract_comp,
 			project_addr,
@@ -149,6 +154,7 @@
 		) VALUES (
 			#{docCustomer.id},
 			#{contractId},
+			#{cusCode},
 			#{contractDate},
 			#{contractComp},
 			#{projectAddr},
@@ -194,6 +200,7 @@
 		UPDATE contract_sales SET 	
 			project_name = #{docCustomer.id},
 			contract_id = #{contractId},
+			cus_code = #{cusCode},
 			contract_date = #{contractDate},
 			contract_comp = #{contractComp},
 			project_addr = #{projectAddr},

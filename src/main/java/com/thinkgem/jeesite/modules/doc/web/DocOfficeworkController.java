@@ -87,22 +87,22 @@ public class DocOfficeworkController extends BaseController {
 		return "redirect:"+Global.getAdminPath()+"/doc/docOfficework/?repage";
 	}
 
-	@ResponseBody
-	@RequestMapping(value = "treeData")
-	public List<Map<String, Object>> treeData(HttpServletResponse response) {
-		List<Map<String, Object>> mapList = Lists.newArrayList();
-		DocOfficework docOfficework = new DocOfficework();
-		List<DocOfficework> list = docOfficeworkService.findList(docOfficework);
-		for (int i=0; i<list.size(); i++){
-			DocOfficework e = list.get(i);
-			Map<String, Object> map = Maps.newHashMap();
-			map.put("id", e.getId());
-			map.put("name", e.getOfficeworkName()+"["+e.getOfficeworkCode()+"]");
-
-			mapList.add(map);
-		}
-		return mapList;
-	}
+//	@ResponseBody
+//	@RequestMapping(value = "treeData")
+//	public List<Map<String, Object>> treeData(HttpServletResponse response) {
+//		List<Map<String, Object>> mapList = Lists.newArrayList();
+//		DocOfficework docOfficework = new DocOfficework();
+//		List<DocOfficework> list = docOfficeworkService.findList(docOfficework);
+//		for (int i=0; i<list.size(); i++){
+//			DocOfficework e = list.get(i);
+//			Map<String, Object> map = Maps.newHashMap();
+//			map.put("id", e.getId());
+//			map.put("name", e.getOfficeworkName()+"["+e.getOfficeworkCode()+"]");
+//
+//			mapList.add(map);
+//		}
+//		return mapList;
+//	}
 	@ResponseBody
 	@RequestMapping(value = "treeData2")
 	public List<Map<String, Object>> treeData2(HttpServletResponse response) {
@@ -113,6 +113,23 @@ public class DocOfficeworkController extends BaseController {
 			DocOfficework e = list.get(i);
 			Map<String, Object> map = Maps.newHashMap();
 			map.put("id", e.getOfficeworkCode());
+			map.put("name", e.getOfficeworkName()+"["+e.getOfficeworkCode()+"]");
+
+			mapList.add(map);
+		}
+		return mapList;
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "treeData")
+	public List<Map<String, Object>> treeData(HttpServletResponse response) {
+		List<Map<String, Object>> mapList = Lists.newArrayList();
+		DocOfficework docOfficework = new DocOfficework();
+		List<DocOfficework> list = docOfficeworkService.treeData(docOfficework);
+		for (int i=0; i<list.size(); i++){
+			DocOfficework e = list.get(i);
+			Map<String, Object> map = Maps.newHashMap();
+			map.put("id", e.getId());
 			map.put("name", e.getOfficeworkName()+"["+e.getOfficeworkCode()+"]");
 
 			mapList.add(map);

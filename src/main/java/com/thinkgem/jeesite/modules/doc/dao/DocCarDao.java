@@ -10,7 +10,7 @@ import com.thinkgem.jeesite.modules.doc.entity.DocCar;
 /**
  * 车辆档案DAO接口
  * @author spark
- * @version 2017-12-15
+ * @version 2018-01-20
  */
 @MyBatisDao
 public interface DocCarDao extends CrudDao<DocCar> {

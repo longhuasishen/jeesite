@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.produces.dao.CarsDispatchDao">
+    
+	<sql id="carsDispatchColumns">
+		a.id AS "id",
+		a.car_no AS "carNo",
+		a.car_name AS "carName",
+		a.back_time AS "backTime",
+		a.produce_time AS "produceTime",
+		a.out_time AS "outTime",
+		a.fix_time AS "fixTime",
+		a.ext_field1 AS "extField1",
+		a.car_state AS "carState",
+		a.car_type AS "carType",
+		a.ext_field2 AS "extField2",
+		a.car_owner AS "carOwner",
+		a.ext_field3 AS "extField3",
+		a.remark AS "remark",
+		a.back_sort AS "backSort",
+		a.produce_sort AS "produceSort",
+		a.out_sort AS "outSort",
+		a.fix_sort AS "fixSort"
+	</sql>
+	
+	<sql id="carsDispatchJoins">
+	</sql>
+    
+	<select id="get" resultType="CarsDispatch">
+		SELECT 
+			<include refid="carsDispatchColumns"/>
+		FROM cars_dispatch a
+		<include refid="carsDispatchJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="CarsDispatch">
+		SELECT 
+			<include refid="carsDispatchColumns"/>
+		FROM cars_dispatch a
+		<include refid="carsDispatchJoins"/>
+		<where>
+			
+			<if test="carNo != null and carNo != ''">
+				AND a.car_no = #{carNo}
+			</if>
+			<if test="carName != null and carName != ''">
+				AND a.car_name = #{carName}
+			</if>
+			<if test="backTime != null and backTime != ''">
+				AND a.back_time = #{backTime}
+			</if>
+			<if test="produceTime != null and produceTime != ''">
+				AND a.produce_time = #{produceTime}
+			</if>
+			<if test="outTime != null and outTime != ''">
+				AND a.out_time = #{outTime}
+			</if>
+			<if test="fixTime != null and fixTime != ''">
+				AND a.fix_time = #{fixTime}
+			</if>
+			<if test="carState != null and carState != ''">
+				AND a.car_state = #{carState}
+			</if>
+			<if test="carType != null and carType != ''">
+				AND a.car_type = #{carType}
+			</if>
+			<if test="carOwner != null and carOwner != ''">
+				AND a.car_owner = #{carOwner}
+			</if>
+			<if test="backSort != null and backSort != ''">
+				AND a.back_sort = #{backSort}
+			</if>
+			<if test="produceSort != null and produceSort != ''">
+				AND a.produce_sort = #{produceSort}
+			</if>
+			<if test="outSort != null and outSort != ''">
+				AND a.out_sort = #{outSort}
+			</if>
+			<if test="fixSort != null and fixSort != ''">
+				AND a.fix_sort = #{fixSort}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="CarsDispatch">
+		SELECT 
+			<include refid="carsDispatchColumns"/>
+		FROM cars_dispatch a
+		<include refid="carsDispatchJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO cars_dispatch(
+			car_no,
+			car_name,
+			back_time,
+			produce_time,
+			out_time,
+			fix_time,
+			ext_field1,
+			car_state,
+			car_type,
+			ext_field2,
+			car_owner,
+			ext_field3,
+			remark,
+			back_sort,
+			produce_sort,
+			out_sort,
+			fix_sort
+		) VALUES (
+			#{carNo},
+			#{carName},
+			#{backTime},
+			#{produceTime},
+			#{outTime},
+			#{fixTime},
+			#{extField1},
+			#{carState},
+			#{carType},
+			#{extField2},
+			#{carOwner},
+			#{extField3},
+			#{remark},
+			#{backSort},
+			#{produceSort},
+			#{outSort},
+			#{fixSort}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE cars_dispatch SET 	
+			car_no = #{carNo},
+			car_name = #{carName},
+			back_time = #{backTime},
+			produce_time = #{produceTime},
+			out_time = #{outTime},
+			fix_time = #{fixTime},
+			ext_field1 = #{extField1},
+			car_state = #{carState},
+			car_type = #{carType},
+			ext_field2 = #{extField2},
+			car_owner = #{carOwner},
+			ext_field3 = #{extField3},
+			remark = #{remark},
+			back_sort = #{backSort},
+			produce_sort = #{produceSort},
+			out_sort = #{outSort},
+			fix_sort = #{fixSort}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM cars_dispatch
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

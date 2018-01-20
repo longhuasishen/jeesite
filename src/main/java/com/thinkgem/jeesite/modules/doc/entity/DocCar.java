@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * 车辆档案Entity
  * @author spark
- * @version 2017-12-15
+ * @version 2018-01-20
  */
 public class DocCar extends DataEntity<DocCar> {
 	
@@ -32,6 +32,14 @@ public class DocCar extends DataEntity<DocCar> {
 	private String isOther;		// 其它设备
 	private String isAvalable;		// 是否可用
 	private String driveRecord;		// 行驶记录
+	private String backTime;		// 回厂时间
+	private String produceTime;		// 安排生产时间
+	private String outTime;		// 出厂时间
+	private String fixTime;		// 维修时间
+	private String backSort;		// 回厂排序
+	private String produceSort;		// 生产排序
+	private String outSort;		// 出厂排序
+	private String fixSort;		// 维修排序
 	private String extField1;		// ext_field1
 	private String extField2;		// ext_field2
 	private String extField3;		// ext_field3
@@ -46,7 +54,7 @@ public class DocCar extends DataEntity<DocCar> {
 	}
 
 	private List<String> childCarList1;//原材料勾选1
-
+	
 	public DocCar() {
 		super();
 	}
@@ -188,6 +196,78 @@ public class DocCar extends DataEntity<DocCar> {
 
 	public void setDriveRecord(String driveRecord) {
 		this.driveRecord = driveRecord;
+	}
+	
+	@Length(min=0, max=120, message="回厂时间长度必须介于 0 和 120 之间")
+	public String getBackTime() {
+		return backTime;
+	}
+
+	public void setBackTime(String backTime) {
+		this.backTime = backTime;
+	}
+	
+	@Length(min=0, max=20, message="安排生产时间长度必须介于 0 和 20 之间")
+	public String getProduceTime() {
+		return produceTime;
+	}
+
+	public void setProduceTime(String produceTime) {
+		this.produceTime = produceTime;
+	}
+	
+	@Length(min=0, max=20, message="出厂时间长度必须介于 0 和 20 之间")
+	public String getOutTime() {
+		return outTime;
+	}
+
+	public void setOutTime(String outTime) {
+		this.outTime = outTime;
+	}
+	
+	@Length(min=0, max=20, message="维修时间长度必须介于 0 和 20 之间")
+	public String getFixTime() {
+		return fixTime;
+	}
+
+	public void setFixTime(String fixTime) {
+		this.fixTime = fixTime;
+	}
+	
+	@Length(min=0, max=5, message="回厂排序长度必须介于 0 和 5 之间")
+	public String getBackSort() {
+		return backSort;
+	}
+
+	public void setBackSort(String backSort) {
+		this.backSort = backSort;
+	}
+	
+	@Length(min=0, max=5, message="生产排序长度必须介于 0 和 5 之间")
+	public String getProduceSort() {
+		return produceSort;
+	}
+
+	public void setProduceSort(String produceSort) {
+		this.produceSort = produceSort;
+	}
+	
+	@Length(min=0, max=5, message="出厂排序长度必须介于 0 和 5 之间")
+	public String getOutSort() {
+		return outSort;
+	}
+
+	public void setOutSort(String outSort) {
+		this.outSort = outSort;
+	}
+	
+	@Length(min=0, max=5, message="维修排序长度必须介于 0 和 5 之间")
+	public String getFixSort() {
+		return fixSort;
+	}
+
+	public void setFixSort(String fixSort) {
+		this.fixSort = fixSort;
 	}
 	
 	@Length(min=0, max=60, message="ext_field1长度必须介于 0 和 60 之间")

@@ -123,5 +123,12 @@
 		DELETE FROM project_distance
 		WHERE id = #{id}
 	</update>
-	
+	<select id="treeData" resultType="ProjectDistance">
+		select * from project_distance
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+		</choose>
+	</select>
 </mapper>

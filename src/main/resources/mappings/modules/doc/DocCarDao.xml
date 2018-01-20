@@ -19,6 +19,14 @@
 		a.is_other AS "isOther",
 		a.is_avalable AS "isAvalable",
 		a.drive_record AS "driveRecord",
+		a.back_time AS "backTime",
+		a.produce_time AS "produceTime",
+		a.out_time AS "outTime",
+		a.fix_time AS "fixTime",
+		a.back_sort AS "backSort",
+		a.produce_sort AS "produceSort",
+		a.out_sort AS "outSort",
+		a.fix_sort AS "fixSort",
 		a.ext_field1 AS "extField1",
 		a.ext_field2 AS "extField2",
 		a.ext_field3 AS "extField3",
@@ -42,6 +50,7 @@
 		FROM doc_car a
 		<include refid="docCarJoins"/>
 		<where>
+			
 			<if test="carCode != null and carCode != ''">
 				AND a.car_code LIKE
 				<if test="dbName == 'oracle'">'%'||#{carCode}||'%'</if>
@@ -49,10 +58,49 @@
 				<if test="dbName == 'mysql'">CONCAT('%', #{carCode}, '%')</if>
 			</if>
 			<if test="carNo != null and carNo != ''">
-				AND a.car_no LIKE
+				AND a.car_no  LIKE
 				<if test="dbName == 'oracle'">'%'||#{carNo}||'%'</if>
 				<if test="dbName == 'mssql'">'%'+#{carNo}+'%'</if>
 				<if test="dbName == 'mysql'">CONCAT('%', #{carNo}, '%')</if>
+			</if>
+			<if test="driverName != null and driverName != ''">
+				AND a.driver_name = #{driverName}
+			</if>
+			<if test="carOwner != null and carOwner != ''">
+				AND a.car_owner = #{carOwner}
+			</if>
+			<if test="carLicence != null and carLicence != ''">
+				AND a.car_licence = #{carLicence}
+			</if>
+			<if test="cardNo != null and cardNo != ''">
+				AND a.card_no = #{cardNo}
+			</if>
+			<if test="carTypename != null and carTypename != ''">
+				AND a.car_typename = #{carTypename}
+			</if>
+			<if test="emptyWeight != null and emptyWeight != ''">
+				AND a.empty_weight = #{emptyWeight}
+			</if>
+			<if test="driveCube != null and driveCube != ''">
+				AND a.drive_cube = #{driveCube}
+			</if>
+			<if test="carPhone != null and carPhone != ''">
+				AND a.car_phone = #{carPhone}
+			</if>
+			<if test="isMixing != null and isMixing != ''">
+				AND a.is_mixing = #{isMixing}
+			</if>
+			<if test="isPump != null and isPump != ''">
+				AND a.is_pump = #{isPump}
+			</if>
+			<if test="isOther != null and isOther != ''">
+				AND a.is_other = #{isOther}
+			</if>
+			<if test="isAvalable != null and isAvalable != ''">
+				AND a.is_avalable = #{isAvalable}
+			</if>
+			<if test="driveRecord != null and driveRecord != ''">
+				AND a.drive_record = #{driveRecord}
 			</if>
 		</where>
 		<choose>
@@ -98,6 +146,14 @@
 			is_other,
 			is_avalable,
 			drive_record,
+			back_time,
+			produce_time,
+			out_time,
+			fix_time,
+			back_sort,
+			produce_sort,
+			out_sort,
+			fix_sort,
 			ext_field1,
 			ext_field2,
 			ext_field3,
@@ -118,6 +174,14 @@
 			#{isOther},
 			#{isAvalable},
 			#{driveRecord},
+			#{backTime},
+			#{produceTime},
+			#{outTime},
+			#{fixTime},
+			#{backSort},
+			#{produceSort},
+			#{outSort},
+			#{fixSort},
 			#{extField1},
 			#{extField2},
 			#{extField3},
@@ -142,6 +206,14 @@
 			is_other = #{isOther},
 			is_avalable = #{isAvalable},
 			drive_record = #{driveRecord},
+			back_time = #{backTime},
+			produce_time = #{produceTime},
+			out_time = #{outTime},
+			fix_time = #{fixTime},
+			back_sort = #{backSort},
+			produce_sort = #{produceSort},
+			out_sort = #{outSort},
+			fix_sort = #{fixSort},
 			ext_field1 = #{extField1},
 			ext_field2 = #{extField2},
 			ext_field3 = #{extField3},

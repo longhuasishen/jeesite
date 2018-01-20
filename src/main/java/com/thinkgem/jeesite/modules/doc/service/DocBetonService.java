@@ -43,5 +43,9 @@ public class DocBetonService extends CrudService<DocBetonDao, DocBeton> {
 	public void delete(DocBeton docBeton) {
 		super.delete(docBeton);
 	}
+
+	public List<DocBeton> treeData(DocBeton docBeton) {
+		return dao.treeData(docBeton);
+	}
 	
 }

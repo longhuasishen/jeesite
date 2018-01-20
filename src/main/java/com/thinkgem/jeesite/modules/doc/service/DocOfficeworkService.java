@@ -43,5 +43,8 @@ public class DocOfficeworkService extends CrudService<DocOfficeworkDao, DocOffic
 	public void delete(DocOfficework docOfficework) {
 		super.delete(docOfficework);
 	}
-	
+
+	public List<DocOfficework> treeData(DocOfficework docOfficework) {
+		return dao.treeData(docOfficework);
+	}
 }

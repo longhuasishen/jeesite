@@ -232,5 +232,13 @@
 		DELETE FROM doc_officework
 		WHERE id = #{id}
 	</update>
-	
+	<select id="treeData" resultType="DocOfficework">
+		select * from doc_officework
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+		</choose>
+	</select>
+
 </mapper>

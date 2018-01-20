@@ -22,6 +22,12 @@
                         }
                     }
                 });
+
+				var mydate = new Date();
+				var dateS = mydate.getFullYear()+"-"+mydate.getMonth()+1 + "-" + mydate.getDate();
+            	$( "#contractDate" ).val(dateS);
+            	$( "#makeDate" ).val(dateS);
+
             }
         );
 
@@ -33,6 +39,8 @@
                     //设置input值
                     $("#contractComp").val(data.cusOrg);
                     $("#projectAddr").val(data.cusAddress);
+                    $("#extField1").val(data.cusName);
+                    $("#cusCode").val(data.cusCode);
                 });
 
             }
@@ -120,115 +128,158 @@
 <form:form id="inputForm" modelAttribute="contractSales" action="${ctx}/contract/contractSales/save" method="post" class="form-horizontal">
 	<form:hidden path="id"/>
 	<sys:message content="${message}"/>
-	<div class="control-group">
-		<label class="control-label">工程名称：</label>
-		<div class="controls">
-			<sys:treeselect id="projectName" name="docCustomer.id" value="${contractSales.docCustomer.id}" labelName="docCustomer.cusProject" labelValue="${contractSales.docCustomer.cusProject}"
-							title="客户档案" url="/doc/docCustomer/treeDataCusProject" cssClass="required"/>
-			<span class="help-inline"><font color="red">*</font> </span>
-		</div>
-	</div>
-	<div class="control-group">
-		<label class="control-label">合同编号：</label>
-		<div class="controls">
-			<form:input path="contractId"  htmlEscape="false" maxlength="32" class="input-xlarge "/>
-		</div>
-	</div>
-	<div class="control-group">
-		<label class="control-label">签定日期：</label>
-		<div class="controls">
-			<input id="contractDate"  name="contractDate"  type="text" readonly="readonly" maxlength="20" class="Wdate required" style="width:163px;"
-				   value="${contractSales.contractDate}"
-				   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
-		</div>
-	</div>
-	<div class="control-group">
-		<label class="control-label">合同单位：</label>
-		<div class="controls">
-			<form:input path="contractComp" htmlEscape="false" maxlength="120" class="input-xlarge "/>
-		</div>
-	</div>
-	<div class="control-group">
-		<label class="control-label">项目地址：</label>
-		<div class="controls">
-			<form:input path="projectAddr" htmlEscape="false" maxlength="240" class="input-xlarge "/>
-		</div>
-	</div>
-	<div class="control-group">
-		<label class="control-label">签定部门：</label>
-		<div class="controls">
-			<sys:treeselect id="contractDepartment" name="docDepartment.id" value="${contractSales.docDepartment.id}" labelName="docDepartment.departmentName" labelValue="${contractSales.docDepartment.departmentName}"
-							title="部门档案" url="/doc/docDepartment/treeData" cssClass="required"/>
-		</div>
-	</div>
-	<div class="control-group">
-		<label class="control-label">业务员：</label>
-		<div class="controls">
-			<sys:treeselect id="salesPerson" name="docOfficework.id" value="${contractSales.docOfficework.id}" labelName="docOfficework.officeworkName" labelValue="${contractSales.docOfficework.officeworkName}"
-							title="职员档案" url="/doc/docOfficework/treeData" cssClass="required"/>
-		</div>
-	</div>
-	<div class="control-group">
-		<label class="control-label">客户分类：</label>
-		<div class="controls">
-			<sys:treeselect id="comstemType" name="comstemType" value="${contractSales.docOfficework.id}" labelName="docOfficework.officeworkName" labelValue="${contractSales.docOfficework.officeworkName}"
-							title="职员档案" url="/doc/docOfficework/treeData" cssClass="required"/>
-		</div>
-	</div>
-	<div class="control-group">
-		<label class="control-label">砼结算方式：</label>
-		<div class="controls">
-			<sys:treeselect id="tongAccmeth" name="docAccmeth.id" value="${contractSales.docAccmeth.id}" labelName="docAccmeth.accmethName" labelValue="${contractSales.docAccmeth.accmethName}"
-							title="结算方式档案" url="/doc/docAccmeth/treeData" cssClass="required"/>
-		</div>
-	</div>
-	<div class="control-group">
-		<label class="control-label">签定地点：</label>
-		<div class="controls">
-			<form:input path="contractAddr" htmlEscape="false" maxlength="240" class="input-xlarge "/>
-		</div>
-	</div>
-	<div class="control-group">
-		<label class="control-label">见证方：</label>
-		<div class="controls">
-			<form:input path="thirdPerson" htmlEscape="false" maxlength="60" class="input-xlarge "/>
-		</div>
-	</div>
-	<div class="control-group">
-		<label class="control-label">有效期限：</label>
-		<div class="controls">
-				<%--<form:input path="effTerm" htmlEscape="false" maxlength="1" class="input-xlarge "/>--%>
-			<input id="effStart"  name="effStart"  type="text" readonly="readonly" maxlength="20" class="Wdate required" style="width:163px;"
-				   value="${contractSales.effStart}"
-				   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
-			　--　
-			<input id="effEnd" name="effEnd" type="text" readonly="readonly" maxlength="20" class="Wdate required" style="width:163px;"
-				   value="${contractSales.effEnd}"
-				   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
-		</div>
-	</div>
-	<div class="control-group">
-		<label class="control-label">方量控制：</label>
-		<div class="controls">
-				<%--<form:input path="cubeControl" htmlEscape="false" maxlength="1" class="input-xlarge "/>--%>
-			<form:input path="cubeStart" htmlEscape="false" maxlength="32" class="input-xlarge "/>
-			--
-			<form:input path="cubeEnd" htmlEscape="false" maxlength="32" class="input-xlarge "/>
-		</div>
-	</div>
-	<div class="control-group">
-		<label class="control-label">时间控制：</label>
-		<div class="controls">
-				<%--<form:input path="timeControl" htmlEscape="false" maxlength="1" class="input-xlarge "/>--%>
-			<input id="timeStart"  name="timeStart"  type="text" readonly="readonly" maxlength="20" class="Wdate required" style="width:163px;"
-				   value="${contractSales.timeStart}"
-				   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
-			　--　
-			<input id="timeEnd" name="timeEnd" type="text" readonly="readonly" maxlength="20" class="Wdate required" style="width:163px;"
-				   value="${contractSales.timeEnd}"
-				   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
-		</div>
-	</div>
+	<table>
+		<tr>
+			<td>
+				<div class="control-group">
+					<label class="control-label">工程名称：</label>
+					<div class="controls">
+						<sys:treeselect id="projectName" name="docCustomer.id" value="${contractSales.docCustomer.id}" labelName="docCustomer.cusProject" labelValue="${contractSales.docCustomer.cusProject}"
+										title="客户档案" url="/doc/docCustomer/treeDataCusProject" cssClass="required"/>
+						<span class="help-inline"><font color="red">*</font> </span>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="control-group">
+					<label class="control-label">合同编号：</label>
+					<div class="controls">
+						<form:input path="contractId"  htmlEscape="false" maxlength="32" class="input-xlarge " placeholder="请输入合同编号"/>
+					</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<div class="control-group">
+					<label class="control-label">签定日期：</label>
+					<div class="controls">
+						<input id="contractDate"  name="contractDate"  type="text" readonly="readonly" maxlength="20" class="Wdate required" style="width:163px;"
+							   value="${contractSales.contractDate}"
+							   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="control-group">
+					<label class="control-label">合同单位：</label>
+					<div class="controls">
+						<form:input path="contractComp" htmlEscape="false" maxlength="120" class="input-xlarge "  placeholder="请输入合同单位"/>
+					</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<div class="control-group">
+					<label class="control-label">项目地址：</label>
+					<div class="controls">
+						<form:input path="projectAddr" htmlEscape="false" maxlength="240" class="input-xlarge "  placeholder="请输入项目地址"/>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="control-group">
+					<label class="control-label">签定部门：</label>
+					<div class="controls">
+						<sys:treeselect id="contractDepartment" name="docDepartment.id" value="${contractSales.docDepartment.id}" labelName="docDepartment.departmentName" labelValue="${contractSales.docDepartment.departmentName}"
+										title="部门档案" url="/doc/docDepartment/treeData" cssClass="required"/>
+					</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<div class="control-group">
+					<label class="control-label">业务员：</label>
+					<div class="controls">
+						<sys:treeselect id="salesPerson" name="docOfficework.id" value="${contractSales.docOfficework.id}" labelName="docOfficework.officeworkName" labelValue="${contractSales.docOfficework.officeworkName}"
+										title="职员档案" url="/doc/docOfficework/treeData" cssClass="required"/>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="control-group">
+					<label class="control-label">客户分类：</label>
+					<div class="controls">
+						<sys:treeselect id="comstemType" name="comstemType" value="${contractSales.docOfficework.id}" labelName="docOfficework.officeworkName" labelValue="${contractSales.docOfficework.officeworkName}"
+										title="职员档案" url="/doc/docOfficework/treeData" cssClass="required"/>
+					</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<div class="control-group">
+					<label class="control-label">砼结算方式：</label>
+					<div class="controls">
+						<sys:treeselect id="tongAccmeth" name="docAccmeth.id" value="${contractSales.docAccmeth.id}" labelName="docAccmeth.accmethName" labelValue="${contractSales.docAccmeth.accmethName}"
+										title="结算方式档案" url="/doc/docAccmeth/treeData" cssClass="required"/>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="control-group">
+					<label class="control-label">签定地点：</label>
+					<div class="controls">
+						<form:input path="contractAddr" htmlEscape="false" maxlength="240" class="input-xlarge "  placeholder="请输入签定地点"/>
+					</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<div class="control-group">
+					<label class="control-label">见证方：</label>
+					<div class="controls">
+						<form:input path="thirdPerson" htmlEscape="false" maxlength="60" class="input-xlarge "/>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="control-group">
+					<label class="control-label">有效期限：</label>
+					<div class="controls">
+							<%--<form:input path="effTerm" htmlEscape="false" maxlength="1" class="input-xlarge "/>--%>
+						<input id="effStart"  name="effStart"  type="text" readonly="readonly" maxlength="20" class="Wdate required" style="width:163px;"
+							   value="${contractSales.effStart}"
+							   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
+						　--　
+						<input id="effEnd" name="effEnd" type="text" readonly="readonly" maxlength="20" class="Wdate required" style="width:163px;"
+							   value="${contractSales.effEnd}"
+							   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
+					</div>
+				</div>
+			</td>
+		<tr>
+			<td>
+				<div class="control-group">
+					<label class="control-label">方量控制：</label>
+					<div class="controls">
+							<%--<form:input path="cubeControl" htmlEscape="false" maxlength="1" class="input-xlarge "/>--%>
+						<form:input path="cubeStart" htmlEscape="false" maxlength="32" class="input-xlarge "/>
+						--
+						<form:input path="cubeEnd" htmlEscape="false" maxlength="32" class="input-xlarge "/>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="control-group">
+					<label class="control-label">时间控制：</label>
+					<div class="controls">
+							<%--<form:input path="timeControl" htmlEscape="false" maxlength="1" class="input-xlarge "/>--%>
+						<input id="timeStart"  name="timeStart"  type="text" readonly="readonly" maxlength="20" class="Wdate required" style="width:163px;"
+							   value="${contractSales.timeStart}"
+							   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
+						　--　
+						<input id="timeEnd" name="timeEnd" type="text" readonly="readonly" maxlength="20" class="Wdate required" style="width:163px;"
+							   value="${contractSales.timeEnd}"
+							   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
+					</div>
+				</div>
+			</td>
+		</tr>
+	</table>
 	<div>
 		<table>
 			<tr>
@@ -818,6 +869,12 @@
                 });
 
 			</script>
+	</div>
+
+	<div class="control-group" style="display:none">
+		<div class="controls">
+			<form:input path="cusCode" htmlEscape="false" maxlength="60" class="input-xlarge "/>
+		</div>
 	</div>
 
 	<div class="form-actions">

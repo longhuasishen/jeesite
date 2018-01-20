@@ -7,6 +7,8 @@ import com.thinkgem.jeesite.common.persistence.CrudDao;
 import com.thinkgem.jeesite.common.persistence.annotation.MyBatisDao;
 import com.thinkgem.jeesite.modules.doc.entity.DocOfficework;
 
+import java.util.List;
+
 /**
  * 职员档案DAO接口
  * @author spark
@@ -14,5 +16,5 @@ import com.thinkgem.jeesite.modules.doc.entity.DocOfficework;
  */
 @MyBatisDao
 public interface DocOfficeworkDao extends CrudDao<DocOfficework> {
-	
+    public List<DocOfficework> treeData(DocOfficework docOfficework);
 }

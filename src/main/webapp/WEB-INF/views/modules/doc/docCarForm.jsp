@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/include/taglib.jsp"%>
 <html>
 <head>
-	<title>车辆档案</title>
+	<title>车辆档案管理</title>
 	<meta name="decorator" content="default"/>
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -50,27 +50,19 @@
 		<div class="control-group">
 			<label class="control-label">司机姓名1：</label>
 			<div class="controls">
-				<form:input path="driverName" htmlEscape="false" maxlength="60" class="input-xlarge required"/>
-				<span class="help-inline"><font color="red">*</font> </span>
+				<form:input path="driverName" htmlEscape="false" maxlength="60" class="input-xlarge "/>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">司机姓名2：</label>
 			<div class="controls">
-				<form:input path="carOwner" htmlEscape="false" maxlength="20" class="input-xlarge"/>
-			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label">司机姓名3：</label>
-			<div class="controls">
-				<form:input path="carTypename" htmlEscape="false" maxlength="120" class="input-xlarge "/>
+				<form:input path="carOwner" htmlEscape="false" maxlength="20" class="input-xlarge "/>
 			</div>
 		</div>
 		<div class="control-group" style="display:none">
 			<label class="control-label">行驶执照：</label>
 			<div class="controls">
-				<form:input path="carLicence" htmlEscape="false" maxlength="32" class="input-xlarge required"/>
-				<span class="help-inline"><font color="red">*</font> </span>
+				<form:input path="carLicence" htmlEscape="false" maxlength="32" class="input-xlarge "/>
 			</div>
 		</div>
 		<div class="control-group">
@@ -82,10 +74,15 @@
 		<div class="control-group">
 			<label class="control-label">卡号：</label>
 			<div class="controls">
-				<form:input path="cardNo" htmlEscape="false" maxlength="32" class="input-xlarge"/>
+				<form:input path="cardNo" htmlEscape="false" maxlength="32" class="input-xlarge "/>
 			</div>
 		</div>
-
+		<div class="control-group">
+			<label class="control-label">车型名称：</label>
+			<div class="controls">
+				<form:input path="carTypename" htmlEscape="false" maxlength="120" class="input-xlarge "/>
+			</div>
+		</div>
 		<div class="control-group">
 			<label class="control-label">空重：</label>
 			<div class="controls">
@@ -107,7 +104,6 @@
 		<div class="control-group">
 			<label class="control-label">是否可用：</label>
 			<div class="controls">
-				<%--<form:input path="isAvalable" htmlEscape="false" maxlength="1" class="input-xlarge "/>--%>
 				<form:select path="isAvalable" class="input-xlarge ">
 					<form:option value="" label=""/>
 					<form:options items="${fns:getDictList('yes_no')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
@@ -121,24 +117,72 @@
 			</div>
 		</div>
 		<div class="control-group">
+			<label class="control-label">回厂时间：</label>
+			<div class="controls">
+				<form:input path="backTime" htmlEscape="false" maxlength="120" class="input-xlarge "/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">安排生产时间：</label>
+			<div class="controls">
+				<form:input path="produceTime" htmlEscape="false" maxlength="20" class="input-xlarge "/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">出厂时间：</label>
+			<div class="controls">
+				<form:input path="outTime" htmlEscape="false" maxlength="20" class="input-xlarge "/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">维修时间：</label>
+			<div class="controls">
+				<form:input path="fixTime" htmlEscape="false" maxlength="20" class="input-xlarge "/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">回厂排序：</label>
+			<div class="controls">
+				<form:input path="backSort" htmlEscape="false" maxlength="5" class="input-xlarge "/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">生产排序：</label>
+			<div class="controls">
+				<form:input path="produceSort" htmlEscape="false" maxlength="5" class="input-xlarge "/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">出厂排序：</label>
+			<div class="controls">
+				<form:input path="outSort" htmlEscape="false" maxlength="5" class="input-xlarge "/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">维修排序：</label>
+			<div class="controls">
+				<form:input path="fixSort" htmlEscape="false" maxlength="5" class="input-xlarge "/>
+			</div>
+		</div>
+		<div class="control-group" style="display:none">
 			<label class="control-label">ext_field1：</label>
 			<div class="controls">
 				<form:input path="extField1" htmlEscape="false" maxlength="60" class="input-xlarge "/>
 			</div>
 		</div>
-		<div class="control-group">
+		<div class="control-group" style="display:none">
 			<label class="control-label">ext_field2：</label>
 			<div class="controls">
 				<form:input path="extField2" htmlEscape="false" maxlength="60" class="input-xlarge "/>
 			</div>
 		</div>
-		<div class="control-group">
+		<div class="control-group" style="display:none">
 			<label class="control-label">ext_field3：</label>
 			<div class="controls">
 				<form:input path="extField3" htmlEscape="false" maxlength="120" class="input-xlarge "/>
 			</div>
 		</div>
-		<div class="control-group">
+		<div class="control-group" style="display:none">
 			<label class="control-label">remark：</label>
 			<div class="controls">
 				<form:input path="remark" htmlEscape="false" maxlength="1000" class="input-xlarge "/>
