@@ -25,150 +25,150 @@
 		<input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
 		<input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
 		<ul class="ul-form">
-			<li><label>发货单号：</label>
-				<form:input path="goodsNo" htmlEscape="false" maxlength="32" class="input-medium"/>
-			</li>
+			<%--<li><label>发货单号：</label>--%>
+				<%--<form:input path="goodsNo" htmlEscape="false" maxlength="32" class="input-medium"/>--%>
+			<%--</li>--%>
 			<li><label>出库日期：</label>
-				<input name="outDate" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate"
-					value="<fmt:formatDate value="${goodsBill.outDate}" pattern="yyyy-MM-dd HH:mm:ss"/>"
-					onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
+				<input id="outDate"  name="outDate"  type="text" readonly="readonly" maxlength="20" class="Wdate required" style="width:163px;"
+					   value="${goodsBill.outDate}"
+					   onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'});"/>
 			</li>
-			<li><label>合同编号：</label>
-				<form:input path="contractNo" htmlEscape="false" maxlength="20" class="input-medium"/>
-			</li>
-			<li><label>客户名称：</label>
-				<form:input path="customName" htmlEscape="false" maxlength="60" class="input-medium"/>
-			</li>
-			<li><label>工程名称：</label>
-				<form:input path="projectName" htmlEscape="false" maxlength="120" class="input-medium"/>
-			</li>
-			<li><label>运输车次：</label>
-				<form:input path="carCount" htmlEscape="false" maxlength="15" class="input-medium"/>
-			</li>
-			<li><label>交货地点：</label>
-				<form:input path="goodsAddr" htmlEscape="false" maxlength="240" class="input-medium"/>
-			</li>
-			<li><label>施工部位：</label>
-				<form:input path="buildSite" htmlEscape="false" maxlength="120" class="input-medium"/>
-			</li>
-			<li><label>生产通知单：</label>
-				<form:input path="noticeNo" htmlEscape="false" maxlength="20" class="input-medium"/>
-			</li>
-			<li><label>强度等级：</label>
-				<form:input path="strengthGrade" htmlEscape="false" maxlength="20" class="input-medium"/>
-			</li>
-			<li><label>商品名称：</label>
-				<form:input path="goodsName" htmlEscape="false" maxlength="60" class="input-medium"/>
-			</li>
-			<li><label>浇灌方法：</label>
-				<form:input path="waterMeth" htmlEscape="false" maxlength="20" class="input-medium"/>
-			</li>
-			<li><label>起始坍落度：</label>
-				<form:input path="slumpsStart" htmlEscape="false" maxlength="10" class="input-medium"/>
-			</li>
-			<li><label>终止坍落度：</label>
-				<form:input path="slumpsEnd" htmlEscape="false" maxlength="10" class="input-medium"/>
-			</li>
-			<li><label>客户编码：</label>
-				<form:input path="customNo" htmlEscape="false" maxlength="60" class="input-medium"/>
-			</li>
+			<%--<li><label>合同编号：</label>--%>
+				<%--<form:input path="contractNo" htmlEscape="false" maxlength="20" class="input-medium"/>--%>
+			<%--</li>--%>
+			<%--<li><label>客户名称：</label>--%>
+				<%--<form:input path="customName" htmlEscape="false" maxlength="60" class="input-medium"/>--%>
+			<%--</li>--%>
+			<%--<li><label>工程名称：</label>--%>
+				<%--<form:input path="projectName" htmlEscape="false" maxlength="120" class="input-medium"/>--%>
+			<%--</li>--%>
+			<%--<li><label>运输车次：</label>--%>
+				<%--<form:input path="carCount" htmlEscape="false" maxlength="15" class="input-medium"/>--%>
+			<%--</li>--%>
+			<%--<li><label>交货地点：</label>--%>
+				<%--<form:input path="goodsAddr" htmlEscape="false" maxlength="240" class="input-medium"/>--%>
+			<%--</li>--%>
+			<%--<li><label>施工部位：</label>--%>
+				<%--<form:input path="buildSite" htmlEscape="false" maxlength="120" class="input-medium"/>--%>
+			<%--</li>--%>
+			<%--<li><label>生产通知单：</label>--%>
+				<%--<form:input path="noticeNo" htmlEscape="false" maxlength="20" class="input-medium"/>--%>
+			<%--</li>--%>
+			<%--<li><label>强度等级：</label>--%>
+				<%--<form:input path="strengthGrade" htmlEscape="false" maxlength="20" class="input-medium"/>--%>
+			<%--</li>--%>
+			<%--<li><label>商品名称：</label>--%>
+				<%--<form:input path="goodsName" htmlEscape="false" maxlength="60" class="input-medium"/>--%>
+			<%--</li>--%>
+			<%--<li><label>浇灌方法：</label>--%>
+				<%--<form:input path="waterMeth" htmlEscape="false" maxlength="20" class="input-medium"/>--%>
+			<%--</li>--%>
+			<%--<li><label>起始坍落度：</label>--%>
+				<%--<form:input path="slumpsStart" htmlEscape="false" maxlength="10" class="input-medium"/>--%>
+			<%--</li>--%>
+			<%--<li><label>终止坍落度：</label>--%>
+				<%--<form:input path="slumpsEnd" htmlEscape="false" maxlength="10" class="input-medium"/>--%>
+			<%--</li>--%>
+			<%--<li><label>客户编码：</label>--%>
+				<%--<form:input path="customNo" htmlEscape="false" maxlength="60" class="input-medium"/>--%>
+			<%--</li>--%>
 			<li><label>搅拌站：</label>
 				<form:input path="withStation" htmlEscape="false" maxlength="60" class="input-medium"/>
 			</li>
-			<li><label>特种材料：</label>
-				<form:input path="specialMaterial" htmlEscape="false" maxlength="120" class="input-medium"/>
-			</li>
-			<li><label>仓库名称：</label>
-				<form:input path="repertoryName" htmlEscape="false" maxlength="30" class="input-medium"/>
-			</li>
-			<li><label>本车数量：</label>
-				<form:input path="curcarCount" htmlEscape="false" maxlength="15" class="input-medium"/>
-			</li>
-			<li><label>砂浆数量：</label>
-				<form:input path="mortarCount" htmlEscape="false" maxlength="15" class="input-medium"/>
-			</li>
-			<li><label>同标号数量：</label>
-				<form:input path="aboutNum" htmlEscape="false" maxlength="15" class="input-medium"/>
-			</li>
-			<li><label>司机：</label>
-				<form:input path="goodsDriver" htmlEscape="false" maxlength="60" class="input-medium"/>
-			</li>
-			<li><label>运输车号：</label>
-				<form:input path="carNo" htmlEscape="false" maxlength="15" class="input-medium"/>
-			</li>
-			<li><label>增量：</label>
-				<form:input path="goodsIncrement" htmlEscape="false" maxlength="15" class="input-medium"/>
-			</li>
-			<li><label>发车时间：</label>
-				<input name="departTime" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate"
-					value="<fmt:formatDate value="${goodsBill.departTime}" pattern="yyyy-MM-dd HH:mm:ss"/>"
-					onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
-			</li>
-			<li><label>到达时间：</label>
-				<input name="reachTime" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate"
-					value="<fmt:formatDate value="${goodsBill.reachTime}" pattern="yyyy-MM-dd HH:mm:ss"/>"
-					onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
-			</li>
-			<li><label>卸料时间：</label>
-				<input name="unloadTime" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate"
-					value="<fmt:formatDate value="${goodsBill.unloadTime}" pattern="yyyy-MM-dd HH:mm:ss"/>"
-					onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
-			</li>
-			<li><label>发货人：</label>
-				<form:input path="departPerson" htmlEscape="false" maxlength="60" class="input-medium"/>
-			</li>
-			<li><label>质检员：</label>
-				<form:input path="qualityPerson" htmlEscape="false" maxlength="60" class="input-medium"/>
-			</li>
-			<li><label>收货人：</label>
-				<form:input path="goodsClerk" htmlEscape="false" maxlength="60" class="input-medium"/>
-			</li>
-			<li><label>制单人：</label>
-				<form:input path="createPerson" htmlEscape="false" maxlength="60" class="input-medium"/>
-			</li>
-			<li><label>审核人：</label>
-				<form:input path="checkPerson" htmlEscape="false" maxlength="60" class="input-medium"/>
-			</li>
-			<li><label>审核状态：</label>
-				<form:select path="checkStatus" class="input-medium">
-					<form:option value="" label=""/>
-					<form:options items="${fns:getDictList('')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
-				</form:select>
-			</li>
-			<li><label>制单日期：</label>
-				<input name="makeDate" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate"
-					value="<fmt:formatDate value="${goodsBill.makeDate}" pattern="yyyy-MM-dd HH:mm:ss"/>"
-					onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
-			</li>
-			<li><label>审核日期：</label>
-				<input name="checkDate" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate"
-					value="<fmt:formatDate value="${goodsBill.checkDate}" pattern="yyyy-MM-dd HH:mm:ss"/>"
-					onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
-			</li>
-			<li><label>累计车数：</label>
-				<form:input path="totalCars" htmlEscape="false" maxlength="10" class="input-medium"/>
-			</li>
-			<li><label>累计方量：</label>
-				<form:input path="totalCube" htmlEscape="false" maxlength="10" class="input-medium"/>
-			</li>
-			<li><label>备注：</label>
-				<form:input path="goodsRemark" htmlEscape="false" maxlength="200" class="input-medium"/>
-			</li>
-			<li><label>异常料处理：</label>
-				<form:input path="exceptHandle" htmlEscape="false" maxlength="1000" class="input-medium"/>
-			</li>
-			<li><label>ext_field1：</label>
-				<form:input path="extField1" htmlEscape="false" maxlength="60" class="input-medium"/>
-			</li>
-			<li><label>ext_field2：</label>
-				<form:input path="extField2" htmlEscape="false" maxlength="60" class="input-medium"/>
-			</li>
-			<li><label>ext_field3：</label>
-				<form:input path="extField3" htmlEscape="false" maxlength="120" class="input-medium"/>
-			</li>
-			<li><label>remark：</label>
-				<form:input path="remark" htmlEscape="false" maxlength="1000" class="input-medium"/>
-			</li>
+			<%--<li><label>特种材料：</label>--%>
+				<%--<form:input path="specialMaterial" htmlEscape="false" maxlength="120" class="input-medium"/>--%>
+			<%--</li>--%>
+			<%--<li><label>仓库名称：</label>--%>
+				<%--<form:input path="repertoryName" htmlEscape="false" maxlength="30" class="input-medium"/>--%>
+			<%--</li>--%>
+			<%--<li><label>本车数量：</label>--%>
+				<%--<form:input path="curcarCount" htmlEscape="false" maxlength="15" class="input-medium"/>--%>
+			<%--</li>--%>
+			<%--<li><label>砂浆数量：</label>--%>
+				<%--<form:input path="mortarCount" htmlEscape="false" maxlength="15" class="input-medium"/>--%>
+			<%--</li>--%>
+			<%--<li><label>同标号数量：</label>--%>
+				<%--<form:input path="aboutNum" htmlEscape="false" maxlength="15" class="input-medium"/>--%>
+			<%--</li>--%>
+			<%--<li><label>司机：</label>--%>
+				<%--<form:input path="goodsDriver" htmlEscape="false" maxlength="60" class="input-medium"/>--%>
+			<%--</li>--%>
+			<%--<li><label>运输车号：</label>--%>
+				<%--<form:input path="carNo" htmlEscape="false" maxlength="15" class="input-medium"/>--%>
+			<%--</li>--%>
+			<%--<li><label>增量：</label>--%>
+				<%--<form:input path="goodsIncrement" htmlEscape="false" maxlength="15" class="input-medium"/>--%>
+			<%--</li>--%>
+			<%--<li><label>发车时间：</label>--%>
+				<%--<input name="departTime" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate"--%>
+					<%--value="<fmt:formatDate value="${goodsBill.departTime}" pattern="yyyy-MM-dd HH:mm:ss"/>"--%>
+					<%--onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>--%>
+			<%--</li>--%>
+			<%--<li><label>到达时间：</label>--%>
+				<%--<input name="reachTime" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate"--%>
+					<%--value="<fmt:formatDate value="${goodsBill.reachTime}" pattern="yyyy-MM-dd HH:mm:ss"/>"--%>
+					<%--onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>--%>
+			<%--</li>--%>
+			<%--<li><label>卸料时间：</label>--%>
+				<%--<input name="unloadTime" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate"--%>
+					<%--value="<fmt:formatDate value="${goodsBill.unloadTime}" pattern="yyyy-MM-dd HH:mm:ss"/>"--%>
+					<%--onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>--%>
+			<%--</li>--%>
+			<%--<li><label>发货人：</label>--%>
+				<%--<form:input path="departPerson" htmlEscape="false" maxlength="60" class="input-medium"/>--%>
+			<%--</li>--%>
+			<%--<li><label>质检员：</label>--%>
+				<%--<form:input path="qualityPerson" htmlEscape="false" maxlength="60" class="input-medium"/>--%>
+			<%--</li>--%>
+			<%--<li><label>收货人：</label>--%>
+				<%--<form:input path="goodsClerk" htmlEscape="false" maxlength="60" class="input-medium"/>--%>
+			<%--</li>--%>
+			<%--<li><label>制单人：</label>--%>
+				<%--<form:input path="createPerson" htmlEscape="false" maxlength="60" class="input-medium"/>--%>
+			<%--</li>--%>
+			<%--<li><label>审核人：</label>--%>
+				<%--<form:input path="checkPerson" htmlEscape="false" maxlength="60" class="input-medium"/>--%>
+			<%--</li>--%>
+			<%--<li><label>审核状态：</label>--%>
+				<%--<form:select path="checkStatus" class="input-medium">--%>
+					<%--<form:option value="" label=""/>--%>
+					<%--<form:options items="${fns:getDictList('')}" itemLabel="label" itemValue="value" htmlEscape="false"/>--%>
+				<%--</form:select>--%>
+			<%--</li>--%>
+			<%--<li><label>制单日期：</label>--%>
+				<%--<input name="makeDate" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate"--%>
+					<%--value="<fmt:formatDate value="${goodsBill.makeDate}" pattern="yyyy-MM-dd HH:mm:ss"/>"--%>
+					<%--onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>--%>
+			<%--</li>--%>
+			<%--<li><label>审核日期：</label>--%>
+				<%--<input name="checkDate" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate"--%>
+					<%--value="<fmt:formatDate value="${goodsBill.checkDate}" pattern="yyyy-MM-dd HH:mm:ss"/>"--%>
+					<%--onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>--%>
+			<%--</li>--%>
+			<%--<li><label>累计车数：</label>--%>
+				<%--<form:input path="totalCars" htmlEscape="false" maxlength="10" class="input-medium"/>--%>
+			<%--</li>--%>
+			<%--<li><label>累计方量：</label>--%>
+				<%--<form:input path="totalCube" htmlEscape="false" maxlength="10" class="input-medium"/>--%>
+			<%--</li>--%>
+			<%--<li><label>备注：</label>--%>
+				<%--<form:input path="goodsRemark" htmlEscape="false" maxlength="200" class="input-medium"/>--%>
+			<%--</li>--%>
+			<%--<li><label>异常料处理：</label>--%>
+				<%--<form:input path="exceptHandle" htmlEscape="false" maxlength="1000" class="input-medium"/>--%>
+			<%--</li>--%>
+			<%--<li><label>ext_field1：</label>--%>
+				<%--<form:input path="extField1" htmlEscape="false" maxlength="60" class="input-medium"/>--%>
+			<%--</li>--%>
+			<%--<li><label>ext_field2：</label>--%>
+				<%--<form:input path="extField2" htmlEscape="false" maxlength="60" class="input-medium"/>--%>
+			<%--</li>--%>
+			<%--<li><label>ext_field3：</label>--%>
+				<%--<form:input path="extField3" htmlEscape="false" maxlength="120" class="input-medium"/>--%>
+			<%--</li>--%>
+			<%--<li><label>remark：</label>--%>
+				<%--<form:input path="remark" htmlEscape="false" maxlength="1000" class="input-medium"/>--%>
+			<%--</li>--%>
 			<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
 			<li class="clearfix"></li>
 		</ul>
@@ -216,10 +216,10 @@
 				<th>累计方量</th>
 				<th>备注</th>
 				<th>异常料处理</th>
-				<th>ext_field1</th>
-				<th>ext_field2</th>
-				<th>ext_field3</th>
-				<th>remark</th>
+				<%--<th>ext_field1</th>--%>
+				<%--<th>ext_field2</th>--%>
+				<%--<th>ext_field3</th>--%>
+				<%--<th>remark</th>--%>
 				<shiro:hasPermission name="bill:goodsBill:edit"><th>操作</th></shiro:hasPermission>
 			</tr>
 		</thead>
@@ -343,18 +343,18 @@
 				<td>
 					${goodsBill.exceptHandle}
 				</td>
-				<td>
-					${goodsBill.extField1}
-				</td>
-				<td>
-					${goodsBill.extField2}
-				</td>
-				<td>
-					${goodsBill.extField3}
-				</td>
-				<td>
-					${goodsBill.remark}
-				</td>
+				<%--<td>--%>
+					<%--${goodsBill.extField1}--%>
+				<%--</td>--%>
+				<%--<td>--%>
+					<%--${goodsBill.extField2}--%>
+				<%--</td>--%>
+				<%--<td>--%>
+					<%--${goodsBill.extField3}--%>
+				<%--</td>--%>
+				<%--<td>--%>
+					<%--${goodsBill.remark}--%>
+				<%--</td>--%>
 				<shiro:hasPermission name="bill:goodsBill:edit"><td>
     				<a href="${ctx}/bill/goodsBill/form?id=${goodsBill.id}">修改</a>
 					<a href="${ctx}/bill/goodsBill/delete?id=${goodsBill.id}" onclick="return confirmx('确认要删除该发货单吗？', this.href)">删除</a>

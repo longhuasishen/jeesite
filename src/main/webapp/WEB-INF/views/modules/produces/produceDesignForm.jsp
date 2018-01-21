@@ -114,7 +114,7 @@
 					<div class="control-group">
 						<label class="control-label">客户名称：</label>
 						<div class="controls">
-							<sys:treeselect id="customName" name="contractSales.id" value="${produceDesign.contractSales.id}" labelName="contractSales.extField1" labelValue="${produceDesign.contractSales.extField1}"
+							<sys:treeselect id="customName" name="contractSales.id" value="${produceDesign.contractSales.id}" labelName="customName" labelValue="${produceDesign.customName}"
 											title="客户档案" url="/contract/contractSales/treeDataCusProject" />
 						</div>
 					</div>
@@ -169,7 +169,7 @@
 					<div class="control-group">
 						<label class="control-label">品种名称：</label>
 						<div class="controls">
-							<sys:treeselect id="kindName" name="docBeton.kindCode" value="${produceDesign.docBeton.kindCode}" labelName="docBeton.kindName" labelValue="${produceDesign.docBeton.kindName}"
+							<sys:treeselect id="kindName" name="docBeton.kindCode" value="${produceDesign.docBeton.kindCode}" labelName="kindName" labelValue="${produceDesign.kindName}"
 											title="混凝土档案" url="/doc/docBeton/treeData" />
 						</div>
 					</div>
@@ -188,7 +188,7 @@
 					<div class="control-group">
 						<label class="control-label">浇灌方法：</label>
 						<div class="controls">
-							<sys:treeselect id="waterMeth" name="docWatermeth.watermethCode" value="${produceDesign.docWatermeth.watermethCode}" labelName="docWatermeth.watermethName" labelValue="${produceDesign.docWatermeth.watermethName}"
+							<sys:treeselect id="waterMeth" name="docWatermeth.watermethCode" value="${produceDesign.docWatermeth.watermethCode}" labelName="waterMeth" labelValue="${produceDesign.waterMeth}"
 											title="浇灌方法档案" url="/doc/docWatermeth/treeData" />
 						</div>
 					</div>
@@ -199,7 +199,7 @@
 					<div class="control-group">
 						<label class="control-label">现场调度：</label>
 						<div class="controls">
-							<sys:treeselect id="localeDispatch" name="docOfficework.officeworkCode" value="${produceDesign.docOfficework.officeworkCode}" labelName="docOfficework.officeworkName" labelValue="${produceDesign.docOfficework.officeworkName}"
+							<sys:treeselect id="localeDispatch" name="docOfficework.officeworkCode" value="${produceDesign.docOfficework.officeworkCode}" labelName="localeDispatch" labelValue="${produceDesign.localeDispatch}"
 											title="职员档案" url="/doc/docOfficework/treeData" />
 						</div>
 					</div>
@@ -208,7 +208,7 @@
 					<div class="control-group">
 						<label class="control-label">泵名称：</label>
 						<div class="controls">
-							<sys:treeselect id="bengName" name="docPump.pumpCode" value="${produceDesign.docPump.pumpCode}" labelName="docPump.pumpName" labelValue="${produceDesign.docPump.pumpName}"
+							<sys:treeselect id="bengName" name="docPump.pumpCode" value="${produceDesign.docPump.pumpCode}" labelName="bengName" labelValue="${produceDesign.bengName}"
 											title="泵档案" url="/doc/docPump/treeData" />
 						</div>
 					</div>

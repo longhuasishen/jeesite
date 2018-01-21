@@ -126,7 +126,7 @@ public class DocCustomerController extends BaseController {
 	public List<Map<String, Object>> treeDataShortName( HttpServletResponse response) {
 		List<Map<String, Object>> mapList = Lists.newArrayList();
 		DocCustomer docCustomer = new DocCustomer();
-		List<DocCustomer> list = docCustomerService.findList(docCustomer);
+		List<DocCustomer> list = docCustomerService.treeData(docCustomer);
 		for (int i=0; i<list.size(); i++){
 			DocCustomer e = list.get(i);
 			Map<String, Object> map = Maps.newHashMap();

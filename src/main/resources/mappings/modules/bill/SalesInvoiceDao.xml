@@ -6,7 +6,7 @@
 		a.id AS "id",
 		a.invoice_no AS "invoiceNo",
 		a.invoice_date AS "invoiceDate",
-		a.custom_abbr AS "customAbbr",
+		a.custom_abbr AS "docCustomer.cusShortName",
 		a.tax_num AS "taxNum",
 		a.custom_acc AS "customAcc",
 		a.bank_name AS "bankName",
@@ -148,7 +148,7 @@
 		) VALUES (
 			#{invoiceNo},
 			#{invoiceDate},
-			#{customAbbr},
+			#{docCustomer.cusShortName},
 			#{taxNum},
 			#{customAcc},
 			#{bankName},
@@ -171,7 +171,7 @@
 		UPDATE sales_invoice SET 	
 			invoice_no = #{invoiceNo},
 			invoice_date = #{invoiceDate},
-			custom_abbr = #{customAbbr},
+			custom_abbr = #{docCustomer.cusShortName},
 			tax_num = #{taxNum},
 			custom_acc = #{customAcc},
 			bank_name = #{bankName},

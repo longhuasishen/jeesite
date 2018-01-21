@@ -5,16 +5,14 @@ package com.thinkgem.jeesite.modules.produces.dao;
 
 import com.thinkgem.jeesite.common.persistence.CrudDao;
 import com.thinkgem.jeesite.common.persistence.annotation.MyBatisDao;
-import com.thinkgem.jeesite.modules.produces.entity.ProduceDesign;
-
-import java.util.List;
+import com.thinkgem.jeesite.modules.produces.entity.CoordinateRatioNotice;
 
 /**
- * 生产计划单DAO接口
+ * 配合比通知单DAO接口
  * @author spark
- * @version 2018-01-04
+ * @version 2018-01-21
  */
 @MyBatisDao
-public interface ProduceDesignDao extends CrudDao<ProduceDesign> {
-    public List<ProduceDesign> selNotice(ProduceDesign produceDesign);
+public interface CoordinateRatioNoticeDao extends CrudDao<CoordinateRatioNotice> {
+	
 }

@@ -6,7 +6,7 @@
 		a.id AS "id",
 		a.bill_no AS "billNo",
 		a.bill_date AS "billDate",
-		a.custom_abbr AS "docCustomer.id",
+		a.custom_abbr AS "docCustomer.cusShortName",
 		a.month_amount AS "monthAmount",
 		a.contract_amount AS "contractAmount",
 		a.check_status AS "checkStatus",
@@ -18,13 +18,10 @@
 		a.ext_field1 AS "extField1",
 		a.ext_field2 AS "extField2",
 		a.ext_field3 AS "extField3",
-		e.cus_code AS "docCustomer.cusCode",
-		e.cus_short_name AS "docCustomer.cusShortName",
 		a.remark AS "remark"
 	</sql>
 	
 	<sql id="contractReceivableJoins">
-		LEFT JOIN doc_customer e ON e.id = a.custom_abbr
 	</sql>
     
 	<select id="get" resultType="ContractReceivable">
@@ -145,7 +142,7 @@
 		) VALUES (
 			#{billNo},
 			#{billDate},
-			#{docCustomer.id},
+			#{docCustomer.cusShortName},
 			#{monthAmount},
 			#{contractAmount},
 			#{checkStatus},
@@ -165,7 +162,7 @@
 		UPDATE contract_receivable SET 	
 			bill_no = #{billNo},
 			bill_date = #{billDate},
-			custom_abbr = #{docCustomer.id},
+			custom_abbr = #{docCustomer.cusShortName},
 			month_amount = #{monthAmount},
 			contract_amount = #{contractAmount},
 			check_status = #{checkStatus},

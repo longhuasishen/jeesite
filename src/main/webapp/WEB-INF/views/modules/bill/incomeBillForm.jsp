@@ -142,25 +142,25 @@
 				<form:input path="incomeRemark" htmlEscape="false" maxlength="200" class="input-xlarge "/>
 			</div>
 		</div>
-		<div class="control-group">
+		<div class="control-group" style="display: none;">
 			<label class="control-label">ext_field1：</label>
 			<div class="controls">
 				<form:input path="extField1" htmlEscape="false" maxlength="60" class="input-xlarge "/>
 			</div>
 		</div>
-		<div class="control-group">
+		<div class="control-group" style="display: none;">
 			<label class="control-label">ext_field2：</label>
 			<div class="controls">
 				<form:input path="extField2" htmlEscape="false" maxlength="60" class="input-xlarge "/>
 			</div>
 		</div>
-		<div class="control-group">
+		<div class="control-group"style="display: none;">
 			<label class="control-label">ext_field3：</label>
 			<div class="controls">
 				<form:input path="extField3" htmlEscape="false" maxlength="120" class="input-xlarge "/>
 			</div>
 		</div>
-		<div class="control-group">
+		<div class="control-group" style="display: none;">
 			<label class="control-label">remark：</label>
 			<div class="controls">
 				<form:input path="remark" htmlEscape="false" maxlength="1000" class="input-xlarge "/>

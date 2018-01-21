@@ -1,0 +1,620 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.produces.dao.CoordinateRatioDao">
+    
+	<sql id="coordinateRatioColumns">
+		a.id AS "id",
+		a.ratio_code AS "ratioCode",
+		a.kind_name AS "kindName",
+		a.test_date AS "testDate",
+		a.water_ratio AS "waterRatio",
+		a.sand_ratio AS "sandRatio",
+		a.slumps AS "slumps",
+		a.startcapacity AS "startcapacity",
+		a.end_capacity AS "endCapacity",
+		a.kind_water AS "kindWater",
+		a.kind_cement AS "kindCement",
+		a.kind_ag1 AS "kindAg1",
+		a.kind_ag2 AS "kindAg2",
+		a.kind_ag3 AS "kindAg3",
+		a.kind_ag4 AS "kindAg4",
+		a.kind_flyash AS "kindFlyash",
+		a.kind_breeze AS "kindBreeze",
+		a.kind_add1 AS "kindAdd1",
+		a.kind_add2 AS "kindAdd2",
+		a.kind_backup1 AS "kindBackup1",
+		a.kind_slops AS "kindSlops",
+		a.dosage_water AS "dosageWater",
+		a.dosage_cement AS "dosageCement",
+		a.dosage_ag1 AS "dosageAg1",
+		a.dosage_ag2 AS "dosageAg2",
+		a.dosage_ag3 AS "dosageAg3",
+		a.dosage_ag4 AS "dosageAg4",
+		a.dosage_flyash AS "dosageFlyash",
+		a.dosage_breeze AS "dosageBreeze",
+		a.dosage_add1 AS "dosageAdd1",
+		a.dosage_add2 AS "dosageAdd2",
+		a.dosage_backup1 AS "dosageBackup1",
+		a.dosage_slops AS "dosageSlops",
+		a.prop_water AS "propWater",
+		a.prop_cement AS "propCement",
+		a.prop_ag1 AS "propAg1",
+		a.prop_ag2 AS "propAg2",
+		a.prop_ag3 AS "propAg3",
+		a.prop_ag4 AS "propAg4",
+		a.prop_flyash AS "propFlyash",
+		a.prop_breeze AS "propBreeze",
+		a.prop_add1 AS "propAdd1",
+		a.prop_add2 AS "propAdd2",
+		a.prop_backup1 AS "propBackup1",
+		a.prop_slops AS "propSlops",
+		a.price_water AS "priceWater",
+		a.price_cement AS "priceCement",
+		a.price_ag1 AS "priceAg1",
+		a.price_ag2 AS "priceAg2",
+		a.price_ag3 AS "priceAg3",
+		a.price_ag4 AS "priceAg4",
+		a.price_flyash AS "priceFlyash",
+		a.price_breeze AS "priceBreeze",
+		a.price_add1 AS "priceAdd1",
+		a.price_add2 AS "priceAdd2",
+		a.price_backup1 AS "priceBackup1",
+		a.price_slops AS "priceSlops",
+		a.amount_water AS "amountWater",
+		a.amount_cement AS "amountCement",
+		a.amount_ag1 AS "amountAg1",
+		a.amount_ag2 AS "amountAg2",
+		a.amount_ag3 AS "amountAg3",
+		a.amount_ag4 AS "amountAg4",
+		a.amount_flyash AS "amountFlyash",
+		a.amount_breeze AS "amountBreeze",
+		a.amount_add1 AS "amountAdd1",
+		a.amount_add2 AS "amountAdd2",
+		a.amount_backup1 AS "amountBackup1",
+		a.amount_slops AS "amountSlops",
+		a.create_person AS "createPerson",
+		a.check_person AS "checkPerson",
+		a.make_date AS "makeDate",
+		a.check_date AS "checkDate",
+		a.ratio_cost AS "ratioCost",
+		a.ratio_owner AS "docOfficework.officeworkName",
+		a.ratio_remark AS "ratioRemark",
+		a.ext_field1 AS "extField1",
+		a.ext_field2 AS "extField2",
+		a.ext_field3 AS "extField3",
+		a.remark AS "remark"
+	</sql>
+	
+	<sql id="coordinateRatioJoins">
+	</sql>
+    
+	<select id="get" resultType="CoordinateRatio">
+		SELECT 
+			<include refid="coordinateRatioColumns"/>
+		FROM coordinate_ratio a
+		<include refid="coordinateRatioJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="CoordinateRatio">
+		SELECT 
+			<include refid="coordinateRatioColumns"/>
+		FROM coordinate_ratio a
+		<include refid="coordinateRatioJoins"/>
+		<where>
+			
+			<if test="ratioCode != null and ratioCode != ''">
+				AND a.ratio_code = #{ratioCode}
+			</if>
+			<if test="kindName != null and kindName != ''">
+				AND a.kind_name = #{kindName}
+			</if>
+			<if test="testDate != null and testDate != ''">
+				AND a.test_date = #{testDate}
+			</if>
+			<if test="waterRatio != null and waterRatio != ''">
+				AND a.water_ratio = #{waterRatio}
+			</if>
+			<if test="sandRatio != null and sandRatio != ''">
+				AND a.sand_ratio = #{sandRatio}
+			</if>
+			<if test="slumps != null and slumps != ''">
+				AND a.slumps = #{slumps}
+			</if>
+			<if test="startcapacity != null and startcapacity != ''">
+				AND a.startcapacity = #{startcapacity}
+			</if>
+			<if test="endCapacity != null and endCapacity != ''">
+				AND a.end_capacity = #{endCapacity}
+			</if>
+			<if test="kindWater != null and kindWater != ''">
+				AND a.kind_water = #{kindWater}
+			</if>
+			<if test="kindCement != null and kindCement != ''">
+				AND a.kind_cement = #{kindCement}
+			</if>
+			<if test="kindAg1 != null and kindAg1 != ''">
+				AND a.kind_ag1 = #{kindAg1}
+			</if>
+			<if test="kindAg2 != null and kindAg2 != ''">
+				AND a.kind_ag2 = #{kindAg2}
+			</if>
+			<if test="kindAg3 != null and kindAg3 != ''">
+				AND a.kind_ag3 = #{kindAg3}
+			</if>
+			<if test="kindAg4 != null and kindAg4 != ''">
+				AND a.kind_ag4 = #{kindAg4}
+			</if>
+			<if test="kindFlyash != null and kindFlyash != ''">
+				AND a.kind_flyash = #{kindFlyash}
+			</if>
+			<if test="kindBreeze != null and kindBreeze != ''">
+				AND a.kind_breeze = #{kindBreeze}
+			</if>
+			<if test="kindAdd1 != null and kindAdd1 != ''">
+				AND a.kind_add1 = #{kindAdd1}
+			</if>
+			<if test="kindAdd2 != null and kindAdd2 != ''">
+				AND a.kind_add2 = #{kindAdd2}
+			</if>
+			<if test="kindBackup1 != null and kindBackup1 != ''">
+				AND a.kind_backup1 = #{kindBackup1}
+			</if>
+			<if test="kindSlops != null and kindSlops != ''">
+				AND a.kind_slops = #{kindSlops}
+			</if>
+			<if test="dosageWater != null and dosageWater != ''">
+				AND a.dosage_water = #{dosageWater}
+			</if>
+			<if test="dosageCement != null and dosageCement != ''">
+				AND a.dosage_cement = #{dosageCement}
+			</if>
+			<if test="dosageAg1 != null and dosageAg1 != ''">
+				AND a.dosage_ag1 = #{dosageAg1}
+			</if>
+			<if test="dosageAg2 != null and dosageAg2 != ''">
+				AND a.dosage_ag2 = #{dosageAg2}
+			</if>
+			<if test="dosageAg3 != null and dosageAg3 != ''">
+				AND a.dosage_ag3 = #{dosageAg3}
+			</if>
+			<if test="dosageAg4 != null and dosageAg4 != ''">
+				AND a.dosage_ag4 = #{dosageAg4}
+			</if>
+			<if test="dosageFlyash != null and dosageFlyash != ''">
+				AND a.dosage_flyash = #{dosageFlyash}
+			</if>
+			<if test="dosageBreeze != null and dosageBreeze != ''">
+				AND a.dosage_breeze = #{dosageBreeze}
+			</if>
+			<if test="dosageAdd1 != null and dosageAdd1 != ''">
+				AND a.dosage_add1 = #{dosageAdd1}
+			</if>
+			<if test="dosageAdd2 != null and dosageAdd2 != ''">
+				AND a.dosage_add2 = #{dosageAdd2}
+			</if>
+			<if test="dosageBackup1 != null and dosageBackup1 != ''">
+				AND a.dosage_backup1 = #{dosageBackup1}
+			</if>
+			<if test="dosageSlops != null and dosageSlops != ''">
+				AND a.dosage_slops = #{dosageSlops}
+			</if>
+			<if test="propWater != null and propWater != ''">
+				AND a.prop_water = #{propWater}
+			</if>
+			<if test="propCement != null and propCement != ''">
+				AND a.prop_cement = #{propCement}
+			</if>
+			<if test="propAg1 != null and propAg1 != ''">
+				AND a.prop_ag1 = #{propAg1}
+			</if>
+			<if test="propAg2 != null and propAg2 != ''">
+				AND a.prop_ag2 = #{propAg2}
+			</if>
+			<if test="propAg3 != null and propAg3 != ''">
+				AND a.prop_ag3 = #{propAg3}
+			</if>
+			<if test="propAg4 != null and propAg4 != ''">
+				AND a.prop_ag4 = #{propAg4}
+			</if>
+			<if test="propFlyash != null and propFlyash != ''">
+				AND a.prop_flyash = #{propFlyash}
+			</if>
+			<if test="propBreeze != null and propBreeze != ''">
+				AND a.prop_breeze = #{propBreeze}
+			</if>
+			<if test="propAdd1 != null and propAdd1 != ''">
+				AND a.prop_add1 = #{propAdd1}
+			</if>
+			<if test="propAdd2 != null and propAdd2 != ''">
+				AND a.prop_add2 = #{propAdd2}
+			</if>
+			<if test="propBackup1 != null and propBackup1 != ''">
+				AND a.prop_backup1 = #{propBackup1}
+			</if>
+			<if test="propSlops != null and propSlops != ''">
+				AND a.prop_slops = #{propSlops}
+			</if>
+			<if test="priceWater != null and priceWater != ''">
+				AND a.price_water = #{priceWater}
+			</if>
+			<if test="priceCement != null and priceCement != ''">
+				AND a.price_cement = #{priceCement}
+			</if>
+			<if test="priceAg1 != null and priceAg1 != ''">
+				AND a.price_ag1 = #{priceAg1}
+			</if>
+			<if test="priceAg2 != null and priceAg2 != ''">
+				AND a.price_ag2 = #{priceAg2}
+			</if>
+			<if test="priceAg3 != null and priceAg3 != ''">
+				AND a.price_ag3 = #{priceAg3}
+			</if>
+			<if test="priceAg4 != null and priceAg4 != ''">
+				AND a.price_ag4 = #{priceAg4}
+			</if>
+			<if test="priceFlyash != null and priceFlyash != ''">
+				AND a.price_flyash = #{priceFlyash}
+			</if>
+			<if test="priceBreeze != null and priceBreeze != ''">
+				AND a.price_breeze = #{priceBreeze}
+			</if>
+			<if test="priceAdd1 != null and priceAdd1 != ''">
+				AND a.price_add1 = #{priceAdd1}
+			</if>
+			<if test="priceAdd2 != null and priceAdd2 != ''">
+				AND a.price_add2 = #{priceAdd2}
+			</if>
+			<if test="priceBackup1 != null and priceBackup1 != ''">
+				AND a.price_backup1 = #{priceBackup1}
+			</if>
+			<if test="priceSlops != null and priceSlops != ''">
+				AND a.price_slops = #{priceSlops}
+			</if>
+			<if test="amountWater != null and amountWater != ''">
+				AND a.amount_water = #{amountWater}
+			</if>
+			<if test="amountCement != null and amountCement != ''">
+				AND a.amount_cement = #{amountCement}
+			</if>
+			<if test="amountAg1 != null and amountAg1 != ''">
+				AND a.amount_ag1 = #{amountAg1}
+			</if>
+			<if test="amountAg2 != null and amountAg2 != ''">
+				AND a.amount_ag2 = #{amountAg2}
+			</if>
+			<if test="amountAg3 != null and amountAg3 != ''">
+				AND a.amount_ag3 = #{amountAg3}
+			</if>
+			<if test="amountAg4 != null and amountAg4 != ''">
+				AND a.amount_ag4 = #{amountAg4}
+			</if>
+			<if test="amountFlyash != null and amountFlyash != ''">
+				AND a.amount_flyash = #{amountFlyash}
+			</if>
+			<if test="amountBreeze != null and amountBreeze != ''">
+				AND a.amount_breeze = #{amountBreeze}
+			</if>
+			<if test="amountAdd1 != null and amountAdd1 != ''">
+				AND a.amount_add1 = #{amountAdd1}
+			</if>
+			<if test="amountAdd2 != null and amountAdd2 != ''">
+				AND a.amount_add2 = #{amountAdd2}
+			</if>
+			<if test="amountBackup1 != null and amountBackup1 != ''">
+				AND a.amount_backup1 = #{amountBackup1}
+			</if>
+			<if test="amountSlops != null and amountSlops != ''">
+				AND a.amount_slops = #{amountSlops}
+			</if>
+			<if test="createPerson != null and createPerson != ''">
+				AND a.create_person = #{createPerson}
+			</if>
+			<if test="checkPerson != null and checkPerson != ''">
+				AND a.check_person = #{checkPerson}
+			</if>
+			<if test="makeDate != null and makeDate != ''">
+				AND a.make_date = #{makeDate}
+			</if>
+			<if test="checkDate != null and checkDate != ''">
+				AND a.check_date = #{checkDate}
+			</if>
+			<if test="ratioCost != null and ratioCost != ''">
+				AND a.ratio_cost = #{ratioCost}
+			</if>
+			<if test="ratioOwner != null and ratioOwner != ''">
+				AND a.ratio_owner = #{ratioOwner}
+			</if>
+			<if test="ratioRemark != null and ratioRemark != ''">
+				AND a.ratio_remark = #{ratioRemark}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="CoordinateRatio">
+		SELECT 
+			<include refid="coordinateRatioColumns"/>
+		FROM coordinate_ratio a
+		<include refid="coordinateRatioJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO coordinate_ratio(
+			ratio_code,
+			kind_name,
+			test_date,
+			water_ratio,
+			sand_ratio,
+			slumps,
+			startcapacity,
+			end_capacity,
+			kind_water,
+			kind_cement,
+			kind_ag1,
+			kind_ag2,
+			kind_ag3,
+			kind_ag4,
+			kind_flyash,
+			kind_breeze,
+			kind_add1,
+			kind_add2,
+			kind_backup1,
+			kind_slops,
+			dosage_water,
+			dosage_cement,
+			dosage_ag1,
+			dosage_ag2,
+			dosage_ag3,
+			dosage_ag4,
+			dosage_flyash,
+			dosage_breeze,
+			dosage_add1,
+			dosage_add2,
+			dosage_backup1,
+			dosage_slops,
+			prop_water,
+			prop_cement,
+			prop_ag1,
+			prop_ag2,
+			prop_ag3,
+			prop_ag4,
+			prop_flyash,
+			prop_breeze,
+			prop_add1,
+			prop_add2,
+			prop_backup1,
+			prop_slops,
+			price_water,
+			price_cement,
+			price_ag1,
+			price_ag2,
+			price_ag3,
+			price_ag4,
+			price_flyash,
+			price_breeze,
+			price_add1,
+			price_add2,
+			price_backup1,
+			price_slops,
+			amount_water,
+			amount_cement,
+			amount_ag1,
+			amount_ag2,
+			amount_ag3,
+			amount_ag4,
+			amount_flyash,
+			amount_breeze,
+			amount_add1,
+			amount_add2,
+			amount_backup1,
+			amount_slops,
+			create_person,
+			check_person,
+			make_date,
+			check_date,
+			ratio_cost,
+			ratio_owner,
+			ratio_remark,
+			ext_field1,
+			ext_field2,
+			ext_field3,
+			remark
+		) VALUES (
+			#{ratioCode},
+			#{kindName},
+			#{testDate},
+			#{waterRatio},
+			#{sandRatio},
+			#{slumps},
+			#{startcapacity},
+			#{endCapacity},
+			#{kindWater},
+			#{kindCement},
+			#{kindAg1},
+			#{kindAg2},
+			#{kindAg3},
+			#{kindAg4},
+			#{kindFlyash},
+			#{kindBreeze},
+			#{kindAdd1},
+			#{kindAdd2},
+			#{kindBackup1},
+			#{kindSlops},
+			#{dosageWater},
+			#{dosageCement},
+			#{dosageAg1},
+			#{dosageAg2},
+			#{dosageAg3},
+			#{dosageAg4},
+			#{dosageFlyash},
+			#{dosageBreeze},
+			#{dosageAdd1},
+			#{dosageAdd2},
+			#{dosageBackup1},
+			#{dosageSlops},
+			#{propWater},
+			#{propCement},
+			#{propAg1},
+			#{propAg2},
+			#{propAg3},
+			#{propAg4},
+			#{propFlyash},
+			#{propBreeze},
+			#{propAdd1},
+			#{propAdd2},
+			#{propBackup1},
+			#{propSlops},
+			#{priceWater},
+			#{priceCement},
+			#{priceAg1},
+			#{priceAg2},
+			#{priceAg3},
+			#{priceAg4},
+			#{priceFlyash},
+			#{priceBreeze},
+			#{priceAdd1},
+			#{priceAdd2},
+			#{priceBackup1},
+			#{priceSlops},
+			#{amountWater},
+			#{amountCement},
+			#{amountAg1},
+			#{amountAg2},
+			#{amountAg3},
+			#{amountAg4},
+			#{amountFlyash},
+			#{amountBreeze},
+			#{amountAdd1},
+			#{amountAdd2},
+			#{amountBackup1},
+			#{amountSlops},
+			#{createPerson},
+			#{checkPerson},
+			#{makeDate},
+			#{checkDate},
+			#{ratioCost},
+			#{docOfficework.officeworkName},
+			#{ratioRemark},
+			#{extField1},
+			#{extField2},
+			#{extField3},
+			#{remark}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE coordinate_ratio SET 	
+			ratio_code = #{ratioCode},
+			kind_name = #{kindName},
+			test_date = #{testDate},
+			water_ratio = #{waterRatio},
+			sand_ratio = #{sandRatio},
+			slumps = #{slumps},
+			startcapacity = #{startcapacity},
+			end_capacity = #{endCapacity},
+			kind_water = #{kindWater},
+			kind_cement = #{kindCement},
+			kind_ag1 = #{kindAg1},
+			kind_ag2 = #{kindAg2},
+			kind_ag3 = #{kindAg3},
+			kind_ag4 = #{kindAg4},
+			kind_flyash = #{kindFlyash},
+			kind_breeze = #{kindBreeze},
+			kind_add1 = #{kindAdd1},
+			kind_add2 = #{kindAdd2},
+			kind_backup1 = #{kindBackup1},
+			kind_slops = #{kindSlops},
+			dosage_water = #{dosageWater},
+			dosage_cement = #{dosageCement},
+			dosage_ag1 = #{dosageAg1},
+			dosage_ag2 = #{dosageAg2},
+			dosage_ag3 = #{dosageAg3},
+			dosage_ag4 = #{dosageAg4},
+			dosage_flyash = #{dosageFlyash},
+			dosage_breeze = #{dosageBreeze},
+			dosage_add1 = #{dosageAdd1},
+			dosage_add2 = #{dosageAdd2},
+			dosage_backup1 = #{dosageBackup1},
+			dosage_slops = #{dosageSlops},
+			prop_water = #{propWater},
+			prop_cement = #{propCement},
+			prop_ag1 = #{propAg1},
+			prop_ag2 = #{propAg2},
+			prop_ag3 = #{propAg3},
+			prop_ag4 = #{propAg4},
+			prop_flyash = #{propFlyash},
+			prop_breeze = #{propBreeze},
+			prop_add1 = #{propAdd1},
+			prop_add2 = #{propAdd2},
+			prop_backup1 = #{propBackup1},
+			prop_slops = #{propSlops},
+			price_water = #{priceWater},
+			price_cement = #{priceCement},
+			price_ag1 = #{priceAg1},
+			price_ag2 = #{priceAg2},
+			price_ag3 = #{priceAg3},
+			price_ag4 = #{priceAg4},
+			price_flyash = #{priceFlyash},
+			price_breeze = #{priceBreeze},
+			price_add1 = #{priceAdd1},
+			price_add2 = #{priceAdd2},
+			price_backup1 = #{priceBackup1},
+			price_slops = #{priceSlops},
+			amount_water = #{amountWater},
+			amount_cement = #{amountCement},
+			amount_ag1 = #{amountAg1},
+			amount_ag2 = #{amountAg2},
+			amount_ag3 = #{amountAg3},
+			amount_ag4 = #{amountAg4},
+			amount_flyash = #{amountFlyash},
+			amount_breeze = #{amountBreeze},
+			amount_add1 = #{amountAdd1},
+			amount_add2 = #{amountAdd2},
+			amount_backup1 = #{amountBackup1},
+			amount_slops = #{amountSlops},
+			create_person = #{createPerson},
+			check_person = #{checkPerson},
+			make_date = #{makeDate},
+			check_date = #{checkDate},
+			ratio_cost = #{ratioCost},
+			ratio_owner = #{docOfficework.officeworkName},
+			ratio_remark = #{ratioRemark},
+			ext_field1 = #{extField1},
+			ext_field2 = #{extField2},
+			ext_field3 = #{extField3},
+			remark = #{remark}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM coordinate_ratio
+		WHERE id = #{id}
+	</update>
+
+	<select id="selNotice" resultType="CoordinateRatio">
+		select * from coordinate_ratio
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+		</choose>
+	</select>
+	
+</mapper>

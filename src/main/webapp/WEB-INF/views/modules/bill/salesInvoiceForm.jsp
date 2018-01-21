@@ -51,7 +51,9 @@
 		<div class="control-group">
 			<label class="control-label">客户简称：</label>
 			<div class="controls">
-				<form:input path="customAbbr" htmlEscape="false" maxlength="60" class="input-xlarge "/>
+				<sys:treeselect id="customAbbr" name="docCustomer.id" value="${salesInvoice.docCustomer.id}" labelName="docCustomer.cusShortName" labelValue="${salesInvoice.docCustomer.cusShortName}"
+								title="客户档案" url="/doc/docCustomer/treeData" cssClass="required"/>
+				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">

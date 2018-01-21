@@ -43,5 +43,9 @@ public class ProduceDesignService extends CrudService<ProduceDesignDao, ProduceD
 	public void delete(ProduceDesign produceDesign) {
 		super.delete(produceDesign);
 	}
+
+	public List<ProduceDesign> selNotice(ProduceDesign produceDesign) {
+		return dao.selNotice(produceDesign);
+	}
 	
 }

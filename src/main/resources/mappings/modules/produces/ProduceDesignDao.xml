@@ -7,17 +7,17 @@
 		a.notice_no AS "noticeNo",
 		a.goods_date AS "goodsDate",
 		a.first_date AS "firstDate",
-		a.custom_name AS "contractSales.extField1",
+		a.custom_name AS "customName",
 		a.build_unit AS "buildUnit",
 		a.receive_unit AS "receiveUnit",
 		a.goods_count AS "goodsCount",
 		a.task_count AS "taskCount",
 		a.hetong_accmeth AS "hetongAccmeth",
-		a.kind_name AS "docBeton.kindName",
+		a.kind_name AS "kindName",
 		a.build_site AS "buildSite",
-		a.water_meth AS "docWatermeth.watermethName",
-		a.locale_dispatch AS "docOfficework.officeworkName",
-		a.beng_name AS "docPump.pumpName",
+		a.water_meth AS "waterMeth",
+		a.locale_dispatch AS "localeDispatch",
+		a.beng_name AS "bengName",
 		a.distance AS "distance",
 		a.project_addr AS "projectAddr",
 		a.contact AS "contact",
@@ -123,17 +123,17 @@
 			#{noticeNo},
 			#{goodsDate},
 			#{firstDate},
-			#{contractSales.extField1},
+			#{customName},
 			#{buildUnit},
 			#{receiveUnit},
 			#{goodsCount},
 			#{taskCount},
 			#{hetongAccmeth},
-			#{docBeton.kindName},
+			#{kindName},
 			#{buildSite},
-			#{docWatermeth.watermethName},
-			#{docOfficework.officeworkName},
-			#{docPump.pumpName},
+			#{waterMeth},
+			#{localeDispatch},
+			#{bengName},
 			#{distance},
 			#{projectAddr},
 			#{contact},
@@ -161,17 +161,17 @@
 			notice_no = #{noticeNo},
 			goods_date = #{goodsDate},
 			first_date = #{firstDate},
-			custom_name = #{contractSales.extField1},
+			custom_name = #{customName},
 			build_unit = #{buildUnit},
 			receive_unit = #{receiveUnit},
 			goods_count = #{goodsCount},
 			task_count = #{taskCount},
 			hetong_accmeth = #{hetongAccmeth},
-			kind_name = #{docBeton.kindName},
+			kind_name = #{kindName},
 			build_site = #{buildSite},
-			water_meth = #{docWatermeth.watermethName},
-			locale_dispatch = #{docOfficework.officeworkName},
-			beng_name = #{docPump.pumpName},
+			water_meth = #{waterMeth},
+			locale_dispatch = #{localeDispatch},
+			beng_name = #{bengName},
 			distance = #{distance},
 			project_addr = #{projectAddr},
 			contact = #{contact},
@@ -198,5 +198,14 @@
 		DELETE FROM produce_design
 		WHERE id = #{id}
 	</update>
+
+	<select id="selNotice" resultType="ProduceDesign">
+		select * from produce_design
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+		</choose>
+	</select>
 	
 </mapper>

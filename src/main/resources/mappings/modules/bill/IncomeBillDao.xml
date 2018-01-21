@@ -6,9 +6,9 @@
 		a.id AS "id",
 		a.bill_no AS "billNo",
 		a.bill_date AS "billDate",
-		a.custom_name AS "docCustomer.id",
+		a.custom_name AS "docCustomer.cusName",
 		a.project_name AS "projectName",
-		a.pay_way AS "docPaymeth.id",
+		a.pay_way AS "docPaymeth.paymethName",
 		a.income_amount AS "incomeAmount",
 		a.with_no AS "withNo",
 		a.bank_name AS "bankName",
@@ -22,16 +22,10 @@
 		a.ext_field1 AS "extField1",
 		a.ext_field2 AS "extField2",
 		a.ext_field3 AS "extField3",
-		e.cus_code AS "docCustomer.cusCode",
-		e.cus_name AS "docCustomer.cusName",
-		c.paymeth_code AS "docPaymeth.paymethCode",
-		c.paymeth_name AS "docPaymeth.paymethName",
 		a.remark AS "remark"
 	</sql>
 	
 	<sql id="incomeBillJoins">
-		LEFT JOIN doc_customer e ON e.id = a.custom_name
-		LEFT JOIN doc_paymeth c ON c.id = a.pay_way
 	</sql>
     
 	<select id="get" resultType="IncomeBill">
@@ -160,9 +154,9 @@
 		) VALUES (
 			#{billNo},
 			#{billDate},
-			#{docCustomer.id},
+			#{docCustomer.cusName},
 			#{projectName},
-			#{docPaymeth.id},
+			#{docPaymeth.paymethName},
 			#{incomeAmount},
 			#{withNo},
 			#{bankName},
@@ -184,9 +178,9 @@
 		UPDATE income_bill SET 	
 			bill_no = #{billNo},
 			bill_date = #{billDate},
-			custom_name = #{docCustomer.id},
+			custom_name = #{docCustomer.cusName},
 			project_name = #{projectName},
-			pay_way = #{docPaymeth.id},
+			pay_way = #{docPaymeth.paymethName},
 			income_amount = #{incomeAmount},
 			with_no = #{withNo},
 			bank_name = #{bankName},

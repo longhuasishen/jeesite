@@ -53,7 +53,7 @@ public class ProjectDistanceController extends BaseController {
 		}
 		return entity;
 	}
-	
+
 	@RequiresPermissions("produces:projectDistance:view")
 	@RequestMapping(value = {"list", ""})
 	public String list(ProjectDistance projectDistance, HttpServletRequest request, HttpServletResponse response, Model model) {

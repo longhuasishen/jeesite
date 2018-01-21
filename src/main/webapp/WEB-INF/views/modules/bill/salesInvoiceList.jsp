@@ -108,7 +108,7 @@
 					${salesInvoice.invoiceDate}
 				</td>
 				<td>
-					${salesInvoice.customAbbr}
+					${salesInvoice.docCustomer.cusShortName}
 				</td>
 				<td>
 					${salesInvoice.taxNum}

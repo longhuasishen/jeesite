@@ -6,6 +6,8 @@ package com.thinkgem.jeesite.modules.produces.web;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.thinkgem.jeesite.modules.sys.utils.UserUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.thinkgem.jeesite.common.config.Global;
@@ -22,6 +25,9 @@ import com.thinkgem.jeesite.common.web.BaseController;
 import com.thinkgem.jeesite.common.utils.StringUtils;
 import com.thinkgem.jeesite.modules.produces.entity.ProduceDesign;
 import com.thinkgem.jeesite.modules.produces.service.ProduceDesignService;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * 生产计划单Controller
@@ -46,6 +52,19 @@ public class ProduceDesignController extends BaseController {
 		}
 		return entity;
 	}
+
+	@ResponseBody
+	@RequestMapping(value = {"get"})
+	public ProduceDesign getById(@RequestParam(required=false) String id) {
+		ProduceDesign entity = null;
+		if (StringUtils.isNotBlank(id)){
+			entity = produceDesignService.get(id);
+		}
+		if (entity == null){
+			entity = new ProduceDesign();
+		}
+		return entity;
+	}
 	
 	@RequiresPermissions("produces:produceDesign:view")
 	@RequestMapping(value = {"list", ""})
@@ -54,6 +73,13 @@ public class ProduceDesignController extends BaseController {
 		model.addAttribute("page", page);
 		return "modules/produces/produceDesignList";
 	}
+	@RequiresPermissions("produces:produceNotice:view")
+	@RequestMapping(value = {"listNotice"})
+	public String listNotice(ProduceDesign produceDesign, HttpServletRequest request, HttpServletResponse response, Model model) {
+		Page<ProduceDesign> page = produceDesignService.findPage(new Page<ProduceDesign>(request, response), produceDesign);
+		model.addAttribute("page", page);
+		return "modules/produces/produceNoticeList";
+	}
 
 	@RequiresPermissions("produces:produceDesign:view")
 	@RequestMapping(value = "form")
@@ -61,6 +87,14 @@ public class ProduceDesignController extends BaseController {
 		model.addAttribute("produceDesign", produceDesign);
 		model.addAttribute("user", UserUtils.getUser());
 		return "modules/produces/produceDesignForm";
+	}
+
+	@RequiresPermissions("produces:produceNotice:view")
+	@RequestMapping(value = "formNotice")
+	public String formNotice(ProduceDesign produceDesign, Model model) {
+		model.addAttribute("produceDesign", produceDesign);
+		model.addAttribute("user", UserUtils.getUser());
+		return "modules/produces/produceNoticeForm";
 	}
 
 	@RequiresPermissions("produces:produceDesign:edit")
@@ -73,13 +107,47 @@ public class ProduceDesignController extends BaseController {
 		addMessage(redirectAttributes, "保存生产计划单成功");
 		return "redirect:"+Global.getAdminPath()+"/produces/produceDesign/?repage";
 	}
-	
+	@RequiresPermissions("produces:produceNotice:edit")
+	@RequestMapping(value = "saveNotice")
+	public String saveNotice(ProduceDesign produceDesign, Model model, RedirectAttributes redirectAttributes) {
+		if (!beanValidator(model, produceDesign)){
+			return form(produceDesign, model);
+		}
+		produceDesignService.save(produceDesign);
+		addMessage(redirectAttributes, "保存生产计划单成功");
+		return "redirect:"+Global.getAdminPath()+"/produces/produceDesign/listNotice?repage";
+	}
 	@RequiresPermissions("produces:produceDesign:edit")
 	@RequestMapping(value = "delete")
 	public String delete(ProduceDesign produceDesign, RedirectAttributes redirectAttributes) {
 		produceDesignService.delete(produceDesign);
 		addMessage(redirectAttributes, "删除生产计划单成功");
 		return "redirect:"+Global.getAdminPath()+"/produces/produceDesign/?repage";
+	}
+
+	@RequiresPermissions("produces:produceNotice:edit")
+	@RequestMapping(value = "deleteNotice")
+	public String deleteNotice(ProduceDesign produceDesign, RedirectAttributes redirectAttributes) {
+		produceDesignService.delete(produceDesign);
+		addMessage(redirectAttributes, "删除生产计划单成功");
+		return "redirect:"+Global.getAdminPath()+"/produces/produceDesign/listNotice?repage";
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "selNotice")
+	public List<Map<String, Object>> selNotice(HttpServletResponse response) {
+		List<Map<String, Object>> mapList = Lists.newArrayList();
+		ProduceDesign produceDesign = new ProduceDesign();
+		List<ProduceDesign> list = produceDesignService.selNotice(produceDesign);
+		for (int i=0; i<list.size(); i++){
+			ProduceDesign e = list.get(i);
+			Map<String, Object> map = Maps.newHashMap();
+			map.put("id", e.getId());
+			map.put("name", e.getNoticeNo()+"["+e.getCustomName()+"]");
+
+			mapList.add(map);
+		}
+		return mapList;
 	}
 
 }

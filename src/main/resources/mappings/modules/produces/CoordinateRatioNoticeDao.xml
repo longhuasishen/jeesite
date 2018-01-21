@@ -1,0 +1,933 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.produces.dao.CoordinateRatioNoticeDao">
+    
+	<sql id="coordinateRatioNoticeColumns">
+		a.id AS "id",
+		a.notice_no AS "noticeNo",
+		a.ratio_code AS "ratioCode",
+		a.ratio_notice_code AS "ratioNoticeCode",
+		a.notice_status AS "noticeStatus",
+		a.notice_mixing AS "noticeMixing",
+		a.beng_name AS "bengName",
+		a.custom_name AS "customName",
+		a.project_name AS "projectName",
+		a.concrete_name AS "concreteName",
+		a.goods_count AS "goodsCount",
+		a.special_require AS "specialRequire",
+		a.build_site AS "buildSite",
+		a.water_meth AS "waterMeth",
+		a.goods_date AS "goodsDate",
+		a.notice_remark AS "noticeRemark",
+		a.mixing_time AS "mixingTime",
+		a.mixing_no AS "mixingNo",
+		a.impervious_level AS "imperviousLevel",
+		a.flexural_level AS "flexuralLevel",
+		a.mixing_station AS "mixingStation",
+		a.water_ratio AS "waterRatio",
+		a.sand_ratio AS "sandRatio",
+		a.slumps AS "slumps",
+		a.startcapacity AS "startcapacity",
+		a.end_capacity AS "endCapacity",
+		a.kind_water AS "kindWater",
+		a.kind_cement AS "kindCement",
+		a.kind_ag1 AS "kindAg1",
+		a.kind_ag2 AS "kindAg2",
+		a.kind_ag3 AS "kindAg3",
+		a.kind_ag4 AS "kindAg4",
+		a.kind_flyash AS "kindFlyash",
+		a.kind_breeze AS "kindBreeze",
+		a.kind_add1 AS "kindAdd1",
+		a.kind_add2 AS "kindAdd2",
+		a.kind_backup1 AS "kindBackup1",
+		a.kind_slops AS "kindSlops",
+		a.repe_water AS "repeWater",
+		a.dosage_water AS "dosageWater",
+		a.dosage_cement AS "dosageCement",
+		a.repe_cement AS "repeCement",
+		a.repe_ag1 AS "repeAg1",
+		a.dosage_ag1 AS "dosageAg1",
+		a.dosage_ag2 AS "dosageAg2",
+		a.repe_ag2 AS "repeAg2",
+		a.dosage_ag3 AS "dosageAg3",
+		a.repe_ag3 AS "repeAg3",
+		a.repe_ag4 AS "repeAg4",
+		a.dosage_ag4 AS "dosageAg4",
+		a.repe_flyash AS "repeFlyash",
+		a.dosage_flyash AS "dosageFlyash",
+		a.repe_breeze AS "repeBreeze",
+		a.dosage_breeze AS "dosageBreeze",
+		a.repe_add1 AS "repeAdd1",
+		a.dosage_add1 AS "dosageAdd1",
+		a.dosage_add2 AS "dosageAdd2",
+		a.repe_add2 AS "repeAdd2",
+		a.repe_backup1 AS "repeBackup1",
+		a.dosage_backup1 AS "dosageBackup1",
+		a.dosage_slops AS "dosageSlops",
+		a.repe_slops AS "repeSlops",
+		a.prop_water AS "propWater",
+		a.prop_cement AS "propCement",
+		a.prop_ag1 AS "propAg1",
+		a.prop_ag2 AS "propAg2",
+		a.prop_ag3 AS "propAg3",
+		a.prop_ag4 AS "propAg4",
+		a.prop_flyash AS "propFlyash",
+		a.prop_breeze AS "propBreeze",
+		a.prop_add1 AS "propAdd1",
+		a.prop_add2 AS "propAdd2",
+		a.prop_backup1 AS "propBackup1",
+		a.prop_slops AS "propSlops",
+		a.primage_water AS "primageWater",
+		a.primage_cement AS "primageCement",
+		a.primage_ag1 AS "primageAg1",
+		a.primage_ag2 AS "primageAg2",
+		a.primage_ag3 AS "primageAg3",
+		a.primage_ag4 AS "primageAg4",
+		a.primage_flyash AS "primageFlyash",
+		a.primage_breeze AS "primageBreeze",
+		a.primage_add1 AS "primageAdd1",
+		a.primage_add2 AS "primageAdd2",
+		a.primage_backup1 AS "primageBackup1",
+		a.primage_slops AS "primageSlops",
+		a.weight_water AS "weightWater",
+		a.weight_cement AS "weightCement",
+		a.weight_ag1 AS "weightAg1",
+		a.weight_ag2 AS "weightAg2",
+		a.weight_ag3 AS "weightAg3",
+		a.weight_ag4 AS "weightAg4",
+		a.weight_flyash AS "weightFlyash",
+		a.weight_breeze AS "weightBreeze",
+		a.weight_add1 AS "weightAdd1",
+		a.weight_add2 AS "weightAdd2",
+		a.weight_backup1 AS "weightBackup1",
+		a.weight_slops AS "weightSlops",
+		a.wetweight_water AS "wetweightWater",
+		a.wetweight_cement AS "wetweightCement",
+		a.wetweight_ag1 AS "wetweightAg1",
+		a.wetweight_ag2 AS "wetweightAg2",
+		a.wetweight_ag3 AS "wetweightAg3",
+		a.wetweight_ag4 AS "wetweightAg4",
+		a.wetweight_flyash AS "wetweightFlyash",
+		a.wetweight_breeze AS "wetweightBreeze",
+		a.wetweight_add1 AS "wetweightAdd1",
+		a.wetweight_add2 AS "wetweightAdd2",
+		a.wetweight_backup1 AS "wetweightBackup1",
+		a.wetweight_slops AS "wetweightSlops",
+		a.resist_count AS "resistCount",
+		a.impervious_count AS "imperviousCount",
+		a.flexural_count AS "flexuralCount",
+		a.create_person AS "createPerson",
+		a.check_person AS "checkPerson",
+		a.cancel_person AS "cancelPerson",
+		a.make_date AS "makeDate",
+		a.check_date AS "checkDate",
+		a.cancel_date AS "cancelDate",
+		a.modify_person AS "modifyPerson",
+		a.notice_owner AS "noticeOwner",
+		a.curr_remark AS "currRemark",
+		a.ext_field1 AS "extField1",
+		a.ext_field2 AS "extField2",
+		a.ext_field3 AS "extField3",
+		a.remark AS "remark"
+	</sql>
+	
+	<sql id="coordinateRatioNoticeJoins">
+	</sql>
+    
+	<select id="get" resultType="CoordinateRatioNotice">
+		SELECT 
+			<include refid="coordinateRatioNoticeColumns"/>
+		FROM coordinate_ratio_notice a
+		<include refid="coordinateRatioNoticeJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="CoordinateRatioNotice">
+		SELECT 
+			<include refid="coordinateRatioNoticeColumns"/>
+		FROM coordinate_ratio_notice a
+		<include refid="coordinateRatioNoticeJoins"/>
+		<where>
+			
+			<if test="noticeNo != null and noticeNo != ''">
+				AND a.notice_no = #{noticeNo}
+			</if>
+			<if test="ratioCode != null and ratioCode != ''">
+				AND a.ratio_code = #{ratioCode}
+			</if>
+			<if test="ratioNoticeCode != null and ratioNoticeCode != ''">
+				AND a.ratio_notice_code = #{ratioNoticeCode}
+			</if>
+			<if test="noticeStatus != null and noticeStatus != ''">
+				AND a.notice_status = #{noticeStatus}
+			</if>
+			<if test="noticeMixing != null and noticeMixing != ''">
+				AND a.notice_mixing = #{noticeMixing}
+			</if>
+			<if test="bengName != null and bengName != ''">
+				AND a.beng_name = #{bengName}
+			</if>
+			<if test="customName != null and customName != ''">
+				AND a.custom_name = #{customName}
+			</if>
+			<if test="projectName != null and projectName != ''">
+				AND a.project_name = #{projectName}
+			</if>
+			<if test="concreteName != null and concreteName != ''">
+				AND a.concrete_name = #{concreteName}
+			</if>
+			<if test="goodsCount != null and goodsCount != ''">
+				AND a.goods_count = #{goodsCount}
+			</if>
+			<if test="specialRequire != null and specialRequire != ''">
+				AND a.special_require = #{specialRequire}
+			</if>
+			<if test="buildSite != null and buildSite != ''">
+				AND a.build_site = #{buildSite}
+			</if>
+			<if test="waterMeth != null and waterMeth != ''">
+				AND a.water_meth = #{waterMeth}
+			</if>
+			<if test="goodsDate != null and goodsDate != ''">
+				AND a.goods_date = #{goodsDate}
+			</if>
+			<if test="noticeRemark != null and noticeRemark != ''">
+				AND a.notice_remark = #{noticeRemark}
+			</if>
+			<if test="mixingTime != null and mixingTime != ''">
+				AND a.mixing_time = #{mixingTime}
+			</if>
+			<if test="mixingNo != null and mixingNo != ''">
+				AND a.mixing_no = #{mixingNo}
+			</if>
+			<if test="imperviousLevel != null and imperviousLevel != ''">
+				AND a.impervious_level = #{imperviousLevel}
+			</if>
+			<if test="flexuralLevel != null and flexuralLevel != ''">
+				AND a.flexural_level = #{flexuralLevel}
+			</if>
+			<if test="mixingStation != null and mixingStation != ''">
+				AND a.mixing_station = #{mixingStation}
+			</if>
+			<if test="waterRatio != null and waterRatio != ''">
+				AND a.water_ratio = #{waterRatio}
+			</if>
+			<if test="sandRatio != null and sandRatio != ''">
+				AND a.sand_ratio = #{sandRatio}
+			</if>
+			<if test="slumps != null and slumps != ''">
+				AND a.slumps = #{slumps}
+			</if>
+			<if test="startcapacity != null and startcapacity != ''">
+				AND a.startcapacity = #{startcapacity}
+			</if>
+			<if test="endCapacity != null and endCapacity != ''">
+				AND a.end_capacity = #{endCapacity}
+			</if>
+			<if test="kindWater != null and kindWater != ''">
+				AND a.kind_water = #{kindWater}
+			</if>
+			<if test="kindCement != null and kindCement != ''">
+				AND a.kind_cement = #{kindCement}
+			</if>
+			<if test="kindAg1 != null and kindAg1 != ''">
+				AND a.kind_ag1 = #{kindAg1}
+			</if>
+			<if test="kindAg2 != null and kindAg2 != ''">
+				AND a.kind_ag2 = #{kindAg2}
+			</if>
+			<if test="kindAg3 != null and kindAg3 != ''">
+				AND a.kind_ag3 = #{kindAg3}
+			</if>
+			<if test="kindAg4 != null and kindAg4 != ''">
+				AND a.kind_ag4 = #{kindAg4}
+			</if>
+			<if test="kindFlyash != null and kindFlyash != ''">
+				AND a.kind_flyash = #{kindFlyash}
+			</if>
+			<if test="kindBreeze != null and kindBreeze != ''">
+				AND a.kind_breeze = #{kindBreeze}
+			</if>
+			<if test="kindAdd1 != null and kindAdd1 != ''">
+				AND a.kind_add1 = #{kindAdd1}
+			</if>
+			<if test="kindAdd2 != null and kindAdd2 != ''">
+				AND a.kind_add2 = #{kindAdd2}
+			</if>
+			<if test="kindBackup1 != null and kindBackup1 != ''">
+				AND a.kind_backup1 = #{kindBackup1}
+			</if>
+			<if test="kindSlops != null and kindSlops != ''">
+				AND a.kind_slops = #{kindSlops}
+			</if>
+			<if test="repeWater != null and repeWater != ''">
+				AND a.repe_water = #{repeWater}
+			</if>
+			<if test="dosageWater != null and dosageWater != ''">
+				AND a.dosage_water = #{dosageWater}
+			</if>
+			<if test="dosageCement != null and dosageCement != ''">
+				AND a.dosage_cement = #{dosageCement}
+			</if>
+			<if test="repeCement != null and repeCement != ''">
+				AND a.repe_cement = #{repeCement}
+			</if>
+			<if test="repeAg1 != null and repeAg1 != ''">
+				AND a.repe_ag1 = #{repeAg1}
+			</if>
+			<if test="dosageAg1 != null and dosageAg1 != ''">
+				AND a.dosage_ag1 = #{dosageAg1}
+			</if>
+			<if test="dosageAg2 != null and dosageAg2 != ''">
+				AND a.dosage_ag2 = #{dosageAg2}
+			</if>
+			<if test="repeAg2 != null and repeAg2 != ''">
+				AND a.repe_ag2 = #{repeAg2}
+			</if>
+			<if test="dosageAg3 != null and dosageAg3 != ''">
+				AND a.dosage_ag3 = #{dosageAg3}
+			</if>
+			<if test="repeAg3 != null and repeAg3 != ''">
+				AND a.repe_ag3 = #{repeAg3}
+			</if>
+			<if test="repeAg4 != null and repeAg4 != ''">
+				AND a.repe_ag4 = #{repeAg4}
+			</if>
+			<if test="dosageAg4 != null and dosageAg4 != ''">
+				AND a.dosage_ag4 = #{dosageAg4}
+			</if>
+			<if test="repeFlyash != null and repeFlyash != ''">
+				AND a.repe_flyash = #{repeFlyash}
+			</if>
+			<if test="dosageFlyash != null and dosageFlyash != ''">
+				AND a.dosage_flyash = #{dosageFlyash}
+			</if>
+			<if test="repeBreeze != null and repeBreeze != ''">
+				AND a.repe_breeze = #{repeBreeze}
+			</if>
+			<if test="dosageBreeze != null and dosageBreeze != ''">
+				AND a.dosage_breeze = #{dosageBreeze}
+			</if>
+			<if test="repeAdd1 != null and repeAdd1 != ''">
+				AND a.repe_add1 = #{repeAdd1}
+			</if>
+			<if test="dosageAdd1 != null and dosageAdd1 != ''">
+				AND a.dosage_add1 = #{dosageAdd1}
+			</if>
+			<if test="dosageAdd2 != null and dosageAdd2 != ''">
+				AND a.dosage_add2 = #{dosageAdd2}
+			</if>
+			<if test="repeAdd2 != null and repeAdd2 != ''">
+				AND a.repe_add2 = #{repeAdd2}
+			</if>
+			<if test="repeBackup1 != null and repeBackup1 != ''">
+				AND a.repe_backup1 = #{repeBackup1}
+			</if>
+			<if test="dosageBackup1 != null and dosageBackup1 != ''">
+				AND a.dosage_backup1 = #{dosageBackup1}
+			</if>
+			<if test="dosageSlops != null and dosageSlops != ''">
+				AND a.dosage_slops = #{dosageSlops}
+			</if>
+			<if test="repeSlops != null and repeSlops != ''">
+				AND a.repe_slops = #{repeSlops}
+			</if>
+			<if test="propWater != null and propWater != ''">
+				AND a.prop_water = #{propWater}
+			</if>
+			<if test="propCement != null and propCement != ''">
+				AND a.prop_cement = #{propCement}
+			</if>
+			<if test="propAg1 != null and propAg1 != ''">
+				AND a.prop_ag1 = #{propAg1}
+			</if>
+			<if test="propAg2 != null and propAg2 != ''">
+				AND a.prop_ag2 = #{propAg2}
+			</if>
+			<if test="propAg3 != null and propAg3 != ''">
+				AND a.prop_ag3 = #{propAg3}
+			</if>
+			<if test="propAg4 != null and propAg4 != ''">
+				AND a.prop_ag4 = #{propAg4}
+			</if>
+			<if test="propFlyash != null and propFlyash != ''">
+				AND a.prop_flyash = #{propFlyash}
+			</if>
+			<if test="propBreeze != null and propBreeze != ''">
+				AND a.prop_breeze = #{propBreeze}
+			</if>
+			<if test="propAdd1 != null and propAdd1 != ''">
+				AND a.prop_add1 = #{propAdd1}
+			</if>
+			<if test="propAdd2 != null and propAdd2 != ''">
+				AND a.prop_add2 = #{propAdd2}
+			</if>
+			<if test="propBackup1 != null and propBackup1 != ''">
+				AND a.prop_backup1 = #{propBackup1}
+			</if>
+			<if test="propSlops != null and propSlops != ''">
+				AND a.prop_slops = #{propSlops}
+			</if>
+			<if test="primageWater != null and primageWater != ''">
+				AND a.primage_water = #{primageWater}
+			</if>
+			<if test="primageCement != null and primageCement != ''">
+				AND a.primage_cement = #{primageCement}
+			</if>
+			<if test="primageAg1 != null and primageAg1 != ''">
+				AND a.primage_ag1 = #{primageAg1}
+			</if>
+			<if test="primageAg2 != null and primageAg2 != ''">
+				AND a.primage_ag2 = #{primageAg2}
+			</if>
+			<if test="primageAg3 != null and primageAg3 != ''">
+				AND a.primage_ag3 = #{primageAg3}
+			</if>
+			<if test="primageAg4 != null and primageAg4 != ''">
+				AND a.primage_ag4 = #{primageAg4}
+			</if>
+			<if test="primageFlyash != null and primageFlyash != ''">
+				AND a.primage_flyash = #{primageFlyash}
+			</if>
+			<if test="primageBreeze != null and primageBreeze != ''">
+				AND a.primage_breeze = #{primageBreeze}
+			</if>
+			<if test="primageAdd1 != null and primageAdd1 != ''">
+				AND a.primage_add1 = #{primageAdd1}
+			</if>
+			<if test="primageAdd2 != null and primageAdd2 != ''">
+				AND a.primage_add2 = #{primageAdd2}
+			</if>
+			<if test="primageBackup1 != null and primageBackup1 != ''">
+				AND a.primage_backup1 = #{primageBackup1}
+			</if>
+			<if test="primageSlops != null and primageSlops != ''">
+				AND a.primage_slops = #{primageSlops}
+			</if>
+			<if test="weightWater != null and weightWater != ''">
+				AND a.weight_water = #{weightWater}
+			</if>
+			<if test="weightCement != null and weightCement != ''">
+				AND a.weight_cement = #{weightCement}
+			</if>
+			<if test="weightAg1 != null and weightAg1 != ''">
+				AND a.weight_ag1 = #{weightAg1}
+			</if>
+			<if test="weightAg2 != null and weightAg2 != ''">
+				AND a.weight_ag2 = #{weightAg2}
+			</if>
+			<if test="weightAg3 != null and weightAg3 != ''">
+				AND a.weight_ag3 = #{weightAg3}
+			</if>
+			<if test="weightAg4 != null and weightAg4 != ''">
+				AND a.weight_ag4 = #{weightAg4}
+			</if>
+			<if test="weightFlyash != null and weightFlyash != ''">
+				AND a.weight_flyash = #{weightFlyash}
+			</if>
+			<if test="weightBreeze != null and weightBreeze != ''">
+				AND a.weight_breeze = #{weightBreeze}
+			</if>
+			<if test="weightAdd1 != null and weightAdd1 != ''">
+				AND a.weight_add1 = #{weightAdd1}
+			</if>
+			<if test="weightAdd2 != null and weightAdd2 != ''">
+				AND a.weight_add2 = #{weightAdd2}
+			</if>
+			<if test="weightBackup1 != null and weightBackup1 != ''">
+				AND a.weight_backup1 = #{weightBackup1}
+			</if>
+			<if test="weightSlops != null and weightSlops != ''">
+				AND a.weight_slops = #{weightSlops}
+			</if>
+			<if test="wetweightWater != null and wetweightWater != ''">
+				AND a.wetweight_water = #{wetweightWater}
+			</if>
+			<if test="wetweightCement != null and wetweightCement != ''">
+				AND a.wetweight_cement = #{wetweightCement}
+			</if>
+			<if test="wetweightAg1 != null and wetweightAg1 != ''">
+				AND a.wetweight_ag1 = #{wetweightAg1}
+			</if>
+			<if test="wetweightAg2 != null and wetweightAg2 != ''">
+				AND a.wetweight_ag2 = #{wetweightAg2}
+			</if>
+			<if test="wetweightAg3 != null and wetweightAg3 != ''">
+				AND a.wetweight_ag3 = #{wetweightAg3}
+			</if>
+			<if test="wetweightAg4 != null and wetweightAg4 != ''">
+				AND a.wetweight_ag4 = #{wetweightAg4}
+			</if>
+			<if test="wetweightFlyash != null and wetweightFlyash != ''">
+				AND a.wetweight_flyash = #{wetweightFlyash}
+			</if>
+			<if test="wetweightBreeze != null and wetweightBreeze != ''">
+				AND a.wetweight_breeze = #{wetweightBreeze}
+			</if>
+			<if test="wetweightAdd1 != null and wetweightAdd1 != ''">
+				AND a.wetweight_add1 = #{wetweightAdd1}
+			</if>
+			<if test="wetweightAdd2 != null and wetweightAdd2 != ''">
+				AND a.wetweight_add2 = #{wetweightAdd2}
+			</if>
+			<if test="wetweightBackup1 != null and wetweightBackup1 != ''">
+				AND a.wetweight_backup1 = #{wetweightBackup1}
+			</if>
+			<if test="wetweightSlops != null and wetweightSlops != ''">
+				AND a.wetweight_slops = #{wetweightSlops}
+			</if>
+			<if test="resistCount != null and resistCount != ''">
+				AND a.resist_count = #{resistCount}
+			</if>
+			<if test="imperviousCount != null and imperviousCount != ''">
+				AND a.impervious_count = #{imperviousCount}
+			</if>
+			<if test="flexuralCount != null and flexuralCount != ''">
+				AND a.flexural_count = #{flexuralCount}
+			</if>
+			<if test="createPerson != null and createPerson != ''">
+				AND a.create_person = #{createPerson}
+			</if>
+			<if test="checkPerson != null and checkPerson != ''">
+				AND a.check_person = #{checkPerson}
+			</if>
+			<if test="cancelPerson != null and cancelPerson != ''">
+				AND a.cancel_person = #{cancelPerson}
+			</if>
+			<if test="makeDate != null and makeDate != ''">
+				AND a.make_date = #{makeDate}
+			</if>
+			<if test="checkDate != null and checkDate != ''">
+				AND a.check_date = #{checkDate}
+			</if>
+			<if test="cancelDate != null and cancelDate != ''">
+				AND a.cancel_date = #{cancelDate}
+			</if>
+			<if test="modifyPerson != null and modifyPerson != ''">
+				AND a.modify_person = #{modifyPerson}
+			</if>
+			<if test="noticeOwner != null and noticeOwner != ''">
+				AND a.notice_owner = #{noticeOwner}
+			</if>
+			<if test="currRemark != null and currRemark != ''">
+				AND a.curr_remark = #{currRemark}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="CoordinateRatioNotice">
+		SELECT 
+			<include refid="coordinateRatioNoticeColumns"/>
+		FROM coordinate_ratio_notice a
+		<include refid="coordinateRatioNoticeJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO coordinate_ratio_notice(
+			notice_no,
+			ratio_code,
+			ratio_notice_code,
+			notice_status,
+			notice_mixing,
+			beng_name,
+			custom_name,
+			project_name,
+			concrete_name,
+			goods_count,
+			special_require,
+			build_site,
+			water_meth,
+			goods_date,
+			notice_remark,
+			mixing_time,
+			mixing_no,
+			impervious_level,
+			flexural_level,
+			mixing_station,
+			water_ratio,
+			sand_ratio,
+			slumps,
+			startcapacity,
+			end_capacity,
+			kind_water,
+			kind_cement,
+			kind_ag1,
+			kind_ag2,
+			kind_ag3,
+			kind_ag4,
+			kind_flyash,
+			kind_breeze,
+			kind_add1,
+			kind_add2,
+			kind_backup1,
+			kind_slops,
+			repe_water,
+			dosage_water,
+			dosage_cement,
+			repe_cement,
+			repe_ag1,
+			dosage_ag1,
+			dosage_ag2,
+			repe_ag2,
+			dosage_ag3,
+			repe_ag3,
+			repe_ag4,
+			dosage_ag4,
+			repe_flyash,
+			dosage_flyash,
+			repe_breeze,
+			dosage_breeze,
+			repe_add1,
+			dosage_add1,
+			dosage_add2,
+			repe_add2,
+			repe_backup1,
+			dosage_backup1,
+			dosage_slops,
+			repe_slops,
+			prop_water,
+			prop_cement,
+			prop_ag1,
+			prop_ag2,
+			prop_ag3,
+			prop_ag4,
+			prop_flyash,
+			prop_breeze,
+			prop_add1,
+			prop_add2,
+			prop_backup1,
+			prop_slops,
+			primage_water,
+			primage_cement,
+			primage_ag1,
+			primage_ag2,
+			primage_ag3,
+			primage_ag4,
+			primage_flyash,
+			primage_breeze,
+			primage_add1,
+			primage_add2,
+			primage_backup1,
+			primage_slops,
+			weight_water,
+			weight_cement,
+			weight_ag1,
+			weight_ag2,
+			weight_ag3,
+			weight_ag4,
+			weight_flyash,
+			weight_breeze,
+			weight_add1,
+			weight_add2,
+			weight_backup1,
+			weight_slops,
+			wetweight_water,
+			wetweight_cement,
+			wetweight_ag1,
+			wetweight_ag2,
+			wetweight_ag3,
+			wetweight_ag4,
+			wetweight_flyash,
+			wetweight_breeze,
+			wetweight_add1,
+			wetweight_add2,
+			wetweight_backup1,
+			wetweight_slops,
+			resist_count,
+			impervious_count,
+			flexural_count,
+			create_person,
+			check_person,
+			cancel_person,
+			make_date,
+			check_date,
+			cancel_date,
+			modify_person,
+			notice_owner,
+			curr_remark,
+			ext_field1,
+			ext_field2,
+			ext_field3,
+			remark
+		) VALUES (
+			#{noticeNo},
+			#{ratioCode},
+			#{ratioNoticeCode},
+			#{noticeStatus},
+			#{noticeMixing},
+			#{bengName},
+			#{customName},
+			#{projectName},
+			#{concreteName},
+			#{goodsCount},
+			#{specialRequire},
+			#{buildSite},
+			#{waterMeth},
+			#{goodsDate},
+			#{noticeRemark},
+			#{mixingTime},
+			#{mixingNo},
+			#{imperviousLevel},
+			#{flexuralLevel},
+			#{mixingStation},
+			#{waterRatio},
+			#{sandRatio},
+			#{slumps},
+			#{startcapacity},
+			#{endCapacity},
+			#{kindWater},
+			#{kindCement},
+			#{kindAg1},
+			#{kindAg2},
+			#{kindAg3},
+			#{kindAg4},
+			#{kindFlyash},
+			#{kindBreeze},
+			#{kindAdd1},
+			#{kindAdd2},
+			#{kindBackup1},
+			#{kindSlops},
+			#{repeWater},
+			#{dosageWater},
+			#{dosageCement},
+			#{repeCement},
+			#{repeAg1},
+			#{dosageAg1},
+			#{dosageAg2},
+			#{repeAg2},
+			#{dosageAg3},
+			#{repeAg3},
+			#{repeAg4},
+			#{dosageAg4},
+			#{repeFlyash},
+			#{dosageFlyash},
+			#{repeBreeze},
+			#{dosageBreeze},
+			#{repeAdd1},
+			#{dosageAdd1},
+			#{dosageAdd2},
+			#{repeAdd2},
+			#{repeBackup1},
+			#{dosageBackup1},
+			#{dosageSlops},
+			#{repeSlops},
+			#{propWater},
+			#{propCement},
+			#{propAg1},
+			#{propAg2},
+			#{propAg3},
+			#{propAg4},
+			#{propFlyash},
+			#{propBreeze},
+			#{propAdd1},
+			#{propAdd2},
+			#{propBackup1},
+			#{propSlops},
+			#{primageWater},
+			#{primageCement},
+			#{primageAg1},
+			#{primageAg2},
+			#{primageAg3},
+			#{primageAg4},
+			#{primageFlyash},
+			#{primageBreeze},
+			#{primageAdd1},
+			#{primageAdd2},
+			#{primageBackup1},
+			#{primageSlops},
+			#{weightWater},
+			#{weightCement},
+			#{weightAg1},
+			#{weightAg2},
+			#{weightAg3},
+			#{weightAg4},
+			#{weightFlyash},
+			#{weightBreeze},
+			#{weightAdd1},
+			#{weightAdd2},
+			#{weightBackup1},
+			#{weightSlops},
+			#{wetweightWater},
+			#{wetweightCement},
+			#{wetweightAg1},
+			#{wetweightAg2},
+			#{wetweightAg3},
+			#{wetweightAg4},
+			#{wetweightFlyash},
+			#{wetweightBreeze},
+			#{wetweightAdd1},
+			#{wetweightAdd2},
+			#{wetweightBackup1},
+			#{wetweightSlops},
+			#{resistCount},
+			#{imperviousCount},
+			#{flexuralCount},
+			#{createPerson},
+			#{checkPerson},
+			#{cancelPerson},
+			#{makeDate},
+			#{checkDate},
+			#{cancelDate},
+			#{modifyPerson},
+			#{noticeOwner},
+			#{currRemark},
+			#{extField1},
+			#{extField2},
+			#{extField3},
+			#{remark}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE coordinate_ratio_notice SET 	
+			notice_no = #{noticeNo},
+			ratio_code = #{ratioCode},
+			ratio_notice_code = #{ratioNoticeCode},
+			notice_status = #{noticeStatus},
+			notice_mixing = #{noticeMixing},
+			beng_name = #{bengName},
+			custom_name = #{customName},
+			project_name = #{projectName},
+			concrete_name = #{concreteName},
+			goods_count = #{goodsCount},
+			special_require = #{specialRequire},
+			build_site = #{buildSite},
+			water_meth = #{waterMeth},
+			goods_date = #{goodsDate},
+			notice_remark = #{noticeRemark},
+			mixing_time = #{mixingTime},
+			mixing_no = #{mixingNo},
+			impervious_level = #{imperviousLevel},
+			flexural_level = #{flexuralLevel},
+			mixing_station = #{mixingStation},
+			water_ratio = #{waterRatio},
+			sand_ratio = #{sandRatio},
+			slumps = #{slumps},
+			startcapacity = #{startcapacity},
+			end_capacity = #{endCapacity},
+			kind_water = #{kindWater},
+			kind_cement = #{kindCement},
+			kind_ag1 = #{kindAg1},
+			kind_ag2 = #{kindAg2},
+			kind_ag3 = #{kindAg3},
+			kind_ag4 = #{kindAg4},
+			kind_flyash = #{kindFlyash},
+			kind_breeze = #{kindBreeze},
+			kind_add1 = #{kindAdd1},
+			kind_add2 = #{kindAdd2},
+			kind_backup1 = #{kindBackup1},
+			kind_slops = #{kindSlops},
+			repe_water = #{repeWater},
+			dosage_water = #{dosageWater},
+			dosage_cement = #{dosageCement},
+			repe_cement = #{repeCement},
+			repe_ag1 = #{repeAg1},
+			dosage_ag1 = #{dosageAg1},
+			dosage_ag2 = #{dosageAg2},
+			repe_ag2 = #{repeAg2},
+			dosage_ag3 = #{dosageAg3},
+			repe_ag3 = #{repeAg3},
+			repe_ag4 = #{repeAg4},
+			dosage_ag4 = #{dosageAg4},
+			repe_flyash = #{repeFlyash},
+			dosage_flyash = #{dosageFlyash},
+			repe_breeze = #{repeBreeze},
+			dosage_breeze = #{dosageBreeze},
+			repe_add1 = #{repeAdd1},
+			dosage_add1 = #{dosageAdd1},
+			dosage_add2 = #{dosageAdd2},
+			repe_add2 = #{repeAdd2},
+			repe_backup1 = #{repeBackup1},
+			dosage_backup1 = #{dosageBackup1},
+			dosage_slops = #{dosageSlops},
+			repe_slops = #{repeSlops},
+			prop_water = #{propWater},
+			prop_cement = #{propCement},
+			prop_ag1 = #{propAg1},
+			prop_ag2 = #{propAg2},
+			prop_ag3 = #{propAg3},
+			prop_ag4 = #{propAg4},
+			prop_flyash = #{propFlyash},
+			prop_breeze = #{propBreeze},
+			prop_add1 = #{propAdd1},
+			prop_add2 = #{propAdd2},
+			prop_backup1 = #{propBackup1},
+			prop_slops = #{propSlops},
+			primage_water = #{primageWater},
+			primage_cement = #{primageCement},
+			primage_ag1 = #{primageAg1},
+			primage_ag2 = #{primageAg2},
+			primage_ag3 = #{primageAg3},
+			primage_ag4 = #{primageAg4},
+			primage_flyash = #{primageFlyash},
+			primage_breeze = #{primageBreeze},
+			primage_add1 = #{primageAdd1},
+			primage_add2 = #{primageAdd2},
+			primage_backup1 = #{primageBackup1},
+			primage_slops = #{primageSlops},
+			weight_water = #{weightWater},
+			weight_cement = #{weightCement},
+			weight_ag1 = #{weightAg1},
+			weight_ag2 = #{weightAg2},
+			weight_ag3 = #{weightAg3},
+			weight_ag4 = #{weightAg4},
+			weight_flyash = #{weightFlyash},
+			weight_breeze = #{weightBreeze},
+			weight_add1 = #{weightAdd1},
+			weight_add2 = #{weightAdd2},
+			weight_backup1 = #{weightBackup1},
+			weight_slops = #{weightSlops},
+			wetweight_water = #{wetweightWater},
+			wetweight_cement = #{wetweightCement},
+			wetweight_ag1 = #{wetweightAg1},
+			wetweight_ag2 = #{wetweightAg2},
+			wetweight_ag3 = #{wetweightAg3},
+			wetweight_ag4 = #{wetweightAg4},
+			wetweight_flyash = #{wetweightFlyash},
+			wetweight_breeze = #{wetweightBreeze},
+			wetweight_add1 = #{wetweightAdd1},
+			wetweight_add2 = #{wetweightAdd2},
+			wetweight_backup1 = #{wetweightBackup1},
+			wetweight_slops = #{wetweightSlops},
+			resist_count = #{resistCount},
+			impervious_count = #{imperviousCount},
+			flexural_count = #{flexuralCount},
+			create_person = #{createPerson},
+			check_person = #{checkPerson},
+			cancel_person = #{cancelPerson},
+			make_date = #{makeDate},
+			check_date = #{checkDate},
+			cancel_date = #{cancelDate},
+			modify_person = #{modifyPerson},
+			notice_owner = #{noticeOwner},
+			curr_remark = #{currRemark},
+			ext_field1 = #{extField1},
+			ext_field2 = #{extField2},
+			ext_field3 = #{extField3},
+			remark = #{remark}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM coordinate_ratio_notice
+		WHERE id = #{id}
+	</update>
+	
+</mapper>
